@@ -18,7 +18,7 @@ app.use(cors({
     
 },
   credentials: true
-}));
+));
 
 app.get('/', (req, res) => {
   res.send('backend running');
