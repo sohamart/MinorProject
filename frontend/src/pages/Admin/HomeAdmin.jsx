@@ -6,7 +6,7 @@ const HomeAdmin = () => {
 
   return (
     <div className='h-screen w-screen flex flex-col justify-center items-center'>
-      <h1 className='text-6xl uppercase font-bold'>Welcome Back</h1>
+      <h1 className='text-4xl lg:text-8xl md:text-6xl uppercase font-bold'>Welcome Back</h1>
       <p className='mt-3 text-2xl'>
         Admin - {loggedinName}
       </p>
