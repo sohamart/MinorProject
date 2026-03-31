@@ -13,13 +13,17 @@ const cookie = require('cookie-parser');
 
 const app = express();
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://classroutine-three.vercel.app",
-    "https://56fpmdwx-5173.inc1.devtunnels.ms",
-    "https://classroutinetime-q5k92fdm8-sohamduttabwn-1581s-projects.vercel.app",
-    "https://classroutinetime-ngg0kcoc1-sohamduttabwn-1581s-projects.vercel.app"
-  ],
+  origin: function (origin, callback) {
+    if (
+      !origin ||
+      origin.includes("vercel.app") ||   // 🔥 all vercel frontend allow
+      origin.includes("localhost")
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"));
+    }
+  },
   credentials: true
 }));
 
