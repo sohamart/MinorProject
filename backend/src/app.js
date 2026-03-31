@@ -13,10 +13,12 @@ const cookie = require('cookie-parser');
 
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5173",
-     // ✅ tor frontend
-  credentials: true                  // ✅ important (cookie/jwt er jonno)
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://classroutine-three.vercel.app"
+  ],
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookie());

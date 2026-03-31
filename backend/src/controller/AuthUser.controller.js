@@ -4,7 +4,9 @@ const bcrypt = require('bcryptjs');
 const Adminuser = require('../model/AdminUser.model');
 const Teacheruser = require('../model/TeacherUser.model');
 
-// student user login logut AND register features
+const isProduction = process.env.NODE_ENV === "production";
+
+// student user login logout AND register features
 
 const registerStudent = async (req, res) => {
     const { name, email, password, trade, sem } = req.body;
@@ -22,7 +24,11 @@ const registerStudent = async (req, res) => {
 
         const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET);
 
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
 
         res.status(201).json({
             message: 'Student registered successfully',
@@ -58,7 +64,11 @@ const loginStudent = async (req, res) => {
             expiresIn: '1h'
         });
 
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
 
         res.status(201).json({
             message: 'Student logged in successfully',
@@ -79,7 +89,11 @@ const loginStudent = async (req, res) => {
 // 🔥 FIXED
 const logoutStudent = async (req, res) => {
     try {
-        res.clearCookie('token')
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
         res.status(200).json({ message: 'Logged out successfully' });
     } catch {
         res.status(500).json({ message: 'Internal server error' });
@@ -122,7 +136,11 @@ const registerAdmin = async (req, res) => {
 
         const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET);
 
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
 
         res.status(201).json({
             message: 'Admin registered successfully',
@@ -154,7 +172,11 @@ const loginAdmin = async (req, res) => {
 
         const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET);
 
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
 
         res.status(201).json({
             message: 'Admin logged in successfully',
@@ -173,7 +195,11 @@ const loginAdmin = async (req, res) => {
 // 🔥 FIXED
 const logoutAdmin = async (req, res) => {
     try {
-        res.clearCookie('token')
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
         res.status(200).json({ message: 'Logged out successfully' });
     } catch {
         res.status(500).json({ message: 'Internal server error' });
@@ -216,7 +242,11 @@ const registerTeacher = async (req, res) => {
 
         const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET);
 
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
 
         res.status(201).json({
             message: 'Teacher registered successfully',
@@ -250,7 +280,11 @@ const loginTeacher = async (req, res) => {
 
         const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET);
 
-        res.cookie("token", token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
 
         res.status(201).json({
             message: 'Teacher logged in successfully',
@@ -270,7 +304,11 @@ const loginTeacher = async (req, res) => {
 // 🔥 FIXED
 const logoutTeacher = async (req, res) => {
     try {
-        res.clearCookie('token')
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax"
+        });
         res.status(200).json({ message: 'Logged out successfully' });
     } catch {
         res.status(500).json({ message: 'Internal server error' });
