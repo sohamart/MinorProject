@@ -15,7 +15,8 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://classroutine-three.vercel.app"
+    "https://classroutine-three.vercel.app",
+    "https://56fpmdwx-5173.inc1.devtunnels.ms"
   ],
   credentials: true
 }));
