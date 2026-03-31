@@ -17,7 +17,8 @@ app.use(cors({
     "http://localhost:5173",
     "https://classroutine-three.vercel.app",
     "https://56fpmdwx-5173.inc1.devtunnels.ms",
-    "https://classroutinetime-q5k92fdm8-sohamduttabwn-1581s-projects.vercel.app/"
+    "https://classroutinetime-q5k92fdm8-sohamduttabwn-1581s-projects.vercel.app",
+    "https://classroutinetime-ngg0kcoc1-sohamduttabwn-1581s-projects.vercel.app"
   ],
   credentials: true
 }));
