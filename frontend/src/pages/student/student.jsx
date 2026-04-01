@@ -132,7 +132,7 @@ const Student = () => {
 
 
         {/* 🧊 Main Content */}
-        <div className="relative z-10 lg:gap-4 p-4 flex w-full">
+        <div className="relative z-10 lg:gap-4 fixed top-0 p-4 flex w-full">
 
           <Sidebar />
           <div className=' lg:h-full md:h-full w-full h-[83vh]'>
