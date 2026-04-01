@@ -34,7 +34,7 @@ const SidebarMob = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-20">
 
       {/* Menu Button */}
       <motion.div
@@ -56,7 +56,7 @@ const SidebarMob = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "-100%", opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="p-12 fixed top-0 left-0 h-screen w-screen backdrop-blur-xl bg-black/50 z-40"
+            className="p-12 fixed top-0 left-0  h-screen w-screen backdrop-blur-xl bg-black/50 z-40"
           >
 
             {/* 🔥 Cross Button (Animated) */}
@@ -67,7 +67,7 @@ const SidebarMob = () => {
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: 100, opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="w-10 bg-white/25 border-l-2 border-white/30 rounded-l-2xl absolute top-8 right-0 flex justify-center items-center h-10"
+                  className="w-10 bg-white/25 border-l-2 z-20 border-white/30 rounded-l-2xl absolute top-8 right-0 flex justify-center items-center h-10"
                 >
                   <button onClick={closeNav} className="mr-1 cursor-pointer">
                     <X color="#ffffff" />
