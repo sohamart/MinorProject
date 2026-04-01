@@ -5,6 +5,7 @@ import { AuthContextData } from '../../context/AuthContext'
 import Sidebar from '../../components/sidebar/StudentSidebar/sidebar'
 import {motion , useMotionValue, useSpring} from 'framer-motion'
 import { useDragControls } from "motion/react"
+import Dock from '../../components/dockMobile/dock'
 
 
 
@@ -39,6 +40,7 @@ const Student = () => {
   if (!loggedinStudent) return null
 
   return (
+    <>
     <div
     onMouseMove={handleMouseMove}
     className="relative flex w-screen h-screen  overflow-hidden text-white bg-black">
@@ -134,9 +136,16 @@ const Student = () => {
 
         <Sidebar />
         <Outlet context={{ loggedinName: loggedinStudent?.name }} />
+        
       </div>
+      
     </div>
+    <div className='lg:hidden md:hidden block bg-red-500 w-full'>
+          <Dock></Dock>
+        </div>
+    </>
       )
+
 }
 
       export default Student
