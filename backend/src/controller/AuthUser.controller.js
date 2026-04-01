@@ -334,6 +334,47 @@ const findteacher = async (req, res) => {
     }
 };
 
+
+
+
+const getAllStudent = async (req, res) => {
+    try {
+        const studentuserdata = await Studentuser.find();
+
+
+        if (!studentuserdata) {
+            return res.status(404).json({ message: 'No students found' });
+        }
+
+        res.status(200).json({
+            message: 'Students found successfully',
+            studentuserdata: studentuserdata
+            });
+            
+    
+
+    } catch{
+        res.status(500).json({ message: 'Internal server error' });
+    }
+    }
+const getAllteacher = async (req, res) => {
+    try {
+        const teacheruserdata = await Teacheruser.find();
+        if (!teacheruserdata) {
+            return res.status(404).json({ message: 'No teachers found' });
+        }
+
+        res.status(200).json({
+            message: 'Teachers found successfully',
+            teacheruserdata: teacheruserdata
+        });
+    }
+    catch{
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+    }
+
 module.exports = {
     registerStudent,
     loginStudent,
@@ -346,5 +387,8 @@ module.exports = {
     logoutTeacher,
     findstudent,
     findteacher,
-    findadmin
+    findadmin,
+    getAllStudent,
+    getAllteacher
+
 };

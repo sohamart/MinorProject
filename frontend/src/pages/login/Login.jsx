@@ -18,13 +18,13 @@ const Login = () => {
     const navigate = useNavigate()
     useEffect(() => {
       if(loggedinStudent !== null ){
-        navigate("/student/")
+        navigate("/student/home")
       }
       else if(loggedinAdmin !== null){
-        navigate("/admin/")
+        navigate("/admin/home")
       }
       else if(loggedinTeacher !== null){
-        navigate("/teacher/")
+        navigate("/teacher/home")
       }
     
       

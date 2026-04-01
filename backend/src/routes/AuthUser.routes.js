@@ -20,6 +20,8 @@ router.post('/teacher/logout', AuthUserController.logoutTeacher)
 router.get('/loggedinStudent/find', AuthUserController.findstudent)
 router.get('/loggedinTeacher/find', AuthUserController.findteacher)
 router.get('/loggedinAdmin/find', AuthUserController.findadmin)
+router.get('/getAllStudent', AuthUserController.getAllStudent)
+router.get('/getAllteacher', AuthUserController.getAllteacher)
 
 
 
