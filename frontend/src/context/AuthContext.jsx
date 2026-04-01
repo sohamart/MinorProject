@@ -93,7 +93,8 @@ const AuthContext = (props) => {
         setloggedinAdmin,
         setloggedinName,
         loggedinName,
-        API
+        API,
+        setloading
         
         }}>
         {props.children}
