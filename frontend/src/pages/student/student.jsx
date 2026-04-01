@@ -108,7 +108,7 @@ const Student = () => {
           rotate: 360,
         }}
         transition={{
-          duration: 3,
+          duration: 8,
           repeat: Infinity,
           repeatType: "reverse",
           ease: "ease",
