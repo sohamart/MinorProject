@@ -17,7 +17,7 @@ const SidebarMob = () => {
 
    
       <div
-        className={`w-10 bg-white/15 border-r-2 border-white/30 rounded-r-2xl absolute top-4 left[-2]  flex justify-center items-center h-10
+        className={`w-10 bg-white/15 border-r-2 border-white/30  rounded-r-2xl absolute top-4 left[-2]  flex justify-center items-center h-10
     transform transition-transform duration-300 delay-400 ease-in z-40
       ${!navopen ? "translate-x-0" : "-translate-x-full"}`}
       >
@@ -27,7 +27,7 @@ const SidebarMob = () => {
       </div>
 
       <div
-        className={` p-12 fixed top-0 left-0 h-screen w-screen bg-black
+        className={` p-12 fixed top-0 left-0 h-screen w-screen  backdrop-blur-2xl 
         transform transition-transform duration-400 ease-in z-40
         ${navopen ? "translate-x-0" : "-translate-x-full"}`}
       >

@@ -5,7 +5,7 @@ import StudentSidebarItems from './studentSidebarItems'
 const sidebar = () => {
   return (
     <>
-    <div className="lg:w-110 h-full w-screen hidden bg-black/10 border border-white/50 rounded-2xl lg:block">
+    <div className="lg:w-110 h-full w-screen hidden backdrop-blur-2xl bg-black/10 border border-white/50 rounded-2xl lg:block">
             <StudentSidebarItems></StudentSidebarItems>
           
 

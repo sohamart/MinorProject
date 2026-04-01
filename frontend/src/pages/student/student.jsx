@@ -42,81 +42,90 @@ const Student = () => {
     <div
     onMouseMove={handleMouseMove}
     className="relative flex w-screen h-screen  overflow-hidden text-white bg-black">
-      <motion.div
-        style={{
-          left: smoothX,
-          top: smoothY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        className="absolute  w-10 h-10 bg-white/12 border border-white/20  rounded-full pointer-events-none"
-      />
-      <motion.div
-        animate={{
-          x: 150,
-          y: 0,
-          rotate: 360,
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "ease",
-          
-
-        }}
-        className="absolute top-150 left-20 lg:top-120 lg:left-320 lg:w-200 lg:h-200 h-60 w-60 bg-blue-500 opacity-80 blur-3xl rounded-full pointer-events-none"
-      />
       
       
-      <motion.div
+       {/* Gradient Mesh Blobs */}
+         <motion.div
+        className="absolute  top-1/2 left-1/2 lg:block w-[500px] h-[500px] bg-purple-600 rounded-full mix-blend-screen filter blur-3xl opacity-30"
         animate={{
-          x: 350,
-          y: 0,
-          rotate: 360,
+          x: [0, 100, -50, 0],
+          y: [0, -100, 50, 0],
         }}
         transition={{
-          duration: 3,
+          duration: 12,
           repeat: Infinity,
-          repeatType: "reverse",
-          ease: "ease",
-          
-
+          ease: "easeInOut",
         }}
-        className="absolute hidden lg:block bottom-0 right-0 lg:bottom-[-720px] lg:right-320  lg:w-200 lg:h-200 h-60 w-60 bg-green-500 opacity-80 blur-3xl rounded-full pointer-events-none"
       />
+
       <motion.div
+        className="absolute hidden lg:block w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
         animate={{
-          x: 550,
-          y: 0,
-          rotate: 360,
+          x: [0, -120, 80, 0],
+          y: [0, 80, -60, 0],
         }}
         transition={{
-          duration: 3,
+          duration: 14,
           repeat: Infinity,
-          repeatType: "reverse",
-          ease: "ease",
-          
-
+          ease: "easeInOut",
         }}
-        className="absolute hidden lg:block bottom-0 right-0 lg:top-[-720px] lg:right-[250px]  lg:w-200 lg:h-200 h-60 w-60 bg-green-500 opacity-80 blur-3xl rounded-full pointer-events-none"
       />
+
       <motion.div
+        className="absolute  lg:block w-[450px] h-[450px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"
         animate={{
-          x: 550,
-          y: 0,
-          rotate: 360,
+          x: [0, 60, -60, 0],
+          y: [0, -60, 100, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 16,
           repeat: Infinity,
-          repeatType: "reverse",
-          ease: "ease",
-          
-
+          ease: "easeInOut",
         }}
-        className="absolute bottom-150 right-120 lg:top-[-700px] lg:right-320  lg:w-200 lg:h-200 h-60 w-60 bg-purple-500 opacity-80 blur-3xl rounded-full pointer-events-none"
       />
+
+
+      <motion.div
+        className="absolute top-1/2 left-1/2 lg:top-2/5 lg:left-3/5 w-[500px] h-[500px] bg-purple-600 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+        animate={{
+          x: [0, 100, -50, 0],
+          y: [0, -100, 50, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute hidden  lg:block lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+        animate={{
+          x: [0, -120, 80, 0],
+          y: [0, 80, -60, 0],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute top-1/5 left-1/4 lg:top-1/2 lg:left-1/2 w-[450px] h-[450px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"
+        animate={{
+          x: [0, 60, -60, 0],
+          y: [0, -60, 100, 0],
+        }}
+        transition={{
+          duration: 16,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Overlay Gradient (depth) */}
+      {/* <div className="absolute  inset-0 top:1/2 left:1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-black via-transparent to-black opacity-90"></div> */}
 
       
 
