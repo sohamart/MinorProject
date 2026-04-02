@@ -6,7 +6,7 @@ const HomeStudent = () => {
 
   return (
     <div className= ' text-white h-full w-full  flex flex-col items-center  bg-black/20 backdrop-blur-xl border border-white/40 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
-      <div className='lg:w-120 w-50 lg:h-20 bg-white/10 backdrop-blur-lg border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center' >
+      <div className='lg:w-120 h-18 w-50 lg:h-20 bg-white/10 backdrop-blur-lg border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center' >
             <h1 className='lg:text-3xl  uppercase font-bold'>Dashboard</h1>
             
         </div>
