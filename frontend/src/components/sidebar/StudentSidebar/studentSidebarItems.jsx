@@ -19,7 +19,7 @@ const studentSidebarItems = (props) => {
   };
 
   return (
-    <div className="text-white z-20 flex gap-4 flex-col w-full items-center h-full rounded-2xl p-2 lg:pt-18">
+    <div className="text-white z-20 flex gap-4  flex-col w-full items-center h-full rounded-2xl p-2 lg:pt-18">
 
       <motion.div variants={itemVariants}>
         <NavLink

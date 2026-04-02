@@ -48,9 +48,9 @@ const StudentLogin = () => {
         <>
             <form
                 onSubmit={formhandel}
-                className={`bg-yellow-400 relative lg:w-100 lg:p-5 w-80 md:w-180 p-5 md:p-15 rounded-2xl shadow-lg flex flex-col items-center justify-center`}>
+                className={` backdrop-blur-2xl  border border-green-400/50 bg-green-400/15 relative lg:w-100 lg:p-5 w-80 md:w-180 p-5 md:p-15 rounded-2xl shadow-lg flex flex-col items-center justify-center`}>
 
-                <h1 className='absolute md:top-13 lg:top-8 top-7 text-2xl lg:text-2xl uppercase font-bold md:text-5xl'>student Login</h1>
+                <h1 className='absolute md:top-13 lg:top-6 top-5 text-2xl lg:text-2xl uppercase font-bold md:text-5xl'>student Login</h1>
 
                 {userNotFound && <h1 className='absolute md:top-25 lg:top-15 top-13 text-red-500'>{userNotFound}!!</h1>}
 
@@ -59,7 +59,7 @@ const StudentLogin = () => {
                     onChange={(e) => setemail(e.target.value)}
                     placeholder='Email'
                     required
-                    className='bg-white pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-15 md:w-120 md:h-20 md:mt-20 lg:w-80 lg:h-13 lg:mt-18'
+                    className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-15 md:w-120 md:h-20 md:mt-20 lg:w-80 lg:h-13 lg:mt-18'
                     type="email"
                 />
 
@@ -69,7 +69,7 @@ const StudentLogin = () => {
                     onChange={(e) => setpassword(e.target.value)}
                     placeholder='Password'
                     required
-                    className='bg-white pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-5 md:w-120 md:h-20 md:mt-10 lg:w-80 lg:h-13 lg:mt-5'
+                    className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-5 md:w-120 md:h-20 md:mt-10 lg:w-80 lg:h-13 lg:mt-5'
                 />
 
                 <div className='flex gap-1 items-center justify-end mt-2 w-full mr-12'>

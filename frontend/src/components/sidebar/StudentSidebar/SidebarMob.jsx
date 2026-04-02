@@ -56,7 +56,7 @@ const SidebarMob = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "-100%", opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="p-12 fixed top-0 left-0  h-screen w-screen backdrop-blur-xl bg-black/50 z-40"
+            className="p-12 fixed top-0 left-0  h-screen w-screen backdrop-blur-xl z-22"
           >
 
             {/* 🔥 Cross Button (Animated) */}
@@ -81,7 +81,7 @@ const SidebarMob = () => {
               variants={containerVariants}
               initial="hidden"
               animate="show"
-              className="text-white w-full h-4/5 mt-12 space-y-9"
+              className="text-white  w-full h-4/5 mt-12 space-y-9"
             >
               <StudentSidebarItems NavHandel={closeNav} />
             </motion.div>

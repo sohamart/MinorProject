@@ -45,49 +45,49 @@ const TeacherLogin = () => {
     return (
         <>
             <form
-                onSubmit={formhandel}
-                className={`bg-yellow-400 relative lg:w-100 lg:p-5 w-80 md:w-180 p-5 md:p-15 rounded-2xl shadow-lg flex flex-col items-center justify-center`}>
-
-                <h1 className='absolute md:top-13 lg:top-8 top-7 text-2xl lg:text-2xl uppercase font-bold md:text-5xl'>teacher Login</h1>
-
-                {userNotFound && <h1 className='absolute md:top-25 lg:top-15 top-13 text-red-500'>{userNotFound}!!</h1>}
-
-                <input
-                    value={email}
-                    onChange={(e) => setemail(e.target.value)}
-                    placeholder='Email'
-                    required
-                    className='bg-white pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-15 md:w-120 md:h-20 md:mt-20 lg:w-80 lg:h-13 lg:mt-18'
-                    type="email"
-                />
-
-                <input
-                    type={showPassword ? "text" : "password"} // 🔥 FIXED (toggle working)
-                    value={password}
-                    onChange={(e) => setpassword(e.target.value)}
-                    placeholder='Password'
-                    required
-                    className='bg-white pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-5 md:w-120 md:h-20 md:mt-10 lg:w-80 lg:h-13 lg:mt-5'
-                />
-
-                <div className='flex gap-1 items-center justify-end mt-2 w-full mr-12'>
-                    <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                    >
-                        {showPassword ? <CircleCheck className='w-5 mt-1' /> : <Circle className='w-5 mt-1' />}
-                    </button>
-                    <h1 className='text-sm'>show password</h1>
-                </div>
-
-                <button
-                    disabled={loading} // 🔥 disable
-                    className='active:scale-95 duration-300 bg-black text-white rounded-2xl w-25 h-11 mt-5 md:text-2xl md:w-60 md:h-20 md:mt-10 lg:w-33 lg:h-14 uppercase border border-amber-50 lg:mt-5'
-                >
-                    {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "Login"} {/* 🔥 text change */}
-                </button>
-
-            </form>
+                            onSubmit={formhandel}
+                            className={` backdrop-blur-2xl  border border-yellow-400/50 bg-yellow-400/15 relative lg:w-100 lg:p-5 w-80 md:w-180 p-5 md:p-15 rounded-2xl shadow-lg flex flex-col items-center justify-center`}>
+            
+                            <h1 className='absolute md:top-13 lg:top-6 top-5 text-2xl lg:text-2xl uppercase font-bold md:text-5xl'>Teacher Login</h1>
+            
+                            {userNotFound && <h1 className='absolute md:top-25 lg:top-15 top-13 text-red-500'>{userNotFound}!!</h1>}
+            
+                            <input
+                                value={email}
+                                onChange={(e) => setemail(e.target.value)}
+                                placeholder='Email'
+                                required
+                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-15 md:w-120 md:h-20 md:mt-20 lg:w-80 lg:h-13 lg:mt-18'
+                                type="email"
+                            />
+            
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setpassword(e.target.value)}
+                                placeholder='Password'
+                                required
+                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-5 md:w-120 md:h-20 md:mt-10 lg:w-80 lg:h-13 lg:mt-5'
+                            />
+            
+                            <div className='flex gap-1 items-center justify-end mt-2 w-full mr-12'>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <CircleCheck className='w-5 mt-1' /> : <Circle className='w-5 mt-1' />}
+                                </button>
+                                <h1 className='text-sm'>show password</h1>
+                            </div>
+            
+                            <button
+                                disabled={loading} // 🔥 disable while loading
+                                className='active:scale-95 duration-300 bg-black text-white rounded-2xl w-25 h-11 mt-5 md:text-2xl md:w-60 md:h-20 md:mt-10 lg:w-33 lg:h-14 uppercase border border-amber-50 lg:mt-5'
+                            >
+                                {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "Login"} {/* 🔥 text change */}
+                            </button>
+            
+                        </form>
         </>
     )
 }

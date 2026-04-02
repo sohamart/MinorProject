@@ -101,7 +101,7 @@ const Student = () => {
         />
 
         <motion.div
-          className="absolute hidden  lg:block lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+          className="absolute top-1/5 left-1/4  lg:block lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           animate={{
             x: [0, -120, 80, 0],
             y: [0, 80, -60, 0],
@@ -144,9 +144,10 @@ const Student = () => {
 
       </div>
       <div className="lg:hidden  w-full h-[13vh]   md:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-15">
-        <div className="backdrop-blur-2xl h-full   border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        <div className="backdrop-blur-2xl h-full z-20  border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           <Dock />
         </div>
+        
       </div>
     </>
   )
