@@ -36,12 +36,12 @@ const Faculty = () => {
         <div className='h-full relative w-full flex flex-col items-center rounded-2xl lg:bg-black/15 border border-white/50'>
 
             {/* Heading */}
-            <div className='lg:w-120 h-18 w-50 lg:h-20 bg-white/10 backdrop-blur-lg border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+            <div className='lg:w-120 h-18 mb-4 w-50 lg:h-20 bg-white/10 backdrop-blur-lg border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                 <h1 className='lg:text-3xl h-15 text-center flex justify-center items-center text-lg uppercase font-bold'>our faculties</h1>
             </div>
 
             {/* Container */}
-            <div className='overflow-y-scroll pt-32 pb-30 bg-black/20  border border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-lg rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center lg:justify-between items-center lg:items-start'>
+            <div className='overflow-y-scroll pt-22 pb-30 bg-black/20  border border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-lg rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center lg:justify-between items-center lg:items-start'>
 
                 {teachers.map((teacher, index) => (
                     <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:w-120 p-4 lg:h-40 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4 backdrop-blur-2xl bg-black/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
