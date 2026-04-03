@@ -31,13 +31,13 @@ const FacultiesData = () => {
         }
     };
 
-    const deleteStudent = async (id) => {
+    const deleteTeacher = async (id) => {
         if (!window.confirm("Are you sure to delete this student ?")) return;
 
         setDeletingId(id);
 
         try {
-            await axios.delete(`${API}/api/auth/deleteStudent/${id}`, {
+            await axios.delete(`${API}/api/auth/deleteTeacher/${id}`, {
                 withCredentials: true
             });
 
@@ -119,7 +119,7 @@ const FacultiesData = () => {
 
                             </div>
                             <div className='w-full'>
-                                <button onClick={() => deleteStudent(student._id)} className="h-14 text-2xl w-full rounded-2xl flex items-center justify-center border active:scale-95 hover:bg-white hover:text-black  hover:scale-105 transition duration-300 hover:border-black/50 border-red-400/50 bg-red-400/20 ">
+                                <button onClick={() => deleteTeacher(teacher._id)} className="h-14 text-2xl w-full rounded-2xl flex items-center justify-center border active:scale-95 hover:bg-white hover:text-black  hover:scale-105 transition duration-300 hover:border-black/50 border-red-400/50 bg-red-400/20 ">
 
                                     {deletingId === teacher._id ? "Loading..." : "Delete"}
 
