@@ -82,7 +82,7 @@ const studentSidebarItems = (props) => {
               ? "bg-white/15 border border-amber-50" 
               : "hover:border hover:border-white/50 bg-none"}`
           }
-          to={`/student/profile/${loggedinStudent?.name}`}
+          to={`/student/profile/${loggedinStudent?._id}`}
         >
           Profile
         </NavLink>

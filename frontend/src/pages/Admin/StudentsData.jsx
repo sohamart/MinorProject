@@ -11,9 +11,32 @@ const StudentsData = () => {
     const [error, seterror] = useState(null)
     const API = import.meta.env.VITE_API_URI
     const [loading, setloading] = useState(true)
+    const [deletingId, setDeletingId] = useState(null);
+    
+    
+const deleteStudent = async (id) => {
+    if (!window.confirm("Are you sure to delete this student ?")) return;
 
-    useEffect(() => {
-        const fetchStudents = async () => {
+    setDeletingId(id);
+
+    try {
+        await axios.delete(`${API}/api/auth/deleteStudent/${id}`, {
+            withCredentials: true
+        });
+
+        
+
+
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await fetchStudents();
+        setDeletingId(null);
+    }
+};
+const fetchStudents = async () => {
+    
+
             try {
                 const response = await axios.get(`${API}/api/auth/getAllStudent`,
                     { withCredentials: true }
@@ -21,7 +44,9 @@ const StudentsData = () => {
 
                 setstudents(response.data.studentuserdata)
                 seterror(null);
-                setloading(false);
+                
+                
+                
 
             } catch (error) {
                 console.error('Error fetching :', error);
@@ -29,10 +54,22 @@ const StudentsData = () => {
                 seterror(error.message);
                 setloading(false);
             }
+             finally {
+        setloading(false); // 🔥 always stop loading
+    }
         };
 
+        
+
+    useEffect(() => {
+        
         fetchStudents();
+
     }, [])
+
+    
+
+
 
     return (
         <div className='h-full relative w-full bg-black/10 flex flex-col items-center rounded-2xl  border border-white/50'>
@@ -43,13 +80,14 @@ const StudentsData = () => {
             </div>
 
             {/* Container */}
-            <div className='overflow-y-scroll h-full pt-8 pb-30 no-scrollbar bg-black/20    shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center lg:justify-between items-center lg:items-start'>
+            <div className='overflow-y-scroll lg:pt-14 lg:pb-24 h-full pt-8 pb-30 no-scrollbar bg-black/20  lg:justify-center shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center  items-center lg:items-start'>
 
                 {students.map((student, index) => (
-                    <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:w-120 p-4 lg:h-40 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
+                    <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:max-w-[530px]  p-4  rounded-2xl flex flex-col  items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
 
                         {/* Image */}
-                        <div className='border-2 bg-yellow-500  border-yellow-500 rounded-full w-20 h-20 flex items-center justify-center overflow-hidden'>
+                        <div className=' flex lg:flex-row flex-col w-full gap-4 justify-center items-center'>
+                        <div className='border-2 bg-yellow-500  border-yellow-500 rounded-full  w-20 h-20 flex items-center justify-center overflow-hidden'>
                             <img
                                 src="https://t3.ftcdn.net/jpg/08/12/63/16/360_F_812631683_ek5GhlY2zdlSILJMT7pHFujzi37i4Os4.jpg"
                                 alt="avatar"
@@ -58,7 +96,7 @@ const StudentsData = () => {
                         </div>
 
                         {/* Name + Subject */}
-                        <div className='border bg-green-400/10 border-green-400/30 w-full lg:w-65 rounded-2xl flex flex-col items-center justify-center p-2'>
+                        <div className='border  bg-green-400/10 border-green-400/30 w-full lg:w-70 rounded-2xl flex flex-col items-center justify-center p-2'>
                             <h1 className='text-sm lg:text-lg text-center'>
                                 <span className='text-green-400'>Name: </span> {student.name}
                             </h1>
@@ -69,9 +107,11 @@ const StudentsData = () => {
                                 <span className='text-blue-400'>Sem: </span> {student.sem}
                             </p>
                         </div>
+                        </div>
 
                         {/* Email */}
-                        <div className='border gap-4 bg-blue-500/10 border-blue-500/30 flex items-center justify-center w-full lg:w-20 h-16 lg:h-21 rounded-2xl'>
+                        <div className="flex  w-full  gap-4 justify-center items-center">
+                                <div className='border  gap-4 bg-blue-500/10 border-blue-500/30 flex items-center justify-center p-2 lg:w-25 h-16 lg:h-21 rounded-2xl'>
                             <a
                                 href={`mailto:${student.email}?subject=Student Query&body=Hello Sir,`}
                                 className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
@@ -79,17 +119,26 @@ const StudentsData = () => {
                                 <Mail className="text-white" />
                             </a>
 
-                            <a
+                            {/* <a
                                 className="flex lg:hidden items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
 
                                 href="https://wa.me/919647085384?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class">
 
                                 <MessageCircleMore className="text-white" />
-                            </a>
+                            </a> */}
 
                             
 
                         </div>
+                        <div className='w-full'>
+                            <button onClick={() => deleteStudent(student._id)} className="h-14 text-2xl w-full rounded-2xl flex items-center justify-center border active:scale-95 hover:bg-white hover:text-black  hover:scale-105 transition duration-300 hover:border-black/50 border-red-400/50 bg-red-400/20 ">
+                                
+                               {deletingId === student._id ? "Loading..." : "Delete"}
+                                
+                                </button>
+                        </div>
+                        </div>
+                        
 
                     </div>
                 ))}
@@ -106,7 +155,7 @@ const StudentsData = () => {
 
 
                 {/* Loading */}
-                {loading && (
+                {loading && !deletingId && (
                     <p className="text-2xl lg:text-4xl absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         Loading...
                     </p>
@@ -117,7 +166,7 @@ const StudentsData = () => {
 
 
                         <p className="text-2xl text-center lg:text-4xl ">
-                            No teachers found !!.
+                            No Students found !!.
                         </p>
                     </div>
                 )}
