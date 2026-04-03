@@ -50,6 +50,8 @@ const FacultiesData = () => {
             setteachers([]);
             seterror(error.message);
             setloading(false);
+        } finally {
+            setloading(false); // 🔥 always stop loading
         }
     };
 
@@ -144,7 +146,7 @@ const FacultiesData = () => {
 
 
                 {/* Loading */}
-                {loading && (
+                {loading && !deletingId && (
                     <p className="text-2xl lg:text-4xl absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         Loading...
                     </p>
