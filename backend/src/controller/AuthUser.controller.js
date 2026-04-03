@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === "production";
 // student user login logout AND register features
 
 const registerStudent = async (req, res) => {
-    const { name, email, password, trade, sem } = req.body;
+    const { name, email, password, trade, sem, phone } = req.body;
 
     const isStudentExist = await Studentuser.findOne({ email });
 
@@ -20,7 +20,7 @@ const registerStudent = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        const studentuserdata = await Studentuser.create({ name, email, password: hashedPassword, trade, sem });
+        const studentuserdata = await Studentuser.create({ name,phone, email, password: hashedPassword, trade, sem });
 
         const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET);
 
@@ -37,6 +37,7 @@ const registerStudent = async (req, res) => {
                 email: studentuserdata.email,
                 trade: studentuserdata.trade,
                 sem: studentuserdata.sem,
+                phone: studentuserdata.phone,
                 token: token
             }
         });
@@ -77,6 +78,7 @@ const loginStudent = async (req, res) => {
                 email: studentuserdata.email,
                 trade: studentuserdata.trade,
                 sem: studentuserdata.sem,
+                phone: studentuserdata.phone,
                 token: token
             }
         });

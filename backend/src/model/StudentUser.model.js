@@ -10,6 +10,9 @@ const StudentUser = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    phone: {
+        type: String
+    },
     password: {
         type: String,
         required: true,
@@ -24,6 +27,7 @@ const StudentUser = new mongoose.Schema({
         enum:["1st", "2nd", "3rd", "4th", "5th", "6th"],
         required: true,
     },
+
 
 
 },
