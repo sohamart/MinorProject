@@ -7,9 +7,9 @@ import { useContext } from "react";
 import { AuthContextData } from "../../../context/AuthContext";
 
 
-const studentSidebarItems = (props) => {
+const AdminSidebarItems = (props) => {
   
-      const { loggedinStudent } = useContext(AuthContextData)
+      const { loggedinAdmin } = useContext(AuthContextData)
       
 
   const itemVariants = {
@@ -38,7 +38,7 @@ const studentSidebarItems = (props) => {
               ? "bg-white/15 border border-amber-50" 
               : "hover:border hover:border-white/50 bg-none"}`
           }
-          to={"/student/home"}
+          to={"/Admin/home"}
         >
           Dashbord
         </NavLink>
@@ -67,11 +67,26 @@ const studentSidebarItems = (props) => {
               ? "bg-white/15 border border-amber-50" 
               : "hover:border hover:border-white/50 bg-none"}`
           }
-          to={"/student/Faculty"}
+          to={"/Admin/facultiesData"}
         >
           Faculty
         </NavLink>
       </motion.div>
+      <motion.div variants={itemVariants}>
+        <NavLink
+          onClick={props.NavHandel}
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
+            ${isActive 
+              ? "bg-white/15 border border-amber-50" 
+              : "hover:border hover:border-white/50 bg-none"}`
+          }
+          to={"/Admin/studentsData"}
+        >
+          Students
+        </NavLink>
+      </motion.div>
+
       <motion.div variants={itemVariants}>
         <NavLink
           
@@ -82,7 +97,7 @@ const studentSidebarItems = (props) => {
               ? "bg-white/15 border border-amber-50" 
               : "hover:border hover:border-white/50 bg-none"}`
           }
-          to={`/student/profile/${loggedinStudent?.name}`}
+          to={`/Admin/profile/${loggedinAdmin?.name}`}
         >
           Profile
         </NavLink>
@@ -92,4 +107,4 @@ const studentSidebarItems = (props) => {
   );
 };
 
-export default studentSidebarItems;
+export default AdminSidebarItems;

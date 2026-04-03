@@ -9,3 +9,11 @@
     opacity: 1;
   }
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}

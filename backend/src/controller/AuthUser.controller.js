@@ -86,7 +86,6 @@ const loginStudent = async (req, res) => {
     }
 };
 
-// 🔥 FIXED
 const logoutStudent = async (req, res) => {
     try {
         res.clearCookie('token', {
@@ -118,6 +117,31 @@ const findstudent = async (req, res) => {
         res.status(401).json({ message: 'Unauthorized' });
     }
 };
+
+const deleteStudent = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deletedStudent = await Studentuser.findByIdAndDelete(id);
+        if (!student){
+            res.status(404).json({ message: 'Student not found' });
+        }
+        res.status(200).json({ 
+            message: 'Student deleted successfully',
+            deletedStudent
+        });
+    } catch {
+        res.status(500).json({ message: 'Internal server error' });
+
+
+    }
+}
+
+
+
+
+
+
 
 // ================= ADMIN =================
 
@@ -391,6 +415,7 @@ module.exports = {
     findteacher,
     findadmin,
     getAllStudent,
-    getAllteacher
+    getAllteacher,
+    deleteStudent
 
 };

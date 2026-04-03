@@ -10,22 +10,12 @@ import Dock from '../../components/dockMobile/dock'
 
 
 const Student = () => {
-  const controls = useDragControls()
   const navigate = useNavigate()
   const { loggedinStudent, loading } = useContext(AuthContextData)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+
 
   // Smooth effect
-  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 })
-  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 })
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    mouseX.set(e.clientX - rect.top) // center adjust
-    mouseY.set(e.clientY - rect.left)
-  }
-
+ 
 
   useEffect(() => {
     if (!loading && !loggedinStudent) {
@@ -42,7 +32,6 @@ const Student = () => {
   return (
     <>
       <div
-        onMouseMove={handleMouseMove}
         className="relative flex w-screen h-screen  overflow-hidden text-white ">
 
 
@@ -50,7 +39,7 @@ const Student = () => {
 
 
         {/* 🧊 Main Content */}
-        <div className="relative z-10 lg:gap-4 fixed top-0 p-4 flex w-full">
+        <div className=" z-10 lg:gap-4 fixed top-0 p-4 flex w-full">
 
           <Sidebar />
           <div className=' lg:h-full md:h-full w-full h-[83vh]'>

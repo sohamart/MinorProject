@@ -63,7 +63,7 @@ const Home = () => {
 </div>
             </div>
             
-            <h1 className='text-4xl lg:text-8xl md:text-6xl uppercase font-bold'>Home Page</h1>
+            <h1 className='text-4xl lg:text-8xl md:text-6xl uppercase font-bold'>c.r time pro</h1>
             
         <div className=' flex flex-col items-center pb-10 absolute bottom-0 h-[40vh] lg:h-[35vh] w-full rounded-t-[180px] lg:rounded-t-[100px] bg-indigo-400/10 backdrop-blur-2xl border-t-2 border-white/30'>
                 <button className='  z-2 w-35 h-12 rounded-2xl mt-8 text-2xl font-bold active:scale-95 duration-300 hover:bg-green-400 bg-green-400/30 border-2 border-green-400/40' onClick={loginhandel}>Login</button>

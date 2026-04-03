@@ -22,6 +22,7 @@ router.get('/loggedinTeacher/find', AuthUserController.findteacher)
 router.get('/loggedinAdmin/find', AuthUserController.findadmin)
 router.get('/getAllStudent', AuthUserController.getAllStudent)
 router.get('/getAllteacher', AuthUserController.getAllteacher)
+router.delete('/deleteStudent/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteStudent)
 
 
 

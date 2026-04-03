@@ -11,8 +11,11 @@ import Home from './pages/home/Home'
 import Faculty from './pages/student/Faculty'
 import ErrorPage from './pages/ErrorPage/ErrorPage'
 import Profile from './pages/student/Profile'
+import StudentsData from './pages/Admin/StudentsData'
+import AdminProfile from './pages/Admin/AdminProfile'
 
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import FacultiesData from './pages/Admin/FacultiesData'
 
 
 
@@ -151,6 +154,9 @@ const App = () => {
       </Route>
       <Route path="/admin" element={<Admin/>}>
       <Route path='/admin/home' element={<HomeAdmin/>}/>
+      <Route path='/admin/facultiesData' element={<FacultiesData/>}/>
+      <Route path='/admin/studentsData' element={<StudentsData/>}/>
+      <Route path='/admin/profile/:id' element={<AdminProfile/>}/>
       </Route>
 
 
