@@ -56,7 +56,7 @@ const Student = () => {
           <div className=' lg:h-full md:h-full w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinStudent?.name }} />
           </div>
-        
+          
 
         </div>
 
@@ -65,6 +65,7 @@ const Student = () => {
         <div className="backdrop-blur-2xl h-full z-20  border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           <Dock loggedinStudent={loggedinStudent} />
         </div>
+        
         
       </div>
     </>

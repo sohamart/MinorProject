@@ -55,7 +55,7 @@ const Profile = () => {
     }
     
   return (
-    <div className=' border w-full h-full flex flex-col items-center lg:bg-black/5 bg-white/5 border-white/50 rounded-2xl'>
+    <div className=' relative border w-full h-full flex flex-col items-center lg:bg-black/5 bg-white/5 border-white/50 rounded-2xl'>
         <div className='lg:w-120 h-16 mb-8 w-50 lg:h-20 border-r border-l bg-white/10  border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                 <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>Profile</h1>
             </div>
@@ -89,7 +89,11 @@ const Profile = () => {
             {!loading ? ("logout"):("loading...")}
         </button>
         
-
+        <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
+                                <h1 className=' uppercase '>
+                                    designed and devoloped by Soham Dutta
+                                </h1>
+                            </div>
     </div>
   )
 }

@@ -76,13 +76,15 @@ const Faculty = () => {
                                 <Mail className="text-white" />
                             </a>
 
-                            <a 
-                            className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
-                            
-                            href="https://wa.me/919647085384?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class">
+                            <a
+                                className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
 
-                                    <MessageCircleMore className="text-white" />
+                                href="https://wa.me/919647085384?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class">
+
+                                <MessageCircleMore className="text-white" />
                             </a>
+
+                            
 
                         </div>
 
@@ -93,12 +95,12 @@ const Faculty = () => {
                 {error && (
 
                     <div className='absolute w-80 flex gap-2 flex-col items-center  justify-center top-3/6 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                        <Ban className='w-10 h-10'/>
+                        <Ban className='w-10 h-10' />
                         <p className="text-red-500 mb-40 text-center text-2xl lg:text-4xl ">{error}</p>
 
                     </div>
                 )}
-                
+
 
                 {/* Loading */}
                 {loading && (
@@ -108,16 +110,23 @@ const Faculty = () => {
                 )}
                 {teachers.length === 0 && !loading && !error && (
                     <div className='absolute w-90 flex gap-2 flex-col items-center  justify-center top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                        <Ban className='w-10 h-10'/>
+                        <Ban className='w-10 h-10' />
 
-                    
-                    <p className="text-2xl text-center lg:text-4xl ">
-                        No teachers found !!.
-                    </p>
+
+                        <p className="text-2xl text-center lg:text-4xl ">
+                            No teachers found !!.
+                        </p>
                     </div>
                 )}
+            
+            
 
             </div>
+            <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
+                                <h1 className=' uppercase '>
+                                    designed and devoloped by Soham Dutta
+                                </h1>
+                            </div>
 
         </div>
     )
