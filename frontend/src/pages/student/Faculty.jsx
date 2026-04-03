@@ -2,6 +2,7 @@ import React from 'react'
 import { Mail } from "lucide-react";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { MessageCircleMore } from "lucide-react";
 
 const Faculty = () => {
 
@@ -33,21 +34,21 @@ const Faculty = () => {
     }, [])
 
     return (
-        <div className='h-full relative w-full flex flex-col items-center rounded-2xl lg:bg-black/15 border border-white/50'>
+        <div className='h-full relative w-full flex flex-col items-center rounded-2xl  border border-white/50'>
 
             {/* Heading */}
-            <div className='lg:w-120 h-18 mb-8 w-50 lg:h-20 bg-white/10 backdrop-blur-lg border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
-                <h1 className='lg:text-3xl h-15 text-center flex justify-center items-center text-lg uppercase font-bold'>our faculties</h1>
+            <div className='lg:w-120 h-18 mb-8 w-50 lg:h-20 bg-white/10  border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+                <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>our faculties</h1>
             </div>
 
             {/* Container */}
-            <div className='overflow-y-scroll pt-8 pb-30 bg-black/20  border border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-lg rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center lg:justify-between items-center lg:items-start'>
+            <div className='overflow-y-scroll h-full pt-8 pb-30 bg-black/20    shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center lg:justify-between items-center lg:items-start'>
 
                 {teachers.map((teacher, index) => (
-                    <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:w-120 p-4 lg:h-40 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4 backdrop-blur-2xl bg-black/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
+                    <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:w-120 p-4 lg:h-40 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
 
                         {/* Image */}
-                        <div className='border bg-blue-500 border-blue-500 rounded-full w-20 h-20 flex items-center justify-center overflow-hidden'>
+                        <div className='border-2 bg-yellow-500  border-yellow-500 rounded-full w-20 h-20 flex items-center justify-center overflow-hidden'>
                             <img
                                 src="https://t3.ftcdn.net/jpg/08/12/63/16/360_F_812631683_ek5GhlY2zdlSILJMT7pHFujzi37i4Os4.jpg"
                                 alt="avatar"
@@ -56,7 +57,7 @@ const Faculty = () => {
                         </div>
 
                         {/* Name + Subject */}
-                        <div className='border bg-white/10 border-amber-50 w-full lg:w-65 rounded-2xl flex flex-col items-center justify-center p-2'>
+                        <div className='border bg-green-400/10 border-green-400/30 w-full lg:w-65 rounded-2xl flex flex-col items-center justify-center p-2'>
                             <h1 className='text-sm lg:text-lg text-center'>
                                 <span className='text-green-400'>Name: </span> {teacher.name}
                             </h1>
@@ -66,12 +67,20 @@ const Faculty = () => {
                         </div>
 
                         {/* Email */}
-                        <div className='border bg-white/10 border-amber-50 flex items-center justify-center w-full lg:w-20 h-16 lg:h-21 rounded-2xl'>
+                        <div className='border gap-4 bg-blue-500/10 border-blue-500/30 flex items-center justify-center w-full lg:w-20 h-16 lg:h-21 rounded-2xl'>
                             <a
                                 href={`mailto:${teacher.email}?subject=Student Query&body=Hello Sir,`}
-                                className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-blue-500 hover:scale-110 transition duration-300"
+                                className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
                             >
                                 <Mail className="text-white" />
+                            </a>
+
+                            <a 
+                            className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
+                            
+                            href="https://wa.me/919647085384?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class">
+
+                                    <MessageCircleMore className="text-white" />
                             </a>
 
                         </div>

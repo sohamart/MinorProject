@@ -228,7 +228,7 @@ const findadmin = async (req, res) => {
 // ================= TEACHER =================
 
 const registerTeacher = async (req, res) => {
-    const { name, email, password, subject } = req.body;
+    const { name, email, password, subject, phone} = req.body;
 
     try {
         const isTeacherExist = await Teacheruser.findOne({ email });
@@ -238,7 +238,7 @@ const registerTeacher = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const teacheruserdata = await Teacheruser.create({ name, email, password: hashedPassword, subject });
+        const teacheruserdata = await Teacheruser.create({ name, phone, email, password: hashedPassword, subject });
 
         const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET);
 
@@ -254,6 +254,7 @@ const registerTeacher = async (req, res) => {
                 name: teacheruserdata.name,
                 email: teacheruserdata.email,
                 subject: teacheruserdata.subject,
+                phone: teacheruserdata.phone,
                 token: token
             }
         });
@@ -292,6 +293,7 @@ const loginTeacher = async (req, res) => {
                 name: teacheruserdata.name,
                 email: teacheruserdata.email,
                 subject: teacheruserdata.subject,
+                phone: teacheruserdata.phone,
                 token: token
             }
         });
