@@ -75,13 +75,25 @@ const App = () => {
         
 
         <motion.div
-          className="absolute hidden lg:block w-[450px] h-[450px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"
+          className="absolute hidden lg:block left-200 top-100 w-[450px] h-[450px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"
           animate={{
             x: [0, 60, -60, 0],
             y: [0, -60, 100, 0],
           }}
           transition={{
             duration: 16,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute hidden left-200 top-100 lg:block w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+          animate={{
+            x: [0, -120, 80, 0],
+            y: [0, 80, -60, 0],
+          }}
+          transition={{
+            duration: 14,
             repeat: Infinity,
             ease: "easeInOut",
           }}
