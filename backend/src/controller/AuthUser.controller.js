@@ -360,6 +360,23 @@ const findteacher = async (req, res) => {
     }
 };
 
+const deleteTeacher = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deletedTeacher = await Teacheruser.findByIdAndDelete(id);
+        if (!teacher){
+            res.status(404).json({ message: 'Teacher not found' });
+        }
+        res.status(200).json({ 
+            message: 'Teacher deleted successfully',
+            deletedTeacher
+        });
+    }catch{
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+    }
 
 
 
@@ -416,6 +433,8 @@ module.exports = {
     findadmin,
     getAllStudent,
     getAllteacher,
-    deleteStudent
+    deleteStudent,
+    deleteTeacher
+
 
 };

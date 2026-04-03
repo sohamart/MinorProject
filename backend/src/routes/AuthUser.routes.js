@@ -24,6 +24,7 @@ router.get('/getAllStudent', AuthUserController.getAllStudent)
 router.get('/getAllteacher', AuthUserController.getAllteacher)
 router.delete('/deleteStudent/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteStudent)
 
+router.delete('/deleteTeacher/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteTeacher)
 
 
 

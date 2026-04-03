@@ -13,23 +13,7 @@ const FacultiesData = () => {
     const [loading, setloading] = useState(true)
     const [deletingId, setDeletingId] = useState(null);
 
-    const fetchTeachers = async () => {
-        try {
-            const response = await axios.get(`${API}/api/auth/getAllteacher`,
-                { withCredentials: true }
-            );
-
-            setteachers(response.data.teacheruserdata)
-            seterror(null);
-            setloading(false);
-
-        } catch (error) {
-            console.error('Error fetching :', error);
-            setteachers([]);
-            seterror(error.message);
-            setloading(false);
-        }
-    };
+    
 
     const deleteTeacher = async (id) => {
         if (!window.confirm("Are you sure to delete this student ?")) return;
@@ -49,6 +33,23 @@ const FacultiesData = () => {
         } finally {
             await fetchTeachers();
             setDeletingId(null);
+        }
+    };
+    const fetchTeachers = async () => {
+        try {
+            const response = await axios.get(`${API}/api/auth/getAllteacher`,
+                { withCredentials: true }
+            );
+
+            setteachers(response.data.teacheruserdata)
+            seterror(null);
+            
+
+        } catch (error) {
+            console.error('Error fetching :', error);
+            setteachers([]);
+            seterror(error.message);
+            setloading(false);
         }
     };
 
