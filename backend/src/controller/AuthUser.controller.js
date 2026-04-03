@@ -196,7 +196,9 @@ const loginAdmin = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET,{
+            expiresIn: '1h'
+        });
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -305,7 +307,9 @@ const loginTeacher = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET,{
+            expiresIn: '1s'
+        });
 
         res.cookie("token", token, {
             httpOnly: true,
