@@ -3,6 +3,7 @@ import { Mail } from "lucide-react";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { MessageCircleMore } from "lucide-react";
+import { Ban } from "lucide-react";
 
 const Faculty = () => {
 
@@ -34,10 +35,10 @@ const Faculty = () => {
     }, [])
 
     return (
-        <div className='h-full relative w-full flex flex-col items-center rounded-2xl  border border-white/50'>
+        <div className='h-full relative w-full  flex flex-col items-center rounded-2xl  border border-white/50'>
 
             {/* Heading */}
-            <div className='lg:w-120 h-18 mb-8 w-50 lg:h-20 bg-white/10  border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+            <div className='lg:w-120 h-18 mb-8 w-50 lg:h-20 bg-white/10 border-r border-l border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                 <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>our faculties</h1>
             </div>
 
@@ -89,13 +90,31 @@ const Faculty = () => {
                 ))}
 
                 {/* Error */}
-                {error && <p className="text-red-500">{error}</p>}
+                {error && (
+
+                    <div className='absolute w-80 flex gap-2 flex-col items-center  justify-center top-3/6 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                        <Ban className='w-10 h-10'/>
+                        <p className="text-red-500 mb-40 text-center text-2xl lg:text-4xl ">{error}</p>
+
+                    </div>
+                )}
+                
 
                 {/* Loading */}
                 {loading && (
-                    <p className="text-2xl lg:text-4xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <p className="text-2xl lg:text-4xl absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         Loading...
                     </p>
+                )}
+                {teachers.length === 0 && !loading && !error && (
+                    <div className='absolute w-90 flex gap-2 flex-col items-center  justify-center top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                        <Ban className='w-10 h-10'/>
+
+                    
+                    <p className="text-2xl text-center lg:text-4xl ">
+                        No teachers found !!.
+                    </p>
+                    </div>
                 )}
 
             </div>

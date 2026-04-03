@@ -3,7 +3,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import { useContext } from "react";
+import { AuthContextData } from "../../../context/AuthContext";
+
+
 const studentSidebarItems = (props) => {
+  
+      const { loggedinStudent } = useContext(AuthContextData)
+      
 
   const itemVariants = {
     hidden: { x: -60, opacity: 0 },
@@ -48,6 +55,21 @@ const studentSidebarItems = (props) => {
           to={"/student/Faculty"}
         >
           Faculty
+        </NavLink>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <NavLink
+          
+          onClick={props.NavHandel}
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
+            ${isActive 
+              ? "bg-white/15 border border-amber-50" 
+              : "hover:border hover:border-white/50 bg-none"}`
+          }
+          to={`/student/profile/${loggedinStudent?._id}`}
+        >
+          Profile
         </NavLink>
       </motion.div>
 

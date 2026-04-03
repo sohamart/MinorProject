@@ -10,6 +10,7 @@ import Admin from './pages/Admin/Admin'
 import Home from './pages/home/Home'
 import Faculty from './pages/student/Faculty'
 import ErrorPage from './pages/ErrorPage/ErrorPage'
+import Profile from './pages/student/Profile'
 
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
@@ -60,7 +61,7 @@ const App = () => {
         />
 
         <motion.div
-          className="absolute hidden lg:block top-1/5 left-1/4   lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+          className="absolute hidden lg:block w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           animate={{
             x: [0, -120, 80, 0],
             y: [0, 80, -60, 0],
@@ -71,18 +72,37 @@ const App = () => {
             ease: "easeInOut",
           }}
         />
+        
+
         <motion.div
-          className="absolute hidden lg:block top-1/5 left-1/4   lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+          className="absolute hidden lg:block w-[450px] h-[450px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"
           animate={{
-            x: [0, -120, 80, 0],
-            y: [0, 80, -60, 0],
+            x: [0, 60, -60, 0],
+            y: [0, -60, 100, 0],
           }}
           transition={{
-            duration: 14,
+            duration: 16,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
+
+
+        <motion.div
+          className="absolute hidden lg-block  lg:bottom-2/5 lg:left-3/5 w-[500px] h-[500px] bg-purple-600 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+          animate={{
+            x: [0, 100, -50, 0],
+            y: [0, -100, 50, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        
+        
 
         {/* mobile blob */}
 
@@ -109,6 +129,7 @@ const App = () => {
       <Route path="/student" element={<Student/>}>
         <Route path='/student/home' element={<HomeStudent/>}/>
         <Route path='/student/Faculty' element={<Faculty/>}/>
+        <Route path='/student/profile/:id' element={<Profile/>}/>
       </Route>
 
       {/* teacher route */}
