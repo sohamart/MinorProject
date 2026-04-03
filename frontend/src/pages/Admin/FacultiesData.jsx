@@ -122,7 +122,7 @@ const FacultiesData = () => {
 
                             </div>
                             <div className='w-full'>
-                                <button onClick={() => deleteTeacher(teacher._id)} className="h-14 text-2xl w-full rounded-2xl flex items-center justify-center border active:scale-95 hover:bg-white hover:text-black  hover:scale-105 transition duration-300 hover:border-black/50 border-red-400/50 bg-red-400/20 ">
+                                <button onClick={() => deleteTeacher(teacher._id)} className="h-14 text-2xl w-full rounded-2xl flex items-center justify-center border active:scale-95 lg:hover:bg-white lg:hover:text-black  hover:scale-105 transition duration-300 hover:border-black/50 border-red-400/50 bg-red-400/20 ">
 
                                     {deletingId === teacher._id ? "Loading..." : "Delete"}
 
