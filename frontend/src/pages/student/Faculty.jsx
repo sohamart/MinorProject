@@ -43,10 +43,10 @@ const Faculty = () => {
             </div>
 
             {/* Container */}
-            <div className='overflow-y-scroll h-full pt-8 pb-30 bg-black/20    shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center lg:justify-between items-center lg:items-start'>
+            <div className='overflow-y-scroll h-full pt-8 pb-30 bg-black/20 lg:w-full  shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-8 w-full mt-4 lg:mt-8 p-4 lg:p-8 justify-center lg:justify-center  items-center lg:items-start'>
 
                 {teachers.map((teacher, index) => (
-                    <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:max-w-[530px]  p-4  rounded-2xl flex flex-col  items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
+                    <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:max-w-[500px]  p-4  rounded-2xl flex flex-col  items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
 
                         {/* Image */}
                         <div className=' flex lg:flex-row flex-col w-full gap-4 justify-center items-center'>
@@ -74,21 +74,21 @@ const Faculty = () => {
 
                         {/* Email */}
                         <div className="flex  w-full  gap-4 justify-center items-center">
-                            <div className='border  gap-4 bg-blue-500/10 border-blue-500/30 flex items-center justify-center p-2 lg:w-25 h-16 lg:h-21 rounded-2xl'>
+                            <div className='border  gap-4 bg-blue-500/10 border-blue-500/30 flex items-center justify-center p-2 lg:w-full h-16 lg:h-21 rounded-2xl'>
                                 <a
                                     href={`mailto:${teacher.email}?subject=Student Query&body=Hello Sir,`}
-                                    className="flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
+                                    className="flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
                                 >
                                     <Mail className="text-white" />
                                 </a>
 
-                                {/* <a
-                                                    className="flex lg:hidden items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
+                                <a
+                                                    className="flex  items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
                     
-                                                    href="https://wa.me/919647085384?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class">
+                                                    href={`https://wa.me/91${teacher.phone}?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class`}>
                     
                                                     <MessageCircleMore className="text-white" />
-                                                </a> */}
+                                                </a>
 
 
 

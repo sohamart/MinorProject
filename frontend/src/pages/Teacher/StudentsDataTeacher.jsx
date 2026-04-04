@@ -100,7 +100,7 @@ const fetchStudents = async () => {
                             <a
                                 className="flex  items-center justify-center w-12 h-12 lg:w-15 lg:h-15 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
 
-                                href={`https://wa.me/${student.phone}}?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class`}>
+                                href={`https://wa.me/91${student.phone}?text=Hello%20${student.name}%2C%20I%20want%20to%20meet%20you%20tommorow`}>
 
                                 <MessageCircleMore className="text-white" />
                             </a>

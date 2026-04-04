@@ -18,6 +18,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import FacultiesData from './pages/Admin/FacultiesData'
 import TeacherProfile from './pages/Teacher/TeacherProfile'
 import StudentDataTeacher from './pages/Teacher/StudentsDataTeacher'
+import TodayClasses from './pages/student/TodayClasses'
 
 
 
@@ -148,6 +149,7 @@ const App = () => {
         <Route path='/student/home' element={<HomeStudent/>}/>
         <Route path='/student/Faculty' element={<Faculty/>}/>
         <Route path='/student/profile/:id' element={<Profile/>}/>
+        <Route path='/student/TodayClasses' element={<TodayClasses/>}/>
       </Route>
 
 
