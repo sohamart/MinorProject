@@ -18,32 +18,47 @@ const ClassContext = (props) => {
     const [error, seterror] = useState(null)
     const API = import.meta.env.VITE_API_URI
     useEffect(() => {   
-    
-        const fetchTodayClass = async () => {   
-            try{
-            const response = await axios.get(`${API}/api/class/today`, { withCredentials: true })
-            setclasses(response?.data?.todayclass?.classes || []);
-            
+    const fetchTodayClass = async () => {   
+        try {
+            setloading(true);
+
+            const response = await axios.get(
+                `${API}/api/class/today`,
+                { withCredentials: true }
+            );
+
+            const data = response?.data?.todayclass?.classes || [];
+
+            setclasses(data);
+
+            // 🔥 MAIN FIX (retry once if empty)
+            if (data.length === 0) {
+                setTimeout(async () => {
+                    const retry = await axios.get(
+                        `${API}/api/class/today`,
+                        { withCredentials: true }
+                    );
+
+                    setclasses(retry?.data?.todayclass?.classes || []);
+                }, 500); // wait for backend autoCopy
             }
-            catch{
-                console.log("error")
-                setloading(false)
-                seterror("error")
-            }
-            finally{
-                setTimeout(() => {
-                    setloading(false)
-                }, 500)
-            }
+
+        } catch (err) {
+            console.log(err);
+            seterror("error");
+        } finally {
+            setloading(false);
         }
+    };
 
+    fetchTodayClass();
 
-
-
+    const interval = setInterval(() => {
         fetchTodayClass()
-        
-    
-    }, [refresh])
+    }, 3000)
+
+    return () => clearInterval(interval)
+}, [refresh]);
 
 
     return (
