@@ -1,48 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-
-
-const weeklyclass = new mongoose.Schema({
-    day: {
-        type: String,
-        required: true,
-    },
-    classes: [
-        {
-        subject: {
-            type: String,
-            required: true,
-        },
-        teacher: {
-            type: String,
-            required: true,
-        },
-        time: {
-            type: String,
-            required: true,
-        },
-        type: {
-            type: String,
-            enum: ["theory", "lab"],
-            required: true,
-        },
-
-        room: {
-            type: String,
-
-        },
-        }
-    ]
-}, {
-    timestamps: true
+const classSchema = new mongoose.Schema({
+    subject: String,
+    teacher: String,
+    time: String,
+    type: String
 });
 
-const weeklyclassmodel = mongoose.model('weeklyclass', weeklyclass);
+const weeklySchema = new mongoose.Schema({
+    day: { type: String, required: true },
+    classes: [classSchema]
+});
 
-module.exports = weeklyclassmodel;
+const weeklyClass = mongoose.model("WeeklyClass", weeklySchema);
 
-
-
-
-
-
+module.exports = weeklyClass;

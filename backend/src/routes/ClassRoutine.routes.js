@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const ClassRoutineController = require ('../controller/ClassRoutine.controller')
-const AuthMiddileware = require('../middelwares/Auth.middleware')
 
+const controller = require('../controller/ClassRoutine.controller');
 
+// Weekly (Admin)
+router.post('/weekly/add', controller.addWeeklyClass);
+router.delete('/weekly/delete/:day', controller.deleteWeeklyClass);
 
-
-router.post('/weeklyclass/add', AuthMiddileware.AuthAdminMiddileware , ClassRoutineController.addWeeklyClass)
-router.get('/todayclass/find', ClassRoutineController.TodayClass)
-
-
-
+// Today
+router.get('/today', controller.TodayClass);
+router.post('/today/add', controller.addTodayClassItem);
+router.put('/today/update/:id', controller.updateTodayClassItem);
+router.delete('/today/delete/:id', controller.deleteTodayClassItem);
 
 module.exports = router;

@@ -1,6 +1,5 @@
-const DailyClass = require('../model/DailyClass.model');
 const WeeklyClass = require('../model/WeeklyClasses.model');
-
+const DailyClass = require('../model/DailyClass.model');
 
 const autoCopyTodayClass = async () => {
     try {
@@ -8,34 +7,55 @@ const autoCopyTodayClass = async () => {
         const dayName = today.toLocaleString('en-US', { weekday: 'long' });
         const todayDate = today.toDateString();
 
-        // duplicate check
-        const exists = await DailyClass.findOne({ date: todayDate });
+        console.log("Today:", dayName);
 
-        if (exists) {
-            console.log("Already copied today");
-            return;
-        }
-
-        // weekly data fetch
-        const weekly = await WeeklyClass.findOne({ day: dayName });
-
-        if (!weekly) {
-            console.log("No class found for today ");
-            return;
-        }
-
-        // create daily data
-        await DailyClass.create({
-            day: dayName,
-            date: todayDate,
-            classes: weekly.classes
+        const weekly = await WeeklyClass.findOne({
+            day: { $regex: new RegExp(`^${dayName.trim()}$`, "i") }
         });
 
-        console.log("Today class copied successfully");
+        if (!weekly) {
+            console.log("❌ No weekly data found for:", dayName);
+            return;
+        }
+
+        let daily = await DailyClass.findOne({ date: todayDate });
+
+        if (!daily) {
+            await DailyClass.create({
+                day: dayName,
+                date: todayDate,
+                classes: weekly.classes
+            });
+
+            console.log("✅ Fresh copy created");
+            return;
+        }
+
+        // 🔥 MERGE
+        const updatedClasses = [];
+
+        for (let w of weekly.classes) {
+            const match = daily.classes.find(
+                d.subject === w.subject
+            );
+
+            if (match) {
+                updatedClasses.push(match);
+            } else {
+                updatedClasses.push(w);
+            }
+        }
+
+        daily.classes = updatedClasses;
+        await daily.save();
+
+        console.log("✅ Merged successfully");
 
     } catch (error) {
-        console.log("Error:", error.message);
+        console.log("❌ ERROR:", error.message);
     }
 };
 
 module.exports = autoCopyTodayClass;
+
+//

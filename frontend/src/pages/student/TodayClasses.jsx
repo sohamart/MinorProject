@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
+import { Ban } from "lucide-react";
 
 const TodayClasses = () => {
   const { classes = [], loading, error } = useContext(ClassContextData) || {};
@@ -19,10 +20,8 @@ const TodayClasses = () => {
           
           <div className=' overflow-y-auto p-4 flex flex-col lg:flex-row justify-center items-center  lg:flex-wrap gap-5'>
         
-        {classes.length === 0 ? (
-          <p className='text-center text-gray-300'>No classes today</p>
-        ) : (
-          classes.map((cls) => (
+        
+          {classes.map((cls) => (
             <div 
                key={cls._id}
                className='w-full lg:h-30 lg:text-2xl lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
@@ -40,7 +39,7 @@ const TodayClasses = () => {
              </div>
             
           ))
-        )}
+}
 
         {loading && (
                     <p className="text-2xl lg:text-4xl absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2">

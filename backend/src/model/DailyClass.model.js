@@ -1,24 +1,19 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const dailyClassSchema = new mongoose.Schema({
+const classSchema = new mongoose.Schema({
+    subject: String,
+    teacher: String,
+    time: String,
+    type: String,
+    isModified: { type: Boolean, default: false } // 🔥 important
+});
+
+const dailySchema = new mongoose.Schema({
     day: String,
     date: String,
-    classes: [
-        {
-            subject: String,
-            teacher: String,
-            time: String,
-            type: {
-                type: String,
-            },
-            remarks: {
-                type: String,
-                
-            }
-        }
-    ]
-}, { timestamps: true });
+    classes: [classSchema]
+});
 
-const dailyClassModel = mongoose.model('dailyClass', dailyClassSchema);
+const dailyClass = mongoose.model("DailyClass", dailySchema);
 
-module.exports = dailyClassModel;
+module.exports = dailyClass;

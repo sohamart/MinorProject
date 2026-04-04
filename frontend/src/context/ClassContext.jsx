@@ -11,6 +11,8 @@ export const ClassContextData = createContext()
 
 
 const ClassContext = (props) => {
+    const [refresh, setrefresh] = useState(false);
+
     const [classes, setclasses] = useState([])
     const { loading, setloading } = useContext(AuthContextData)
     const [error, seterror] = useState(null)
@@ -19,8 +21,8 @@ const ClassContext = (props) => {
     
         const fetchTodayClass = async () => {   
             try{
-            const response = await axios.get(`${API}/api/class/todayclass/find`, { withCredentials: true })
-            setclasses(response?.data?.todayclass?.[0]?.classes || []);
+            const response = await axios.get(`${API}/api/class/today`, { withCredentials: true })
+            setclasses(response?.data?.todayclass?.classes || []);
             
             }
             catch{
@@ -41,7 +43,7 @@ const ClassContext = (props) => {
         fetchTodayClass()
         
     
-    }, [])
+    }, [refresh])
 
 
     return (
@@ -53,7 +55,9 @@ const ClassContext = (props) => {
         API,
         setloading,
         seterror,
-        setclasses
+        setclasses,
+        setrefresh,
+        refresh
 
       }}>
         {props.children}
