@@ -82,7 +82,7 @@ const fetchStudents = async () => {
             {/* Container */}
             <div className='overflow-y-scroll lg:pt-14 lg:pb-24 h-full pt-8 pb-30 no-scrollbar bg-black/20  lg:justify-center shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center  items-center lg:items-start'>
 
-                {students.map((student, index) => (
+                {students.slice().reverse().map((student, index) => (
                     <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:max-w-[530px]  p-4  rounded-2xl flex flex-col  items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
 
                         {/* Image */}

@@ -22,14 +22,6 @@ const registerStudent = async (req, res) => {
     try {
         const studentuserdata = await Studentuser.create({ name,phone, email, password: hashedPassword, trade, sem });
 
-        const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET);
-
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: isProduction,
-            sameSite: isProduction ? "none" : "lax"
-        });
-
         res.status(201).json({
             message: 'Student registered successfully',
             Studentuser: {
@@ -38,7 +30,6 @@ const registerStudent = async (req, res) => {
                 trade: studentuserdata.trade,
                 sem: studentuserdata.sem,
                 phone: studentuserdata.phone,
-                token: token
             }
         });
     }

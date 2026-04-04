@@ -16,7 +16,7 @@ const HomeTeacher = () => {
           welcome back
         </h1>
         <p className='mt-3 lg:text-2xl text-2xl font-bold '>
-          Admin - {loggedinName}
+          Teacher - {loggedinName}
         </p>
         <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
           <h1 className=' uppercase '>

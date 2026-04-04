@@ -3,17 +3,25 @@ import { CircleCheck } from "lucide-react";
 import { Circle } from "lucide-react";
 import { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { AuthContextData } from '../../context/AuthContext';
+import student from '../../assets/student.png'
+import { useNavigate } from 'react-router';
+
 
 const StudentRegister = () => {
+    const navigate = useNavigate()
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
-    const Navigate = useNavigate()
-    const [userNotFound, setuserNotFound] = useState("")
-    const { setloggedinAdmin, loggedinName, setloggedinName, API } = useContext(AuthContextData)
+    const [name, setname] = useState("")
+    const [phone, setphone] = useState("")
+    const [trade, settrade] = useState("")
+    const [sem, setsem] = useState("")
     const [showPassword, setShowPassword] = useState(false)
-    const [loading, setLoading] = useState(false) // 🔥 NEW
+    const [loading, setLoading] = useState(false)
+    const API = import.meta.env.VITE_API_URI
+    const [RegisterdSuccess, setRegisterdSuccess] = useState(false)
+    const [registeredData, setregisteredData] = useState(null)
+    const [error, seterror] = useState(null)
+
 
     const formhandel = async (e) => {
         e.preventDefault()
@@ -21,125 +29,196 @@ const StudentRegister = () => {
 
         try {
             const response = await axios.post(
-                `${API}/api/auth/admin/login`,
-                { email, password },
+                `${API}/api/auth/student/register`,
+                { name, email, password, phone, trade, sem },
                 { withCredentials: true }
             )
+            console.log(response.data)
 
-            setloggedinAdmin(response.data.adminuserdata)
-            setloggedinName(response.data.adminuserdata.name)
+            setregisteredData(response.data.Studentuser)
 
-            Navigate("/admin/")
+            
+
+
 
         } catch (error) {
             console.log(error.response?.data?.message)
-            setuserNotFound(error.response?.data?.message)
+            seterror(error.response?.data?.message)
         } finally {
-            setLoading(false) // 🔥 stop
+            setLoading(false) //
+            setRegisterdSuccess(true) 
+            setTimeout(() => {
+                setRegisterdSuccess(false)
+            }, 11000);
+
+
         }
 
         setemail("")
         setpassword("")
+        setname("")
+        setphone("")
+        settrade("")
+        setsem("")
+        setShowPassword(false)
+    }
+    const okbuttonhandel = () => {
+        setRegisterdSuccess(false)
+    }
+    const checkbuttonhandel = () => {
+        setRegisterdSuccess(false)
+        navigate("/admin/studentsData")
+    }
+    const ErrorOK = () => {
+        setRegisterdSuccess(false)
+        seterror(null)
     }
 
     return (
         <>
-        <div className= ' relative text-white h-full w-full lg:bg-black/5 bg-white/5 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
-      <div className='lg:w-120  h-18 w-50 lg:h-20 bg-white/10 border-b border-white/40 border-r border-l shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center' >
-            <h1 className='lg:text-3xl  uppercase font-bold'>Student Register</h1>
-            
-        </div>
+            <div className='h-full relative w-full bg-black/20 flex flex-col items-center rounded-2xl pl-1 border border-white/50'>
 
-        <div className='mt-14 lg:mt-4'>
-            <form
-                            onSubmit={formhandel}
-                            className={` backdrop-blur-2xl  border border-blue-400/50 bg-blue-400/15 relative lg:w-100 lg:p-5 w-80 md:w-180 p-5 md:p-15 rounded-2xl shadow-lg flex flex-col items-center justify-center`}>
-            
-                            <h1 className='absolute md:top-13 lg:top-6 top-5 text-2xl lg:text-2xl uppercase font-bold md:text-5xl'>Student Data</h1>
-            
-                            <input
-                                value={email}
-                                onChange={(e) => setemail(e.target.value)}
-                                placeholder='Full Name'
-                                required
-                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-15 md:w-120 md:h-20 md:mt-20 lg:w-80 lg:h-13 lg:mt-18'
-                                type="text"
-                            />
-                            <div className='pl-5 pr-5 gap-3 flex w-full'>
-                                <input
-                                value={email}
-                                onChange={(e) => setemail(e.target.value)}
-                                placeholder='Trade'
-                                required
-                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-1/2 h-10 mt-5 md:w-1/2 md:h-20 md:mt-10 lg:w-1/2 lg:h-13 lg:mt-5'
-                                type="text"
-                            />
-                            <input
-                                value={email}
-                                onChange={(e) => setemail(e.target.value)}
-                                placeholder='Sem'
-                                required
-                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-1/2 h-10 mt-5 md:w-1/2 md:h-20 md:mt-10 lg:w-1/2 lg:h-13 lg:mt-5'
-                                type="text"
-                            />
-                            </div>
-                            
+                {/* Heading */}
+                <div className='lg:w-120 h-18 mb-2 w-50 lg:h-20 bg-white/10 border-r  border-l border-b border-white/40   rounded-2xl mt-2 flex items-center justify-center'>
+                    <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>our faculties</h1>
+                </div>
 
-                            <input
-                                value={email}
-                                onChange={(e) => setemail(e.target.value)}
-                                placeholder='Email'
+                {/* Container */}
+                <div className='overflow-y-scroll no-scrollbar h-full pt-8 pb-30       backdrop-blur-md rounded-xl  flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center  items-center '>
+
+                    <form
+                        onSubmit={formhandel}
+                        className={` backdrop-blur-2xl  border border-blue-400/50 bg-blue-400/15 relative lg:w-100 lg:p-5 w-80 md:w-180 p-5 md:p-15 rounded-2xl shadow-lg flex flex-col items-center justify-center`}>
+
+                        <h1 className='absolute md:top-13 lg:top-6 top-5 text-2xl lg:text-2xl uppercase font-bold md:text-5xl'>Student Data</h1>
+
+                        <input
+                            value={name}
+                            onChange={(e) => setname(e.target.value)}
+                            placeholder='Full Name'
+                            required
+                            className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-15 md:w-120 md:h-20 md:mt-20 lg:w-80 lg:h-13 lg:mt-18'
+                            type="text"
+                        />
+                        <div className='pl-5 pr-5 gap-3 flex w-full'>
+                            <select
+                                value={trade}
+                                onChange={(e) => settrade(e.target.value)}
                                 required
-                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10  md:w-120 md:h-20 lg:mt-5 mt-5 md:mt-10 lg:w-80 lg:h-13 '
-                                type="email"
-                            />
-                            <input
-                                value={email}
-                                onChange={(e) => setemail(e.target.value)}
-                                placeholder='phone'
-                                required
-                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10  md:w-120 md:h-20 lg:mt-5 mt-5 md:mt-10 lg:w-80 lg:h-13 '
-                                type="phone"
-                            />
-            
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                onChange={(e) => setpassword(e.target.value)}
-                                placeholder='Password'
-                                required
-                                className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-5 md:w-120 md:h-20 md:mt-10 lg:w-80 lg:h-13 lg:mt-5'
-                            />
-            
-                            <div className='flex gap-1 items-center justify-end mt-2 w-full mr-12'>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                >
-                                    {showPassword ? <CircleCheck className='w-5 mt-1' /> : <Circle className='w-5 mt-1' />}
-                                </button>
-                                <h1 className='text-sm'>show password</h1>
-                            </div>
-            
-                            <button
-                                disabled={loading} // 🔥 disable while loading
-                                className='active:scale-95 duration-300 bg-black text-white rounded-2xl w-25 h-11 mt-5 md:text-2xl md:w-60 md:h-20 md:mt-10 lg:w-33 lg:h-14 uppercase border border-amber-50 lg:mt-2'
+                                className="bg-white/10 text-white border border-white/20 pl-4 pr-8 rounded-2xl w-1/2 h-10 mt-5 md:h-20 lg:h-13 outline-none appearance-none cursor-pointer"
                             >
-                                {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "submit"} {/* 🔥 text change */}
+                                <option value="" className="text-black">Trade</option>
+                                <option value="CST" className="text-black">CST</option>
+                                <option value="ETC" className="text-black">ETC</option>
+                                <option value="CE" className="text-black">CE</option>
+        
+                            </select>
+
+                            <select
+                                value={sem}
+                                onChange={(e) => setsem(e.target.value)}
+                                required
+                                className="bg-white/10 text-white border border-white/20 pl-4 pr-8 rounded-2xl w-1/2 h-10 mt-5 md:h-20 lg:h-13 outline-none appearance-none cursor-pointer"
+                            >
+                                <option value="" className="text-black">Sem</option>
+                                <option value="1st" className="text-black">1st Sem</option>
+                                <option value="2nd" className="text-black">2nd Sem</option>
+                                <option value="3rd" className="text-black">3rd Sem</option>
+                                <option value="4th" className="text-black">4th Sem</option>
+                                <option value="5th" className="text-black">5th Sem</option>
+                                <option value="6th" className="text-black">6th Sem</option>
+                            </select>
+                        </div>
+
+
+                        <input
+                            value={email}
+                            onChange={(e) => setemail(e.target.value)}
+                            placeholder='Email'
+                            required
+                            className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10  md:w-120 md:h-20 lg:mt-5 mt-5 md:mt-10 lg:w-80 lg:h-13 '
+                            type="email"
+                        />
+                        <input
+                            value={phone}
+                            onChange={(e) => setphone(e.target.value)}
+                            placeholder='phone'
+                            required
+                            className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10  md:w-120 md:h-20 lg:mt-5 mt-5 md:mt-10 lg:w-80 lg:h-13 '
+                            type="phone"
+                        />
+
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setpassword(e.target.value)}
+                            placeholder='Password'
+                            required
+                            className='bg-white/10 border border-white/20 pl-4 md:placeholder:text-2xl rounded-2xl w-60 h-10 mt-5 md:w-120 md:h-20 md:mt-10 lg:w-80 lg:h-13 lg:mt-5'
+                        />
+
+                        <div className='flex gap-1 items-center justify-end mt-2 w-full mr-12'>
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <CircleCheck className='w-5 mt-1' /> : <Circle className='w-5 mt-1' />}
                             </button>
-            
-                        </form>
-        </div>
-        <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
-                        <h1 className=' uppercase '>
-                designed and devoloped by Soham Dutta
-            </h1>
-          </div>
-        </div>
-            
+                            <h1 className='text-sm'>show password</h1>
+                        </div>
+
+                        <button
+                            disabled={loading} // 🔥 disable while loading
+                            className='active:scale-95 duration-300 bg-black text-white rounded-2xl w-25 h-11 mt-5 md:text-2xl md:w-60 md:h-20 md:mt-10 lg:w-33 lg:h-14 uppercase border border-amber-50 lg:mt-2'
+                        >
+                            {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "submit"} {/* 🔥 text change */}
+                        </button>
+
+                    </form>
+
+                </div>
+                <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
+                    <h1 className=' uppercase '>
+                        designed and devoloped by Soham Dutta
+                    </h1>
+                </div>
+                {RegisterdSuccess && !error && (
+
+                    <div className='w-1200 h-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl z-2000 backdrop-blur-xs   bg-black/50 flex items-center justify-center'>
+                        <div className='lg:w-120 lg:h-115 w-70 flex-col lg:justify-between h-70 bg-green-500/10 backdrop-blur-2xl border border-green-400/50  rounded-2xl flex items-center justify-center'>
+                            <div className='w-25 h-25 lg:w-40 lg:h-40 lg:mt-8  mt-2 rounded-full flex justify-center items-center overflow-hidden bg-white/10 border border-white/50'>
+                                <img className='w-22 h-22 lg:w-38 lg:h-38 lg:mt-9 mt-5 ' src={student} alt="student" />
+                            </div>
+                            <div className='w-full flex flex-col items-center justify-center h-20 lg:mb-12'>
+                                <h1 className='text-white-500 lg:text-2xl '>Student Registered Succesfully !! </h1>
+                                <h1 className='lg:mt-2 lg:text-2xl'><span className='text-orange-400  '> Name : </span> {registeredData?.name}</h1>
+                                <h1 className='lg:mt-2 lg:text-2xl'><span className='text-green-500 lg:text-2xl'>Email : </span> {registeredData?.email}</h1>
+
+                            </div>
+                            <div className='flex w-full h-20 gap-4 items-center justify-center'>
+                                <button onClick={okbuttonhandel} className='bg-white/20 hover:bg-green-600 active:scale-95 duration-300 lg:mb-5 border rounded-2xl w-20 h-12 text-xl uppercase flex items-center justify-center'>ok</button>
+                                <button onClick={checkbuttonhandel} className='bg-white/20 hover:bg-green-600 active:scale-95 duration-300 lg:mb-5 lg:w-60 border rounded-2xl w-37 h-12 text-l uppercase flex items-center justify-center'>check students</button>
+                            </div>
+                        </div>
+                    </div>
+
+                )} 
+                {error &&(
+                    <div className='w-1200 h-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl z-2000 backdrop-blur-xs bg-black/50 flex items-center justify-center'>
+                        <div className='lg:w-120 relative lg:h-120 w-70 flex-col   h-70 bg-green-500/10 backdrop-blur-2xl border border-green-400/50  rounded-2xl flex items-center justify-center'>
+                        <h1 className='text-2xl text-red-500'>{error}</h1>
+                        <button onClick={ErrorOK} className='absolute bottom-4 w-30 h-12 bg-white/20 border rounded-2xl flex items-center justify-center border-white/50'>OK</button>
+                    </div> 
+                    </div> 
+
+                )}
+
+
+            </div>
+
         </>
-    
-  )
+
+    )
 }
 
 
