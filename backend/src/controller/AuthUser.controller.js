@@ -259,13 +259,7 @@ const registerTeacher = async (req, res) => {
 
         const teacheruserdata = await Teacheruser.create({ name, phone, email, password: hashedPassword, subject });
 
-        const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET);
-
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: isProduction,
-            sameSite: isProduction ? "none" : "lax"
-        });
+        
 
         res.status(201).json({
             message: 'Teacher registered successfully',
@@ -274,7 +268,6 @@ const registerTeacher = async (req, res) => {
                 email: teacheruserdata.email,
                 subject: teacheruserdata.subject,
                 phone: teacheruserdata.phone,
-                token: token
             }
         });
 

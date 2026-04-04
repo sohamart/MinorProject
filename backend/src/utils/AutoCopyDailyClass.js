@@ -36,7 +36,7 @@ const autoCopyTodayClass = async () => {
 
         for (let w of weekly.classes) {
             const match = daily.classes.find(
-                d.subject === w.subject
+                (d) => d.subject === w.subject
             );
 
             if (match) {

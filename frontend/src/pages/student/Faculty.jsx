@@ -45,7 +45,7 @@ const Faculty = () => {
             {/* Container */}
             <div className='overflow-y-scroll h-full pt-8 pb-30 bg-black/20 lg:w-full  shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-8 w-full mt-4 lg:mt-8 p-4 lg:p-8 justify-center lg:justify-center  items-center lg:items-start'>
 
-                {teachers.map((teacher, index) => (
+                {teachers.slice().reverse().map((teacher, index) => (
                     <div key={index} className='card mt-15 lg:mt-4 w-full max-w-[500px] lg:max-w-[500px]  p-4  rounded-2xl flex flex-col  items-center justify-between gap-4  backdrom-blur-md bg-white/10 shadow-lg hover:shadow-yellow-200/10 hover:scale-[1.02] transition-all duration-300 border border-white/50'>
 
                         {/* Image */}

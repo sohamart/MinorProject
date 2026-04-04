@@ -13,36 +13,33 @@ const addWeeklyClass = async (req, res) => {
         if (!day || !classes || classes.length === 0) {
             return res.status(400).json({
                 success: false,
-                message: "Day and classes are required"
+                message: "Day and classes required"
             });
         }
 
-        const exist = await WeeklyClass.findOne({
+        let exist = await WeeklyClass.findOne({
             day: { $regex: new RegExp(`^${day}$`, "i") }
         });
 
         if (exist) {
-            return res.status(400).json({
-                success: false,
-                message: "Weekly class already exists"
-            });
+            exist.classes.push(...classes);
+            await exist.save();
+        } else {
+            await WeeklyClass.create({ day, classes });
         }
 
-        const data = await WeeklyClass.create({ day, classes });
+        // 🔥 IMPORTANT FIX
+        await autoCopyTodayClass();
 
-        await autoCopyTodayClass(); // 🔥 sync
-
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
-            message: "Weekly class added",
-            data
+            message: "Weekly updated successfully"
         });
 
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "Failed to add weekly class",
-            error: error.message
+            message: error.message
         });
     }
 };
@@ -55,51 +52,62 @@ const deleteWeeklyClass = async (req, res) => {
     try {
         const { day } = req.params;
 
-        if (!day) {
-            return res.status(400).json({
-                success: false,
-                message: "Day parameter required"
-            });
-        }
-
-        const deleted = await WeeklyClass.findOneAndDelete({
+        await WeeklyClass.findOneAndDelete({
             day: { $regex: new RegExp(`^${day}$`, "i") }
         });
 
-        if (!deleted) {
-            return res.status(404).json({
-                success: false,
-                message: "Weekly class not found"
-            });
-        }
-
-        await autoCopyTodayClass(); // 🔥 sync
+        // 🔥 IMPORTANT FIX
+        await autoCopyTodayClass();
 
         return res.status(200).json({
             success: true,
-            message: "Weekly class deleted"
+            message: "Deleted successfully"
         });
 
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "Failed to delete weekly class",
-            error: error.message
+            message: error.message
         });
     }
 };
 
 
 // ================================
-// ✅ GET TODAY CLASS
+// ✅ GET WEEKLY
+// ================================
+const getWeeklyClasses = async (req, res) => {
+    try {
+        const weekly = await WeeklyClass.find();
+
+        return res.status(200).json({
+            success: true,
+            weeklyclass: weekly
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+
+// ================================
+// ✅ GET TODAY CLASS (FIXED)
 // ================================
 const TodayClass = async (req, res) => {
     try {
-        await autoCopyTodayClass();
-
         const todayDate = new Date().toDateString();
 
-        const today = await DailyClass.findOne({ date: todayDate });
+        let today = await DailyClass.findOne({ date: todayDate });
+
+        // 🔥 IF NOT EXIST → CREATE THEN FETCH AGAIN
+        if (!today) {
+            await autoCopyTodayClass();
+            today = await DailyClass.findOne({ date: todayDate });
+        }
 
         if (!today) {
             return res.status(404).json({
@@ -110,15 +118,13 @@ const TodayClass = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Today class fetched",
             todayclass: today
         });
 
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "Failed to fetch today class",
-            error: error.message
+            message: error.message
         });
     }
 };
@@ -129,52 +135,18 @@ const TodayClass = async (req, res) => {
 // ================================
 const addTodayClassItem = async (req, res) => {
     try {
-        const { subject, teacher, time, type } = req.body;
-
-        if (!subject || !teacher || !time || !type) {
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required"
-            });
-        }
-
         const todayDate = new Date().toDateString();
 
         const updated = await DailyClass.findOneAndUpdate(
             { date: todayDate },
-            {
-                $push: {
-                    classes: {
-                        subject,
-                        teacher,
-                        time,
-                        type,
-                        isModified: true
-                    }
-                }
-            },
+            { $push: { classes: { ...req.body, isModified: true } } },
             { new: true }
         );
 
-        if (!updated) {
-            return res.status(404).json({
-                success: false,
-                message: "Today class not found"
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            message: "Class added",
-            data: updated
-        });
+        return res.json({ success: true, data: updated });
 
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "Failed to add class",
-            error: error.message
-        });
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -185,50 +157,21 @@ const addTodayClassItem = async (req, res) => {
 const updateTodayClassItem = async (req, res) => {
     try {
         const { id } = req.params;
-        const { subject, teacher, time, type } = req.body;
-
-        if (!id) {
-            return res.status(400).json({
-                success: false,
-                message: "Class ID required"
-            });
-        }
 
         const todayDate = new Date().toDateString();
 
         const updated = await DailyClass.findOneAndUpdate(
             { date: todayDate, "classes._id": id },
-            {
-                $set: {
-                    "classes.$.subject": subject,
-                    "classes.$.teacher": teacher,
-                    "classes.$.time": time,
-                    "classes.$.type": type,
-                    "classes.$.isModified": true
-                }
-            },
+            { $set: { ...Object.fromEntries(
+                Object.entries(req.body).map(([k,v]) => [`classes.$.${k}`, v])
+            ), "classes.$.isModified": true } },
             { new: true }
         );
 
-        if (!updated) {
-            return res.status(404).json({
-                success: false,
-                message: "Class not found"
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            message: "Class updated",
-            data: updated
-        });
+        return res.json({ success: true, data: updated });
 
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "Failed to update class",
-            error: error.message
-        });
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -240,44 +183,18 @@ const deleteTodayClassItem = async (req, res) => {
     try {
         const { id } = req.params;
 
-        if (!id) {
-            return res.status(400).json({
-                success: false,
-                message: "Class ID required"
-            });
-        }
-
         const todayDate = new Date().toDateString();
 
         const updated = await DailyClass.findOneAndUpdate(
             { date: todayDate },
-            {
-                $pull: {
-                    classes: { _id: id }
-                }
-            },
+            { $pull: { classes: { _id: id } } },
             { new: true }
         );
 
-        if (!updated) {
-            return res.status(404).json({
-                success: false,
-                message: "Class not found"
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            message: "Class deleted",
-            data: updated
-        });
+        return res.json({ success: true, data: updated });
 
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "Failed to delete class",
-            error: error.message
-        });
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -285,6 +202,7 @@ const deleteTodayClassItem = async (req, res) => {
 module.exports = {
     addWeeklyClass,
     deleteWeeklyClass,
+    getWeeklyClasses,
     TodayClass,
     addTodayClassItem,
     updateTodayClassItem,

@@ -75,6 +75,20 @@ const AdminSidebarItems = (props) => {
           TodayClass
         </NavLink>
       </motion.div>
+      <motion.div variants={itemVariants}>
+        <NavLink
+          onClick={props.NavHandel}
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
+            ${isActive 
+              ? "bg-white/15 border border-amber-50" 
+              : "hover:border hover:border-white/50 bg-none"}`
+          }
+          to={"/Admin/WeeklyClass"}
+        >
+          Weekly Class
+        </NavLink>
+      </motion.div>
 
       <motion.div variants={itemVariants}>
         <NavLink
@@ -158,7 +172,7 @@ const AdminSidebarItems = (props) => {
       top: 200, // কতটা scroll হবে
       behavior: "smooth"
     });
-  }} className=" w-10 lg:hidden h-10 flex justify-center items-center bg:white/40 border border-white/50 fixed bottom-26 right-2 rounded-full ">
+  }} className=" w-10 lg:hidden h-10 flex justify-center items-center bg:white/40 border border-white/50 fixed bottom-36 right-2 rounded-full ">
                       <ChevronDown className="text-white w-6 h-6"/>
         </div>
 

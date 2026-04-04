@@ -80,7 +80,7 @@ const StudentRegister = () => {
 
                 {/* Heading */}
                 <div className='lg:w-120 h-18 mb-2 w-50 lg:h-20 bg-white/10 border-r  border-l border-b border-white/40   rounded-2xl mt-2 flex items-center justify-center'>
-                    <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>our faculties</h1>
+                    <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>Students Register</h1>
                 </div>
 
                 {/* Container */}
