@@ -39,48 +39,7 @@ const TodayClasses = () => {
             
           ))
         )}
-        <div 
-              
-              className='w-full lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
-            >
-              <div>
-                <h2 className='font-bold'>dfggrfeg</h2>
-                <p className='text-sm text-gray-300'>sjhdsdf</p>
-                <p className='text-xs'>dbms</p>
-              </div>
-
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold`}>
-                fsdfds
-              </span>
-            </div>
-            <div 
-              
-              className='w-full lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
-            >
-              <div>
-                <h2 className='font-bold'>dfggrfeg</h2>
-                <p className='text-sm text-gray-300'>sjhdsdf</p>
-                <p className='text-xs'>dbms</p>
-              </div>
-
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold`}>
-                fsdfds
-              </span>
-            </div>
-            <div 
-              
-              className='w-full lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
-            >
-              <div>
-                <h2 className='font-bold'>dfggrfeg</h2>
-                <p className='text-sm text-gray-300'>sjhdsdf</p>
-                <p className='text-xs'>dbms</p>
-              </div>
-
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold`}>
-                fsdfds
-              </span>
-            </div>
+        
 
       </div>
       </div>
