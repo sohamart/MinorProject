@@ -20,7 +20,7 @@ const ClassContext = (props) => {
     useEffect(() => {   
     const fetchTodayClass = async () => {   
         try {
-            setloading(true);
+            
 
             const response = await axios.get(
                 `${API}/api/class/today`,
@@ -47,7 +47,7 @@ const ClassContext = (props) => {
             console.log(err);
             seterror("error");
         } finally {
-            setloading(false);
+            
         }
     };
 
