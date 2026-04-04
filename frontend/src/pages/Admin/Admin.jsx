@@ -40,8 +40,10 @@ const Admin = () => {
 
         {/* 🧊 Main Content */}
         <div className=" relative z-10 lg:gap-4  top-0 p-4 flex w-full">
-
-          <AdminSidebar />
+          
+            <AdminSidebar />
+          
+          
           <div className=' lg:h-full md:h-full w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinAdmin?.name }} />
           </div>
@@ -50,8 +52,8 @@ const Admin = () => {
         </div>
 
       </div>
-      <div className="lg:hidden  w-full h-[13vh]   md:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-15">
-        <div className="backdrop-blur-2xl h-full z-20  border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+      <div className="lg:hidden  w-full h-[13vh]   md:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-10">
+        <div className="backdrop-blur-2xl h-full  border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           <AdminDock loggedinAdmin={loggedinAdmin} />
         </div>
         

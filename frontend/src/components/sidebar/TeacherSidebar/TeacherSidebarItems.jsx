@@ -24,7 +24,20 @@ const TeacherSidebarItems = (props) => {
 
   return (
     <div className="text-white z-20 flex gap-4  flex-col w-full items-center h-full rounded-2xl p-2 lg:pt-18">
-      
+      <motion.div variants={itemVariants}>
+        <NavLink
+          onClick={props.NavHandel}
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
+            ${isActive 
+              ? "bg-white/15 border border-amber-50" 
+              : "hover:border hover:border-white/50 bg-none"}`
+          }
+          to={"/"}
+        >
+          Home
+        </NavLink>
+      </motion.div>
 
       <motion.div variants={itemVariants}>
         <NavLink
@@ -40,6 +53,7 @@ const TeacherSidebarItems = (props) => {
           Dashbord
         </NavLink>
       </motion.div>
+      
       <motion.div variants={itemVariants}>
         <NavLink
           onClick={props.NavHandel}
@@ -49,9 +63,9 @@ const TeacherSidebarItems = (props) => {
               ? "bg-white/15 border border-amber-50" 
               : "hover:border hover:border-white/50 bg-none"}`
           }
-          to={"/"}
+          to={"/teacher/todayClasses"}
         >
-          Home
+          TodayClass
         </NavLink>
       </motion.div>
 

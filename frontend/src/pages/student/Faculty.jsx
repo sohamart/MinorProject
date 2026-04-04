@@ -64,10 +64,10 @@ const Faculty = () => {
                                     <span className='text-green-400'>Name: </span> {teacher.name}
                                 </h1>
                                 <p className='text-xs mt-4 lg:text-base text-center'>
-                                    <span className='text-yellow-400'>Trade: </span> {teacher.trade}
+                                    <span className='text-yellow-400'>Subject: </span> {teacher.subject}
                                 </p>
                                 <p className='text-xs mt-2 lg:text-base text-center'>
-                                    <span className='text-blue-400'>Sem: </span> {teacher.sem}
+                                    <span className='text-blue-400'>Email: </span> {teacher.email}
                                 </p>
                             </div>
                         </div>

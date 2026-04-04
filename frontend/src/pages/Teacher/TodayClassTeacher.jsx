@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ClassContextData } from '../../context/ClassContext'
 
 const TodayClassTeacher = () => {
   const { classes = [] } = useContext(ClassContextData) || {};
@@ -22,12 +23,12 @@ const TodayClassTeacher = () => {
            classes.map((cls) => (
              <div 
                key={cls._id}
-               className='w-full lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
+               className='w-full lg:h-30 lg:text-2xl lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
              >
                <div>
                  <h2 className='font-bold'>{cls.subject}</h2>
-                 <p className='text-sm text-gray-300'>{cls.teacher}</p>
-                 <p className='text-xs'>{cls.time}</p>
+                 <p className='text-sm lg:text-md mt-1 text-gray-300'>{cls.teacher}</p>
+                 <p className='text-xs lg:text-sm mt-1 text-green-500'>{cls.time}</p>
                </div>
  
                <span className={`px-3 py-1 flex justify-center items-center h-8 uppercase  rounded-full text-xs font-semibold 
@@ -39,10 +40,16 @@ const TodayClassTeacher = () => {
            ))
          )}
          
- 
+         
        </div>
-       </div>
+
        
+       </div>
+       <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
+          <h1 className=' uppercase '>
+            designed and devoloped by Soham Dutta
+          </h1>
+        </div>
  
      </div>
    )

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 
 const TodayClasses = () => {
-  const { classes = [] } = useContext(ClassContextData) || {};
+  const { classes = [], loading, error } = useContext(ClassContextData) || {};
 
   console.log(classes)
 
@@ -15,6 +15,8 @@ const TodayClasses = () => {
 
 
       <div className='shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md h-full pt-15 w-full overflow-auto pb-20 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]'>
+          
+          
           <div className=' overflow-y-auto p-4 flex flex-col lg:flex-row justify-center items-center  lg:flex-wrap gap-5'>
         
         {classes.length === 0 ? (
@@ -22,28 +24,47 @@ const TodayClasses = () => {
         ) : (
           classes.map((cls) => (
             <div 
-              key={cls._id}
-              className='w-full lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
-            >
-              <div>
-                <h2 className='font-bold'>{cls.subject}</h2>
-                <p className='text-sm text-gray-300'>{cls.teacher}</p>
-                <p className='text-xs'>{cls.time}</p>
-              </div>
-
-              <span className={`px-3 py-1 flex justify-center items-center h-8 uppercase  rounded-full text-xs font-semibold 
-                ${cls.type === "lab" ? "bg-green-500/20 border border-green-500/50" : "bg-blue-500/20 border border-blue-500/50"}`}>
-                {cls.type}
-              </span>
-            </div>
+               key={cls._id}
+               className='w-full lg:h-30 lg:text-2xl lg:w-120 bg-white/10 border border-white/20 rounded-lg p-3 flex justify-between items-center'
+             >
+               <div>
+                 <h2 className='font-bold'>{cls.subject}</h2>
+                 <p className='text-sm lg:text-md mt-1 text-gray-300'>{cls.teacher}</p>
+                 <p className='text-xs lg:text-sm mt-1 text-green-500'>{cls.time}</p>
+               </div>
+ 
+               <span className={`px-3 py-1 flex justify-center items-center h-8 uppercase  rounded-full text-xs font-semibold 
+                 ${cls.type === "lab" ? "bg-green-500/20 border border-green-500/50" : "bg-blue-500/20 border border-blue-500/50"}`}>
+                 {cls.type}
+               </span>
+             </div>
             
           ))
         )}
-        
+
+        {loading && (
+                    <p className="text-2xl lg:text-4xl absolute top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        Loading...
+                    </p>
+                )}
+                {classes.length === 0 && !loading && !error && (
+                    <div className='absolute w-90 flex gap-2 flex-col items-center  justify-center top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                        <Ban className='w-10 h-10' />
+
+
+                        <p className="text-2xl text-center lg:text-4xl ">
+                            No classes found !!.
+                        </p>
+                    </div>
+                )}
 
       </div>
       </div>
-      
+      <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
+          <h1 className=' uppercase '>
+            designed and devoloped by Soham Dutta
+          </h1>
+        </div>
 
     </div>
   )

@@ -19,6 +19,10 @@ import FacultiesData from './pages/Admin/FacultiesData'
 import TeacherProfile from './pages/Teacher/TeacherProfile'
 import StudentDataTeacher from './pages/Teacher/StudentsDataTeacher'
 import TodayClasses from './pages/student/TodayClasses'
+import TodayClassAdmin from './pages/Admin/TodayClassAdmin'
+import TodayClassTeacher from './pages/Teacher/TodayClassTeacher'
+import StudentRegister from './pages/Admin/StudentRegister'
+import TeacherRegister from './pages/Admin/TeacherRegister'
 
 
 
@@ -159,6 +163,7 @@ const App = () => {
       <Route path='/teacher/home' element={<HomeTeacher/>}/>
       <Route path='/teacher/profile/:id' element={<TeacherProfile/>}/>
       <Route path='/teacher/StudentsData' element={<StudentDataTeacher/>}/>
+      <Route path='/teacher/TodayClasses' element={<TodayClassTeacher/>}/>
       </Route>
 
 
@@ -169,6 +174,9 @@ const App = () => {
       <Route path='/admin/facultiesData' element={<FacultiesData/>}/>
       <Route path='/admin/studentsData' element={<StudentsData/>}/>
       <Route path='/admin/profile/:id' element={<AdminProfile/>}/>
+      <Route path='/admin/TodayClasses' element={<TodayClassAdmin/>}/>
+      <Route path='/admin/studentRegister' element={<StudentRegister/>}/>
+      <Route path='/admin/teacherRegister' element={<TeacherRegister/>}/>
       </Route>
 
 

@@ -15,7 +15,7 @@ const AdminSidebar = () => {
         </div>
 
         {/* Mobile Navbar */}
-        <div className="block lg:hidden">
+        <div className="block  lg:hidden">
           <AdminSidebarMob />
         </div>
     </>

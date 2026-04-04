@@ -36,7 +36,7 @@ const Student = () => {
 
 
        
-
+        
 
         {/* 🧊 Main Content */}
         <div className=" z-10 lg:h-full lg:gap-4 fixed top-0 p-4 flex w-full">

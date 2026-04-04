@@ -35,7 +35,7 @@ const AdminSidebarMob = () => {
   };
 
   return (
-    <div className="relative z-20">
+    <div className="relative  z-20">
 
       {/* Menu Button */}
       <motion.div
@@ -51,13 +51,14 @@ const AdminSidebarMob = () => {
 
       {/* Sidebar */}
       <AnimatePresence>
+        
         {navopen && (
           <motion.div
             initial={{ x: "-100%", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "-100%", opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="p-12 fixed top-0 left-0  h-screen w-screen bg-black  z-22"
+            className="pt-12 pb-12 pl-4 pr-4 fixed top-0 left-0  h-screen w-screen bg-black z-999"
           >
 
             {/* 🔥 Cross Button (Animated) */}
@@ -86,7 +87,7 @@ const AdminSidebarMob = () => {
             >
               <AdminSidebarItems NavHandel={closeNav} />
             </motion.div>
-
+            
           </motion.div>
         )}
       </AnimatePresence>
