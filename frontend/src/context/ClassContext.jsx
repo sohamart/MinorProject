@@ -27,6 +27,12 @@ const ClassContext = (props) => {
             }
         }
         fetchWeeklyClass()
+
+        const interval = setInterval(() => {
+            fetchWeeklyClass();
+        }, 3000); // 3 sec
+
+        return () => clearInterval(interval); 
     }, [])
 
     return (

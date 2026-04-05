@@ -9,7 +9,7 @@ const controller = require("../controller/ClassRoutine.controller");
 // ==========================
 
 // ADD WEEKLY
-// router.post("/weekly/add", controller.addWeeklyClass);
+router.post("/weekly/add", controller.addWeeklyClass);
 
 // // GET ALL WEEKLY
 router.get("/weekly/get", controller.WeeklyClassGet);

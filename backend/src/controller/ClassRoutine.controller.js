@@ -24,6 +24,27 @@ const WeeklyClassGet = async (req, res) => {
 
 }
 
+const addWeeklyClass = async (req, res) => {
+    try {
+        const { day, classes } = req.body;
+        const weeklyclass = await weeklyClass.create({ day, classes });
+        res.status(201).json({
+            message: 'Class added successfully',
+            weeklyclass
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+            error: error.message
+        });
+    }
+}
+
+
+
 module.exports = {
-    WeeklyClassGet
+    WeeklyClassGet,
+    addWeeklyClass
+
 }
