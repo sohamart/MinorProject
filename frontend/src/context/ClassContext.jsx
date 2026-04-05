@@ -1,84 +1,99 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
-import { useContext } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import { AuthContextData } from "./AuthContext";
 
-
-
-
-
-export const ClassContextData = createContext()
-
+export const ClassContextData = createContext();
 
 const ClassContext = (props) => {
     const [refresh, setrefresh] = useState(false);
 
-    const [classes, setclasses] = useState([])
-    const { loading, setloading } = useContext(AuthContextData)
-    const [error, seterror] = useState(null)
-    const API = import.meta.env.VITE_API_URI
-    useEffect(() => {   
-    const fetchTodayClass = async () => {   
-        try {
-            
+    const [classes, setclasses] = useState([]);
+    const [weekly, setweekly] = useState([]); // 🔥 add weekly
 
-            const response = await axios.get(
-                `${API}/api/class/today`,
-                { withCredentials: true }
-            );
+    const { loading, setloading } = useContext(AuthContextData);
+    const [error, seterror] = useState(null);
 
-            const data = response?.data?.todayclass?.classes || [];
+    const API = import.meta.env.VITE_API_URI;
 
-            setclasses(data);
-
-            // 🔥 MAIN FIX (retry once if empty)
-            if (data.length === 0) {
-                setTimeout(async () => {
-                    const retry = await axios.get(
-                        `${API}/api/class/today`,
-                        { withCredentials: true }
-                    );
-
-                    setclasses(retry?.data?.todayclass?.classes || []);
-                }, 500); // wait for backend autoCopy
-            }
-
-        } catch (err) {
-            console.log(err);
-            seterror("error");
-        } finally {
-            
+    // ==========================
+    // TODAY CLASS FETCH
+    // ==========================
+   const fetchTodayClass = async () => {
+    try {
+        // 🔥 only first time loading
+        if (classes.length === 0) {
+            setloading(true);
         }
-    };
 
+        const response = await axios.get(
+            `${API}/api/class/today/get`,
+            { withCredentials: true }
+        );
+
+        const data = response?.data?.data?.classes || [];
+
+        setclasses(data);
+
+    } catch (err) {
+        seterror("Failed to fetch today classes");
+    } finally {
+        setloading(false);
+    }
+};
+
+    // ==========================
+  const fetchWeeklyClass = async () => {
+    try {
+        // only first time loading
+        if (weekly.length === 0) {
+            setloading(true);
+        }
+
+        const res = await axios.get(
+            `${API}/api/class/weekly/get`,
+            { withCredentials: true }
+        );
+        console.log(res);
+        setweekly(res?.data?.data || []);
+
+    } catch (err) {
+        seterror("Failed to fetch weekly classes");
+    } finally {
+        setloading(false);
+    }
+};
+    // ==========================
+    // USE EFFECT
+    // ==========================
+    useEffect(() => {
     fetchTodayClass();
-
-    const interval = setInterval(() => {
-        fetchTodayClass()
-    }, 3000)
-
-    return () => clearInterval(interval)
+    fetchWeeklyClass();
 }, [refresh]);
 
 
+
     return (
-    <div>
-      <ClassContextData.Provider value={{
-        classes,
-        loading,
-        error,
-        API,
-        setloading,
-        seterror,
-        setclasses,
-        setrefresh,
-        refresh
+        <ClassContextData.Provider value={{
+            classes,
+            weekly, // 🔥 add
+            loading,
+            error,
+            API,
+            setloading,
+            seterror,
+            setclasses,
+            setweekly,
+            setrefresh,
+            refresh,
 
-      }}>
-        {props.children}
-      </ClassContextData.Provider>
-    </div>
-  )
-}
+            // 🔥 expose functions (important)
+            getTodayClasses: fetchTodayClass,
+            getWeeklyClasses: fetchWeeklyClass
 
-export default ClassContext 
+        }}>
+            {props.children}
+        </ClassContextData.Provider>
+    );
+};
+
+export default ClassContext;

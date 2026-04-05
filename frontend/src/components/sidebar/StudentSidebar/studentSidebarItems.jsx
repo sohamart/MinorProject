@@ -67,7 +67,21 @@ const studentSidebarItems = (props) => {
           }
           to={"/student/todayClasses"}
         >
-          TodayClasses
+          Today Classes
+        </NavLink>
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <NavLink
+          onClick={props.NavHandel}
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
+            ${isActive 
+              ? "bg-white/15 border border-amber-50" 
+              : "hover:border hover:border-white/50 bg-none"}`
+          }
+          to={"/student/WeeklyClasses"}
+        >
+          Weekly Classes
         </NavLink>
       </motion.div>
       

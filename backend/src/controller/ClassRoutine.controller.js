@@ -1,210 +1,316 @@
-const DailyClass = require('../model/DailyClass.model');
-const WeeklyClass = require('../model/WeeklyClasses.model');
-const autoCopyTodayClass = require('../utils/AutoCopyDailyClass');
+const weeklyClass = require("../model/WeeklyClasses.model");
+const dailyClass = require("../model/DailyClass.model");
 
 
-// ================================
-// ✅ ADD WEEKLY (ADMIN)
-// ================================
+// ==========================
+// COMMON RESPONSE HANDLER
+// ==========================
+const success = (res, message, data = null, status = 200) => {
+    return res.status(status).json({
+        success: true,
+        message,
+        data
+    });
+};
+
+const error = (res, message = "Something went wrong", status = 500) => {
+    return res.status(status).json({
+        success: false,
+        message
+    });
+};
+
+
+
+// ==========================
+// WEEKLY CLASS CONTROLLER
+// ==========================
+
+// ADD WEEKLY
 const addWeeklyClass = async (req, res) => {
     try {
         const { day, classes } = req.body;
 
-        if (!day || !classes || classes.length === 0) {
-            return res.status(400).json({
-                success: false,
-                message: "Day and classes required"
-            });
+        if (!day || !classes || !Array.isArray(classes)) {
+            return error(res, "Invalid input", 400);
         }
 
-        let exist = await WeeklyClass.findOne({
-            day: { $regex: new RegExp(`^${day}$`, "i") }
-        });
-
+        const exist = await weeklyClass.findOne({ day: day.toLowerCase() });
         if (exist) {
-            exist.classes.push(...classes);
-            await exist.save();
-        } else {
-            await WeeklyClass.create({ day, classes });
+            return error(res, "Day already exists", 400);
         }
 
-        // 🔥 IMPORTANT FIX
-        await autoCopyTodayClass();
-
-        return res.status(200).json({
-            success: true,
-            message: "Weekly updated successfully"
+        const newData = await weeklyClass.create({
+            day: day.toLowerCase(),
+            classes
         });
 
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        return success(res, "Weekly class added", newData, 201);
+
+    } catch (err) {
+        console.error(err);
+        return error(res);
     }
 };
 
 
-// ================================
-// ✅ DELETE WEEKLY
-// ================================
+// EDIT WEEKLY (NO day change)
+const editWeeklyClass = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { classes } = req.body;
+
+        if (!classes || !Array.isArray(classes)) {
+            return error(res, "Invalid classes data", 400);
+        }
+
+        const updated = await weeklyClass.findByIdAndUpdate(
+            id,
+            { classes },
+            { new: true }
+        );
+
+        if (!updated) return error(res, "Weekly data not found", 404);
+
+        return success(res, "Weekly updated", updated);
+
+    } catch (err) {
+        console.error(err);
+        return error(res);
+    }
+};
+
+
+// DELETE WEEKLY
 const deleteWeeklyClass = async (req, res) => {
     try {
         const { day } = req.params;
 
-        await WeeklyClass.findOneAndDelete({
-            day: { $regex: new RegExp(`^${day}$`, "i") }
+        const deleted = await weeklyClass.findOneAndDelete({
+            day: day.toLowerCase()
         });
 
-        // 🔥 IMPORTANT FIX
-        await autoCopyTodayClass();
+        if (!deleted) return error(res, "Day not found", 404);
+
+        return success(res, "Weekly deleted");
+
+    } catch (err) {
+        console.error(err);
+        return error(res);
+    }
+};
+
+
+// ==========================
+// GET WEEKLY DATA
+// ==========================
+
+// GET ALL WEEKLY DATA
+const getAllWeeklyClass = async (req, res) => {
+    try {
+        const data = await weeklyClass.find().sort({ day: 1 });
 
         return res.status(200).json({
             success: true,
-            message: "Deleted successfully"
+            message: "All weekly classes fetched",
+            data
         });
 
-    } catch (error) {
+    } catch (err) {
+        console.error(err);
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: "Failed to fetch weekly data"
         });
     }
 };
 
 
-// ================================
-// ✅ GET WEEKLY
-// ================================
-const getWeeklyClasses = async (req, res) => {
-    try {
-        const weekly = await WeeklyClass.find();
 
-        return res.status(200).json({
-            success: true,
-            weeklyclass: weekly
+// GET SINGLE DAY WEEKLY
+const getWeeklyByDay = async (req, res) => {
+    try {
+        const { day } = req.params;
+
+        const data = await weeklyClass.findOne({
+            day: day.toLowerCase()
         });
 
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message
-        });
-    }
-};
-
-
-// ================================
-// ✅ GET TODAY CLASS (FIXED)
-// ================================
-const TodayClass = async (req, res) => {
-    try {
-        const todayDate = new Date().toDateString();
-
-        let today = await DailyClass.findOne({ date: todayDate });
-
-        // 🔥 IF NOT EXIST → CREATE THEN FETCH AGAIN
-        if (!today) {
-            await autoCopyTodayClass();
-            today = await DailyClass.findOne({ date: todayDate });
-        }
-
-        if (!today) {
+        if (!data) {
             return res.status(404).json({
                 success: false,
-                message: "No today class found"
+                message: "Day not found"
             });
         }
 
         return res.status(200).json({
             success: true,
-            todayclass: today
+            message: "Weekly class fetched",
+            data
         });
 
-    } catch (error) {
+    } catch (err) {
+        console.error(err);
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: "Error fetching weekly data"
         });
     }
 };
 
 
-// ================================
-// ✅ ADD CLASS (TEACHER)
-// ================================
-const addTodayClassItem = async (req, res) => {
+
+
+// ==========================
+// TODAY CLASS CONTROLLER
+// ==========================
+
+// LAZY AUTO COPY FUNCTION (Railway safe)
+const ensureTodayData = async () => {
+    const today = new Date();
+    const todayDate = today.toDateString();
+    const dayName = today.toLocaleString("en-US", { weekday: "long" }).toLowerCase();
+
+    let data = await dailyClass.findOne({ date: todayDate });
+
+    if (!data) {
+        // delete old
+        await dailyClass.deleteMany({});
+
+        const weekly = await weeklyClass.findOne({ day: dayName });
+
+        if (!weekly) return null;
+
+        data = await dailyClass.create({
+            date: todayDate,
+            day: dayName,
+            classes: weekly.classes
+        });
+    }
+
+    return data;
+};
+
+
+
+// GET TODAY
+const getTodayClass = async (req, res) => {
     try {
-        const todayDate = new Date().toDateString();
+        const data = await ensureTodayData();
 
-        const updated = await DailyClass.findOneAndUpdate(
-            { date: todayDate },
-            { $push: { classes: { ...req.body, isModified: true } } },
-            { new: true }
-        );
+        if (!data) return error(res, "No class found for today", 404);
 
-        return res.json({ success: true, data: updated });
+        return success(res, "Today class fetched", data);
 
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+    } catch (err) {
+        console.error(err);
+        return error(res);
     }
 };
 
 
-// ================================
-// ✅ UPDATE CLASS
-// ================================
-const updateTodayClassItem = async (req, res) => {
+
+// ADD TODAY CLASS (multiple)
+const addTodayClass = async (req, res) => {
     try {
-        const { id } = req.params;
+        let { classes } = req.body;
 
-        const todayDate = new Date().toDateString();
+        if (!classes) {
+            return error(res, "No classes provided", 400);
+        }
 
-        const updated = await DailyClass.findOneAndUpdate(
-            { date: todayDate, "classes._id": id },
-            { $set: { ...Object.fromEntries(
-                Object.entries(req.body).map(([k,v]) => [`classes.$.${k}`, v])
-            ), "classes.$.isModified": true } },
-            { new: true }
-        );
+        // support single object
+        if (!Array.isArray(classes)) {
+            classes = [classes];
+        }
 
-        return res.json({ success: true, data: updated });
+        const data = await ensureTodayData();
+        if (!data) return error(res, "No base data", 404);
 
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+        for (let newClass of classes) {
+
+            // 🔥 check duplicate
+            const isDuplicate = data.classes.some(c => 
+                c.time === newClass.time || 
+                (c.subject === newClass.subject && c.time === newClass.time)
+            );
+
+            if (isDuplicate) {
+                return error(res, `Class conflict at ${newClass.time}`, 400);
+            }
+
+            data.classes.push(newClass);
+        }
+
+        await data.save();
+
+        return success(res, "Classes added", data);
+
+    } catch (err) {
+        console.error(err);
+        return error(res);
+    }
+};
+const editTodayClass = async (req, res) => {
+    try {
+        const index = parseInt(req.params.index); // 🔥 FIX
+        const updatedClass = req.body;
+
+        const data = await ensureTodayData();
+        if (!data) return error(res, "No data", 404);
+
+        if (isNaN(index) || index < 0 || index >= data.classes.length) {
+            return error(res, "Invalid index", 400);
+        }
+
+        data.classes[index] = updatedClass;
+        await data.save();
+
+        return success(res, "Class updated", data);
+
+    } catch (err) {
+        console.error(err);
+        return error(res);
     }
 };
 
 
-// ================================
-// ✅ DELETE CLASS
-// ================================
-const deleteTodayClassItem = async (req, res) => {
+
+// DELETE TODAY CLASSconst 
+deleteTodayClass = async (req, res) => {
     try {
-        const { id } = req.params;
+        const index = parseInt(req.params.index); // ✅ FIX
 
-        const todayDate = new Date().toDateString();
+        const data = await ensureTodayData();
+        if (!data) return error(res, "No data", 404);
 
-        const updated = await DailyClass.findOneAndUpdate(
-            { date: todayDate },
-            { $pull: { classes: { _id: id } } },
-            { new: true }
-        );
+        if (isNaN(index) || index < 0 || index >= data.classes.length) {
+            return error(res, "Invalid index", 400);
+        }
 
-        return res.json({ success: true, data: updated });
+        data.classes.splice(index, 1);
+        await data.save();
 
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return success(res, "Class deleted", data);
+
+    } catch (err) {
+        console.error("DELETE ERROR:", err);
+        return error(res);
     }
-};
+}
 
 
+
+// ==========================
 module.exports = {
     addWeeklyClass,
+    editWeeklyClass,
     deleteWeeklyClass,
-    getWeeklyClasses,
-    TodayClass,
-    addTodayClassItem,
-    updateTodayClassItem,
-    deleteTodayClassItem
+    getTodayClass,
+    addTodayClass,
+    editTodayClass,
+    deleteTodayClass,
+    getAllWeeklyClass,
+    getWeeklyByDay
+
 };

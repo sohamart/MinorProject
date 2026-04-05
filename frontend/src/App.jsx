@@ -24,6 +24,9 @@ import TodayClassTeacher from './pages/Teacher/TodayClassTeacher'
 import StudentRegister from './pages/Admin/StudentRegister'
 import TeacherRegister from './pages/Admin/TeacherRegister'
 import WeeklyClassAdmin from './pages/Admin/WeeklyClassAdmin'
+import WeeklyClass from './pages/student/WeeklyClass'
+
+
 
 
 
@@ -155,6 +158,7 @@ const App = () => {
         <Route path='/student/Faculty' element={<Faculty/>}/>
         <Route path='/student/profile/:id' element={<Profile/>}/>
         <Route path='/student/TodayClasses' element={<TodayClasses/>}/>
+        <Route path='/student/WeeklyClasses' element={<WeeklyClass/>}/>
       </Route>
 
 

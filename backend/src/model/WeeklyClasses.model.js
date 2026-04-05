@@ -1,10 +1,23 @@
 const mongoose = require("mongoose");
 
 const classSchema = new mongoose.Schema({
-    subject: String,
-    teacher: String,
-    time: String,
-    type: String
+      subject : {
+        type: String,
+        required: true,
+      },
+      teacher : {
+        type: String,
+        required: true,
+      },
+      time : {
+        type: String,
+        required: true,
+      },
+      type : {
+        type: String,
+        enum : ["Theory", "Lab"],
+        required: true
+      }
 });
 
 const weeklySchema = new mongoose.Schema({
