@@ -1,6 +1,8 @@
 import React from 'react'
 import { useContext } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
+import { motion } from 'framer-motion'
+
 
 const WeeklyClassTeacher = () => {
     const { WeeklyClass, error, loading } = useContext(ClassContextData)
@@ -15,8 +17,21 @@ const WeeklyClassTeacher = () => {
                 
                 <div className='  flex gap-12 pt-24 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                     {/* 🔥 ERROR */}
-                    {error && (
-                        <p className="text-red-500 text-xl">{error}</p>
+                    {WeeklyClass.length === 0 &&(
+                        <motion.p
+                        animate={{
+                            opacity: 40
+                            
+                        }}
+                        transition={{
+                            duration: 0.8,
+                            ease : "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            
+                        }}
+
+                        className=" lg:text-4xl opacity-30  text-xl">No Classes Found !!</motion.p>
                     )}
 
 

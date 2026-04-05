@@ -18,10 +18,10 @@ router.get("/weekly/get", controller.WeeklyClassGet);
 // router.get("/weekly/singleday/:day", controller.getWeeklyByDay);
 
 // // EDIT WEEKLY (only classes, no day change)
-// router.put("/weekly/:id", controller.editWeeklyClass);
+router.put("/weekly/edit/:id", controller.editWeeklyClass);
 
 // // DELETE WEEKLY
-// router.delete("/weekly/delete/:day", controller.deleteWeeklyClass);
+router.delete("/weekly/delete/:day", controller.deleteWeeklyClass);
 
 
 
