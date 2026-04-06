@@ -34,14 +34,14 @@ router.delete("/weekly/delete/:day", controller.deleteWeeklyClass);
 router.get("/today/get", controller.getDailyClass);
 
 // // ADD MULTIPLE CLASS TODAY
-// router.post("/today/add", controller.addTodayClass);
+router.post("/today/add", controller.addDailyClass);
 
 // // EDIT CLASS (by index)
-// router.put("/today/edit/:index", controller.editTodayClass);
+router.put("/today/edit/:id", controller.editDailyClasses);
 
 // // DELETE CLASS (by index)
 // router.delete("/today/:index", controller.deleteTodayClass);
-// router.delete("/today/delete/:index", controller.deleteTodayClass);
+router.delete("/today/delete/:classId", controller.deleteDailyClass);
 
 
 

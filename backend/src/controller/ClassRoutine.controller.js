@@ -197,6 +197,7 @@ const getDailyClass = async (req, res) => {
         if (existing) {
             return res.status(200).json({
                 message: "Today's classes (from daily)",
+                _id: existing._id,  
                 day: existing.day.charAt(0).toUpperCase() + existing.day.slice(1),
                 classes: existing.classes
             });
@@ -218,6 +219,7 @@ const getDailyClass = async (req, res) => {
 
         res.status(200).json({
             message: "Today's classes generated",
+            _id: daily._id,   
             day: dayName.charAt(0).toUpperCase() + dayName.slice(1),
             classes: daily.classes
         });
@@ -231,6 +233,191 @@ const getDailyClass = async (req, res) => {
     }
 };
 
+const addDailyClass = async (req, res) => {
+    try {
+        let { classes } = req.body;
+
+        const today = new Date();
+
+        const dayName = today
+            .toLocaleString("en-US", { weekday: "long" })
+            .toLowerCase();
+
+        const todayDate = today.toDateString();
+
+        // ✅ validation
+        if (!classes || classes.length === 0) {
+            return res.status(400).json({ message: "Classes are required" });
+        }
+
+        // ✅ class validation + remarks support
+        for (let cls of classes) {
+            if (!cls.subject || !cls.teacher || !cls.type || !cls.time) {
+                return res.status(400).json({
+                    message: "Subject, teacher, type and time are required"
+                });
+            }
+
+            // optional remarks
+            if (!cls.remarks) {
+                cls.remarks = "Extra";
+            }
+        }
+
+        // ✅ find today's data ONLY by date
+        let existing = await DailyClass.findOne({ date: todayDate });
+
+        if (existing) {
+            // ✅ duplicate check
+            const isDuplicate = existing.classes.some(existingCls =>
+                classes.some(newCls =>
+                    existingCls.subject === newCls.subject &&
+                    existingCls.time === newCls.time
+                )
+            );
+
+            if (isDuplicate) {
+                return res.status(400).json({
+                    message: "Duplicate class found for today"
+                });
+            }
+
+            // ✅ add new classes
+            existing.classes.push(...classes);
+            await existing.save();
+
+            return res.status(200).json({
+                message: "Class added to today's schedule",
+                dailyClass: {
+                    ...existing._doc,
+                    day: existing.day.charAt(0).toUpperCase() + existing.day.slice(1)
+                }
+            });
+        }
+
+        // ✅ যদি আজকের data না থাকে → নতুন create
+        const daily = await DailyClass.create({
+            day: dayName,
+            date: todayDate,
+            classes
+        });
+
+        res.status(201).json({
+            message: "Today's class created and added",
+            dailyClass: {
+                ...daily._doc,
+                day: dayName.charAt(0).toUpperCase() + dayName.slice(1)
+            }
+        });
+
+    } catch (error) {
+        console.log("ADD DAILY CLASS ERROR:", error);
+        res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+};
+const editDailyClasses = async (req, res) => {
+    try {
+        const id = req.params.id?.trim();
+        const { classes } = req.body;
+
+        // 🔒 ID check
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: "Invalid ID" });
+        }
+
+        // 🔒 classes validation
+        if (!Array.isArray(classes) || classes.length === 0) {
+            return res.status(400).json({ message: "Classes are required" });
+        }
+
+        // 🔒 each class validation
+        for (let cls of classes) {
+            if (!cls.subject || !cls.teacher || !cls.type || !cls.time) {
+                return res.status(400).json({
+                    message: "All class fields are required"
+                });
+            }
+
+            // optional remarks
+            if (cls.remarks === undefined) {
+                cls.remarks = "";
+            }
+        }
+
+        // 🔥 update
+        const updated = await DailyClass.findByIdAndUpdate(
+            id,
+            { classes },
+            { new: true }
+        );
+
+        if (!updated) {
+            return res.status(404).json({ message: "Daily class not found" });
+        }
+
+        res.status(200).json({
+            message: "Classes updated successfully",
+            dailyClass: {
+                _id: updated._id, // 🔥 IMPORTANT
+                day: updated.day.charAt(0).toUpperCase() + updated.day.slice(1),
+                classes: updated.classes
+            }
+        });
+
+    } catch (error) {
+        console.log("EDIT DAILY CLASSES ERROR:", error);
+        res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+};
+
+const deleteDailyClass = async (req, res) => {
+    try {
+        const { classId } = req.params;
+
+        if (!classId) {
+            return res.status(400).json({ message: "Class ID required" });
+        }
+
+        const todayDate = new Date().toDateString();
+
+        // 🔍 find today's doc
+        const daily = await DailyClass.findOne({ date: todayDate });
+
+        if (!daily) {
+            return res.status(404).json({ message: "No daily class found" });
+        }
+
+        // 🔍 find class by _id
+        const classItem = daily.classes.id(classId);
+
+        if (!classItem) {
+            return res.status(404).json({ message: "Class not found" });
+        }
+
+        // 🗑 remove
+        classItem.deleteOne();
+
+        await daily.save();
+
+        res.status(200).json({
+            message: "Class deleted successfully",
+            classes: daily.classes // 🔥 frontend update helpful
+        });
+
+    } catch (error) {
+        console.log("DELETE DAILY CLASS ERROR:", error);
+        res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+};
 
         
 
@@ -239,5 +426,10 @@ module.exports = {
         addWeeklyClass,
         deleteWeeklyClass,
         editWeeklyClass,
-        getDailyClass
+        getDailyClass,
+        addDailyClass,
+        editDailyClasses,
+        deleteDailyClass
+
+
     };
