@@ -140,12 +140,12 @@ const TodayClassTeacher = () => {
             alert("Update failed")
         }
     }
-    const ResetHandel = () => {
+    const ResetHandel = async () => {
         try{
             const confirmDelete = window.confirm(`Are you Sure to Reset Classes ?`)
             if (!confirmDelete) return
             setreseting(true)
-            axios.delete(
+            await axios.delete(
                 `${API}/api/class/today/deleteAll`,
                 { withCredentials: true }
             )
