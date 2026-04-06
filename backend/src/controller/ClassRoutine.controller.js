@@ -183,6 +183,8 @@ const getDailyClass = async (req, res) => {
         const todayDate = today.toLocaleDateString("en-CA", {
             timeZone: "Asia/Kolkata"
         });
+        console.log("DATE:", todayDate);
+        console.log("DAY:", dayName);
 
         const dayName = today.toLocaleString("en-US", {
             weekday: "long",
@@ -327,7 +329,7 @@ const editDailyClasses = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
 
             return res.status(400).json({ message: "Invalid ID" });
-            
+
         }
 
         // 🔒 classes validation
@@ -343,7 +345,7 @@ const editDailyClasses = async (req, res) => {
                 });
             }
 
-           
+
         }
 
         // 🔥 update
@@ -436,19 +438,19 @@ const deleteAllDailyClass = async (req, res) => {
 
 
 
-        
+
 
 module.exports = {
-        WeeklyClassGet,
-        addWeeklyClass,
-        deleteWeeklyClass,
-        editWeeklyClass,
-        getDailyClass,
-        addDailyClass,
-        editDailyClasses,
-        deleteDailyClass,
-        deleteAllDailyClass
+    WeeklyClassGet,
+    addWeeklyClass,
+    deleteWeeklyClass,
+    editWeeklyClass,
+    getDailyClass,
+    addDailyClass,
+    editDailyClasses,
+    deleteDailyClass,
+    deleteAllDailyClass
 
 
 
-    };
+};
