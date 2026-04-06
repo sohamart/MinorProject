@@ -30,13 +30,13 @@ const HomeAdmin = () => {
       </p>
       <p className='text-xl mt-5 opacity-40'>Check Your Pages </p>
       <div className=' h-20 w-full items-center justify-center lg:mt-4 flex gap-5 p-5 '>
-        <button onClick={teacherbutton} className='w-min-25 lg:w-40 p-2 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl '>
+        <button onClick={teacherbutton} className='w-min-25 lg:w-min-40 p-2 lg:h-15 lg:text-xl text-xs h-min-20 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl '>
           Teacher Register
         </button>
-        <button onClick={weeklybutton} className='w-min-25 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-blue-500/20 border border-blue-400/50 rounded-2xl '>
+        <button onClick={weeklybutton} className='w-min-25 p-2 lg:w-min-40 lg:h-15 lg:text-xl text-xs h-min-20 active:scale-95 bg-blue-500/20 border border-blue-400/50 rounded-2xl '>
           Weekly Class
         </button>
-        <button onClick={studentbutton} className='w-min-25 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-red-500/20 border border-red-400/50 rounded-2xl '>
+        <button onClick={studentbutton} className='w-min-25 p-2 lg:w-min-40 lg:h-15 lg:text-xl text-xs h-min-20 active:scale-95 bg-red-500/20 border border-red-400/50 rounded-2xl '>
           Student Register
         </button>
 

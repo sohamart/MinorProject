@@ -31,8 +31,8 @@ const TodayClasses = () => {
                                 )}
                                {TodayData.classes.slice().reverse().map((cls, index) => (
                                     <div key={index} className='w-full relative   uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
-                                        {cls.remarks?.length > 2 &&(<div className='flex absolute top-0 left-[-17px] '>
-                                                <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
+                                        {cls.remarks?.length > 2 &&(<div className='flex mt-[-16px] mb-4'>
+                                                <span className=' bg-blue-600 border-b active:scale-95 rounded-b-2xl  p-2'>{cls.remarks}</span>
                                             </div>)}
                                         <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
                                         
