@@ -6,10 +6,15 @@ const WeeklyClassAdmin = () => {
   const { WeeklyClass, error, loading } = useContext(ClassContextData)
 
   const [editData, setEditData] = useState(null)
+
   const [showForm, setShowForm] = useState(false)
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [addData, setaddData] = useState(null)
 
   const [updating, setUpdating] = useState(false)
   const [updateError, setUpdateError] = useState(null)
+  const [adding, setadding] = useState(false)
+  const [addError, setaddError] = useState(null)
 
   const API = import.meta.env.VITE_API_URI
 
@@ -26,6 +31,12 @@ const WeeklyClassAdmin = () => {
     setEditData(formatted)
     setShowForm(true)
   }
+  // ✅ Add
+  const handleAdd = (data) => {
+    setaddData(data)
+    setShowAddForm(true)
+  }
+
 
   // ❌ DELETE
   const handleDelete = async (day) => {
@@ -100,6 +111,41 @@ const WeeklyClassAdmin = () => {
     }
   }
 
+  const addClass = async () => {
+    const finalAddData = {
+      day: addData.day,
+      classes: addData.classes.map(cls => ({
+        subject: cls.subject,
+        teacher: cls.teacher,
+        type: cls.type,
+        time: `${cls.startTime} - ${cls.endTime}`
+      }))
+    }
+
+    try {
+      setadding(true)
+      setaddError(null)
+
+      await axios.post(
+        `${API}/api/class/weekly/add`,
+        finalAddData,
+        { withCredentials: true }
+      )
+
+      setShowAddForm(false)
+      setaddData(null)
+
+      window.location.reload()
+
+    } catch (err) {
+      setaddError(err.response?.data?.message || "Add failed")
+    } finally {
+      setadding(false)
+    }
+  }
+
+
+
   return (
     <>
       <div className='relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-3 lg:p-6'>
@@ -108,8 +154,29 @@ const WeeklyClassAdmin = () => {
         <div className='lg:w-120 w-60 h-16 lg:h-20 bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center mb-6'>
           <h1 className='lg:text-3xl text-xl uppercase font-bold'>Weekly Class</h1>
         </div>
+        <div>
+          <button
+            onClick={() =>
+              handleAdd({
+                day: "Monday",
+                classes: [
+                  {
+                    subject: "",
+                    teacher: "",
+                    type: "",
+                    startTime: "10:00 AM",
+                    endTime: "11:00 AM",
+                  },
+                ],
+              })
+            }
+            className='bg-green-400/10 border absolute right-4 bottom-4 border-green-400/50 rounded-2xl lg:w-40 lg:h-15 active:scale-95  w-30 h-12'
+          >
+            ADD CLASS
+          </button>
+        </div>
 
-        {error && <p className="text-red-500 text-lg mb-4">{error}</p>}
+        {error && <p className="text-White mt-4 text-lg mb-4">No classes Found !! </p>}
 
         {loading && (
           <div className="flex flex-col gap-4 w-full items-center">
@@ -154,20 +221,20 @@ const WeeklyClassAdmin = () => {
                   <div key={index} className='w-full uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'>
 
                     <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around'>
-                      <span className='font-bold text-blue-400'>Class</span> : {cls.subject}
+                      <span className='font-bold text-blue-400'>Class</span>  {cls.subject}
                     </h1>
 
-                    <div className='w-full mt-4 lg:p-22 uppercase p-2 h-34 lg:h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col'>
-                      <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:h-28 h-8'>
-                        <span className='font-bold text-green-400'>Sir</span> : {cls.teacher}
+                    <div className='w-full mt-4 lg:p-28 uppercase p-4  lg:h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col'>
+                      <h1 className='w-full flex justify-between p-2 pl-4 pr-4 bg-green-400/20 border border-green-300/50 rounded-2xl items-center  lg:h-28 h-8'>
+                        <span className='font-bold text-green-400'>Sir</span>  {cls.teacher}
                       </h1>
 
-                      <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl items-center lg:h-28 h-8'>
-                        <span className='font-bold text-red-400'>Time</span> : {cls.time}
+                      <h1 className='w-full flex justify-between p-2 pl-4 pr-4 bg-red-400/20 border border-red-300/50 rounded-2xl items-center lg:h-28 h-8'>
+                        <span className='font-bold text-red-400'>Time</span>  {cls.time}
                       </h1>
 
-                      <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:h-28 h-8'>
-                        <span className='font-bold text-yellow-400'>Type</span> : {cls.type}
+                      <h1 className='w-full flex justify-between p-2 pl-4 pr-4 bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:h-28 h-8'>
+                        <span className='font-bold text-yellow-400'>Type</span>  {cls.type}
                       </h1>
                     </div>
                   </div>
@@ -179,6 +246,165 @@ const WeeklyClassAdmin = () => {
         </div>
 
         {/* MODAL */}
+        {showAddForm && addData && (
+          <div className='fixed h-full justify-center   inset-0 bg-black/80 flex flex-col  items-center z-50 p-3'>
+
+            <div className='bg-black/80 overflow-auto mb-12 no-scrollbar h-120 border border-white/40 p-5 lg:p-8 rounded-2xl w-full max-w-[600px]'>
+
+              <h2 className='text-2xl mb-3'>Add Day</h2>
+
+              {addError && (
+                <p className="text-red-500 mb-3">{addError}</p>
+              )}
+
+              {/* DAY SELECT */}
+              <select
+                value={addData.day}
+                onChange={(e) => setaddData({ ...addData, day: e.target.value })}
+                className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
+              >
+                <option className='text-black' value="Monday">Monday</option>
+                <option className='text-black' value="Tuesday">Tuesday</option>
+                <option className='text-black' value="Wednesday">Wednesday</option>
+                <option className='text-black' value="Thursday">Thursday</option>
+                <option className='text-black' value="Friday">Friday</option>
+                <option className='text-black' value="Saturday">Saturday</option>
+              </select>
+
+              {/* CLASSES */}
+              {addData.classes.map((cls, index) => (
+                <div key={index} className='mb-4 border border-white/30 p-3 rounded-xl'>
+
+                  {/* SUBJECT */}
+                  <select
+                    value={cls.subject}
+                    onChange={(e) => {
+                      const updated = [...addData.classes]
+                      updated[index].subject = e.target.value
+                      setaddData({ ...addData, classes: updated })
+                    }}
+                    className='w-full mb-2 p-2 bg-white/10 rounded border border-white/30'
+                  >
+                    <option className='text-black' value="">Select Subject</option>
+                    <option className='text-black' value="Mathematics">Mathematics</option>
+                    <option className='text-black' value="Physics">Physics</option>
+                    <option className='text-black' value="Chemistry">Chemistry</option>
+                  </select>
+
+                  {/* TEACHER */}
+                  <select
+                    value={cls.teacher}
+                    onChange={(e) => {
+                      const updated = [...addData.classes]
+                      updated[index].teacher = e.target.value
+                      setaddData({ ...addData, classes: updated })
+                    }}
+                    className='w-full mb-2 p-2 bg-white/10 rounded border border-white/30'
+                  >
+                    <option className='text-black' value="">Select Teacher</option>
+                    <option className='text-black' value="Mr. Sharma">Mr. Sharma</option>
+                    <option className='text-black' value="Ms. Roy">Ms. Roy</option>
+                  </select>
+
+                  {/* TIME */}
+                  <div className='flex gap-2'>
+                    <input
+                      type="time"
+                      value={convertTo24Hour(cls.startTime)}
+                      onChange={(e) => {
+                        const updated = [...addData.classes]
+                        updated[index].startTime = convertTo12Hour(e.target.value)
+                        setaddData({ ...addData, classes: updated })
+                      }}
+                      className='w-full p-2 bg-white/10 rounded'
+                    />
+
+                    <input
+                      type="time"
+                      value={convertTo24Hour(cls.endTime)}
+                      onChange={(e) => {
+                        const updated = [...addData.classes]
+                        updated[index].endTime = convertTo12Hour(e.target.value)
+                        setaddData({ ...addData, classes: updated })
+                      }}
+                      className='w-full p-2 bg-white/10 rounded'
+                    />
+                  </div>
+
+                  {/* TYPE */}
+                  <select
+                    value={cls.type}
+                    onChange={(e) => {
+                      const updated = [...addData.classes]
+                      updated[index].type = e.target.value
+                      setaddData({ ...addData, classes: updated })
+                    }}
+                    className='w-full mt-2 p-2 bg-white/10 rounded border border-white/30'
+                  >
+                    <option className='text-black' value="">Select Type</option>
+                    <option className='text-black' value="Theory">Theory</option>
+                    <option className='text-black' value="Practical">Practical</option>
+                  </select>
+
+                  {/* REMOVE BUTTON */}
+                  {addData.classes.length > 1 && (
+                    <button
+                      onClick={() => {
+                        const updated = addData.classes.filter((_, i) => i !== index)
+                        setaddData({ ...addData, classes: updated })
+                      }}
+                      className='mt-2 text-red-400 text-sm'
+                    >
+                      Remove Class
+                    </button>
+                  )}
+                </div>
+              ))}
+
+              {/* ➕ ADD MORE CLASS */}
+              <button
+                onClick={() => {
+                  setaddData({
+                    ...addData,
+                    classes: [
+                      ...addData.classes,
+                      {
+                        subject: "",
+                        teacher: "",
+                        type: "",
+                        startTime: "10:00 AM",
+                        endTime: "11:00 AM",
+                      },
+                    ],
+                  })
+                }}
+                className='w-full mb-3 bg-blue-500/20 border border-blue-400/40 text-blue-300 py-2 rounded-xl'
+              >
+                + Add More Class
+              </button>
+
+              {/* ACTION BUTTONS */}
+              <div className='flex gap-3'>
+                <button
+                  onClick={() => setShowAddForm(false)}
+                  className='w-full bg-red-500/20 border border-red-400/40 text-red-300 py-2 rounded-xl'
+                >
+                  Cancel
+                </button>
+
+                <button
+                  onClick={addClass}
+                  disabled={adding}
+                  className='w-full bg-green-500/20 border border-green-400/40 text-green-300 py-2 rounded-xl'
+                >
+                  {adding ? "Adding..." : "Add"}
+                </button>
+              </div>
+
+            </div>
+          </div>
+        )}
+
         {showForm && editData && (
           <div className='fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-3'>
 
