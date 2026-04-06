@@ -4,8 +4,10 @@ import axios from 'axios'
 
 const WeeklyClassAdmin = () => {
   const { WeeklyClass, error, loading } = useContext(ClassContextData)
+  const [deletinig, setdeletinig] = useState(false)
 
   const [editData, setEditData] = useState(null)
+  const [deleteFlash, setdeleteFlash] = useState(false)
 
   const [showForm, setShowForm] = useState(false)
   const [showAddForm, setShowAddForm] = useState(false)
@@ -40,6 +42,7 @@ const WeeklyClassAdmin = () => {
 
   // ❌ DELETE
   const handleDelete = async (day) => {
+    setdeletinig(true)
     try {
       const confirmDelete = window.confirm(`Delete ${day} classes?`)
       if (!confirmDelete) return
@@ -49,11 +52,24 @@ const WeeklyClassAdmin = () => {
         { withCredentials: true }
       )
 
-      window.location.reload()
+      
+      setdeletinig(false)
+
+      setdeleteFlash(true)
+
+      
+      
+
 
     } catch (err) {
       console.log("DELETE ERROR:", err)
       alert("Delete failed")
+    }
+    finally{
+      setTimeout(() => {
+        setdeleteFlash(false)
+      }, 8000);
+      window.location.reload()
     }
   }
 
@@ -181,12 +197,20 @@ const addClass = async () => {
                 ],
               })
             }
-            className='bg-green-400/20 z-12 border-2 absolute right-4 bottom-4 border-green-400/50 backdrop-blur-2xl rounded-2xl lg:w-40 lg:h-15 active:scale-95  w-30 h-12'
+            className='bg-green-400/20 z-12 border-l-2  border-t-2 border-b-2 absolute right-0 top-22 border-green-400/50 backdrop-blur-2xl rounded-l-2xl lg:w-40 lg:h-15 active:scale-95  w-30 h-12'
           >
             ADD CLASS
           </button>
         </div>
+        {deleteFlash && (
+          <div className='w-screen bottom-[-20px] right-[-20px] h-screen absolute z-222 bg-black/40 backdrop-blur-md flex justify-center items-center '>
+              <div className='w-65  bg-white/10 border flex justify-center items-center border-green-400/50 rounded-2xl h-60  '>
+                  <h1 className='text-2xl text-green-500'>Deleted Sucessfull !!</h1>
+              </div>
+          </div>
+         )
 
+        } 
         {error && <p className="text-White mt-4 text-lg mb-4">No classes Found !!</p>}
 
         {loading && (
@@ -222,7 +246,8 @@ const addClass = async () => {
                       onClick={() => handleDelete(dayData.day)}
                       className='bg-red-500/20 backdrop-blur-md border border-red-400/40 text-red-300 px-4 py-2 rounded-xl hover:bg-red-500/30 transition'
                     >
-                      Delete
+                      {deletinig ? ("deleting.."): ("delete")}
+                      
                     </button>
 
                   </div>
@@ -260,6 +285,7 @@ const addClass = async () => {
               {/* DAY SELECT */}
               <select
                 value={addData.day}
+
                 onChange={(e) => setaddData({ ...addData, day: e.target.value })}
                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
               >
@@ -286,9 +312,11 @@ const addClass = async () => {
                     className='w-full mb-2 p-2 bg-white/10 rounded border border-white/30'
                   >
                     <option className='text-black' value="">Select Subject</option>
-                    <option className='text-black' value="Mathematics">Mathematics</option>
-                    <option className='text-black' value="Physics">Physics</option>
-                    <option className='text-black' value="Chemistry">Chemistry</option>
+                    <option className='text-black' value="DBMS">DBMS</option>
+                    <option className='text-black' value="Operating System">OS</option>
+                    <option className='text-black' value="Computer Network">Computer Network</option>
+                    <option className='text-black' value="java">java</option>
+                    <option className='text-black' value="Software Engineering">Software Engineering</option>
                   </select>
 
                   {/* TEACHER */}
@@ -302,8 +330,10 @@ const addClass = async () => {
                     className='w-full mb-2 p-2 bg-white/10 rounded border border-white/30'
                   >
                     <option className='text-black' value="">Select Teacher</option>
-                    <option className='text-black' value="Mr. Sharma">Mr. Sharma</option>
-                    <option className='text-black' value="Ms. Roy">Ms. Roy</option>
+                    <option className='text-black' value="PGR">PGR</option>
+                    <option className='text-black' value="TKP">TKP</option>
+                    <option className='text-black' value="ND">ND</option>
+                    <option className='text-black' value="AT">AT</option>
                   </select>
 
                   {/* TIME */}
@@ -343,7 +373,7 @@ const addClass = async () => {
                   >
                     <option className='text-black' value="">Select Type</option>
                     <option className='text-black' value="Theory">Theory</option>
-                    <option className='text-black' value="Practical">Practical</option>
+                    <option className='text-black' value="Lab">Lab</option>
                   </select>
 
                   {/* REMOVE BUTTON */}
@@ -442,9 +472,11 @@ const addClass = async () => {
                     className='w-full mb-2 p-2 bg-white/10 rounded border border-white/30'
                   >
                     <option className='text-black' value="">Select Subject</option>
-                    <option className='text-black' value="Mathematics">Mathematics</option>
-                    <option className='text-black' value="Physics">Physics</option>
-                    <option className='text-black' value="Chemistry">Chemistry</option>
+                    <option className='text-black' value="DBMS">DBMS</option>
+                    <option className='text-black' value="Operating System">OS</option>
+                    <option className='text-black' value="Computer Network">Computer Network</option>
+                    <option className='text-black' value="java">java</option>
+                    <option className='text-black' value="Software Engineering">Software Engineering</option>
                   </select>
 
                   <select
@@ -456,9 +488,11 @@ const addClass = async () => {
                     }}
                     className='w-full mb-2 p-2 bg-white/10 rounded border border-white/30'
                   >
-                    <option className='text-black' value="">Select Teacher</option>
-                    <option className='text-black' value="Mr. Sharma">Mr. Sharma</option>
-                    <option className='text-black' value="Ms. Roy">Ms. Roy</option>
+                   <option className='text-black' value="">Select Teacher</option>
+                    <option className='text-black' value="PGR">PGR</option>
+                    <option className='text-black' value="TKP">TKP</option>
+                    <option className='text-black' value="ND">ND</option>
+                    <option className='text-black' value="AT">AT</option>
                   </select>
 
                   <div className='flex gap-2'>
