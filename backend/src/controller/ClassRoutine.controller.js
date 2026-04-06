@@ -325,7 +325,9 @@ const editDailyClasses = async (req, res) => {
 
         // 🔒 ID check
         if (!mongoose.Types.ObjectId.isValid(id)) {
+
             return res.status(400).json({ message: "Invalid ID" });
+            
         }
 
         // 🔒 classes validation
@@ -341,10 +343,7 @@ const editDailyClasses = async (req, res) => {
                 });
             }
 
-            // optional remarks
-            if (cls.remarks === undefined) {
-                cls.remarks = "";
-            }
+           
         }
 
         // 🔥 update

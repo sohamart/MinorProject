@@ -33,7 +33,7 @@ const ClassContext = (props) => {
                 })
                 setTodayClass(res.data)
                 setLoading(false)
-                console.log(res.data)
+                // console.log(res.data)
             } catch (err) {
                 setError(err.message)
                 setLoading(false)
@@ -45,7 +45,7 @@ const ClassContext = (props) => {
         const interval = setInterval(() => {
             fetchWeeklyClass();
             fetchTodayClass();
-        }, 3000); // 3 sec
+        }, 1000); // 3 sec
 
         return () => clearInterval(interval); 
     }, [])

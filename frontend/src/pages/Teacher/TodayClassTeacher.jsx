@@ -125,15 +125,17 @@ const TodayClassTeacher = () => {
                 time: `${formData.startTime} - ${formData.endTime}`
             }
 
-            await axios.put(
+            const res = await axios.put(
                 `${API}/api/class/today/edit/${TodayData._id}`,
                 { classes: updatedClasses },
                 { withCredentials: true }
             )
 
             setShowEdit(false)
-            window.location.reload()
+            // window.location.reload()
             setupdating(false)
+            console.log(res.data)
+
 
 
         } catch (err) {
@@ -150,7 +152,7 @@ const TodayClassTeacher = () => {
                 `${API}/api/class/today/deleteAll`,
                 { withCredentials: true }
             )
-            window.location.reload()
+            
             setreseting(false)
             
 
@@ -198,7 +200,7 @@ const TodayClassTeacher = () => {
                                 {TodayData.classes.length === 0 && (
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
-                                {TodayData.classes.slice().reverse().map((cls, index) => (
+                                {TodayData.classes.map((cls, index) => (
                                     <div key={index} className='w-full uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'>
 
                                         {/* BUTTONS */}
