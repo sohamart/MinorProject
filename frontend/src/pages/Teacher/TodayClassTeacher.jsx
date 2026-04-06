@@ -53,6 +53,7 @@ const TodayClassTeacher = () => {
                     subject: formData.subject,
                     teacher: formData.teacher,
                     type: formData.type,
+                    remarks: "Extra",
                     time: `${formData.startTime} - ${formData.endTime}`
                 }]
             }
@@ -197,12 +198,12 @@ const TodayClassTeacher = () => {
                                 {TodayData.classes.length === 0 && (
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
-                                {TodayData.classes.map((cls, index) => (
+                                {TodayData.classes.slice().reverse().map((cls, index) => (
                                     <div key={index} className='w-full uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'>
 
                                         {/* BUTTONS */}
                                         <div className='flex relative justify-end gap-2 mb-2'>
-                                            {cls.remarks?.length <= 0 &&(<div className='flex absolute top-0 left-[-17px] '>
+                                            {cls.remarks?.length > 2 &&(<div className='flex absolute top-0 left-[-17px] '>
                                                 <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
                                             </div>)}
                                             
