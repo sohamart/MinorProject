@@ -46,9 +46,21 @@ const addWeeklyClass = async (req, res) => {
         const exists = await weeklyClass.findOne({ day });
 
         if (exists) {
-            // ✅ APPEND new classes
-            exists.classes.push(...classes);
 
+            // 🔥 duplicate check (ONLY here)
+            const isDuplicate = exists.classes.some(existing =>
+                classes.some(newCls =>
+                    existing.subject === newCls.subject &&
+                    existing.time === newCls.time
+                )
+            );
+
+            if (isDuplicate) {
+                return res.status(400).json({ message: "Duplicate class found" });
+            }
+
+            // ✅ APPEND
+            exists.classes.push(...classes);
             await exists.save();
 
             return res.status(200).json({
@@ -56,18 +68,8 @@ const addWeeklyClass = async (req, res) => {
                 weeklyclass: exists
             });
         }
-        const isDuplicate = exists.classes.some(existing =>
-            classes.some(newCls =>
-                existing.subject === newCls.subject &&
-                existing.time === newCls.time
-            )
-        );
 
-        if (isDuplicate) {
-            return res.status(400).json({ message: "Duplicate class found" });
-        }
-
-        // ✅ CREATE new day
+        // ✅ CREATE new day (no duplicate check needed)
         const weeklyclass = await weeklyClass.create({
             day,
             classes

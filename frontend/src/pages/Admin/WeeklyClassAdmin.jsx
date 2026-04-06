@@ -162,8 +162,8 @@ const addClass = async () => {
       <div className='relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-3 lg:p-6'>
 
         {/* HEADER */}
-        <div className='lg:w-120 w-60 h-16 lg:h-20 bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center mb-6'>
-          <h1 className='lg:text-3xl text-xl uppercase font-bold'>Weekly Class</h1>
+        <div className='lg:w-120 w-60  h-16 lg:h-20 bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center mb-6'>
+          <h1 className='lg:text-3xl h-18 flex items-center justify-center text-xl uppercase font-bold'>Weekly Class</h1>
         </div>
         <div>
           <button
@@ -181,7 +181,7 @@ const addClass = async () => {
                 ],
               })
             }
-            className='bg-green-400/10 border absolute right-4 bottom-4 border-green-400/50 rounded-2xl lg:w-40 lg:h-15 active:scale-95  w-30 h-12'
+            className='bg-green-400/20 z-12 border-2 absolute right-4 bottom-4 border-green-400/50 backdrop-blur-2xl rounded-2xl lg:w-40 lg:h-15 active:scale-95  w-30 h-12'
           >
             ADD CLASS
           </button>
@@ -197,7 +197,7 @@ const addClass = async () => {
           </div>
         )}
 
-        <div className='w-full overflow-auto no-scrollbar'>
+        <div className='w-full pb-24 pt-24 overflow-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]  no-scrollbar'>
 
           {!loading && WeeklyClass?.length > 0 && WeeklyClass.map((dayData, i) => (
             <div key={i} className="w-full flex justify-center mb-6">
@@ -232,10 +232,10 @@ const addClass = async () => {
                   <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
                     <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
 
-                    <div className='w-full mt-4 lg:p-22 uppercase p-2 min-h-34 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
-                      <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-8 min-h-8'><span className='font-bold text-green-400'>Sir    </span> <span>:</span> {cls.teacher}</h1>
-                      <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-8 min-h-8'><span className='font-bold  text-red-400'>Time      </span> <span>:</span> {cls.time}</h1>
-                      <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-8 min-h-8'><span className='font-bold text-yellow-400'>Type    </span> <span>:</span> {cls.type}</h1>
+                    <div className='w-full mt-4 lg:p-2 uppercase p-2 min-h-34 lg:min-h-30 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
+                      <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-green-400'>Sir    </span> <span>:</span> {cls.teacher}</h1>
+                      <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'><span className='font-bold  text-red-400'>Time      </span> <span>:</span> {cls.time}</h1>
+                      <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-yellow-400'>Type    </span> <span>:</span> {cls.type}</h1>
                     </div>
                   </div>
                 ))}
