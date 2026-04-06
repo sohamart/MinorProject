@@ -175,43 +175,42 @@ const editWeeklyClass = async (req, res) => {
         });
     }
 };
+
 const getDailyClass = async (req, res) => {
     try {
         const today = new Date();
 
-        const dayName = today
-            .toLocaleString("en-US", { weekday: "long" })
-            .toLowerCase();
+        const todayDate = today.toLocaleDateString("en-CA", {
+            timeZone: "Asia/Kolkata"
+        });
 
-        const todayDate = today.toDateString();
+        const dayName = today.toLocaleString("en-US", {
+            weekday: "long",
+            timeZone: "Asia/Kolkata"
+        }).toLowerCase();
 
-        const deleted = await DailyClass.deleteMany({
+        // 🔥 delete old data
+        await DailyClass.deleteMany({
             date: { $ne: todayDate }
         });
 
-        
-
-        // 🔍 check already exists in daily
         const existing = await DailyClass.findOne({ date: todayDate });
 
         if (existing) {
             return res.status(200).json({
                 message: "Today's classes (from daily)",
-                _id: existing._id,  
+                _id: existing._id,
                 day: existing.day.charAt(0).toUpperCase() + existing.day.slice(1),
                 classes: existing.classes
             });
         }
 
-        // 🔍 get from weekly
         const weekly = await weeklyClass.findOne({ day: dayName });
 
         if (!weekly) {
-            console.log("no class found")
             return res.status(404).json({ message: "No class found for today" });
         }
 
-        // 💾 save to daily
         const daily = await DailyClass.create({
             day: dayName,
             date: todayDate,
@@ -220,7 +219,7 @@ const getDailyClass = async (req, res) => {
 
         res.status(200).json({
             message: "Today's classes generated",
-            _id: daily._id,   
+            _id: daily._id,
             day: dayName.charAt(0).toUpperCase() + dayName.slice(1),
             classes: daily.classes
         });
