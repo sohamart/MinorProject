@@ -421,20 +421,19 @@ const deleteDailyClass = async (req, res) => {
 
 const deleteAllDailyClass = async (req, res) => {
     try {
-        const deleted = await DailyClass.deleteMany();
-
-        if(deleted.deletedCount === 0){
-            return res.status(404).json({ message: "No daily class found" });
-        }
+        await DailyClass.deleteMany({}); // 🔥 সব document delete
 
         res.status(200).json({
-            message: "All classes deleted successfully"
+            message: "All daily data deleted successfully"
         });
 
     } catch (error) {
-        console.log("DELETE ALL DAILY CLASS ERROR:", error);
+        console.log("DELETE DAILY ALL ERROR:", error);
+        res.status(500).json({
+            message: "Internal server error"
+        });
     }
-}
+};
 
 
 
