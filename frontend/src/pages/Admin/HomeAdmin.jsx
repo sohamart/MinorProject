@@ -1,8 +1,19 @@
 import React from 'react'
-import { useOutletContext } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
 
 const HomeAdmin = () => {
   const { loggedinName } = useOutletContext()
+  const navigate = useNavigate()
+  const weeklybutton = ( ) =>{
+    navigate("/admin/weeklyClasses")
+  }
+
+  const studentbutton = ( ) =>{
+    navigate("/admin/studentRegister")
+  }
+  const teacherbutton = ( ) =>{
+    navigate("/admin/teacherRegister")
+  }
 
   return (
     <div className= ' relative text-white h-full w-full lg:bg-black/5 bg-white/5 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
@@ -17,6 +28,19 @@ const HomeAdmin = () => {
           <p className='mt-3 lg:text-2xl text-2xl font-bold '>
         Admin - {loggedinName}
       </p>
+      <p className='text-xl mt-5 opacity-40'>Check Your Pages </p>
+      <div className=' h-20 w-full items-center justify-center lg:mt-4 flex gap-5 p-5 '>
+        <button onClick={teacherbutton} className='w-25 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl '>
+          Teacher Register
+        </button>
+        <button onClick={weeklybutton} className='w-25 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-blue-500/20 border border-blue-400/50 rounded-2xl '>
+          Weekly Class
+        </button>
+        <button onClick={studentbutton} className='w-25 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-red-500/20 border border-red-400/50 rounded-2xl '>
+          Student Register
+        </button>
+
+      </div>
       <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
                         <h1 className=' uppercase '>
                 designed and devoloped by Soham Dutta
