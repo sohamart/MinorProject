@@ -202,7 +202,7 @@ const TodayClassTeacher = () => {
 
                                         {/* BUTTONS */}
                                         <div className='flex relative justify-end gap-2 mb-2'>
-                                            {cls.remarks?.length <= 2 &&(<div className='flex absolute top-0 left-[-17px] '>
+                                            {cls.remarks?.length <= 0 &&(<div className='flex absolute top-0 left-[-17px] '>
                                                 <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
                                             </div>)}
                                             
