@@ -31,7 +31,7 @@ router.delete("/weekly/delete/:day", controller.deleteWeeklyClass);
 // // ==========================
 
 // // GET TODAY CLASS (auto lazy copy)
-// router.get("/today/get", controller.getTodayClass);
+router.get("/today/get", controller.getDailyClass);
 
 // // ADD MULTIPLE CLASS TODAY
 // router.post("/today/add", controller.addTodayClass);

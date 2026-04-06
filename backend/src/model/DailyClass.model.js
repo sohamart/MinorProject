@@ -20,7 +20,7 @@ const classSchema = new mongoose.Schema({
       },
       remarks:{
         type:String,
-        default :""
+        
       }
 });
 

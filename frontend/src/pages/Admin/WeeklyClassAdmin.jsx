@@ -185,6 +185,11 @@ const addClass = async () => {
         <div className='lg:w-120 w-60  h-16 lg:h-20 bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center mb-6'>
           <h1 className='lg:text-3xl h-18 flex items-center justify-center text-xl uppercase font-bold'>Weekly Class</h1>
         </div>
+        <div className='absolute left-5 lg:left-120 lg:top-28  lg:w-120 w-42 top-24'>
+          <h1 className='text-xs text-red-600' >
+            ***All Changed data update after 24 hrs***
+          </h1>
+        </div>
         <div>
           <button
             onClick={() =>

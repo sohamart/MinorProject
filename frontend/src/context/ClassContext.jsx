@@ -6,7 +6,7 @@ export const ClassContextData = createContext();
 
 const ClassContext = (props) => {
     const [WeeklyClass, setWeeklyClass] = useState([])
-    // const [TodayClass, setTodayClass] = useState(null)
+    const [TodayClass, setTodayClass] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     const API = import.meta.env.VITE_API_URI
@@ -20,17 +20,32 @@ const ClassContext = (props) => {
                 })
                 setWeeklyClass(res.data.weeklyclass)
                 setLoading(false)
-                console.log(res.data.weeklyclass)
+                // console.log(res.data.weeklyclass)
+            } catch (err) {
+                setError(err.message)
+                setLoading(false)
+            }
+        }
+        const fetchTodayClass = async () => {
+            try {
+                const res = await axios.get(`${API}/api/class/today/get`, {
+                    withCredentials: true
+                })
+                setTodayClass(res.data)
+                setLoading(false)
+                console.log(res.data)
             } catch (err) {
                 setError(err.message)
                 setLoading(false)
             }
         }
         fetchWeeklyClass()
+        fetchTodayClass()
 
         const interval = setInterval(() => {
             fetchWeeklyClass();
-        }, 500); // 3 sec
+            fetchTodayClass();
+        }, 3000); // 3 sec
 
         return () => clearInterval(interval); 
     }, [])
@@ -41,6 +56,8 @@ const ClassContext = (props) => {
             setWeeklyClass,
             error,
             loading,
+            TodayClass,
+            setTodayClass,
         
 
         }}>
