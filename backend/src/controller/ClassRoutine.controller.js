@@ -183,8 +183,8 @@ const getDailyClass = async (req, res) => {
         const todayDate = today.toLocaleDateString("en-CA", {
             timeZone: "Asia/Kolkata"
         });
-        console.log("DATE:", todayDate);
-        console.log("DAY:", dayName);
+        // console.log("DATE:", todayDate);
+        // console.log("DAY:", dayName);
 
         const dayName = today.toLocaleString("en-US", {
             weekday: "long",
