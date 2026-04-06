@@ -152,12 +152,12 @@ const TodayClassTeacher = () => {
                 {/* ADD BUTTON */}
                 <button
                     onClick={() => setShowAdd(true)}
-                    className='absolute right-2 top-22 bg-green-400/20 border border-green-400/50 px-3 py-2 rounded-xl'
+                    className='bg-green-400/20 z-12 border-l-2  border-t-2 border-b-2 absolute right-0 top-22 border-green-400/50 backdrop-blur-2xl rounded-l-2xl lg:w-40 lg:h-15 active:scale-95  w-30 h-12'
                 >
                     ADD
                 </button>
 
-                <div className='flex gap-12 pt-24 pb-24 w-full flex-col overflow-auto no-scrollbar items-center'>
+                <div className='flex gap-12 pt-24 pb-24 w-full flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center'>
 
                     {TodayData === null && (
                         <p className="text-white text-xl">No classes Found !!</p>
@@ -175,12 +175,18 @@ const TodayClassTeacher = () => {
                                     <div key={index} className='w-full uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'>
 
                                         {/* BUTTONS */}
-                                        <div className='flex justify-end gap-2 mb-2'>
-                                            <button onClick={() => openEdit(cls, index)} className=' min-w-20 bg-green-500/20 border rounded-2xl border-green-400/50 p-2'>Edit</button>
-                                            <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border rounded-2xl border-red-400/50 p-2'>
+                                        <div className='flex relative justify-end gap-2 mb-2'>
+                                            <div className='flex absolute top-0 left-[-17px] '>
+                                                <span className='min-w-10 bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
+                                            </div>
+                                            <div className='flex gap-2'>
+                                                <button onClick={() => openEdit(cls, index)} className=' min-w-20 bg-green-500/20 border active:scale-95 rounded-2xl border-green-400/50 p-2'>Edit</button>
+                                            <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border active:scale-95 rounded-2xl border-red-400/50 p-2'>
 
                                                 {deleting ? ("deleting..") : ("delete")}
                                             </button>
+                                            </div>
+                                            
                                         </div>
 
                                         <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
@@ -263,10 +269,10 @@ const TodayClassTeacher = () => {
                             </select>
 
                             <div className='flex gap-3'>
-                                <button onClick={() => setShowAdd(false)} className='w-full bg-red-500/20 border border-red-400/40 py-2 rounded-xl'>
+                                <button onClick={() => setShowAdd(false)} className='w-full active:scale-95 bg-red-500/20 border border-red-400/40 py-2 rounded-xl'>
                                     Cancel
                                 </button>
-                                <button onClick={handleAddClass} className='w-full bg-green-500/20 border border-green-400/40 py-2 rounded-xl'>
+                                <button onClick={handleAddClass} className='w-full active:scale-95 bg-green-500/20 border border-green-400/40 py-2 rounded-xl'>
                                     {adding ? ("adding..") : ("Add")}
                                 </button>
                             </div>
@@ -330,10 +336,10 @@ const TodayClassTeacher = () => {
                             </select>
 
                             <div className='flex gap-3'>
-                                <button onClick={() => setShowEdit(false)} className='w-full bg-red-500/20 border border-red-400/40 py-2 rounded-xl'>
+                                <button onClick={() => setShowEdit(false)} className='w-full active:scale-95 bg-red-500/20 border border-red-400/40 py-2 rounded-xl'>
                                     Cancel
                                 </button>
-                                <button onClick={handleUpdateClass} className='w-full bg-green-500/20 border border-green-400/40 py-2 rounded-xl'>
+                                <button onClick={handleUpdateClass} className='w-full active:scale-95 bg-green-500/20 border border-green-400/40 py-2 rounded-xl'>
                                     {updating ? ("updating..") : ("Update")}
                                 </button>
                             </div>
