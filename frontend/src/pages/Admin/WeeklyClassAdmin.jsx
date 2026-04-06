@@ -112,9 +112,19 @@ const WeeklyClassAdmin = () => {
   }
 
   const addClass = async () => {
+
+    const validClasses = addData.classes.filter(cls =>
+      cls.subject && cls.teacher && cls.type && cls.startTime && cls.endTime
+    )
+
+    if (validClasses.length === 0) {
+      setaddError("At least one valid class required")
+      return
+    }
+
     const finalAddData = {
       day: addData.day,
-      classes: addData.classes.map(cls => ({
+      classes: validClasses.map(cls => ({
         subject: cls.subject,
         teacher: cls.teacher,
         type: cls.type,
