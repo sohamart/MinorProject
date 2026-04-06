@@ -30,10 +30,10 @@ const WeeklyClass = () => {
                                     <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
                                         <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
                                         
-                                        <div className='w-full mt-4 lg:p-22 uppercase p-2 h-34 lg:h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
-                                        <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:h-28 h-8'><span className='font-bold text-green-400'>Sir    </span> <span>:</span> {cls.teacher}</h1>
-                                        <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl items-center lg:h-28 h-8'><span className='font-bold text-red-400'>Time      </span> <span>:</span> {cls.time}</h1>
-                                        <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:h-28 h-8'><span className='font-bold text-yellow-400'>Type    </span> <span>:</span> {cls.type}</h1>
+                                        <div className='w-full mt-4 lg:p-22 uppercase p-2 min-h-34 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
+                                        <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-28 min-h-8'><span className='font-bold text-green-400'>Sir    </span> <span>:</span> {cls.teacher}</h1>
+                                        <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-8 min-h-8'><span className='font-bold  text-red-400'>Time      </span> <span>:</span> {cls.time}</h1>
+                                        <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-28 min-h-8'><span className='font-bold text-yellow-400'>Type    </span> <span>:</span> {cls.type}</h1>
                                         </div>
                                     </div>
                                     
