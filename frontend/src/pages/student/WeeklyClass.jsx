@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 
 const WeeklyClass = () => {
-    const { WeeklyClass,  error, loading } = useContext(ClassContextData)
+    const { WeeklyClass : weeklyData,  error, loading } = useContext(ClassContextData)
 
     return (
         <>
@@ -16,11 +16,11 @@ const WeeklyClass = () => {
                 <div className='  flex gap-12 pt-24 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                     {/* 🔥 ERROR */}
                     {error && (
-                        <p className="text-red-500 text-xl">{error}</p>
+                        <p className="text-white text-xl">No classes Found !! </p>
                     )}
 
 
-                    {!loading && WeeklyClass.length > 0 && WeeklyClass.map((dayData, i) => (    
+                    {!loading && weeklyData?.length > 0 && weeklyData.map((dayData, i) => (    
                         <div key={i} className=''>
                             <div className='card bg-white/10 border lg:w-180 flex p-2 border-white/50 min-h-50 gap-4 flex-col items-center w-80 rounded-2xl '>
                                <div >

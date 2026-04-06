@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState, useContext } from "react";
-import { AuthContextData } from "./AuthContext";
+// import { AuthContextData } from "./AuthContext";
 
 export const ClassContextData = createContext();
 
 const ClassContext = (props) => {
     const [WeeklyClass, setWeeklyClass] = useState(null)
-    const [TodayClass, setTodayClass] = useState(null)
+    // const [TodayClass, setTodayClass] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     const API = import.meta.env.VITE_API_URI
