@@ -110,52 +110,53 @@ const WeeklyClassAdmin = () => {
       setUpdating(false)
     }
   }
+const addClass = async () => {
 
-  const addClass = async () => {
+  const validClasses = addData.classes.filter(cls =>
+    cls.subject && cls.teacher && cls.type && cls.startTime && cls.endTime
+  )
 
-    const validClasses = addData.classes.filter(cls =>
-      cls.subject && cls.teacher && cls.type && cls.startTime && cls.endTime
-    )
-
-    if (validClasses.length === 0) {
-      setaddError("At least one valid class required")
-      return
-    }
-
-    const finalAddData = {
-      day: addData.day,
-      classes: validClasses.map(cls => ({
-        subject: cls.subject,
-        teacher: cls.teacher,
-        type: cls.type,
-        time: `${cls.startTime} - ${cls.endTime}`
-      }))
-    }
-
-    try {
-      setadding(true)
-      setaddError(null)
-
-      await axios.post(
-        `${API}/api/class/weekly/add`,
-        finalAddData,
-        { withCredentials: true }
-      )
-
-      setShowAddForm(false)
-      setaddData(null)
-
-      window.location.reload()
-
-    } catch (err) {
-      setaddError(err.response?.data?.message || "Add failed")
-    } finally {
-      setadding(false)
-    }
+  if (validClasses.length === 0) {
+    setaddError("At least one valid class required")
+    return
   }
 
+  const finalAddData = {
+    day: addData.day,
+    classes: validClasses.map(cls => ({
+      subject: cls.subject,
+      teacher: cls.teacher,
+      type: cls.type,
+      time: `${cls.startTime} - ${cls.endTime}`
+    }))
+  }
 
+  try {
+    setadding(true)
+    setaddError(null)
 
+    const response = await axios.post(
+      `${API}/api/class/weekly/add`,
+      finalAddData,
+      { withCredentials: true }
+    )
+
+    // 🔥 MAIN FIX
+    alert(response.data.message)
+
+    // only success হলে close হবে
+    if (response.status === 200 || response.status === 201) {
+      setShowAddForm(false)
+      setaddData(null)
+      window.location.reload()
+    }
+
+  } catch (err) {
+    setaddError(err.response?.data?.message || "Add failed")
+  } finally {
+    setadding(false)
+  }
+}
   return (
     <>
       <div className='relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-3 lg:p-6'>

@@ -27,7 +27,6 @@ const WeeklyClassGet = async (req, res) => {
 };
 
 
-// ✅ ADD
 const addWeeklyClass = async (req, res) => {
     try {
         let { day, classes } = req.body;
@@ -36,29 +35,53 @@ const addWeeklyClass = async (req, res) => {
             return res.status(400).json({ message: "Day and classes required" });
         }
 
-        // 🔥 normalize day (important)
-        day = day.toLowerCase();
-
-        // ❌ duplicate check
-        const exists = await weeklyClass.findOne({ day });
-        if (exists) {
-            return res.status(400).json({ message: "Day already exists" });
+        for (let cls of classes) {
+            if (!cls.subject || !cls.teacher || !cls.type || !cls.time) {
+                return res.status(400).json({ message: "All class fields are required" });
+            }
         }
 
+        day = day.toLowerCase();
+
+        const exists = await weeklyClass.findOne({ day });
+
+        if (exists) {
+            // ✅ APPEND new classes
+            exists.classes.push(...classes);
+
+            await exists.save();
+
+            return res.status(200).json({
+                message: "Day already exists, classes added successfully",
+                weeklyclass: exists
+            });
+        }
+        const isDuplicate = exists.classes.some(existing =>
+            classes.some(newCls =>
+                existing.subject === newCls.subject &&
+                existing.time === newCls.time
+            )
+        );
+
+        if (isDuplicate) {
+            return res.status(400).json({ message: "Duplicate class found" });
+        }
+
+        // ✅ CREATE new day
         const weeklyclass = await weeklyClass.create({
             day,
             classes
         });
 
         res.status(201).json({
-            message: 'Class added successfully',
+            message: "Class added successfully",
             weeklyclass
         });
 
     } catch (error) {
         console.log("ADD ERROR:", error);
         res.status(500).json({
-            message: 'Internal server error',
+            message: "Internal server error",
             error: error.message
         });
     }
