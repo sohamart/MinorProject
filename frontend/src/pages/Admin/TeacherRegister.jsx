@@ -85,7 +85,7 @@ const TeacherRegister = () => {
                 </div>
 
                 {/* Container */}
-                <div className='overflow-y-scroll no-scrollbar h-full pt-8 pb-30       backdrop-blur-md rounded-xl  flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center  items-center '>
+                <div className='overflow-y-scroll no-scrollbar h-full pt-12 pb-30  [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]     backdrop-blur-md rounded-xl  flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-12 justify-center  items-center '>
 
                     <form
                         onSubmit={formhandel}

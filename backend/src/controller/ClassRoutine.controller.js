@@ -419,6 +419,25 @@ const deleteDailyClass = async (req, res) => {
     }
 };
 
+const deleteAllDailyClass = async (req, res) => {
+    try {
+        const deleted = await DailyClass.deleteMany();
+
+        if(deleted.deletedCount === 0){
+            return res.status(404).json({ message: "No daily class found" });
+        }
+
+        res.status(200).json({
+            message: "All classes deleted successfully"
+        });
+
+    } catch (error) {
+        console.log("DELETE ALL DAILY CLASS ERROR:", error);
+    }
+}
+
+
+
         
 
 module.exports = {
@@ -429,7 +448,9 @@ module.exports = {
         getDailyClass,
         addDailyClass,
         editDailyClasses,
-        deleteDailyClass
+        deleteDailyClass,
+        deleteAllDailyClass
+
 
 
     };

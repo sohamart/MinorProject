@@ -5,7 +5,7 @@ const HomeAdmin = () => {
   const { loggedinName } = useOutletContext()
   const navigate = useNavigate()
   const weeklybutton = ( ) =>{
-    navigate("/admin/weeklyClasses")
+    navigate("/admin/weeklyClass")
   }
 
   const studentbutton = ( ) =>{

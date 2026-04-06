@@ -42,6 +42,7 @@ router.put("/today/edit/:id", controller.editDailyClasses);
 // // DELETE CLASS (by index)
 // router.delete("/today/:index", controller.deleteTodayClass);
 router.delete("/today/delete/:classId", controller.deleteDailyClass);
+router.delete("/today/deleteAll", controller.deleteAllDailyClass)
 
 
 

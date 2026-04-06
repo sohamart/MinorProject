@@ -31,7 +31,11 @@ const TodayClassAdmin = () => {
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
                                {TodayData.classes.map((cls, index) => (
-                                    <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
+                                    <div key={index} className='w-full relative   uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
+                                        {cls.remarks?.length <= 2 &&(<div className='flex absolute top-0 left-[-17px] '>
+                                                <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
+                                            </div>)}
+                                         
                                         <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
                                         
                                         <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
