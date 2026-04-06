@@ -32,7 +32,7 @@ const TodayClassAdmin = () => {
                                 )}
                                {TodayData.classes.slice().reverse().map((cls, index) => (
                                     <div key={index} className='w-full relative   uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
-                                        {cls.remarks?.length <= 2 &&(<div className='flex absolute top-0 left-[-17px] '>
+                                        {cls.remarks?.length > 2 &&(<div className='flex absolute top-0 left-[-17px] '>
                                                 <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
                                             </div>)}
                                          
