@@ -13,6 +13,7 @@ const TodayClassAdmin = () => {
 
                 </div>
                 
+                
                 <div className='  flex gap-12 pt-24 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                     {/* 🔥 ERROR */}
                     {TodayData === null && (
@@ -22,10 +23,13 @@ const TodayClassAdmin = () => {
 
                     {!loading && TodayData && (    
                         <div className=''>
-                            <div className='card bg-white/10 border lg:w-180 flex p-2 border-white/50 min-h-50 gap-4 flex-col items-center w-80 rounded-2xl '>
+                            <div className='card bg-white/10 min-h-40 border lg:w-180 flex p-2 border-white/50 min-h-50 gap-4 flex-col items-center w-80 rounded-2xl '>
                                <div >
                                     <h1 className='text-2xl text-white font-bold uppercase mt-2'>{TodayData.day}</h1>
                                </div>
+                               {TodayData.classes.length === 0 && (
+                                    <p className="text-red-500 text-xl">No classes Found !!</p>
+                                )}
                                {TodayData.classes.map((cls, index) => (
                                     <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
                                         <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>

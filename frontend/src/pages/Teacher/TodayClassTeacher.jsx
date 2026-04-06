@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
 
+
 const TodayClassTeacher = () => {
 
     const { TodayClass: TodayData, loading } = useContext(ClassContextData)
@@ -9,6 +10,9 @@ const TodayClassTeacher = () => {
     const [showAdd, setShowAdd] = useState(false)
     const [showEdit, setShowEdit] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(null)
+    const [adding, setadding] = useState(false)
+    const [updating, setupdating] = useState(false)
+    const [deleting, setdeleting] = useState(false)
 
     const [formData, setFormData] = useState({
         subject: "",
@@ -51,7 +55,7 @@ const TodayClassTeacher = () => {
                     time: `${formData.startTime} - ${formData.endTime}`
                 }]
             }
-
+            setadding(true)
             await axios.post(
                 `${API}/api/class/today/add`,
                 newClass,
@@ -59,7 +63,10 @@ const TodayClassTeacher = () => {
             )
 
             setShowAdd(false)
+
             window.location.reload()
+            setadding(false)
+
 
         } catch (err) {
             console.log(err.response?.data)
@@ -70,12 +77,17 @@ const TodayClassTeacher = () => {
     // ✅ DELETE CLASS
     const handleDeleteClass = async (classId) => {
         try {
+            const confirmDelete = window.confirm(`Delete this class?`)
+            if (!confirmDelete) return
+            setdeleting(true)
             await axios.delete(
                 `${API}/api/class/today/delete/${classId}`,
                 { withCredentials: true }
             )
 
             window.location.reload()
+            setdeleting(false)
+
 
         } catch (err) {
             console.log(err.response?.data)
@@ -85,6 +97,7 @@ const TodayClassTeacher = () => {
 
     // ✅ OPEN EDIT
     const openEdit = (cls, index) => {
+
         setSelectedIndex(index)
         setFormData({
             subject: cls.subject,
@@ -98,7 +111,9 @@ const TodayClassTeacher = () => {
 
     // ✅ UPDATE CLASS (FIXED)
     const handleUpdateClass = async () => {
+
         try {
+            setupdating(true)
             const updatedClasses = [...TodayData.classes]
 
             updatedClasses[selectedIndex] = {
@@ -116,6 +131,8 @@ const TodayClassTeacher = () => {
 
             setShowEdit(false)
             window.location.reload()
+            setupdating(false)
+
 
         } catch (err) {
             console.log(err.response?.data)
@@ -148,27 +165,32 @@ const TodayClassTeacher = () => {
 
                     {!loading && TodayData && (
                         <div>
-                            <div className='card bg-white/10 border lg:w-180 flex p-2 border-white/50 gap-4 flex-col items-center w-80 rounded-2xl'>
+                            <div className='card bg-white/10 min-h-40 border lg:w-180 flex p-2 border-white/50 gap-4 flex-col items-center w-80 rounded-2xl'>
 
-                                <h1 className='text-2xl font-bold uppercase mt-2'>{TodayData.day}</h1>
-
+                                <h1 className='text-2xl lg:text-3xl font-bold uppercase mt-2'>{TodayData.day}</h1>
+                                {TodayData.classes.length === 0 && (
+                                    <p className="text-red-500 text-xl">No classes Found !!</p>
+                                )}
                                 {TodayData.classes.map((cls, index) => (
                                     <div key={index} className='w-full uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'>
 
                                         {/* BUTTONS */}
                                         <div className='flex justify-end gap-2 mb-2'>
-                                            <button onClick={() => openEdit(cls, index)} className='text-blue-400'>Edit</button>
-                                            <button onClick={() => handleDeleteClass(cls._id)} className='text-red-400'>Delete</button>
+                                            <button onClick={() => openEdit(cls, index)} className=' w-20 bg-green-500/20 border rounded-2xl border-green-400/50 p-2'>Edit</button>
+                                            <button onClick={() => handleDeleteClass(cls._id)} className='w-20 bg-red-500/20 border rounded-2xl border-red-400/50 p-2'>
+
+                                                {deleting ? ("deleting..") : ("delete")}
+                                            </button>
                                         </div>
 
-                                        <h1 className='w-full h-12 bg-blue-600/10 border rounded-2xl border-blue-500/50 flex justify-around'>
-                                            <span className='font-bold text-blue-400'>Class</span> : {cls.subject}
-                                        </h1>
+                                        <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
+                                            <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
 
-                                        <div className='w-full mt-4 p-2 bg-white/5 border rounded-2xl flex flex-col gap-4'>
-                                            <h1 className='bg-green-400/20 border rounded-xl text-center'>Sir : {cls.teacher}</h1>
-                                            <h1 className='bg-red-400/20 border rounded-xl text-center'>Time : {cls.time}</h1>
-                                            <h1 className='bg-yellow-400/20 border rounded-xl text-center'>Type : {cls.type}</h1>
+                                            <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
+                                                <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-green-400'>Sir    </span> <span></span> {cls.teacher}</h1>
+                                                <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'><span className='font-bold  text-red-400'>Time      </span> <span></span> {cls.time}</h1>
+                                                <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-yellow-400'>Type    </span> <span></span> {cls.type}</h1>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -187,15 +209,29 @@ const TodayClassTeacher = () => {
 
                             <h2 className='text-xl mb-4 text-center'>Add Class</h2>
 
-                            <input placeholder='Subject'
+                            <select
                                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
-                            />
+                            >
+                                <option className='text-black' value="">Select Subject</option>
+                                <option className='text-black' value="DBMS">DBMS</option>
+                                <option className='text-black' value="Operating System">OS</option>
+                                <option className='text-black' value="Computer Network">Computer Network</option>
+                                <option className='text-black' value="java">java</option>
+                                <option className='text-black' value="Software Engineering">Software Engineering</option>
 
-                            <input placeholder='Teacher'
+                            </select>
+
+                            <select
                                 onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
-                            />
+                            >
+                                <option className='text-black' value="">Select Teacher</option>
+                                <option className='text-black' value="PGR">PGR</option>
+                                <option className='text-black' value="TKP">TKP</option>
+                                <option className='text-black' value="ND">ND</option>
+                                <option className='text-black' value="AT">AT</option>
+                            </select>
 
                             <div className='flex gap-2 mb-3'>
                                 <input type="time"
@@ -212,9 +248,10 @@ const TodayClassTeacher = () => {
                                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                                 className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
-                                <option value="">Type</option>
-                                <option value="Theory">Theory</option>
-                                <option value="Lab">Lab</option>
+                                <option className='text-black' value="">Select Type</option>
+                                <option className='text-black' value="Theory">Theory</option>
+                                <option className='text-black' value="Lab">Lab</option>
+
                             </select>
 
                             <div className='flex gap-3'>
@@ -222,7 +259,7 @@ const TodayClassTeacher = () => {
                                     Cancel
                                 </button>
                                 <button onClick={handleAddClass} className='w-full bg-green-500/20 border border-green-400/40 py-2 rounded-xl'>
-                                    Add
+                                    {adding ? ("adding..") : ("Add")}
                                 </button>
                             </div>
 
@@ -237,15 +274,29 @@ const TodayClassTeacher = () => {
 
                             <h2 className='text-xl mb-4 text-center'>Edit Class</h2>
 
-                            <input value={formData.subject}
+                            <select value={formData.subject}
                                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
-                            />
+                            >
+                                <option className='text-black' value="">Select Subject</option>
+                                <option className='text-black' value="DBMS">DBMS</option>
+                                <option className='text-black' value="Operating System">OS</option>
+                                <option className='text-black' value="Computer Network">Computer Network</option>
+                                <option className='text-black' value="java">java</option>
+                                <option className='text-black' value="Software Engineering">Software Engineering</option>
 
-                            <input value={formData.teacher}
+                            </select>
+
+                            <select value={formData.teacher}
                                 onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
-                            />
+                            >
+                                <option className='text-black' value="">Select Teacher</option>
+                                <option className='text-black' value="PGR">PGR</option>
+                                <option className='text-black' value="TKP">TKP</option>
+                                <option className='text-black' value="ND">ND</option>
+                                <option className='text-black' value="AT">AT</option>
+                            </select>
 
                             <div className='flex gap-2 mb-3'>
                                 <input type="time"
@@ -264,9 +315,10 @@ const TodayClassTeacher = () => {
                                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                                 className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
-                                <option value="">Type</option>
-                                <option value="Theory">Theory</option>
-                                <option value="Lab">Lab</option>
+                                <option className='text-black' value="">Select Type</option>
+                                <option className='text-black' value="Theory">Theory</option>
+                                <option className='text-black' value="Lab">Lab</option>
+
                             </select>
 
                             <div className='flex gap-3'>
@@ -274,7 +326,7 @@ const TodayClassTeacher = () => {
                                     Cancel
                                 </button>
                                 <button onClick={handleUpdateClass} className='w-full bg-green-500/20 border border-green-400/40 py-2 rounded-xl'>
-                                    Update
+                                    {updating ? ("updating..") : ("Update")}
                                 </button>
                             </div>
 

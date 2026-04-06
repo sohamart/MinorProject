@@ -189,7 +189,7 @@ const getDailyClass = async (req, res) => {
             date: { $ne: todayDate }
         });
 
-        console.log("Deleted old data:", deleted.deletedCount);
+        
 
         // 🔍 check already exists in daily
         const existing = await DailyClass.findOne({ date: todayDate });
