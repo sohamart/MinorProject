@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
-import weeklyClass from '../../../../backend/src/model/WeeklyClasses.model'
+
 
 const WeeklyClassAdmin = () => {
   const { WeeklyClass, error, loading } = useContext(ClassContextData)
@@ -69,8 +69,11 @@ const WeeklyClassAdmin = () => {
     finally{
       setTimeout(() => {
         setdeleteFlash(false)
-      }, 8000);
-      window.location.reload()
+        window.location.reload()
+      }, 3000);
+      
+      
+      
     }
   }
 
@@ -212,7 +215,7 @@ const addClass = async () => {
          )
 
         } 
-        {WeeklyClass?.length <= 0 && <p className="text-White mt-4 text-lg mb-4">No classes Found !!</p>}
+        {WeeklyClass?.length === 0 && <p className="text-White mt-14 text-lg mb-4">No classes Found !!</p>}
 
         {loading && (
           <div className="flex flex-col gap-4 w-full items-center">

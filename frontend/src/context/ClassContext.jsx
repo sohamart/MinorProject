@@ -5,7 +5,7 @@ import React, { createContext, useEffect, useState, useContext } from "react";
 export const ClassContextData = createContext();
 
 const ClassContext = (props) => {
-    const [WeeklyClass, setWeeklyClass] = useState(null)
+    const [WeeklyClass, setWeeklyClass] = useState([])
     // const [TodayClass, setTodayClass] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -30,7 +30,7 @@ const ClassContext = (props) => {
 
         const interval = setInterval(() => {
             fetchWeeklyClass();
-        }, 3000); // 3 sec
+        }, 500); // 3 sec
 
         return () => clearInterval(interval); 
     }, [])
