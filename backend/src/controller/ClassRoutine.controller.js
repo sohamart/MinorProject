@@ -207,6 +207,7 @@ const getDailyClass = async (req, res) => {
         const weekly = await weeklyClass.findOne({ day: dayName });
 
         if (!weekly) {
+            console.log("no class found")
             return res.status(404).json({ message: "No class found for today" });
         }
 
