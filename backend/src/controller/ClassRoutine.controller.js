@@ -387,7 +387,7 @@ const deleteDailyClass = async (req, res) => {
         if (!classId) {
             return res.status(400).json({ message: "Class ID required" });
         }
-
+        const today = new Date();
         const todayDate = today.toLocaleDateString("en-CA", {
             timeZone: "Asia/Kolkata"
         });
