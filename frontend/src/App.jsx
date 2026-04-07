@@ -27,6 +27,8 @@ import WeeklyClassAdmin from './pages/Admin/WeeklyClassAdmin'
 import WeeklyClass from './pages/student/WeeklyClass'
 import WeeklyClassTeacher from './pages/Teacher/WeeklyClassTeacher'
 import ExtraClassTeacher from './pages/Teacher/ExtraClassTeacher'
+import ExtraClass from './pages/Admin/ExtraClass'
+import ExtraClassStudent from './pages/student/ExtraClassStudent'
 
 
 
@@ -161,6 +163,8 @@ const App = () => {
         <Route path='/student/profile/:id' element={<Profile/>}/>
         <Route path='/student/TodayClasses' element={<TodayClasses/>}/>
         <Route path='/student/WeeklyClasses' element={<WeeklyClass/>}/>
+        <Route path='/student/ExtraClasses' element={<ExtraClassStudent/>}/>
+
       </Route>
 
 
@@ -188,6 +192,8 @@ const App = () => {
       <Route path='/admin/studentRegister' element={<StudentRegister/>}/>
       <Route path='/admin/teacherRegister' element={<TeacherRegister/>}/>
       <Route path='/admin/weeklyClass' element={<WeeklyClassAdmin/>}/>
+      <Route path='/admin/ExtraClasses' element={<ExtraClass/>}/>
+
 
       </Route>
 

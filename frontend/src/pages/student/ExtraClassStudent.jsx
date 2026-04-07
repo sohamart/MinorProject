@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 
-const ExtraClass = () => {
+const ExtraClassStudent = () => {
  const { TodayClass : TodayData,  error, loading } = useContext(ClassContextData)
   const extraClasses = TodayData?.classes?.filter(
     cls => cls.remarks && cls.remarks.length > 2
@@ -89,4 +89,4 @@ const ExtraClass = () => {
     )
 }
 
-export default ExtraClass
+export default ExtraClassStudent
