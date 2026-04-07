@@ -74,6 +74,7 @@ const TodayClassTeacher = () => {
         } catch (err) {
             console.log(err.response?.data)
             alert("Add failed" , + err.response?.data.message)
+            setadding(false)
         }
     }
 
@@ -95,6 +96,7 @@ const TodayClassTeacher = () => {
         } catch (err) {
             console.log(err.response?.data)
             alert("Delete failed", +err.response?.data.message)
+            setdeleting(false)
         }
     }
 
@@ -144,6 +146,7 @@ const TodayClassTeacher = () => {
         } catch (err) {
             console.log(err.response?.data)
             alert("Update failed",+err.response?.data.message)
+            setupdating(false)
         }
     }
     const ResetHandel = async () => {
@@ -163,6 +166,7 @@ const TodayClassTeacher = () => {
         catch(err){
             console.log(err.response?.data)
             alert("Reset failed")
+            setreseting(false)
         }
     }
 
