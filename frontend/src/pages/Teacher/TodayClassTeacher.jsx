@@ -160,7 +160,8 @@ const TodayClassTeacher = () => {
             )
             
             setreseting(false)
-            
+            window.location.reload()
+
 
         }
         catch(err){
