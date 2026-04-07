@@ -377,8 +377,8 @@ const TodayClassTeacher = () => {
                                 className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
                                 <option className='text-black' value="">Select Type</option>
-                                <option className='text-black' value="Theory">Normal</option>
-                                <option className='text-black' value="Lab">Extra</option>
+                                <option className='text-black' value="">Normal</option>
+                                <option className='text-black' value="Extra">Extra</option>
 
                             </select>
 
