@@ -29,14 +29,14 @@ const HomeStudent = () => {
         Student - {loggedinName}
       </p>
       <p className='text-xl mt-5 opacity-40'>Check Your Pages </p>
-      <div className=' h-20 w-full items-center justify-center lg:mt-4 flex gap-5 p-5 '>
-        <button onClick={weeklybutton} className='w-min-25 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl '>
+      <div className=' h-30 w-full items-center flex-wrap justify-center lg:mt-4 flex gap-5 p-5 '>
+        <button onClick={weeklybutton} className='w-35 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-12 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl '>
           Weekly Class
         </button>
-        <button  onClick={todaybutton} className='w-min-25 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-blue-500/20 border border-blue-400/50 rounded-2xl '>
+        <button  onClick={todaybutton} className='w-35 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-12 active:scale-95 bg-blue-500/20 border border-blue-400/50 rounded-2xl '>
           Today Class
         </button>
-        <button  onClick={facultybutton} className='w-min-25 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-10 active:scale-95 bg-red-500/20 border border-red-400/50 rounded-2xl '>
+        <button  onClick={facultybutton} className='w-35 p-2 lg:w-40 lg:h-15 lg:text-xl text-xs h-12 active:scale-95 bg-red-500/20 border border-red-400/50 rounded-2xl '>
           Faculties
         </button>
 

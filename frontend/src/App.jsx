@@ -26,6 +26,7 @@ import TeacherRegister from './pages/Admin/TeacherRegister'
 import WeeklyClassAdmin from './pages/Admin/WeeklyClassAdmin'
 import WeeklyClass from './pages/student/WeeklyClass'
 import WeeklyClassTeacher from './pages/Teacher/WeeklyClassTeacher'
+import ExtraClassTeacher from './pages/Teacher/ExtraClassTeacher'
 
 
 
@@ -134,11 +135,11 @@ const App = () => {
         {/* mobile blob */}
 
         
-        <div className="absolute lg:hidden top-50  lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-indigo-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+        <div className="absolute lg:hidden top-50  lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           >
 
         </div>
-        <div className="absolute top-[-200px] lg:hidden w-[400px] h-[400px] bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+        <div className="absolute top-[-200px] lg:hidden w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           >
 
         </div>
@@ -171,6 +172,8 @@ const App = () => {
       <Route path='/teacher/StudentsData' element={<StudentDataTeacher/>}/>
       <Route path='/teacher/TodayClasses' element={<TodayClassTeacher/>}/>
       <Route path='/teacher/WeeklyClasses' element={<WeeklyClassTeacher/>}/>
+      <Route path='/teacher/ExtraClasses' element={<ExtraClassTeacher/>}/>
+
       </Route>
 
 
