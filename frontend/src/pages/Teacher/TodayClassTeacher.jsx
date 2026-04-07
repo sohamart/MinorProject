@@ -19,6 +19,7 @@ const TodayClassTeacher = () => {
         subject: "",
         teacher: "",
         type: "",
+        remarks: "",
         startTime: "10:00 AM",
         endTime: "11:00 AM"
     })
@@ -105,6 +106,7 @@ const TodayClassTeacher = () => {
             subject: cls.subject,
             teacher: cls.teacher,
             type: cls.type,
+            remarks: cls.remarks,
             startTime: cls.time.split(" - ")[0],
             endTime: cls.time.split(" - ")[1],
         })
@@ -122,6 +124,7 @@ const TodayClassTeacher = () => {
                 subject: formData.subject,
                 teacher: formData.teacher,
                 type: formData.type,
+                remarks: formData.remarks,
                 time: `${formData.startTime} - ${formData.endTime}`
             }
 
@@ -245,7 +248,7 @@ const TodayClassTeacher = () => {
 
                             <h2 className='text-xl mb-4 text-center'>Add Class</h2>
 
-                            <select
+                            <select required
                                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
@@ -258,7 +261,7 @@ const TodayClassTeacher = () => {
 
                             </select>
 
-                            <select
+                            <select required
                                 onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
@@ -273,14 +276,14 @@ const TodayClassTeacher = () => {
                             <div className='flex gap-2 mb-3'>
                                 <div className='w-full  '>
                                     <label className='ml-2 mb-2' >Start Time</label>
-                                    <input placeholder='Start Time' type="time"
+                                    <input required placeholder='Start Time' type="time"
                                     className='w-full p-3 mt-2 bg-white/10 rounded-xl border border-white/30'
                                     onChange={(e) => setFormData({ ...formData, startTime: convertTo12Hour(e.target.value) })}
                                 />
                                 </div>
                                 <div className='w-full '>
                                     <label className='ml-2 mb-2' >End Time</label>
-                                    <input placeholder='End Time' type="time"
+                                    <input required placeholder='End Time' type="time"
                                     className='w-full mt-2 p-3 bg-white/10 rounded-xl border border-white/30'
                                     onChange={(e) => setFormData({ ...formData, endTime: convertTo12Hour(e.target.value) })}
                                 />
@@ -288,7 +291,7 @@ const TodayClassTeacher = () => {
                                 
                             </div>
 
-                            <select
+                            <select required
                                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                                 className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
@@ -318,7 +321,7 @@ const TodayClassTeacher = () => {
 
                             <h2 className='text-xl mb-4 text-center'>Edit Class</h2>
 
-                            <select value={formData.subject}
+                            <select required value={formData.subject}
                                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
@@ -332,6 +335,7 @@ const TodayClassTeacher = () => {
                             </select>
 
                             <select value={formData.teacher}
+                            required
                                 onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
@@ -343,12 +347,15 @@ const TodayClassTeacher = () => {
                             </select>
 
                             <div className='flex gap-2 mb-3'>
+                                
                                 <input type="time"
+                                required
                                     value={convertTo24Hour(formData.startTime)}
                                     onChange={(e) => setFormData({ ...formData, startTime: convertTo12Hour(e.target.value) })}
                                     className='w-full p-3 bg-white/10 rounded-xl border border-white/30'
                                 />
                                 <input type="time"
+                                required
                                     value={convertTo24Hour(formData.endTime)}
                                     onChange={(e) => setFormData({ ...formData, endTime: convertTo12Hour(e.target.value) })}
                                     className='w-full p-3 bg-white/10 rounded-xl border border-white/30'
@@ -356,12 +363,22 @@ const TodayClassTeacher = () => {
                             </div>
 
                             <select value={formData.type}
+                                required
                                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                                 className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
                                 <option className='text-black' value="">Select Type</option>
                                 <option className='text-black' value="Theory">Theory</option>
                                 <option className='text-black' value="Lab">Lab</option>
+
+                            </select>
+                            <select value={formData.remarks}
+                                onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
+                                className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
+                            >
+                                <option className='text-black' value="">Select Type</option>
+                                <option className='text-black' value="Theory">Normal</option>
+                                <option className='text-black' value="Lab">Extra</option>
 
                             </select>
 

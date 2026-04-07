@@ -241,11 +241,14 @@ const addDailyClass = async (req, res) => {
 
         const today = new Date();
 
-        const dayName = today
-            .toLocaleString("en-US", { weekday: "long" })
-            .toLowerCase();
+        const dayName = today.toLocaleString("en-US", {
+            weekday: "long",
+            timeZone: "Asia/Kolkata"
+        }).toLowerCase();
 
-        const todayDate = today.toDateString();
+        const todayDate = today.toLocaleDateString("en-CA", {
+            timeZone: "Asia/Kolkata"
+        });
 
         // ✅ validation
         if (!classes || classes.length === 0) {
@@ -385,7 +388,9 @@ const deleteDailyClass = async (req, res) => {
             return res.status(400).json({ message: "Class ID required" });
         }
 
-        const todayDate = new Date().toDateString();
+        const todayDate = today.toLocaleDateString("en-CA", {
+            timeZone: "Asia/Kolkata"
+        });
 
         // 🔍 find today's doc
         const daily = await DailyClass.findOne({ date: todayDate });
@@ -422,7 +427,7 @@ const deleteDailyClass = async (req, res) => {
 
 const deleteAllDailyClass = async (req, res) => {
     try {
-        await DailyClass.deleteMany({}); // 🔥 সব document delete
+        await DailyClass.deleteMany({}); // all delete
 
         res.status(200).json({
             message: "All daily data deleted successfully"
