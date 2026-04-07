@@ -73,7 +73,7 @@ const TodayClassTeacher = () => {
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Add failed")
+            alert("Add failed" , + err.response?.data.message)
         }
     }
 
@@ -94,7 +94,7 @@ const TodayClassTeacher = () => {
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Delete failed")
+            alert("Delete failed", +err.response?.data.message)
         }
     }
 
@@ -143,7 +143,7 @@ const TodayClassTeacher = () => {
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Update failed")
+            alert("Update failed",+err.response?.data.message)
         }
     }
     const ResetHandel = async () => {
@@ -376,7 +376,7 @@ const TodayClassTeacher = () => {
                                 onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
                                 className='w-full mb-4 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
-                                <option className='text-black' value="">Select Type</option>
+                                <option className='text-black' value="">Remarks</option>
                                 <option className='text-black' value="">Normal</option>
                                 <option className='text-black' value="Extra">Extra</option>
 
