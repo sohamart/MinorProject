@@ -343,6 +343,7 @@ const addClass = async () => {
                     <option className='text-black' value="TKP">TKP</option>
                     <option className='text-black' value="ND">ND</option>
                     <option className='text-black' value="AT">AT</option>
+                    <option className='text-black' value="SS">SS</option>
                   </select>
 
                   {/* TIME */}

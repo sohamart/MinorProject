@@ -73,7 +73,7 @@ const TodayClassTeacher = () => {
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Add failed" , + err.response?.data.message)
+            alert("Add failed", + err.response?.data.message)
             setadding(false)
         }
     }
@@ -145,12 +145,12 @@ const TodayClassTeacher = () => {
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Update failed",+err.response?.data.message)
+            alert("Update failed", +err.response?.data.message)
             setupdating(false)
         }
     }
     const ResetHandel = async () => {
-        try{
+        try {
             const confirmDelete = window.confirm(`Are you Sure to Reset Classes ?`)
             if (!confirmDelete) return
             setreseting(true)
@@ -158,13 +158,13 @@ const TodayClassTeacher = () => {
                 `${API}/api/class/today/deleteAll`,
                 { withCredentials: true }
             )
-            
+
             setreseting(false)
             window.location.reload()
 
 
         }
-        catch(err){
+        catch (err) {
             console.log(err.response?.data)
             alert("Reset failed")
             setreseting(false)
@@ -213,18 +213,18 @@ const TodayClassTeacher = () => {
 
                                         {/* BUTTONS */}
                                         <div className='flex relative justify-end gap-2 mb-2'>
-                                            {cls.remarks?.length > 2 &&(<div className='flex absolute top-0 left-[-17px] '>
+                                            {cls.remarks?.length > 2 && (<div className='flex absolute top-0 left-[-17px] '>
                                                 <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
                                             </div>)}
-                                            
+
                                             <div className='flex gap-2'>
                                                 <button onClick={() => openEdit(cls, index)} className=' min-w-20 bg-green-500/20 border active:scale-95 rounded-2xl border-green-400/50 p-2'>Edit</button>
-                                            <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border active:scale-95 rounded-2xl border-red-400/50 p-2'>
+                                                <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border active:scale-95 rounded-2xl border-red-400/50 p-2'>
 
-                                                {deleting ? ("deleting..") : ("delete")}
-                                            </button>
+                                                    {deleting ? ("deleting..") : ("delete")}
+                                                </button>
                                             </div>
-                                            
+
                                         </div>
 
                                         <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
@@ -275,25 +275,26 @@ const TodayClassTeacher = () => {
                                 <option className='text-black' value="TKP">TKP</option>
                                 <option className='text-black' value="ND">ND</option>
                                 <option className='text-black' value="AT">AT</option>
+                                <option className='text-black' value="SS">SS</option>
                             </select>
 
-                            
+
                             <div className='flex gap-2 mb-3'>
                                 <div className='w-full  '>
                                     <label className='ml-2 mb-2' >Start Time</label>
                                     <input required placeholder='Start Time' type="time"
-                                    className='w-full p-3 mt-2 bg-white/10 rounded-xl border border-white/30'
-                                    onChange={(e) => setFormData({ ...formData, startTime: convertTo12Hour(e.target.value) })}
-                                />
+                                        className='w-full p-3 mt-2 bg-white/10 rounded-xl border border-white/30'
+                                        onChange={(e) => setFormData({ ...formData, startTime: convertTo12Hour(e.target.value) })}
+                                    />
                                 </div>
                                 <div className='w-full '>
                                     <label className='ml-2 mb-2' >End Time</label>
                                     <input required placeholder='End Time' type="time"
-                                    className='w-full mt-2 p-3 bg-white/10 rounded-xl border border-white/30'
-                                    onChange={(e) => setFormData({ ...formData, endTime: convertTo12Hour(e.target.value) })}
-                                />
+                                        className='w-full mt-2 p-3 bg-white/10 rounded-xl border border-white/30'
+                                        onChange={(e) => setFormData({ ...formData, endTime: convertTo12Hour(e.target.value) })}
+                                    />
                                 </div>
-                                
+
                             </div>
 
                             <select required
@@ -340,7 +341,7 @@ const TodayClassTeacher = () => {
                             </select>
 
                             <select value={formData.teacher}
-                            required
+                                required
                                 onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                                 className='w-full mb-3 p-3 bg-white/10 rounded-xl border border-white/30'
                             >
@@ -352,15 +353,15 @@ const TodayClassTeacher = () => {
                             </select>
 
                             <div className='flex gap-2 mb-3'>
-                                
+
                                 <input type="time"
-                                required
+                                    required
                                     value={convertTo24Hour(formData.startTime)}
                                     onChange={(e) => setFormData({ ...formData, startTime: convertTo12Hour(e.target.value) })}
                                     className='w-full p-3 bg-white/10 rounded-xl border border-white/30'
                                 />
                                 <input type="time"
-                                required
+                                    required
                                     value={convertTo24Hour(formData.endTime)}
                                     onChange={(e) => setFormData({ ...formData, endTime: convertTo12Hour(e.target.value) })}
                                     className='w-full p-3 bg-white/10 rounded-xl border border-white/30'
