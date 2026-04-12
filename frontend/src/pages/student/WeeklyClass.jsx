@@ -15,9 +15,10 @@ const WeeklyClass = () => {
                 
                 <div className='  flex gap-12 pt-24 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                     {/* 🔥 ERROR */}
-                    {error && (
-                        <p className="text-white text-xl">No classes Found !! </p>
-                    )}
+                    {error && weeklyData?.length < 1 &&(
+                         <p className="text-white text-xl">No classes Found !! </p>
+                     )}
+ 
 
 
                     {!loading && weeklyData?.length > 0 && weeklyData.map((dayData, i) => (    
