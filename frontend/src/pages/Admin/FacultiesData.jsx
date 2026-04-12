@@ -13,7 +13,7 @@ const FacultiesData = () => {
     const [loading, setloading] = useState(true)
     const [deletingId, setDeletingId] = useState(null);
 
-    
+
 
     const deleteTeacher = async (id) => {
         if (!window.confirm("Are you sure to delete this student ?")) return;
@@ -43,7 +43,7 @@ const FacultiesData = () => {
 
             setteachers(response.data.teacheruserdata)
             seterror(null);
-            
+
 
         } catch (error) {
             console.error('Error fetching :', error);
@@ -110,13 +110,13 @@ const FacultiesData = () => {
                                     <Mail className="text-white" />
                                 </a>
 
-                                {/* <a
-                                                                        className="flex lg:hidden items-center justify-center w-12 h-12 lg:w-10 lg:h-10 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
-                                        
-                                                                        href="https://wa.me/919647085384?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class">
-                                        
-                                                                        <MessageCircleMore className="text-white" />
-                                                                    </a> */}
+                                <a
+                                    className="flex  items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
+
+                                    href={`https://wa.me/91${teacher.phone}?text=Hello%20sir%2C%20I%20want%20to%20contact%20you%20about%20your%20class`}>
+
+                                    <MessageCircleMore className="text-white" />
+                                </a>
 
 
 
