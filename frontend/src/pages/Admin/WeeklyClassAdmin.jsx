@@ -326,6 +326,7 @@ const addClass = async () => {
                     <option className='text-black' value="Computer Network">Computer Network</option>
                     <option className='text-black' value="java">java</option>
                     <option className='text-black' value="Software Engineering">Software Engineering</option>
+                    <option className='text-black' value="Minor Project">Minor Project</option>
                   </select>
 
                   {/* TEACHER */}
@@ -487,6 +488,7 @@ const addClass = async () => {
                     <option className='text-black' value="Computer Network">Computer Network</option>
                     <option className='text-black' value="java">java</option>
                     <option className='text-black' value="Software Engineering">Software Engineering</option>
+                    <option className='text-black' value="Minor Project">Minor Project</option>
                   </select>
 
                   <select
