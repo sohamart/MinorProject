@@ -276,6 +276,7 @@ const TodayClassTeacher = () => {
                                 <option className='text-black' value="ND">ND</option>
                                 <option className='text-black' value="AT">AT</option>
                                 <option className='text-black' value="SS">SS</option>
+                                <option className='text-black' value="AT, PGR, TKP, SS">AT, PGR, TKP, SS</option>
                             </select>
 
 
@@ -350,6 +351,10 @@ const TodayClassTeacher = () => {
                                 <option className='text-black' value="TKP">TKP</option>
                                 <option className='text-black' value="ND">ND</option>
                                 <option className='text-black' value="AT">AT</option>
+                                <option className='text-black' value="SS">SS</option>
+                                <option className='text-black' value="AT, PGR, TKP, SS">AT, PGR, TKP, SS</option>
+
+
                             </select>
 
                             <div className='flex gap-2 mb-3'>
