@@ -220,7 +220,7 @@ const addClass = async () => {
          )
 
         } 
-        {WeeklyClass?.length === 0 && <p className="text-White mt-14 text-lg mb-4">No classes Found !!</p>}
+        {WeeklyClass?.length < 1 && <p className="text-White mt-14 text-lg mb-4">No classes Found !!</p>}
 
         {loading && (
           <div className="flex flex-col gap-4 w-full items-center">
