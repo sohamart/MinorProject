@@ -15,7 +15,7 @@ const HomeStudent = () => {
     navigate("/student/faculty")
   }
   const Extrabutton = ( ) =>{
-    navigate("/student/extraClass")
+    navigate("/student/ExtraClasses")
   }
 
   return (
