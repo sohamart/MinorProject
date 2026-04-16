@@ -26,7 +26,7 @@ const WeeklyClass = () => {
                             <div  >
                                     <h1 className='text-4xl mb-4 text-white font-bold uppercase mt-2'>{dayData.day}</h1>
                             </div>
-                            <div className='card w-full  bg-white/10 border flex-wrap justify-center items-center flex lg:p-4 p-3 border-white/50 min-h-50 gap-5 lg:flex-row flex-col items-center  rounded-2xl '>
+                            <div className='card w-full  bg-white/5 border flex-wrap justify-center items-center flex lg:p-4 p-3 border-white/20 min-h-50 gap-5 lg:flex-row flex-col items-center  rounded-2xl '>
                                
                                {dayData.classes.map((cls, index) => (
                                     <div key={index} className=' lg:w-80 w-75 uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
