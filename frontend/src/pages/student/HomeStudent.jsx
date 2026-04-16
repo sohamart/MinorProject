@@ -14,6 +14,9 @@ const HomeStudent = () => {
   const facultybutton = ( ) =>{
     navigate("/student/faculty")
   }
+  const Extrabutton = ( ) =>{
+    navigate("/student/extraClass")
+  }
 
   return (
     <div className= ' relative text-white h-full w-full lg:bg-black/5 bg-black/5 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
@@ -38,6 +41,9 @@ const HomeStudent = () => {
         </button>
         <button  onClick={facultybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-red-400/20 border border-red-400/50 rounded-2xl'>
           Faculties
+        </button>
+        <button  onClick={Extrabutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-yellow-400/20 border border-yellow-400/50 rounded-2xl'>
+          Extra Class
         </button>
 
       </div>

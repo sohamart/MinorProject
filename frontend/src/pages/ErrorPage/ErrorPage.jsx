@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom'
 const ErrorPage = () => {
 
   const Navigate = useNavigate()
-  const buttonclicked = () => {
+ 
+  const buttonclicked = () =>{
+    console.log("clicked")
     Navigate("/")
   }
   return (
