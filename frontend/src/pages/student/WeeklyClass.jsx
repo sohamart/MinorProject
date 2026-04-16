@@ -13,7 +13,7 @@ const WeeklyClass = () => {
 
                 </div>
                 
-                <div className='  flex gap-12 pt-24 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
+                <div className=' pl-2 pr-2 flex gap-12 pt-24 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                     {/* 🔥 ERROR */}
                     {error && weeklyData?.length < 1 &&(
                          <p className="text-white text-xl">No classes Found !! </p>
@@ -22,19 +22,20 @@ const WeeklyClass = () => {
 
 
                     {!loading && weeklyData?.length > 0 && weeklyData.map((dayData, i) => (    
-                        <div key={i} className=''>
-                            <div className='card bg-white/10 border lg:w-180 flex p-2 border-white/50 min-h-50 gap-4 flex-col items-center w-80 rounded-2xl '>
-                               <div >
-                                    <h1 className='text-2xl text-white font-bold uppercase mt-2'>{dayData.day}</h1>
-                               </div>
+                        <div key={i} className='w-full lg:pl-12 lg:pr-12 flex flex-col items-center '>
+                            <div  >
+                                    <h1 className='text-4xl mb-4 text-white font-bold uppercase mt-2'>{dayData.day}</h1>
+                            </div>
+                            <div className='card w-full  bg-white/10 border flex-wrap justify-center items-center flex lg:p-4 p-3 border-white/50 min-h-50 gap-5 lg:flex-row flex-col items-center  rounded-2xl '>
+                               
                                {dayData.classes.map((cls, index) => (
-                                    <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
-                                        <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
+                                    <div key={index} className=' lg:w-80 w-75 uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
+                                        <h1 className='w-full h-12 bg-blue-600/10 border text-xl items-center rounded-2xl border-blue-500/50 flex justify-around '>{cls.subject}</h1>
                                         
                                         <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
-                                        <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-green-400'>Sir    </span> <span>:</span> {cls.teacher}</h1>
-                                        <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'><span className='font-bold  text-red-400'>Time      </span> <span>:</span> {cls.time}</h1>
-                                        <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-yellow-400'>Type    </span> <span>:</span> {cls.type}</h1>
+                                        <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'>{cls.teacher}</h1>
+                                        <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'>{cls.time}</h1>
+                                        <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'>{cls.type}</h1>
                                         </div>
                                     </div>
                                     
