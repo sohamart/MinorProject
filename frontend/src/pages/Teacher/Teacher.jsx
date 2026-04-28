@@ -35,7 +35,7 @@ const Teacher = () => {
 
 
         {/* 🧊 Main Content */}
-        <div className=" z-10 lg:gap-4 lg:h-full fixed top-0 p-4 flex w-full">
+        <div className=" z-10 lg:gap-4 md:h-full lg:h-full fixed top-0 p-4 flex w-full">
 
           <Sidebar />
           <div className=' lg:h-full md:h-full w-full h-[83vh]'>

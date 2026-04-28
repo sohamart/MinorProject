@@ -137,11 +137,11 @@ const App = () => {
         {/* mobile blob */}
 
         
-        <div className="absolute lg:hidden top-50  lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+        <div className="absolute lg:hidden md:top-[-120px] md:right-0 top-50 md:h-120 lg:top-1/2 lg:left-1/2 w-[400px] h-[400px] bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           >
 
         </div>
-        <div className="absolute top-[-200px] lg:hidden w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
+        <div className="absolute top-[-200px] md:h-120 md:top-120 md:left-0 lg:hidden w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           >
 
         </div>

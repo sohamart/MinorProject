@@ -44,7 +44,7 @@ const Admin = () => {
             <AdminSidebar />
           
           
-          <div className=' lg:h-full md:h-full w-full h-[83vh]'>
+          <div className=' lg:h-full  md:h-full w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinAdmin?.name }} />
           </div>
           
