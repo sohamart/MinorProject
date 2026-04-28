@@ -15,7 +15,9 @@ const HomeTeacher = () => {
   const studentbutton = ( ) =>{
     navigate("/teacher/studentsData")
   }
-
+  const Extrabutton = ( ) =>{
+    navigate("/teacher/ExtraClasses")
+  }
 
   return (
     <div className=' relative text-white h-full w-full lg:bg-black/5 bg-black/5 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
@@ -27,19 +29,22 @@ const HomeTeacher = () => {
         <h1 className='lg:text-8xl text-5xl text-center uppercase font-bold'>
           welcome back
         </h1>
-        <p className='mt-3 lg:text-2xl text-2xl font-bold '>
+        <p className='mt-3 lg:text-2xl text-xl font-bold '>
           Teacher - {loggedinName}
         </p>
         <p className='text-xl mt-5 opacity-40'>Check Your Pages </p>
-      <div className=' h-20 w-full items-center justify-center lg:mt-4 flex gap-5 p-5 '>
-        <button onClick={weeklybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl '>
+      <div className=' h-30 w-full items-center flex-wrap justify-center lg:mt-4 flex gap-5 p-5 '>
+        <button onClick={weeklybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl'>
           Weekly Class
         </button>
-        <button onClick={todaybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-blue-400/20 border border-blue-400/50 rounded-2xl'>
+        <button  onClick={todaybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-blue-400/20 border border-blue-400/50 rounded-2xl'>
           Today Class
         </button>
-        <button onClick={studentbutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-red-400/20 border border-red-400/50 rounded-2xl'>
-          Students Data
+        <button  onClick={studentbutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-red-400/20 border border-red-400/50 rounded-2xl'>
+          Students
+        </button>
+        <button  onClick={Extrabutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-yellow-400/20 border border-yellow-400/50 rounded-2xl'>
+          Extra Class
         </button>
 
       </div>
