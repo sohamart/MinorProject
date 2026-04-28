@@ -450,7 +450,7 @@ const addClass = async () => {
         {showForm && editData && (
           <div className='fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-3'>
 
-            <div className='bg-black/80 border border-white/40 p-5 lg:p-8 rounded-2xl w-full max-w-[600px]'>
+            <div className='bg-black/80 border h-120 overflow-auto mb-12 no-scrollbar border-white/40 p-5 lg:p-8 rounded-2xl w-full max-w-[600px]'>
 
               <h2 className='text-2xl mb-3'>Edit Day</h2>
 
