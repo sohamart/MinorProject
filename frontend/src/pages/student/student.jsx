@@ -32,7 +32,7 @@ const Student = () => {
   return (
     <>
       <div
-        className="relative flex w-screen h-[70vh] bg-red-400  overflow-hidden text-white ">
+        className="relative flex w-screen h-screen   overflow-hidden text-white ">
 
 
        
