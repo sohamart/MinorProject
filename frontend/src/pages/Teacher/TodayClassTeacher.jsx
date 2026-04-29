@@ -202,14 +202,15 @@ const TodayClassTeacher = () => {
 
                     {!loading && TodayData && (
                         <div>
-                            <div className='card bg-white/10 min-h-40 border lg:w-180 flex p-2 border-white/50 gap-4 flex-col items-center w-80 rounded-2xl'>
+                            <div className='card  min-h-40  lg:w-full flex p-2  gap-4 flex-col items-center w-full rounded-2xl'>
 
                                 <h1 className='text-2xl lg:text-3xl font-bold uppercase mt-2'>{TodayData.day}</h1>
                                 {TodayData.classes.length === 0 && (
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
-                                {TodayData.classes.map((cls, index) => (
-                                    <div key={index} className='w-full uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'>
+                                <div className='flex w-full p-12 justify-center  gap-4 flex-wrap'>
+                                    {TodayData.classes.map((cls, index) => (
+                                    <div key={index} className='w-120 uppercase lg:text-2xl p-4 bg-white/5 rounded-2xl border border-white/50'>
 
                                         {/* BUTTONS */}
                                         <div className='flex relative justify-end gap-2 mb-2'>
@@ -228,17 +229,19 @@ const TodayClassTeacher = () => {
                                         </div>
 
                                         <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
-                                            <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '><span className='font-bold text-blue-400'>Class    </span> <span>:</span> {cls.subject}</h1>
+                                            <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '> {cls.subject}</h1>
 
                                             <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
-                                                <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-green-400'>Sir    </span> <span></span> {cls.teacher}</h1>
-                                                <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'><span className='font-bold  text-red-400'>Time      </span> <span></span> {cls.time}</h1>
-                                                <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'><span className='font-bold text-yellow-400'>Type    </span> <span></span> {cls.type}</h1>
+                                                <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'> {cls.teacher}</h1>
+                                                <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'> {cls.time}</h1>
+                                                <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'>{cls.type}</h1>
                                             </div>
                                         </div>
 
                                     </div>
                                 ))}
+                                </div>
+                                
 
                             </div>
                         </div>

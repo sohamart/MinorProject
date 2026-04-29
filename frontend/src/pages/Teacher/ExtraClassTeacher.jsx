@@ -29,7 +29,7 @@ const ExtraClassTeacher = () => {
                                    </div>
     
                     
-                    <div className='  flex h-full  gap-12 pt-10 mt-22 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
+                    <div className='  flex h-full  gap-12 pt-25 mt-22 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                         {/* 🔥 ERROR */}
                         {TodayData === null && (
                             <p className="text-white text-xl">No classes Found !! </p>
