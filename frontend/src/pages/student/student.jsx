@@ -42,7 +42,7 @@ const Student = () => {
         <div className=" z-10 lg:h-full md:h-full lg:gap-4 fixed top-0 p-4 flex w-full">
 
           <Sidebar />
-          <div className=' lg:h-full md:h-full w-full h-[83vh]'>
+          <div className=' lg:h-full md:h-[83vh] w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinStudent?.name }} />
           </div>
           

@@ -38,7 +38,7 @@ const Teacher = () => {
         <div className=" z-10 lg:gap-4 md:h-full lg:h-full fixed top-0 p-4 flex w-full">
 
           <Sidebar />
-          <div className=' lg:h-full md:h-full w-full h-[83vh]'>
+          <div className=' lg:h-full md:h-[83vh]  w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinTeacher?.name }} />
           </div>
           
