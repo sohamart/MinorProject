@@ -165,11 +165,11 @@ const FacultiesData = () => {
 
 
             </div>
-            <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
-                <h1 className=' uppercase '>
-                    designed and devoloped by Soham Dutta
-                </h1>
-            </div>
+            <div className='absolute bottom-[-12px] md:bottom-[-23px] lg:bottom-[-14px] text-[6px] md:text-[13px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
+                        <h1 className=' uppercase '>
+                            designed and devoloped by Soham Dutta
+                        </h1>
+                    </div>
 
         </div>
     )
