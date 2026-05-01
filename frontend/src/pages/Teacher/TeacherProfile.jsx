@@ -63,9 +63,9 @@ const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
                 <img className=' w-30 h-30 lg:w-50 lg:h-50 rounded-full mt-7' src={student} alt="" />
         </div>
         <div className='flex flex-col items-center justify-center lg:flex-row lg:gap-12'>
-                <div className='mt-5 w-50 pt-4 pb-5 lg:w-80 h:20 lg:mt-10 text-l flex-col lg:text-xl bg-orange-400/10 border border-orange-400/30 rounded-2xl flex items-center justify-center overflow-hidden'>
+                <div className='mt-5 w-min-50 p-2 pt-4 pb-5 lg:w-80 h:20 lg:mt-10 text-l flex-col lg:text-xl bg-orange-400/10 border border-orange-400/30 rounded-2xl flex items-center justify-center overflow-hidden'>
                 <h1><span className='text-orange-500'>Name : </span> {loggedinTeacher?.name}</h1>
-                <h1><span className='text-green-500 mt-5'>Subject  : </span>  {loggedinTeacher?.subject}</h1>
+                <h1 ><span className='text-green-500 mt-5'>Subject  : </span>  {loggedinTeacher?.subject}</h1>
                 
         </div>
         <div className='mt-5  pt-3 pb-6 pl-2 pr-2 lg: h:10 lg:mt-10 text-sm flex-col lg:text-2xl bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center overflow-hidden'>
