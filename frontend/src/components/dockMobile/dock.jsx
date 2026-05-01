@@ -13,18 +13,28 @@ import { AuthContextData } from '../../context/AuthContext';
 
 const dock = () => {
     const navigate = useNavigate()
-    const { loggedinStudent } = useContext(AuthContextData)
+    const { loggedinStudent  } = useContext(AuthContextData)
+    const { navopen, setnavopen, showCross, setShowCross, openNav, closeNav }= useContext(AuthContextData)
     const homeHandel = () => {
         
         navigate("/student/home")
+        if(navopen === true){
+          closeNav()
+        }
   }
   const ProfileHandel = () => {
     
     navigate(`/student/profile/${loggedinStudent?._id}`)
+    if(navopen === true){
+          closeNav()
+    }
 }
  const ClassHandel = () => {
     
     navigate(`/student/todayClasses`)
+    if(navopen === true){
+          closeNav()
+    }
  }
   return (
     <div className='h-full flex  items-center justify-around p-5 w-full'>

@@ -14,17 +14,28 @@ import { AuthContextData } from '../../context/AuthContext';
 const TeacherDock = () => {
     const navigate = useNavigate()
     const { loggedinStudent } = useContext(AuthContextData)
+    const { navopen, setnavopen, showCross, setShowCross, openNav, closeNav }= useContext(AuthContextData)
     const homeHandel = () => {
         
         navigate("/teacher/home")
+        if(navopen === true){
+          closeNav()
+        }
   }
   const ProfileHandel = () => {
     
     navigate(`/teacher/profile/${loggedinStudent?._id}`)
+    if(navopen === true){
+          closeNav()
+    }
+    
 }
  const ClassHandel = () => {
     
     navigate(`/teacher/todayClasses`)
+    if(navopen === true){
+          closeNav()
+    }
  }
   return (
     <div className='h-full flex  items-center justify-around p-5 w-full'>

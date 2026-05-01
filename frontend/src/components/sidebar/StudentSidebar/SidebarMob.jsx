@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import StudentSidebarItems from "./studentSidebarItems";
+import { useContext } from "react";
+import { AuthContextData } from "../../../context/AuthContext";
 
 const containerVariants = {
   hidden: {},
@@ -14,24 +16,8 @@ const containerVariants = {
 };
 
 const SidebarMob = () => {
-  const [navopen, setnavopen] = useState(false);
-  const [showCross, setShowCross] = useState(false);
+  const { navopen, setnavopen, showCross, setShowCross, openNav, closeNav }= useContext(AuthContextData)
 
-  // 👉 OPEN
-  const openNav = () => {
-    setnavopen(true);
-    setTimeout(() => {
-      setShowCross(true); // delay diye cross ashbe
-    }, 300);
-  };
-
-  // 👉 CLOSE (sequence)
-  const closeNav = () => {
-    setShowCross(false); // age cross hide
-    setTimeout(() => {
-      setnavopen(false); // tarpor sidebar close
-    }, 300);
-  };
 
   return (
     <div className="relative z-20">

@@ -15,6 +15,28 @@ const AuthContext = (props) => {
   const [loggedinName, setloggedinName] = useState("")
   const API = import.meta.env.VITE_API_URI
 
+  // 👉 SIDEBAR
+    const [navopen, setnavopen] = useState(false);
+    const [showCross, setShowCross] = useState(false);
+  
+    // 👉 OPEN
+    const openNav = () => {
+      setnavopen(true);
+      setTimeout(() => {
+        setShowCross(true); // delay diye cross ashbe
+      }, 300);
+    };
+  
+    // 👉 CLOSE (sequence)
+    const closeNav = () => {
+      setShowCross(false); // age cross hide
+      setTimeout(() => {
+        setnavopen(false); // tarpor sidebar close
+      }, 300);
+    };
+
+
+
 
   useEffect(() => {
     const fetchuser = async () => {
@@ -94,7 +116,13 @@ const AuthContext = (props) => {
         setloggedinName,
         loggedinName,
         API,
-        setloading
+        setloading,
+        navopen,
+        setnavopen,
+        showCross,
+        setShowCross,
+        openNav,
+        closeNav,
         
         }}>
         {props.children}

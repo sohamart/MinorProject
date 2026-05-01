@@ -14,17 +14,28 @@ import { AuthContextData } from '../../context/AuthContext';
 const AdminDock = () => {
     const navigate = useNavigate()
     const { loggedinStudent } = useContext(AuthContextData)
+    const { navopen, setnavopen, showCross, setShowCross, openNav, closeNav }= useContext(AuthContextData)
     const homeHandel = () => {
         
         navigate("/admin/home")
+        if(navopen === true){
+          closeNav()
+        }
   }
   const ProfileHandel = () => {
     
     navigate(`/admin/profile/${loggedinStudent?._id}`)
+    if(navopen === true){
+          closeNav()
+    }
+    
 }
  const ClassHandel = () => {
     
     navigate(`/admin/todayClasses`)
+    if(navopen === true){
+          closeNav()
+    }
  }
   return (
     <div className='h-full flex  items-center justify-around p-5 w-full'>
