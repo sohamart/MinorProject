@@ -40,19 +40,19 @@ const TeacherDock = () => {
   return (
     <div className='h-full flex  items-center justify-around p-5 w-full'>
           <button onClick={homeHandel}  className='w-[18vw] h-[8vh] flex gap-1 flex-col justify-center items-center bg-white/10 rounded-full border border-amber-50/20 backdrop-blur-2xl shadow-2xl'>
-            <House className='text-white w-5 h-5' />
-            <p className='text-[9px] text-white'>Dashbord</p>
+            <House className='text-white w-5 h-5 md:w-9 md:h-9' />
+            <p className='text-[9px] md:text-xl text-white'>Dashbord</p>
     
           </button>
           <div onClick={ClassHandel} className='w-[18vw] h-[8vh] flex gap-1 flex-col justify-center items-center bg-white/10 rounded-full border border-amber-50/20 backdrop-blur-2xl shadow-2xl'>
             
-            <PcCase className='text-white w-5 h-5' />
-            <p className='text-[7px] text-white'>Today Classes</p>
+            <PcCase className='text-white w-5 h-5 md:w-9 md:h-9' />
+            <p className='text-[7px] md:text-xl text-white'>Today Classes</p>
           </div>
           <div onClick={ProfileHandel} className='w-[18vw] h-[8vh] flex gap-1 flex-col justify-center items-center bg-white/10 rounded-full border border-amber-50/20 backdrop-blur-2xl shadow-2xl'>
             
-            <UserRound className='text-white w-5 h-5' />
-            <p className='text-[11px] text-white'>Profile</p>
+            <UserRound className='text-white w-5 h-5 md:w-9 md:h-9  ' />
+            <p className='text-[11px] md:text-xl text-white'>Profile</p>
           </div>
           
         </div>
