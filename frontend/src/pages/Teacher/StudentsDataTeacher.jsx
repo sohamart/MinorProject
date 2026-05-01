@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { MessageCircleMore } from "lucide-react";
 import { Ban } from "lucide-react";
+import Student from '../../assets/student.png'
+
 
 const StudentsDataTeacher = () => {
    const [students, setstudents] = useState([])
@@ -65,9 +67,9 @@ const fetchStudents = async () => {
 
                         {/* Image */}
                         <div className=' flex lg:flex-row flex-col w-full gap-4 justify-center items-center'>
-                        <div className='border-2 bg-yellow-500  border-yellow-500 rounded-full  w-20 h-20 flex items-center justify-center overflow-hidden'>
+                        <div className='border-2 bg-yellow-500/20  border-yellow-500 rounded-full  w-20 h-20 flex items-center justify-center overflow-hidden'>
                             <img
-                                src="https://t3.ftcdn.net/jpg/08/12/63/16/360_F_812631683_ek5GhlY2zdlSILJMT7pHFujzi37i4Os4.jpg"
+                                src={Student}
                                 alt="avatar"
                                 className="w-19  h-19 rounded-full object-cover object-center"
                             />

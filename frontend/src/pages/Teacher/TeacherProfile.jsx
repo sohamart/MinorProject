@@ -4,6 +4,8 @@ import { AuthContextData } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import student from '../../assets/student.png'
+import teacher from '../../assets/teacher.jpg'
+
 import { Dot } from "lucide-react";
 
 import { useState } from 'react';
@@ -59,8 +61,8 @@ const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
             
         )}
         
-        <div className='mt-5 w-30 h-30 lg:w-50 lg:h-50 bg-green-400/10 border-2 border-green-400/30 rounded-full flex items-center justify-center overflow-hidden'>
-                <img className=' w-30 h-30 lg:w-50 lg:h-50 rounded-full mt-7' src={student} alt="" />
+        <div className='mt-5 w-32 h-32 lg:w-50 lg:h-50 bg-green-400/10 border-2 border-green-400/30 rounded-full flex items-center justify-center overflow-hidden'>
+                <img className=' w-30 h-30  lg:w-50 lg:h-50 rounded-full object-cover' src={teacher} alt="" />
         </div>
         <div className='flex flex-col items-center justify-center lg:flex-row lg:gap-12'>
                 <div className='mt-5 w-min-50 p-2 pt-4 pb-5 lg:w-80 h:20 lg:mt-10 text-l flex-col lg:text-xl bg-orange-400/10 border border-orange-400/30 rounded-2xl flex items-center justify-center overflow-hidden'>
