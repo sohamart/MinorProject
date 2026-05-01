@@ -8,8 +8,8 @@ const loading = () => {
   console.log(localdate)
   return (
     <div className='transform  transition ease-in duration-300 flex-col h-screen w-screen flex bg-black  items-center justify-center '>
-      <h1 className='text-white absolute bottom-5 '>C.R TIME PRO</h1>
-      <h1 className='text-white absolute bottom-5 '>C.R TIME PRO</h1>
+      <h1 className='text-white text-xl lg:text-4xl md:text-4xl font-bold absolute top-2 '>C.R TIME PRO</h1>
+      
 
       
       <ClockLoader
