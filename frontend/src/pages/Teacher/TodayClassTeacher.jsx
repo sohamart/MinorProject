@@ -176,7 +176,7 @@ const TodayClassTeacher = () => {
             <div className='relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]'>
 
                 {/* HEADER */}
-                <div className='lg:w-120 h-18 w-50 lg:h-20 bg-white/10 border-b border-white/40 border-r border-l shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+                <div className='lg:w-120 h-18 w-50 lg:h-20  bg-white/10 border-b border-white/40 border-r border-l shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                     <h1 className='lg:text-3xl flex h-18 items-center justify-center uppercase font-bold'>Today Class</h1>
                 </div>
 
@@ -194,21 +194,21 @@ const TodayClassTeacher = () => {
                     {reseting ? ("reseting..") : ("Reset Classes")}
                 </button>
 
-                <div className='flex gap-12 pt-24 pb-24 w-full flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center'>
+                <div className='flex gap-12 pt-24 p-2 pb-24 w-full flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center'>
 
                     {TodayData === null && (
                         <p className="text-white text-xl">No classes Found !!</p>
                     )}
 
                     {!loading && TodayData && (
-                        <div>
+                        <div className=' w-full '>
                             <div className='card  min-h-40  lg:w-full flex p-2  gap-4 flex-col items-center w-full rounded-2xl'>
 
                                 <h1 className='text-2xl lg:text-3xl font-bold uppercase mt-2'>{TodayData.day}</h1>
                                 {TodayData.classes.length === 0 && (
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
-                                <div className='flex w-full p-12 justify-center  gap-4 flex-wrap'>
+                                <div className='flex w-full p-2 justify-center  gap-4 flex-wrap'>
                                     {TodayData.classes.map((cls, index) => (
                                     <div key={index} className='w-120 uppercase lg:text-2xl p-4 bg-white/5 rounded-2xl border border-white/50'>
 
