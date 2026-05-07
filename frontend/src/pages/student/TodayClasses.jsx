@@ -42,7 +42,7 @@ const TodayClasses = () => {
                      )}
  
                      {!loading && TodayData && (
-                         <div className='pl-12 pr-12 flex-col lg:flex-row gap-4 flex-wrap flex justify-center items-center'>
+                         <div className='lg:pl-52 lg:pr-52 flex-col lg:flex-row gap-4 flex-wrap flex justify-center items-center'>
  
                              {TodayData.classes.length === 0 && (
                                  <p className="text-red-500 text-xl">
