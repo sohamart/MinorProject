@@ -104,7 +104,7 @@ const FacultiesData = () => {
                         <div className="flex  w-full  gap-4 justify-center items-center">
                             <div className='border  gap-4 bg-blue-500/10 border-blue-500/30 flex items-center justify-center p-2 lg:w-45 h-16 lg:h-21 rounded-2xl'>
                                 <a
-                                    href={`mailto:${teacher.email}?subject=Student Query&body=Hello Sir,`}
+                                    href={`mailto:${teacher.email}?subject=Student Query&body=Hello ${teacher.name} Sir,`}
                                     className="flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-2xl lg:rounded-full bg-white/10 border border-white/50 hover:scale-95 transition duration-300"
                                 >
                                     <Mail className="text-white" />
