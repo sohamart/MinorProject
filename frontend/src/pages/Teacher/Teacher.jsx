@@ -26,13 +26,13 @@ const Teacher = () => {
   if (!loggedinTeacher) return null
   const [rotated, setRotated] = React.useState(false);
 
-  
+
   // Smooth effect
     const Refresh = () => {
     setRotated(!rotated)
     setTimeout(() => {
       window.location.reload()
-    }, 500);
+    }, 10);
 
   }
 
