@@ -15,6 +15,7 @@ import { useState } from 'react'
 const Teacher = () => {
   const navigate = useNavigate()
   const { loggedinTeacher, loading } = useContext(AuthContextData)
+  const [rotated, setRotated] = useState(false);
 
   useEffect(() => {
     if (!loading && !loggedinTeacher) {
@@ -28,7 +29,7 @@ const Teacher = () => {
   // ⛔ Stop rendering to avoid flicker
   if (!loggedinTeacher) return null
 
-  const [rotated, setRotated] = useState(false);
+ 
 
   const Refresh = () => {
     setRotated(true);
