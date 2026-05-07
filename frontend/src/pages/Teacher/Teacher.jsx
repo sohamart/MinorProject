@@ -24,6 +24,18 @@ const Teacher = () => {
 
   // ⛔ Stop rendering to avoid flicker
   if (!loggedinTeacher) return null
+  const [rotated, setRotated] = React.useState(false);
+
+  
+  // Smooth effect
+    const Refresh = () => {
+    setRotated(!rotated)
+    setTimeout(() => {
+      window.location.reload()
+    }, 500);
+
+  }
+
 
   return (
     <>
@@ -38,6 +50,13 @@ const Teacher = () => {
         <div className=" z-10 lg:gap-4 md:h-full lg:h-full fixed top-0 p-4 flex w-full">
 
           <Sidebar />
+          <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-l-2 rounded-l-2xl top-8 right-4'>
+            <RefreshCcw
+              onClick={Refresh}
+              className={`duration-500 cursor-pointer ${rotated ? "rotate-180" : ""
+                }`}
+            />
+          </div>
           <div className=' lg:h-full md:h-[83vh]  w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinTeacher?.name }} />
           </div>
