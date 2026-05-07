@@ -10,6 +10,7 @@ import Sidebar from '../../components/sidebar/TeacherSidebar/TeacherSidebar'
 import TeacherDock from '../../components/dockMobile/TeacherDock'
 import { RefreshCcw } from 'lucide-react';
 
+
 const Teacher = () => {
   const navigate = useNavigate()
   const { loggedinTeacher, loading } = useContext(AuthContextData)
@@ -25,15 +26,16 @@ const Teacher = () => {
 
   // ⛔ Stop rendering to avoid flicker
   if (!loggedinTeacher) return null
-  const [rotated, setRotated] = React.useState(false);
+  
+const [rotated, setRotated] = React.useState(false);
 
+const Refresh = () => {
+  setRotated(true);
 
-  // Smooth effect
-    const Refresh = () => {
-    setRotated(!rotated)
-    setTimeout(() => {
-      window.location.reload()
-    }, 10);
+  setTimeout(() => {
+    window.location.reload();
+  }, 500); // animation complete
+};
 
   }
 
