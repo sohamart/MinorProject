@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
+import Logo from '../../assets/clock.webp'
+
 
 
 const TodayClassTeacher = () => {
@@ -65,6 +67,14 @@ const TodayClassTeacher = () => {
                 { withCredentials: true }
             )
 
+            // 🔥 NOTIFICATION
+            if (Notification.permission === "granted") {
+            new Notification("📚 Class Added", {
+                body: `${formData.subject} extra class added`,
+                icon: Logo
+            })
+            }
+
             setShowAdd(false)
 
             window.location.reload()
@@ -88,6 +98,14 @@ const TodayClassTeacher = () => {
                 `${API}/api/class/today/delete/${classId}`,
                 { withCredentials: true }
             )
+
+            // 🔥 NOTIFICATION
+        if (Notification.permission === "granted") {
+            new Notification("📚 Class Canceled", {
+                body: `${formData.subject} class canceled`,
+                icon:  Logo
+            })
+        }
 
             window.location.reload()
             setdeleting(false)
@@ -135,6 +153,13 @@ const TodayClassTeacher = () => {
                 { classes: updatedClasses },
                 { withCredentials: true }
             )
+            // 🔥 NOTIFICATION
+            if (Notification.permission === "granted") {
+                new Notification("📚 Class Updated", {
+                    body: `${formData.subject} class updated`,
+                    icon: Logo
+                })
+            }
 
             setShowEdit(false)
             // window.location.reload()

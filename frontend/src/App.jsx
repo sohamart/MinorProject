@@ -29,12 +29,18 @@ import WeeklyClassTeacher from './pages/Teacher/WeeklyClassTeacher'
 import ExtraClassTeacher from './pages/Teacher/ExtraClassTeacher'
 import ExtraClass from './pages/Admin/ExtraClass'
 import ExtraClassStudent from './pages/student/ExtraClassStudent'
+import { useEffect } from 'react'
 
 
 
 
 
 const App = () => {
+  useEffect(() => {
+  if ("Notification" in window) {
+    Notification.requestPermission()
+  }
+}, [])
   return (
     <div className='h-screen relative w-screen flex flex-col  overflow-hidden bg-black'>
       <motion.div
