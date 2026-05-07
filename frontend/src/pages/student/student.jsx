@@ -6,6 +6,7 @@ import Sidebar from '../../components/sidebar/StudentSidebar/sidebar'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useDragControls } from "motion/react"
 import Dock from '../../components/dockMobile/dock'
+import { RefreshCcw } from 'lucide-react';
 
 
 
@@ -58,7 +59,7 @@ const Student = () => {
                 }`}
             />
           </div>
-          
+
           <div className=' lg:h-full md:h-[83vh] w-full h-[83vh]'>
               <Outlet context={{ loggedinName: loggedinStudent?.name }} />
           </div>
