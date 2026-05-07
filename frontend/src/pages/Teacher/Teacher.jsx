@@ -9,6 +9,7 @@ import Loading from '../../components/loading/loading'
 import Sidebar from '../../components/sidebar/TeacherSidebar/TeacherSidebar'
 import TeacherDock from '../../components/dockMobile/TeacherDock'
 import { RefreshCcw } from 'lucide-react';
+import { useState } from 'react'
 
 
 const Teacher = () => {
@@ -26,57 +27,57 @@ const Teacher = () => {
 
   // ⛔ Stop rendering to avoid flicker
   if (!loggedinTeacher) return null
-  
-const [rotated, setRotated] = React.useState(false);
 
-const Refresh = () => {
-  setRotated(true);
+  const [rotated, setRotated] = useState(false);
 
-  setTimeout(() => {
-    window.location.reload();
-  }, 500); // animation complete
-};
+  const Refresh = () => {
+    setRotated(true);
 
-  }
+    setTimeout(() => {
+      window.location.reload();
+    }, 500); // animation complete
+  };
 
-
-  return (
-    <>
-      <div
-        className="relative flex w-screen h-screen  overflow-hidden text-white ">
+}
 
 
-       
+return (
+  <>
+    <div
+      className="relative flex w-screen h-screen  overflow-hidden text-white ">
 
 
-        {/* 🧊 Main Content */}
-        <div className=" z-10 lg:gap-4 md:h-full lg:h-full fixed top-0 p-4 flex w-full">
 
-          <Sidebar />
-          <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-l-2 rounded-l-2xl top-8 right-4'>
-            <RefreshCcw
-              onClick={Refresh}
-              className={`duration-500 cursor-pointer ${rotated ? "rotate-180" : ""
-                }`}
-            />
-          </div>
-          <div className=' lg:h-full md:h-[83vh]  w-full h-[83vh]'>
-              <Outlet context={{ loggedinName: loggedinTeacher?.name }} />
-          </div>
-          
 
+
+      {/* 🧊 Main Content */}
+      <div className=" z-10 lg:gap-4 md:h-full lg:h-full fixed top-0 p-4 flex w-full">
+
+        <Sidebar />
+        <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-l-2 rounded-l-2xl top-8 right-4'>
+          <RefreshCcw
+            onClick={Refresh}
+            className={`cursor-pointer transition-transform duration-500 ${rotated ? "rotate-180" : ""
+              }`}
+          />
+        </div>
+        <div className=' lg:h-full md:h-[83vh]  w-full h-[83vh]'>
+          <Outlet context={{ loggedinName: loggedinTeacher?.name }} />
         </div>
 
+
       </div>
-      <div className="lg:hidden  w-full h-[13vh]   fixed bottom-0 left-1/2 -translate-x-1/2 z-15">
-        <div className="backdrop-blur-2xl h-full z-20  border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-          <TeacherDock loggedinStudent={loggedinTeacher} />
-        </div>
-        
-        
+
+    </div>
+    <div className="lg:hidden  w-full h-[13vh]   fixed bottom-0 left-1/2 -translate-x-1/2 z-15">
+      <div className="backdrop-blur-2xl h-full z-20  border-t-2 border-white rounded-4xl px-4 py-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        <TeacherDock loggedinStudent={loggedinTeacher} />
       </div>
-    </>
-  )
+
+
+    </div>
+  </>
+)
 }
 
 export default Teacher
