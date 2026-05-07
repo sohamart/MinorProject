@@ -35,7 +35,7 @@ const Student = () => {
     setRotated(!rotated)
     setTimeout(() => {
       window.location.reload()
-    }, 500);
+    }, 10);
 
   }
 

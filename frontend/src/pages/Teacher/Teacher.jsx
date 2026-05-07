@@ -36,7 +36,7 @@ const Teacher = () => {
 
     setTimeout(() => {
       window.location.reload();
-    }, 500); // animation complete
+    }, 10); // animation complete
   };
 
 
