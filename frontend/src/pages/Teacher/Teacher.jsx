@@ -39,7 +39,7 @@ const Teacher = () => {
     }, 500); // animation complete
   };
 
-}
+
 
 
 return (
