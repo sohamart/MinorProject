@@ -37,10 +37,12 @@ import { useEffect } from 'react'
 
 const App = () => {
   useEffect(() => {
-  if ("Notification" in window) {
-    Notification.requestPermission()
-  }
-}, [])
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        console.log("Notification permission:", permission);
+      });
+    }
+  }, []);
   return (
     <div className='h-screen relative w-screen flex flex-col  overflow-hidden bg-black'>
       <motion.div
