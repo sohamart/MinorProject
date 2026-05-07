@@ -208,40 +208,68 @@ const TodayClassTeacher = () => {
                                 {TodayData.classes.length === 0 && (
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
+
+
                                 <div className='flex w-full p-2 justify-center  gap-4 flex-wrap'>
-                                    {TodayData.classes.map((cls, index) => (
-                                    <div key={index} className='w-120 uppercase lg:text-2xl p-4 bg-white/5 rounded-2xl border border-white/50'>
+                                    {[...TodayData.classes]
 
-                                        {/* BUTTONS */}
-                                        <div className='flex relative justify-end gap-2 mb-2'>
-                                            {cls.remarks?.length > 2 && (<div className='flex absolute top-0 left-[-17px] '>
-                                                <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
-                                            </div>)}
+                                        .sort((a, b) => {
 
-                                            <div className='flex gap-2'>
-                                                <button onClick={() => openEdit(cls, index)} className=' min-w-20 bg-green-500/20 border active:scale-95 rounded-2xl border-green-400/50 p-2'>Edit</button>
-                                                <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border active:scale-95 rounded-2xl border-red-400/50 p-2'>
+                                            const getTimeValue = (timeStr) => {
 
-                                                    {deleting ? ("deleting..") : ("delete")}
-                                                </button>
+                                                const startTime = timeStr.split("-")[0].trim()
+
+                                                const [time, modifier] = startTime.split(" ")
+
+                                                let [hours, minutes] = time.split(":").map(Number)
+
+                                                if (modifier === "PM" && hours !== 12) {
+                                                    hours += 12
+                                                }
+
+                                                if (modifier === "AM" && hours === 12) {
+                                                    hours = 0
+                                                }
+
+                                                return hours * 60 + minutes
+                                            }
+
+                                            return getTimeValue(a.time) - getTimeValue(b.time)
+                                        })
+
+                                        .map((cls, index) => (
+                                            <div key={index} className='w-120 uppercase lg:text-2xl p-4 bg-white/5 rounded-2xl border border-white/50'>
+
+                                                {/* BUTTONS */}
+                                                <div className='flex relative justify-end gap-2 mb-2'>
+                                                    {cls.remarks?.length > 2 && (<div className='flex absolute top-0 left-[-17px] '>
+                                                        <span className=' bg-blue-600 border-r active:scale-95 rounded-r-2xl  p-2'>{cls.remarks}</span>
+                                                    </div>)}
+
+                                                    <div className='flex gap-2'>
+                                                        <button onClick={() => openEdit(cls, index)} className=' min-w-20 bg-green-500/20 border active:scale-95 rounded-2xl border-green-400/50 p-2'>Edit</button>
+                                                        <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border active:scale-95 rounded-2xl border-red-400/50 p-2'>
+
+                                                            {deleting ? ("deleting..") : ("delete")}
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                                <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
+                                                    <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '> {cls.subject}</h1>
+
+                                                    <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
+                                                        <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'> {cls.teacher}</h1>
+                                                        <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'> {cls.time}</h1>
+                                                        <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'>{cls.type}</h1>
+                                                    </div>
+                                                </div>
+
                                             </div>
-
-                                        </div>
-
-                                        <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
-                                            <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '> {cls.subject}</h1>
-
-                                            <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
-                                                <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'> {cls.teacher}</h1>
-                                                <h1 className='w-full flex justify-around bg-red-400/20 border border-red-300/50 rounded-2xl lg:text-xl text-xs items-center lg:min-h-10 min-h-8'> {cls.time}</h1>
-                                                <h1 className='w-full flex justify-around bg-yellow-400/20 border border-yellow-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'>{cls.type}</h1>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                ))}
+                                        ))}
                                 </div>
-                                
+
 
                             </div>
                         </div>
