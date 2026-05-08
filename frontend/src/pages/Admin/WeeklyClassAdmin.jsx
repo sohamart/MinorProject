@@ -45,7 +45,7 @@ const WeeklyClassAdmin = () => {
   const handleDelete = async (day) => {
     setdeletinig(true)
     try {
-      const confirmDelete = window.confirm(`Delete ${day} classes?`)
+      const confirmDelete = window.confirm(`Delete ${day} classes? `)
       if (!confirmDelete) return
 
       await axios.delete(
