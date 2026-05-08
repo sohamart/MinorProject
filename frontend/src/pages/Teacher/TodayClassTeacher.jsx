@@ -67,13 +67,7 @@ const TodayClassTeacher = () => {
                 { withCredentials: true }
             )
 
-            // 🔥 NOTIFICATION
-            if (Notification.permission === "granted") {
-            new Notification("📚 Class Added", {
-                body: `${formData.subject} extra class added`,
-                icon: Logo
-            })
-            }
+          
 
             setShowAdd(false)
 
@@ -100,12 +94,7 @@ const TodayClassTeacher = () => {
             )
 
             // 🔥 NOTIFICATION
-        if (Notification.permission === "granted") {
-            new Notification("📚 Class Canceled", {
-                body: `${formData.subject} class canceled`,
-                icon:  Logo
-            })
-        }
+        
 
             window.location.reload()
             setdeleting(false)
@@ -153,13 +142,7 @@ const TodayClassTeacher = () => {
                 { classes: updatedClasses },
                 { withCredentials: true }
             )
-            // 🔥 NOTIFICATION
-            if (Notification.permission === "granted") {
-                new Notification("📚 Class Updated", {
-                    body: `${formData.subject} class updated`,
-                    icon: Logo
-                })
-            }
+            
 
             setShowEdit(false)
             // window.location.reload()
