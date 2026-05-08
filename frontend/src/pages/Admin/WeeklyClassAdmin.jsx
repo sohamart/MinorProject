@@ -264,7 +264,7 @@ const addClass = async () => {
 
                 {dayData.classes.map((cls, index) => (
                   <div key={index} className='w-full  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'>
-                    <h1 className='w-full h-12 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '>{cls.subject}</h1>
+                    <h1 className='w-full text-center h-min-12 p-2 bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '>{cls.subject}</h1>
 
                     <div className='w-full mt-4 lg:p-2 uppercase p-2 min-h-34 lg:min-h-30 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
                       <h1 className='w-full flex justify-around bg-green-400/20 border border-green-300/50 rounded-2xl items-center lg:min-h-10 min-h-8'> {cls.teacher}</h1>

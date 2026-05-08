@@ -35,7 +35,7 @@ const HomeAdmin = () => {
         Admin - {loggedinName}
       </p>
       <p className='text-xl mt-5 opacity-40'>Check Your Pages </p>
-      <div className=' h-30 w-full items-center flex-wrap justify-center lg:mt-4 flex gap-5 p-5 '>
+      <div className=' h-30 w-full overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center flex-wrap justify-center lg:mt-4 flex gap-5 p-5 '>
         <button onClick={weeklybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl'>
           Weekly Class
         </button>
