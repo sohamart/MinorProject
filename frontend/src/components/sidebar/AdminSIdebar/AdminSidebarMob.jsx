@@ -29,7 +29,7 @@ const AdminSidebarMob = () => {
         initial={false}
         animate={{ x: navopen ? -100 : 0 }}
         transition={{ duration: 0.3 }}
-        className="w-10 bg-white/15 border-r-2 border-white/30 rounded-r-2xl absolute top-4 left-[-2px] flex justify-center items-center h-10 z-40"
+        className="w-10 bg-white/15 border-r-2 border-white/30 rounded-r-2xl absolute top-4  flex justify-center items-center h-10 z-40"
       >
         <button onClick={openNav} className="mr-1 cursor-pointer">
           <Menu color="#ffffff" />
