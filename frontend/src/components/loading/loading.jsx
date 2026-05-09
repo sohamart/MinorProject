@@ -33,7 +33,7 @@ const loading = () => {
         size={80}
       />
       {showMessage && (
-        <p className=' absolute bottom-30 lg:bottom-10 text-green-500  mt-8 text-center px-4 text-sm lg:text-lg animate-pulse'>
+        <p className=' absolute bottom-30 lg:bottom-10 text-yellow-500  mt-8 text-center px-4 text-sm lg:text-lg animate-pulse'>
             Please wait... First time may take some time because the server is starting now.
           </p>
       )}
