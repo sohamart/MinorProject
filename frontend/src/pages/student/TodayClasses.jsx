@@ -21,7 +21,7 @@ const TodayClasses = () => {
                  {/* day */}
                  <div className='absolute top-30 lg:left-12 left-2'>
                      <h1 className='text-xl lg:text-2xl text-white font-bold uppercase mt-2'>
-                         {TodayData?.day}
+                         {TodayData?.day || "Holi Day" }
                      </h1>
                  </div>
  
@@ -36,7 +36,7 @@ const TodayClasses = () => {
  
                      {/* ERROR */}
                      {TodayData === null && (
-                         <p className="text-white text-xl">
+                         <p className="text-white animate-pulse text-xl">
                              No classes Found !!
                          </p>
                      )}
@@ -45,7 +45,7 @@ const TodayClasses = () => {
                          <div className='lg:pl-52 lg:pr-52 flex-col lg:flex-row gap-4 flex-wrap flex justify-center items-center'>
  
                              {TodayData.classes.length === 0 && (
-                                 <p className="text-red-500 text-xl">
+                                 <p className="text-red-500 animate-pulse text-xl">
                                      No classes Found !!
                                  </p>
                              )}

@@ -205,7 +205,7 @@ const TodayClassTeacher = () => {
                 <div className='flex gap-12 pt-24 p-2 pb-24 w-full flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center'>
 
                     {TodayData === null && (
-                        <p className="text-white text-xl">No classes Found !!</p>
+                        <p className="text-white animate-pulse text-xl">No classes Found !!</p>
                     )}
 
                     {!loading && TodayData && (

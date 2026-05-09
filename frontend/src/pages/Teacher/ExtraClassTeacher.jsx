@@ -20,7 +20,7 @@ const ExtraClassTeacher = () => {
                     </div>
                       {/* day */}
                                    <div className='absolute top-30  lg:left-12 left-2 ' >
-                                        <h1 className='text-xl  lg:text-2xl text-white font-bold uppercase mt-2'>{TodayData.day}</h1>
+                                        <h1 className='text-xl  lg:text-2xl text-white font-bold uppercase mt-2'>{TodayData?.day || "Holi Day"}</h1>
                                    </div>
     
                                    {/*date  */}
@@ -32,14 +32,14 @@ const ExtraClassTeacher = () => {
                     <div className='  flex h-full  gap-12 pt-25 mt-22 pb-24 lg:w-full  flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] w-full  items-center'>
                         {/* 🔥 ERROR */}
                         {TodayData === null && (
-                            <p className="text-white text-xl">No classes Found !! </p>
+                            <p className="text-white animate-pulse text-xl">No classes Found !! </p>
                         )}
     
                         {!loading && TodayData && (    
                             <div className='  pl-12 pr-12 flex-col lg:flex-row gap-4 flex-wrap flex justify-center items-center'>
                                   
-                                   {TodayData.classes.length === 0 && (
-                                        <p className="text-red-500 text-xl">No classes Found !!</p>
+                                   {TodayData?.classes?.length === 0 && (
+                                        <p className="text-red-500 animate-pulse text-xl">No classes Found !!</p>
                                     )}
                                     
     
@@ -60,7 +60,7 @@ const ExtraClassTeacher = () => {
                                         </div>
                                         ))
                                     ) : (
-                                        <h1>No Extra Classes Found</h1>
+                                        <h1 className=' animate-pulse'>No Extra Classes Found</h1>
                                     )}
     
     
