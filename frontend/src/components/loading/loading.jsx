@@ -16,7 +16,7 @@ const loading = () => {
     // 4 sec pore message show hobe
     const timer = setTimeout(() => {
       setShowMessage(true)
-    }, 1000)
+    }, 4000)
 
     return () => clearTimeout(timer)
     }, [])
