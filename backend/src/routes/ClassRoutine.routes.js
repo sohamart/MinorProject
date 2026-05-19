@@ -44,7 +44,7 @@ router.put("/today/edit/:id", controller.editDailyClasses);
 router.delete("/today/delete/:classId", controller.deleteDailyClass);
 router.delete("/today/deleteAll", controller.deleteAllDailyClass)
 
-
+  
 
 
 module.exports = router;
