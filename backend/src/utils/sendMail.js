@@ -15,7 +15,7 @@ const sendMail = async (emails, subject, text) => {
             },
         });
 
-        await transporter.sendMail({
+        transporter.sendMail({
 
             // 🔥 sender name
             from: `"Class Routine" <${process.env.EMAIL_USER}>`,
