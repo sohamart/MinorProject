@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const StudentUser = require("../model/StudentUser.model");
 const TeacherUser = require("../model/TeacherUser.model");
 const AdminUser = require("../model/AdminUser.model");
+const { sendNotification } = require("../utils/sendNotification");
 
 
 
@@ -94,6 +95,16 @@ const addWeeklyClass = async (req, res) => {
             classes
         });
 
+        try {
+            sendNotification(
+                "New Class Added",
+                "A new class has been added weekly"
+            )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
+
+
 
 
         res.status(201).json({
@@ -122,6 +133,14 @@ const deleteWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const weeklyclass = await weeklyClass.findOneAndDelete({ day });
+        try {
+            sendNotification(
+                "one Class deleted",
+                "A class has been deleted in weekly"
+            )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
 
 
         if (!weeklyclass) {
@@ -167,6 +186,16 @@ const editWeeklyClass = async (req, res) => {
             { day, classes },
             { new: true }
         );
+
+        try {
+            sendNotification(
+                "one Class updated",
+                "A new class has been updated in weekly"
+            )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
+
 
         if (!weeklyclass) {
             return res.status(404).json({ message: "Class not found" });
@@ -304,6 +333,16 @@ const addDailyClass = async (req, res) => {
             existing.classes.push(...classes);
             await existing.save();
 
+            try {
+                sendNotification(
+                    "New Class Added",
+                    "A new class has been added today"
+                )
+            } catch (error) {
+                console.log("NOTIFICATION ERROR:", error);
+            }
+
+
             return res.status(200).json({
                 message: "Class added to today's schedule",
                 dailyClass: {
@@ -319,6 +358,16 @@ const addDailyClass = async (req, res) => {
             date: todayDate,
             classes
         });
+
+        try {
+            sendNotification(
+            "New Class Added",
+            "A new class has been added today"
+        )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
+
 
         res.status(201).json({
             message: "Today's class created and added",
@@ -370,7 +419,17 @@ const editDailyClasses = async (req, res) => {
             { classes },
             { returnDocument: "after" }
         );
-       
+
+        try {
+            sendNotification(
+            "New Class updated",
+            "A new class has been  edited today"
+        )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
+
+
         if (!updated) {
             return res.status(404).json({ message: "Daily class not found" });
         }
@@ -408,6 +467,7 @@ const deleteDailyClass = async (req, res) => {
         // 🔍 find today's doc
         const daily = await DailyClass.findOne({ date: todayDate });
 
+
         if (!daily) {
             return res.status(404).json({ message: "No daily class found" });
         }
@@ -424,6 +484,16 @@ const deleteDailyClass = async (req, res) => {
 
 
         await daily.save();
+
+        try {
+            sendNotification(
+            "one Class closed today",
+            "A class has been off today"
+        )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
+
 
 
         res.status(200).json({
@@ -443,6 +513,14 @@ const deleteDailyClass = async (req, res) => {
 const deleteAllDailyClass = async (req, res) => {
     try {
         await DailyClass.deleteMany({}); // all delete
+        try {
+            sendNotification(
+            "all class reset today ",
+            "All class has been updated check now"
+        )
+        } catch (error) {
+            console.log("NOTIFICATION ERROR:", error);
+        }
 
 
         res.status(200).json({
