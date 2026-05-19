@@ -44,7 +44,7 @@ const TodayClasses = () => {
                      {!loading && TodayData && (
                          <div className='lg:pl-52 lg:pr-52 flex-col lg:flex-row gap-4 flex-wrap flex justify-center items-center'>
  
-                             {TodayData.classes.length === 0 && (
+                             {TodayData?.classes?.length === 0 && (
                                  <p className="text-red-500 animate-pulse text-xl">
                                      No classes Found !!
                                  </p>

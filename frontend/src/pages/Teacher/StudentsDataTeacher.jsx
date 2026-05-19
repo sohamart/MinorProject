@@ -134,7 +134,7 @@ const fetchStudents = async () => {
                         Loading...
                     </p>
                 )}
-                {students.length === 0 && !loading && !error && (
+                {students?.length === 0 && !loading && !error && (
                     <div className='absolute w-90 flex gap-2 flex-col items-center  justify-center top-2/5 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                         <Ban className='w-10 h-10' />
 
