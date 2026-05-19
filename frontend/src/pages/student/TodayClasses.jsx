@@ -51,7 +51,7 @@ const TodayClasses = () => {
                              )}
  
                              {/* class card */}
-                             {[...TodayData.classes]
+                             {[...(TodayData?.classes || [])]
  
                                  .sort((a, b) => {
  
@@ -84,7 +84,7 @@ const TodayClasses = () => {
                                          className='w-80 relative uppercase lg:text-2xl p-4 bg-black/30 rounded-2xl border border-white/50'
                                      >
  
-                                         {cls.remarks?.length > 2 && (
+                                         {cls?.remarks?.length > 2 && (
                                              <div className='flex mt-[-16px] mb-4'>
                                                  <span className='bg-blue-600 border-b active:scale-95 rounded-b-2xl p-2'>
                                                      {cls.remarks}
