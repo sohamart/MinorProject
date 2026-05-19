@@ -1,12 +1,39 @@
 const weeklyClass = require("../model/WeeklyClasses.model");
 const DailyClass = require("../model/DailyClass.model");
 const mongoose = require("mongoose");
+const StudentUser = require("../model/StudentUser.model");
+const TeacherUser = require("../model/TeacherUser.model");
+const AdminUser = require("../model/AdminUser.model");
+
+const { sendMail } = require("../utils/sendMail");
 
 // ✅ helper (capitalize for response only)
 const formatDay = (day) => {
     return day.charAt(0).toUpperCase() + day.slice(1);
 };
 
+
+// ✅ helper for all emails
+const getAllEmails = async () => {
+
+    const students = await StudentUser.find({}, "email");
+
+    const teachers = await TeacherUser.find({}, "email");
+
+    const admins = await AdminUser.find({}, "email");
+
+    const emails = [
+
+        ...students.map(user => user.email),
+
+        ...teachers.map(user => user.email),
+
+        ...admins.map(user => user.email)
+
+    ];
+
+    return emails;
+};
 
 // ✅ GET
 const WeeklyClassGet = async (req, res) => {
@@ -53,6 +80,7 @@ const addWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const exists = await weeklyClass.findOne({ day });
+        
 
         if (exists) {
 
@@ -70,6 +98,8 @@ const addWeeklyClass = async (req, res) => {
             exists.classes.push(...classes);
             await exists.save();
 
+
+
             return res.status(200).json({
                 message: "Day already exists, classes added successfully",
                 weeklyclass: {
@@ -83,6 +113,18 @@ const addWeeklyClass = async (req, res) => {
             day,
             classes
         });
+        const emails = await getAllEmails();
+        try {
+            await sendMail(
+                emails,
+                "Weekly Routine Added",
+                `New weekly class added for ${day}, check the daily routine for more details`
+            );
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
+
+
 
         res.status(201).json({
             message: "Class added successfully",
@@ -110,6 +152,17 @@ const deleteWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const weeklyclass = await weeklyClass.findOneAndDelete({ day });
+        const emails = await getAllEmails();
+
+        try {
+            await sendMail(
+                emails,
+                "Weekly Routine Deleted",
+                `${day} routine deleted`
+            );
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
 
         if (!weeklyclass) {
             return res.status(404).json({ message: 'Class not found' });
@@ -154,6 +207,17 @@ const editWeeklyClass = async (req, res) => {
             { day, classes },
             { new: true }
         );
+        const emails = await getAllEmails();
+
+        try {
+            await sendMail(
+                emails,
+                "Weekly Routine Updated",
+                `Weekly routine updated for ${day}`
+            );
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
 
         if (!weeklyclass) {
             return res.status(404).json({ message: "Class not found" });
@@ -306,6 +370,19 @@ const addDailyClass = async (req, res) => {
             date: todayDate,
             classes
         });
+        const emails = await getAllEmails();
+
+        try {
+            await sendMail(
+                emails,
+                "Daily Class Added",
+                "Today's class added successfully check more details on app "
+                
+            );
+            console.log("MAIL SENT SUCCESSFULLY")
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
 
         res.status(201).json({
             message: "Today's class created and added",
@@ -357,6 +434,17 @@ const editDailyClasses = async (req, res) => {
             { classes },
             { new: true }
         );
+        const emails = await getAllEmails();
+
+        try {
+            await sendMail(
+                emails,
+                "Daily Class Updated",
+                "Today's classes updated, checks more details on app"
+            );
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
 
         if (!updated) {
             return res.status(404).json({ message: "Daily class not found" });
@@ -409,7 +497,21 @@ const deleteDailyClass = async (req, res) => {
         // 🗑 remove
         classItem.deleteOne();
 
+
         await daily.save();
+        const emails = await getAllEmails();
+
+
+        try {
+            await sendMail(
+                emails,
+                "Daily Class Deleted",
+                "One class removed from today's schedule"
+            );
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
+
 
         res.status(200).json({
             message: "Class deleted successfully",
@@ -428,6 +530,16 @@ const deleteDailyClass = async (req, res) => {
 const deleteAllDailyClass = async (req, res) => {
     try {
         await DailyClass.deleteMany({}); // all delete
+        const emails = await getAllEmails();
+        try {
+            await sendMail(
+                emails,
+                "All Daily Classes Deleted",
+                "All daily classes removed"
+            );
+        } catch (mailError) {
+            console.log("MAIL ERROR:", mailError);
+        }
 
         res.status(200).json({
             message: "All daily data deleted successfully"
