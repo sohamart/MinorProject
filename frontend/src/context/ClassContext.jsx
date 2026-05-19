@@ -6,14 +6,12 @@ export const ClassContextData = createContext();
 
 const ClassContext = (props) => {
     const [WeeklyClass, setWeeklyClass] = useState([])
-    const [TodayClass, setTodayClass] = useState({
-        classes: []
-    })
+    const [TodayClass, setTodayClass] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     const API = import.meta.env.VITE_API_URI
 
-
+    
     useEffect(() => {
         const fetchWeeklyClass = async () => {
             try {
@@ -49,7 +47,7 @@ const ClassContext = (props) => {
             fetchTodayClass();
         }, 1000); // 3 sec
 
-        return () => clearInterval(interval);
+        return () => clearInterval(interval); 
     }, [])
 
     return (
@@ -60,7 +58,7 @@ const ClassContext = (props) => {
             loading,
             TodayClass,
             setTodayClass,
-
+        
 
         }}>
             {props.children}
