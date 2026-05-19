@@ -89,7 +89,7 @@ const TodayClasses = () => {
                                                  <span className='bg-blue-600 border-b active:scale-95 rounded-b-2xl p-2'>
                                                      {cls.remarks}
                                                  </span>
-                                             </div>
+                                             </div> 
                                          )}
  
                                          <h1 className='w-full text-center h-min-12 p-2 bg-blue-600/10 border text-xl items-center rounded-2xl border-blue-500/50 flex justify-around'>
