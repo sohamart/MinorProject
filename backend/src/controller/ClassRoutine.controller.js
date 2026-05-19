@@ -80,7 +80,7 @@ const addWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const exists = await weeklyClass.findOne({ day });
-        
+
 
         if (exists) {
 
@@ -208,6 +208,9 @@ const editWeeklyClass = async (req, res) => {
             { new: true }
         );
         const emails = await getAllEmails();
+        console.log(emails);
+
+        console.log("BEFORE SEND MAIL");
 
         try {
             await sendMail(
@@ -377,7 +380,7 @@ const addDailyClass = async (req, res) => {
                 emails,
                 "Daily Class Added",
                 "Today's class added successfully check more details on app "
-                
+
             );
             console.log("MAIL SENT SUCCESSFULLY")
         } catch (mailError) {

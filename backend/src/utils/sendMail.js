@@ -1,44 +1,84 @@
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
-
-const OAuth2 = google.auth.OAuth2;
-
-const oauth2Client = new OAuth2(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    "https://developers.google.com/oauthplayground"
-);
-
-oauth2Client.setCredentials({
-    refresh_token: process.env.REFRESH_TOKEN,
-});
 
 const sendMail = async (emails, subject, text) => {
 
-    try {
+    console.log("MAIL FUNCTION CALLED");
 
-        const accessToken = await oauth2Client.getAccessToken();
+    try {
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                type: "OAuth2",
                 user: process.env.EMAIL_USER,
-                clientId: process.env.CLIENT_ID,
-                clientSecret: process.env.CLIENT_SECRET,
-                refreshToken: process.env.REFRESH_TOKEN,
-                accessToken: accessToken,
+                pass: process.env.EMAIL_PASS,
             },
         });
 
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+
+            // 🔥 sender name
+            from: `"Class Routine" <${process.env.EMAIL_USER}>`,
 
             // 🔥 all users
             bcc: emails,
 
             subject,
-            text,
+
+            // 🔥 beautiful html email
+            html: `
+
+            <div style="
+                font-family: Arial;
+                background:#f5f5f5;
+                padding:20px;
+            ">
+
+                <div style="
+                    max-width:600px;
+                    margin:auto;
+                    background:white;
+                    border-radius:10px;
+                    overflow:hidden;
+                ">
+
+                    <div style="
+                        background:black;
+                        color:white;
+                        text-align:center;
+                        padding:20px;
+                    ">
+
+                        <h1>Class Routine</h1>
+
+                    </div>
+
+                    <div style="padding:30px;">
+
+                        <h2>${subject}</h2>
+
+                        <p>${text}</p>
+
+                        <a href="https://classroutinetime.vercel.app"
+                           style="
+                            display:inline-block;
+                            padding:12px 20px;
+                            background:black;
+                            color:white;
+                            text-decoration:none;
+                            border-radius:6px;
+                           ">
+
+                           Open App
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `,
         });
 
         console.log("EMAIL SENT SUCCESSFULLY");
