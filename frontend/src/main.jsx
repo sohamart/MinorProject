@@ -5,23 +5,6 @@ import App from './App.jsx'
 import { BrowserRouter} from "react-router-dom";
 import AuthContext from './context/AuthContext'
 import ClassContext from './context/ClassContext'
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-
-OneSignalDeferred.push(async function(OneSignal) {
-
-  await OneSignal.init({
-
-    appId: "110699fd-cf38-4536-8af4-03fae3c205ad",
-
-    notifyButton: {
-      enable: true,
-    },
-
-    allowLocalhostAsSecureOrigin: true,
-
-  });
-
-});
 
 
 
