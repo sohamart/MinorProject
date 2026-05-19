@@ -213,7 +213,7 @@ const TodayClassTeacher = () => {
                             <div className='card  min-h-40  lg:w-full flex p-2  gap-4 flex-col items-center w-full rounded-2xl'>
 
                                 <h1 className='text-2xl lg:text-3xl font-bold uppercase mt-2'>{TodayData.day}</h1>
-                                {TodayData.classes.length === 0 && (
+                                {TodayData?.classes?.length === 0 && (
                                     <p className="text-red-500 text-xl">No classes Found !!</p>
                                 )}
 

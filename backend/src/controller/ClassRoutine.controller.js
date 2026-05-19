@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const StudentUser = require("../model/StudentUser.model");
 const TeacherUser = require("../model/TeacherUser.model");
 const AdminUser = require("../model/AdminUser.model");
-const { sendMail } = require("../utils/sendMail")
+
 
 
 
@@ -13,27 +13,7 @@ const formatDay = (day) => {
     return day.charAt(0).toUpperCase() + day.slice(1);
 };
 
-// ✅ helper for all emails
-const getAllEmails = async () => {
 
-    const students = await StudentUser.find({}, "email");
-
-    const teachers = await TeacherUser.find({}, "email");
-
-    const admins = await AdminUser.find({}, "email");
-
-    const emails = [
-
-        ...students.map(user => user.email),
-
-        ...teachers.map(user => user.email),
-
-        ...admins.map(user => user.email)
-
-    ];
-
-    return emails;
-};
 
 // ✅ GET
 const WeeklyClassGet = async (req, res) => {
@@ -390,23 +370,7 @@ const editDailyClasses = async (req, res) => {
             { classes },
             { returnDocument: "after" }
         );
-        const emails = await getAllEmails();
-
-        try {
-
-            await sendMail(
-                emails,
-                "Daily Class Updated",
-                "Today's classes updated"
-            );
-
-        } catch (mailError) {
-
-            console.log("MAIL ERROR:", mailError);
-
-        }
-
-
+       
         if (!updated) {
             return res.status(404).json({ message: "Daily class not found" });
         }
