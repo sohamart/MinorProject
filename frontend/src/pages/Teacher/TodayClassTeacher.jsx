@@ -127,7 +127,7 @@ const TodayClassTeacher = () => {
 
         try {
             setupdating(true)
-            const updatedClasses = [...TodayData.classes]
+            const updatedClasses = [...(TodayData?.classes || [])]
 
             updatedClasses[selectedIndex] = {
                 subject: formData.subject,
@@ -219,7 +219,7 @@ const TodayClassTeacher = () => {
 
 
                                 <div className='flex w-full p-2 justify-center  gap-4 flex-wrap'>
-                                    {[...TodayData.classes]
+                                    {[...(TodayData?.classes || [])]
 
                                         .sort((a, b) => {
 
