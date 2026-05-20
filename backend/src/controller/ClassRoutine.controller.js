@@ -114,7 +114,7 @@ const addWeeklyClass = async (req, res) => {
             classes
         });
 
-        
+
 
 
 
@@ -130,15 +130,15 @@ const addWeeklyClass = async (req, res) => {
         try {
             sendMail(
 
-            emails,
+                emails,
 
-            "weekly Routine added ",
+                "weekly Routine added ",
 
-            `weekly class routine added successfully, day - ${day}, Please check now `
+                `weekly class routine added successfully, day - ${day}, Please check now `
 
-        );
-        }catch(error){
-            console.log("error"+error)
+            );
+        } catch (error) {
+            console.log("error" + error)
         }
     } catch (error) {
         console.log("ADD ERROR:", error);
@@ -158,7 +158,7 @@ const deleteWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const weeklyclass = await weeklyClass.findOneAndDelete({ day });
-        
+
 
 
         if (!weeklyclass) {
@@ -217,21 +217,21 @@ const editWeeklyClass = async (req, res) => {
                 day: formatDay(weeklyclass.day)
             }
         });
-        
+
         const emails = await getAllEmails();
 
         try {
             sendMail(
 
-            emails,
+                emails,
 
-            "weekly Routine Updated ",
+                "weekly Routine Updated ",
 
-            `weekly class routine updated successfully, day - ${day}, Please check now `
+                `weekly class routine updated successfully, day - ${day}, Please check now `
 
-        );
-        }catch(error){
-            console.log("error"+error)
+            );
+        } catch (error) {
+            console.log("error" + error)
         }
 
     } catch (error) {
@@ -358,7 +358,25 @@ const addDailyClass = async (req, res) => {
             existing.classes.push(...classes);
             await existing.save();
 
-            
+
+            // ✅ MAIL
+            const emails = await getAllEmails();
+
+            try {
+
+                await sendMail(
+                    emails,
+                    "New extra class Added today",
+                    `A class added successfully, day - ${dayName}, Please check now `
+                );
+
+            } catch (error) {
+
+                console.log("MAIL ERROR:", error)
+
+            }
+
+
 
             return res.status(200).json({
                 message: "Class added to today's schedule",
@@ -367,7 +385,7 @@ const addDailyClass = async (req, res) => {
                     day: existing.day.charAt(0).toUpperCase() + existing.day.slice(1)
                 }
             });
-            
+
         }
 
         // ✅ যদি আজকের data না থাকে → নতুন create
@@ -377,6 +395,7 @@ const addDailyClass = async (req, res) => {
             classes
         });
 
+
         res.status(201).json({
             message: "Today's class created and added",
             dailyClass: {
@@ -384,21 +403,7 @@ const addDailyClass = async (req, res) => {
                 day: dayName.charAt(0).toUpperCase() + dayName.slice(1)
             }
         });
-        const emails = await getAllEmails();
 
-        try {
-            sendMail(
-
-            emails,
-
-            "Today Routine Changed New class Added",
-
-            `A class added successfully, day - ${dayName}, Please check now `
-
-        );
-        }catch(error){
-            console.log("error"+error)
-        }
 
     } catch (error) {
         console.log("ADD DAILY CLASS ERROR:", error);
@@ -443,11 +448,28 @@ const editDailyClasses = async (req, res) => {
             { returnDocument: "after" }
         );
 
-        
+        const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+                emails,
+
+                "today class Updated",
+
+                "Today's class routine updated successfully, check now "
+
+            );
+        } catch (error) {
+            console.log("error" + error)
+        }
+
+
 
         if (!updated) {
             return res.status(404).json({ message: "Daily class not found" });
         }
+
 
         res.status(200).json({
             message: "Classes updated successfully",
@@ -457,22 +479,8 @@ const editDailyClasses = async (req, res) => {
                 classes: updated.classes
             }
         });
-        
-        const emails = await getAllEmails();
 
-        try {
-            sendMail(
 
-            emails,
-
-            "today class Updated",
-
-            "Today's class routine updated successfully, check now "
-
-        );
-        }catch(error){
-            console.log("error"+error)
-        }
     } catch (error) {
         console.log("EDIT DAILY CLASSES ERROR:", error);
         res.status(500).json({
@@ -514,7 +522,7 @@ const deleteDailyClass = async (req, res) => {
 
         await daily.save();
 
-        
+
 
 
         res.status(200).json({
@@ -527,15 +535,15 @@ const deleteDailyClass = async (req, res) => {
         try {
             sendMail(
 
-            emails,
+                emails,
 
-            "Today one class will be not held ",
+                "Today one class will be not held ",
 
-            "Today's class routine updated successfully, One class Deleted, Please check now"
+                "Today's class routine updated successfully, One class Deleted, Please check now"
 
-        );
-        }catch(error){
-            console.log("error"+error)
+            );
+        } catch (error) {
+            console.log("error" + error)
         }
 
     } catch (error) {
@@ -552,7 +560,7 @@ const deleteAllDailyClass = async (req, res) => {
         await DailyClass.deleteMany({}); // all delete
         const emails = await getAllEmails();
 
-        
+
 
         res.status(200).json({
             message: "All daily data deleted successfully"
@@ -561,15 +569,15 @@ const deleteAllDailyClass = async (req, res) => {
         try {
             sendMail(
 
-            emails,
+                emails,
 
-            "Daily Routine Reset ",
+                "Daily Routine Reset ",
 
-            "Today's class routine updated successfully, All class changed and reset, Please check now"
+                "Today's class routine updated successfully, All class changed and reset, Please check now"
 
-        );
-        }catch(error){
-            console.log("error"+error)
+            );
+        } catch (error) {
+            console.log("error" + error)
         }
 
     } catch (error) {
