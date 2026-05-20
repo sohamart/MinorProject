@@ -3,6 +3,31 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Adminuser = require('../model/AdminUser.model');
 const Teacheruser = require('../model/TeacherUser.model');
+const Studentmodel = require("../model/StudentUser.model");
+const Teachermodel = require("../model/TeacherUser.model");
+const Adminmodel = require("../model/AdminUser.model");
+
+const { sendMail } = require("../utils/sendMail");
+
+
+const getAllEmails = async () => {
+
+    const students = await Studentmodel.find({}, "email");
+
+    const teachers = await Teachermodel.find({}, "email");
+
+    const admins = await Adminmodel.find({}, "email");
+
+    return [
+
+        ...students.map(user => user.email),
+
+        ...teachers.map(user => user.email),
+
+        ...admins.map(user => user.email),
+
+    ];
+};
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -33,6 +58,21 @@ const registerStudent = async (req, res) => {
                 phone: studentuserdata.phone,
             }
         });
+        const emails = await getAllEmails();
+        
+                try {
+                    sendMail(
+        
+                    emails,
+        
+                    "New Student Registered",
+        
+                    `New Student has been registered now, name - ${studentuserdata.name}, Please check now `
+        
+                );
+                }catch(error){
+                    console.log("error"+error)
+                }
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' + error });
@@ -271,6 +311,21 @@ const registerTeacher = async (req, res) => {
                 phone: teacheruserdata.phone,
             }
         });
+         const emails = await getAllEmails();
+        
+                try {
+                    sendMail(
+        
+                    emails,
+        
+                    "New Teacher Registered",
+        
+                    `New Faculty has been registered now, name - ${teacheruserdata.name}, Please check now `
+        
+                );
+                }catch(error){
+                    console.log("error"+error)
+                }
 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' + error });
