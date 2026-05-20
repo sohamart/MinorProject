@@ -95,6 +95,13 @@ const sendMail = async (emails, subject, text) => {
         ">
             ${subject}
         </h2>
+        <p style="
+    font-size:16px;
+    color:#111827;
+    margin-bottom:20px;
+">
+    Hello Student,
+</p>
 
         <p style="
             font-size:16px;
