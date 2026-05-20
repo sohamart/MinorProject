@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
 import Logo from '../../assets/clock.webp'
+import { toast } from 'react-toastify'
 
 
 
@@ -72,12 +73,14 @@ const TodayClassTeacher = () => {
             setShowAdd(false)
 
             window.location.reload()
+            
             setadding(false)
+            toast.success("class added succesfull")
 
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Add failed", + err.response?.data.message)
+            toast.error("Add failed", + err.response?.data.message)
             setadding(false)
         }
     }
@@ -98,11 +101,12 @@ const TodayClassTeacher = () => {
 
             window.location.reload()
             setdeleting(false)
+            toast.success("class deleted succesfull")
 
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Delete failed", +err.response?.data.message)
+            toast.error("Delete failed", +err.response?.data.message)
             setdeleting(false)
         }
     }
@@ -147,13 +151,14 @@ const TodayClassTeacher = () => {
             setShowEdit(false)
             // window.location.reload()
             setupdating(false)
+            toast.success("class updated succesfull")
             console.log(res.data)
 
 
 
         } catch (err) {
             console.log(err.response?.data)
-            alert("Update failed", +err.response?.data.message)
+            toast.error("Update failed", +err.response?.data.message)
             setupdating(false)
         }
     }
@@ -169,12 +174,13 @@ const TodayClassTeacher = () => {
 
             setreseting(false)
             window.location.reload()
+            toast.success("classes reset succesfull")
 
 
         }
         catch (err) {
             console.log(err.response?.data)
-            alert("Reset failed")
+            toast.error("Reset failed")
             setreseting(false)
         }
     }

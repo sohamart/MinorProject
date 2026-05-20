@@ -9,6 +9,7 @@ import teacher from '../../assets/teacher.jpg'
 import { Dot } from "lucide-react";
 
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 const TeacherProfile = () => {
 const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
     const navigate = useNavigate()
@@ -25,13 +26,15 @@ const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
         )
             seterror(null)
             setloggedinTeacher(null)
+            toast.success("logout succesfull")
             navigate('/login')
             
             
         }
         catch(error){
             console.log(error);
-            seterror("server does not responce !!")
+            // seterror("server does not responce !!")
+            toast.error("server does not responce !!")
             setloading(false)
             
         }

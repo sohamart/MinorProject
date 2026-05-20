@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContextData } from '../../context/AuthContext'
 import { Circle, CircleCheck } from 'lucide-react'
+import { toast } from 'react-toastify'
 
 const TeacherLogin = () => {
     const [email, setemail] = useState("")
@@ -28,12 +29,15 @@ const TeacherLogin = () => {
 
             setloggedinTeacher(response.data.teacheruserdata)
             setloggedinName(response.data.teacheruserdata.name)
+            toast.success("Login Successful")
+
 
             Navigate("/teacher/")
 
         } catch (error) {
             console.log(error.response?.data?.message)
-            setuserNotFound(error.response?.data?.message)
+            // setuserNotFound(error.response?.data?.message)
+            toast.error(error.response?.data?.message)
         } finally {
             setLoading(false) // 🔥 stop loading
         }

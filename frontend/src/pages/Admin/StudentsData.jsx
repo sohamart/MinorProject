@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { MessageCircleMore } from "lucide-react";
 import { Ban } from "lucide-react";
 import Student from"../../assets/student.png"
+import { toast } from 'react-toastify';
 
 const StudentsData = () => {
 
@@ -30,9 +31,11 @@ const deleteStudent = async (id) => {
 
     } catch (error) {
         console.error(error);
+        toast.error(error)
     } finally {
         await fetchStudents();
         setDeletingId(null);
+        toast.success("Student Deleted Succesfull")
     }
 };
 const fetchStudents = async () => {

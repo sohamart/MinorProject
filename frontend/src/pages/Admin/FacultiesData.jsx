@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { MessageCircleMore } from "lucide-react";
 import { Ban } from "lucide-react";
+import { toast } from 'react-toastify';
 
 const FacultiesData = () => {
 
@@ -25,14 +26,18 @@ const FacultiesData = () => {
                 withCredentials: true
             });
 
+            
+
 
 
 
         } catch (error) {
             console.error(error);
+            toast.error(error)
         } finally {
             await fetchTeachers();
             setDeletingId(null);
+            toast.success("Teacher Deleted Succesfull")
         }
     };
     const fetchTeachers = async () => {

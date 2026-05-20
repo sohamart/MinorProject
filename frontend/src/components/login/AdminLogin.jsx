@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContextData } from '../../context/AuthContext'
 import { Circle, CircleCheck } from 'lucide-react'
+import { toast } from 'react-toastify'
 
 const AdminLogin = () => {
 
@@ -30,12 +31,15 @@ const AdminLogin = () => {
 
             setloggedinAdmin(response.data.adminuserdata)
             setloggedinName(response.data.adminuserdata.name)
+            toast.success("Login Successful")
+
 
             Navigate("/admin/")
 
         } catch (error) {
             console.log(error.response?.data?.message)
-            setuserNotFound(error.response?.data?.message)
+            // setuserNotFound(error.response?.data?.message)
+            toast.error(error.response?.data?.message)
         } finally {
             setLoading(false) // 🔥 stop
         }

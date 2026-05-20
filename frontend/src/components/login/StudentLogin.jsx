@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContextData } from '../../context/AuthContext'
 import { Circle, CircleCheck } from 'lucide-react'
+import { toast } from 'react-toastify'
 
 const StudentLogin = () => {
     const { setloggedinStudent, loggedinName, setloggedinName, API } = useContext(AuthContextData)
@@ -29,12 +30,14 @@ const StudentLogin = () => {
 
             setloggedinStudent(response.data.Studentuser)
             setloggedinName(response.data.Studentuser.name)
+            toast.success("Login Successful")
 
             Navigate("/student/")
 
         } catch (error) {
             console.log(error.response?.data?.message)
-            setuserNotFound(error.response?.data?.message)
+            toast.error(error.response?.data?.message)
+            // setuserNotFound(error.response?.data?.message)
             setloggedinStudent(null)
         } finally {
             setLoading(false) // 🔥 stop loading (success + error duita tei)

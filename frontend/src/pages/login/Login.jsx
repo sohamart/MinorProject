@@ -136,11 +136,7 @@ const Login = () => {
                         <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-0 mt-4 '>*please select login role to open form*</h1>
             
             
-            <div className='absolute bottom-[-14px] text-[8px] text-center opacity-20 flex justify-center items-center w-full'>
-                        <h1 className=' uppercase '>
-                designed and devoloped by Soham Dutta
-            </h1>
-            </div>
+            
             
             
         </div>

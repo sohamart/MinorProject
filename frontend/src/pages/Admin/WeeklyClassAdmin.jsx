@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 const WeeklyClassAdmin = () => {
@@ -55,6 +56,7 @@ const WeeklyClassAdmin = () => {
 
       
       setdeletinig(false)
+      toast.success("Delete Sucessfull !!")
 
       setdeleteFlash(true)
 
@@ -64,7 +66,7 @@ const WeeklyClassAdmin = () => {
 
     } catch (err) {
       console.log("DELETE ERROR:", err)
-      alert("Delete failed")
+      toast.error("Delete failed")
     }
     finally{
       setTimeout(() => {
@@ -123,9 +125,12 @@ const WeeklyClassAdmin = () => {
       setEditData(null)
 
       window.location.reload()
+      toast.success("Update Sucessfull !!")
+
 
     } catch (err) {
-      setUpdateError(err.response?.data?.message || "Update failed")
+      // setUpdateError(err.response?.data?.message || "Update failed")
+      toast.error("Update failed" || err.response?.data?.message)
     } finally {
       setUpdating(false)
     }
@@ -163,16 +168,19 @@ const addClass = async () => {
 
     // 🔥 MAIN FIX
     alert(response.data.message)
+    
 
     // only success হলে close হবে
     if (response.status === 200 || response.status === 201) {
       setShowAddForm(false)
       setaddData(null)
       window.location.reload()
+      toast.success("Add Sucessfull !!")
     }
 
   } catch (err) {
-    setaddError(err.response?.data?.message || "Add failed")
+    // setaddError(err.response?.data?.message || "Add failed")
+    toast.error("Add failed" || err.response?.data?.message)
   } finally {
     setadding(false)
   }

@@ -7,6 +7,7 @@ import Admin from '../../assets/Admin.png'
 import { Dot } from "lucide-react";
 
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 
 
@@ -30,13 +31,15 @@ const Profile = () => {
         )
             seterror(null)
             setloggedinAdmin(null)
+            toast.success("logout succesfull")
             navigate('/login')
             
             
         }
         catch(error){
             console.log(error);
-            seterror("server does not responce !!")
+            // seterror("server does not responce !!")
+            toast.error("server does not responce !!")
             setloading(false)
             
         }

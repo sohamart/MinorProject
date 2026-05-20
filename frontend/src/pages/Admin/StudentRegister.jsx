@@ -5,6 +5,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import student from '../../assets/student.png'
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 
 const StudentRegister = () => {
@@ -36,6 +37,7 @@ const StudentRegister = () => {
             console.log(response.data)
 
             setregisteredData(response.data.Studentuser)
+            toast.success("Registerd Succesfully")
 
             
 
@@ -43,7 +45,8 @@ const StudentRegister = () => {
 
         } catch (error) {
             console.log(error.response?.data?.message)
-            seterror(error.response?.data?.message)
+            // seterror(error.response?.data?.message)
+            toast.error(error.response?.data?.message)
         } finally {
             setLoading(false) //
             setRegisterdSuccess(true) 
