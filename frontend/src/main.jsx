@@ -28,9 +28,9 @@ createRoot(document.getElementById('root')).render(
                     draggable
                     pauseOnHover
                     theme="light"
-                    toastClassName="rounded-4xl"
-                    
-                    
+                    className=" text-xl "
+
+
                 />
             </BrowserRouter>
         </ClassContext>
