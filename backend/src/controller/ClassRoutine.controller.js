@@ -567,7 +567,7 @@ const deleteAllDailyClass = async (req, res) => {
         });
 
         try {
-            sendMail(
+            await sendMail(
 
                 emails,
 
