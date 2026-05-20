@@ -27,7 +27,9 @@ createRoot(document.getElementById('root')).render(
                     pauseOnFocusLoss
                     draggable
                     pauseOnHover
-                    theme="dark"
+                    theme="light"
+                    toastClassName="rounded-4xl"
+                    
                     
                 />
             </BrowserRouter>
