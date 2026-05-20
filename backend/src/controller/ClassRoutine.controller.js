@@ -114,6 +114,17 @@ const addWeeklyClass = async (req, res) => {
             classes
         });
 
+        
+
+
+
+        res.status(201).json({
+            message: "Class added successfully",
+            weeklyclass: {
+                ...weeklyclass._doc,
+                day: formatDay(weeklyclass.day)
+            }
+        });
         const emails = await getAllEmails();
 
         try {
@@ -129,17 +140,6 @@ const addWeeklyClass = async (req, res) => {
         }catch(error){
             console.log("error"+error)
         }
-
-
-
-        res.status(201).json({
-            message: "Class added successfully",
-            weeklyclass: {
-                ...weeklyclass._doc,
-                day: formatDay(weeklyclass.day)
-            }
-        });
-
     } catch (error) {
         console.log("ADD ERROR:", error);
         res.status(500).json({
@@ -205,6 +205,19 @@ const editWeeklyClass = async (req, res) => {
             { new: true }
         );
 
+
+        if (!weeklyclass) {
+            return res.status(404).json({ message: "Class not found" });
+        }
+
+        res.status(200).json({
+            message: "Class updated successfully",
+            weeklyclass: {
+                ...weeklyclass._doc,
+                day: formatDay(weeklyclass.day)
+            }
+        });
+        
         const emails = await getAllEmails();
 
         try {
@@ -220,18 +233,6 @@ const editWeeklyClass = async (req, res) => {
         }catch(error){
             console.log("error"+error)
         }
-
-        if (!weeklyclass) {
-            return res.status(404).json({ message: "Class not found" });
-        }
-
-        res.status(200).json({
-            message: "Class updated successfully",
-            weeklyclass: {
-                ...weeklyclass._doc,
-                day: formatDay(weeklyclass.day)
-            }
-        });
 
     } catch (error) {
         console.log("EDIT ERROR:", error);
@@ -357,6 +358,15 @@ const addDailyClass = async (req, res) => {
             existing.classes.push(...classes);
             await existing.save();
 
+            
+
+            return res.status(200).json({
+                message: "Class added to today's schedule",
+                dailyClass: {
+                    ...existing._doc,
+                    day: existing.day.charAt(0).toUpperCase() + existing.day.slice(1)
+                }
+            });
             const emails = await getAllEmails();
 
         try {
@@ -372,14 +382,6 @@ const addDailyClass = async (req, res) => {
         }catch(error){
             console.log("error"+error)
         }
-
-            return res.status(200).json({
-                message: "Class added to today's schedule",
-                dailyClass: {
-                    ...existing._doc,
-                    day: existing.day.charAt(0).toUpperCase() + existing.day.slice(1)
-                }
-            });
         }
 
         // ✅ যদি আজকের data না থাকে → নতুন create
@@ -440,6 +442,21 @@ const editDailyClasses = async (req, res) => {
             { returnDocument: "after" }
         );
 
+        
+
+        if (!updated) {
+            return res.status(404).json({ message: "Daily class not found" });
+        }
+
+        res.status(200).json({
+            message: "Classes updated successfully",
+            dailyClass: {
+                _id: updated._id, // 🔥 IMPORTANT
+                day: updated.day.charAt(0).toUpperCase() + updated.day.slice(1),
+                classes: updated.classes
+            }
+        });
+        
         const emails = await getAllEmails();
 
         try {
@@ -455,21 +472,6 @@ const editDailyClasses = async (req, res) => {
         }catch(error){
             console.log("error"+error)
         }
-        
-
-        if (!updated) {
-            return res.status(404).json({ message: "Daily class not found" });
-        }
-
-        res.status(200).json({
-            message: "Classes updated successfully",
-            dailyClass: {
-                _id: updated._id, // 🔥 IMPORTANT
-                day: updated.day.charAt(0).toUpperCase() + updated.day.slice(1),
-                classes: updated.classes
-            }
-        });
-
     } catch (error) {
         console.log("EDIT DAILY CLASSES ERROR:", error);
         res.status(500).json({
@@ -511,6 +513,14 @@ const deleteDailyClass = async (req, res) => {
 
         await daily.save();
 
+        
+
+
+        res.status(200).json({
+            message: "Class deleted successfully",
+            classes: daily.classes // 🔥 frontend update helpful
+        });
+
         const emails = await getAllEmails();
 
         try {
@@ -527,12 +537,6 @@ const deleteDailyClass = async (req, res) => {
             console.log("error"+error)
         }
 
-
-        res.status(200).json({
-            message: "Class deleted successfully",
-            classes: daily.classes // 🔥 frontend update helpful
-        });
-
     } catch (error) {
         console.log("DELETE DAILY CLASS ERROR:", error);
         res.status(500).json({
@@ -547,6 +551,12 @@ const deleteAllDailyClass = async (req, res) => {
         await DailyClass.deleteMany({}); // all delete
         const emails = await getAllEmails();
 
+        
+
+        res.status(200).json({
+            message: "All daily data deleted successfully"
+        });
+
         try {
             sendMail(
 
@@ -560,10 +570,6 @@ const deleteAllDailyClass = async (req, res) => {
         }catch(error){
             console.log("error"+error)
         }
-
-        res.status(200).json({
-            message: "All daily data deleted successfully"
-        });
 
     } catch (error) {
         console.log("DELETE DAILY ALL ERROR:", error);
