@@ -164,6 +164,21 @@ const deleteStudent = async (req, res) => {
             message: 'Student deleted successfully',
             deletedStudent
         });
+        const emails = await getAllEmails();
+        
+                try {
+                    sendMail(
+        
+                    emails,
+        
+                    "one Student left",
+        
+                    `admin has been deleted a student now, name - ${deletedStudent.name}, Please check now `
+        
+                );
+                }catch(error){
+                    console.log("error"+error)
+                }
     } catch {
         res.status(500).json({ message: 'Internal server error' });
 
@@ -418,6 +433,21 @@ const deleteTeacher = async (req, res) => {
             message: 'Teacher deleted successfully',
             deletedTeacher
         });
+        const emails = await getAllEmails();
+        
+                try {
+                    sendMail(
+        
+                    emails,
+        
+                    "one Teacher left",
+        
+                    `one Faculty has been left, name - ${deletedTeacher.name},Please check now `
+        
+                );
+                }catch(error){
+                    console.log("error"+error)
+                }
     }catch{
         res.status(500).json({ message: 'Internal server error' });
     }
