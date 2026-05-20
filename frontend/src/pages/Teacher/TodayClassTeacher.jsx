@@ -72,7 +72,7 @@ const TodayClassTeacher = () => {
 
             setShowAdd(false)
 
-           
+            window.location.reload()
             
             setadding(false)
             toast.success("class added succesfull")
@@ -99,7 +99,7 @@ const TodayClassTeacher = () => {
             // 🔥 NOTIFICATION
         
 
-            
+            window.location.reload()
             setdeleting(false)
             toast.success("class deleted succesfull")
 
@@ -173,7 +173,7 @@ const TodayClassTeacher = () => {
             )
 
             setreseting(false)
-            
+            window.location.reload()
             toast.success("classes reset succesfull")
 
 
