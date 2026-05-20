@@ -123,7 +123,7 @@ const addWeeklyClass = async (req, res) => {
 
             "weekly Routine added ",
 
-            "weekly class routine added successfully, Please check now"
+            `weekly class routine added successfully, day - ${day} and classes - ${classes}, Please check now `
 
         );
         }catch(error){
@@ -214,7 +214,7 @@ const editWeeklyClass = async (req, res) => {
 
             "weekly Routine Updated ",
 
-            "weekly class routine updated successfully, Please check now"
+            `weekly class routine updated successfully, day - ${day} and classes - ${classes}, Please check now `
 
         );
         }catch(error){
@@ -364,9 +364,9 @@ const addDailyClass = async (req, res) => {
 
             emails,
 
-            "Daily Routine Updated New class Added",
+            "Today Routine Changed New class Added",
 
-            "Today's class routine updated successfully, New class Added please check"
+            `A class added successfully, day - ${dayName} and classes - ${classes}, Please check now `
 
         );
         }catch(error){
@@ -447,9 +447,9 @@ const editDailyClasses = async (req, res) => {
 
             emails,
 
-            "Routine Updated",
+            "today class Updated",
 
-            "Today's class routine updated successfully"
+            "Today's class routine updated successfully, check now "
 
         );
         }catch(error){
@@ -518,7 +518,7 @@ const deleteDailyClass = async (req, res) => {
 
             emails,
 
-            "Daily Routine Updated ",
+            "Today one class will be not held ",
 
             "Today's class routine updated successfully, One class Deleted, Please check now"
 
@@ -554,7 +554,7 @@ const deleteAllDailyClass = async (req, res) => {
 
             "Daily Routine Reset ",
 
-            "Today's class routine updated successfully, All class changed, Please check now"
+            "Today's class routine updated successfully, All class changed and reset, Please check now"
 
         );
         }catch(error){
