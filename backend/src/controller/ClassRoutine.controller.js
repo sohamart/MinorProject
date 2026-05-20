@@ -398,6 +398,22 @@ const addDailyClass = async (req, res) => {
                 day: dayName.charAt(0).toUpperCase() + dayName.slice(1)
             }
         });
+          const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+            emails,
+
+            "Today Routine Changed New class Added",
+
+            `A class added successfully, day - ${dayName}, Please check now `
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
+        }
 
     } catch (error) {
         console.log("ADD DAILY CLASS ERROR:", error);
