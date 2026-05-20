@@ -30,121 +30,125 @@ const sendMail = async (emails, subject, text) => {
             subject,
 
             html: `
-
 <div style="
-    background:#0f172a;
-    padding:40px;
+    background:#f3f4f6;
+    padding:30px;
     font-family:Arial,sans-serif;
 ">
 
+<div style="
+    max-width:650px;
+    margin:auto;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #e5e7eb;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+">
+
+    <!-- HEADER -->
+
     <div style="
-        max-width:650px;
-        margin:auto;
-        background:#111827;
-        border-radius:20px;
-        overflow:hidden;
-        border:1px solid rgba(255,255,255,0.1);
+        background:#2563eb;
+        padding:30px;
+        text-align:center;
     ">
 
-        <!-- HEADER -->
+        <img
+            src="https://www.dropbox.com/scl/fi/3lsiiius10heauxtpmlnc/clock.PNG?rlkey=qhdpltood8ic0bx994lcn9cp1&st=vcmbqxg1&raw=1"
+            width="80"
+            style="
+                border-radius:16px;
+                background:white;
+                padding:8px;
+                margin-bottom:10px;
+            "
+        />
+
+        <h1 style="
+            color:white;
+            margin:0;
+            font-size:30px;
+            letter-spacing:1px;
+        ">
+            CLASS ROUTINE
+        </h1>
+
+        <p style="
+            color:#dbeafe;
+            margin-top:8px;
+            font-size:15px;
+        ">
+            Daily Educational Updates
+        </p>
+
+    </div>
+
+    <!-- BODY -->
+
+    <div style="padding:35px; color:#111827;">
+
+        <h2 style="
+            font-size:26px;
+            margin-bottom:20px;
+            color:#2563eb;
+        ">
+            ${subject}
+        </h2>
+
+        <p style="
+            font-size:16px;
+            line-height:1.8;
+            color:#374151;
+        ">
+            ${text}
+        </p>
 
         <div style="
-            background:linear-gradient(135deg,#2563eb,#7c3aed);
-            padding:40px;
+            margin-top:30px;
             text-align:center;
         ">
 
-           <img
-   src="https://www.dropbox.com/scl/fi/3lsiiius10heauxtpmlnc/clock.PNG?rlkey=qhdpltood8ic0bx994lcn9cp1&st=vcmbqxg1&raw=1"
-   width="90"
-   style="
-      border-radius:20px;
-      margin-bottom:15px;
-   "
-/>
-
-            <h1 style="
-                color:white;
-                margin:0;
-                font-size:32px;
-                letter-spacing:2px;
-            ">
-                CLASS ROUTINE
-            </h1>
-
-            <p style="
-                color:#dbeafe;
-                margin-top:10px;
-                font-size:16px;
-            ">
-                Smart Daily Class Updates
-            </p>
-
-        </div>
-
-        <!-- BODY -->
-
-        <div style="padding:40px; color:white;">
-
-            <h2 style="
-                font-size:28px;
-                margin-bottom:20px;
-                color:#60a5fa;
-            ">
-                ${subject}
-            </h2>
-
-            <p style="
-                font-size:17px;
-                line-height:1.8;
-                color:#d1d5db;
-            ">
-                ${text}
-            </p>
-
-            <div style="
-                margin-top:35px;
-                text-align:center;
-            ">
-
-                <a
-                    href="https://classroutinetime.vercel.app"
-                    style="
-                        display:inline-block;
-                        padding:16px 30px;
-                        background:linear-gradient(135deg,#2563eb,#7c3aed);
-                        color:white;
-                        text-decoration:none;
-                        border-radius:12px;
-                        font-size:18px;
-                        font-weight:bold;
-                        box-shadow:0 0 20px rgba(37,99,235,0.4);
-                    "
-                >
-                    Open App
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- FOOTER -->
-
-        <div style="
-            padding:20px;
-            text-align:center;
-            border-top:1px solid rgba(255,255,255,0.1);
-            color:#9ca3af;
-            font-size:14px;
-        ">
-
-            © 2026 Class Routine • Developed by Soham Dutta
+            <a
+                href="https://classroutinetime.vercel.app"
+                style="
+                    display:inline-block;
+                    padding:14px 28px;
+                    background:#2563eb;
+                    color:white;
+                    text-decoration:none;
+                    border-radius:10px;
+                    font-size:16px;
+                    font-weight:bold;
+                "
+            >
+                Open Class Routine
+            </a>
 
         </div>
 
     </div>
 
+    <!-- FOOTER -->
+
+    <div style="
+        padding:18px;
+        text-align:center;
+        background:#f9fafb;
+        border-top:1px solid #e5e7eb;
+        color:#6b7280;
+        font-size:13px;
+    ">
+
+        © 2026 Class Routine • Developed by C.R Time Pro Team
+
+    </div>
+
 </div>
+
+
+</div>
+
 
 `,
 
