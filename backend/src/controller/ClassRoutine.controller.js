@@ -123,7 +123,7 @@ const addWeeklyClass = async (req, res) => {
 
             "weekly Routine added ",
 
-            `weekly class routine added successfully, day - ${day} and classes - ${classes}, Please check now `
+            `weekly class routine added successfully, day - ${day}, Please check now `
 
         );
         }catch(error){
@@ -214,7 +214,7 @@ const editWeeklyClass = async (req, res) => {
 
             "weekly Routine Updated ",
 
-            `weekly class routine updated successfully, day - ${day} and classes - ${classes}, Please check now `
+            `weekly class routine updated successfully, day - ${day}, Please check now `
 
         );
         }catch(error){
@@ -366,7 +366,7 @@ const addDailyClass = async (req, res) => {
 
             "Today Routine Changed New class Added",
 
-            `A class added successfully, day - ${dayName} and classes - ${classes}, Please check now `
+            `A class added successfully, day - ${dayName}, Please check now `
 
         );
         }catch(error){
