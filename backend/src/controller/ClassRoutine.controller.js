@@ -1,12 +1,31 @@
 const weeklyClass = require("../model/WeeklyClasses.model");
 const DailyClass = require("../model/DailyClass.model");
 const mongoose = require("mongoose");
-const StudentUser = require("../model/StudentUser.model");
-const TeacherUser = require("../model/TeacherUser.model");
-const AdminUser = require("../model/AdminUser.model");
+const Studentmodel = require("../model/StudentUser.model");
+const Teachermodel = require("../model/TeacherUser.model");
+const Adminmodel = require("../model/AdminUser.model");
+
+const { sendMail } = require("../utils/sendMail");
 
 
+const getAllEmails = async () => {
 
+    const students = await Studentmodel.find({}, "email");
+
+    const teachers = await Teachermodel.find({}, "email");
+
+    const admins = await Adminmodel.find({}, "email");
+
+    return [
+
+        ...students.map(user => user.email),
+
+        ...teachers.map(user => user.email),
+
+        ...admins.map(user => user.email),
+
+    ];
+};
 
 // ✅ helper (capitalize for response only)
 const formatDay = (day) => {
@@ -370,7 +389,24 @@ const editDailyClasses = async (req, res) => {
             { classes },
             { returnDocument: "after" }
         );
-       
+
+        const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+            emails,
+
+            "Routine Updated",
+
+            "Today's class routine updated successfully"
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
+        
+
         if (!updated) {
             return res.status(404).json({ message: "Daily class not found" });
         }
