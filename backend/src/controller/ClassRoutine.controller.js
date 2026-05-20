@@ -398,7 +398,7 @@ const addDailyClass = async (req, res) => {
                 day: dayName.charAt(0).toUpperCase() + dayName.slice(1)
             }
         });
-          const emails = await getAllEmails();
+         const emails = await getAllEmails();
 
         try {
             sendMail(
@@ -413,7 +413,7 @@ const addDailyClass = async (req, res) => {
         }catch(error){
             console.log("error"+error)
         }
-        }
+        
 
     } catch (error) {
         console.log("ADD DAILY CLASS ERROR:", error);
