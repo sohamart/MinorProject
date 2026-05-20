@@ -54,15 +54,14 @@ const sendMail = async (emails, subject, text) => {
             text-align:center;
         ">
 
-            <img
-                src="https://www.dropbox.com/scl/fi/syqw5fh516kmri3nm7o9q/kalna2.png?rlkey=r5xu3xdpmuqu5btbql11ebcel&st=bai8z4xs&raw=1"
-                width="90"
-                style="
-                    border-radius:20px;
-                    margin-bottom:15px;
-                    box-shadow:0 0 20px rgba(255,255,255,0.3);
-                "
-            />
+           <img
+   src="https://www.dropbox.com/scl/fi/3lsiiius10heauxtpmlnc/clock.PNG?rlkey=qhdpltood8ic0bx994lcn9cp1&st=vcmbqxg1&raw=1"
+   width="90"
+   style="
+      border-radius:20px;
+      margin-bottom:15px;
+   "
+/>
 
             <h1 style="
                 color:white;
