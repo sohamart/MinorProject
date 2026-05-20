@@ -99,6 +99,7 @@ const addWeeklyClass = async (req, res) => {
 
 
 
+
             return res.status(200).json({
                 message: "Day already exists, classes added successfully",
                 weeklyclass: {
@@ -112,6 +113,22 @@ const addWeeklyClass = async (req, res) => {
             day,
             classes
         });
+
+        const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+            emails,
+
+            "weekly Routine added ",
+
+            "weekly class routine added successfully, Please check now"
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
 
 
 
@@ -141,6 +158,7 @@ const deleteWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const weeklyclass = await weeklyClass.findOneAndDelete({ day });
+        
 
 
         if (!weeklyclass) {
@@ -186,6 +204,22 @@ const editWeeklyClass = async (req, res) => {
             { day, classes },
             { new: true }
         );
+
+        const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+            emails,
+
+            "weekly Routine Updated ",
+
+            "weekly class routine updated successfully, Please check now"
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
 
         if (!weeklyclass) {
             return res.status(404).json({ message: "Class not found" });
@@ -322,6 +356,22 @@ const addDailyClass = async (req, res) => {
             // ✅ add new classes
             existing.classes.push(...classes);
             await existing.save();
+
+            const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+            emails,
+
+            "Daily Routine Updated New class Added",
+
+            "Today's class routine updated successfully, New class Added please check"
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
 
             return res.status(200).json({
                 message: "Class added to today's schedule",
@@ -461,6 +511,22 @@ const deleteDailyClass = async (req, res) => {
 
         await daily.save();
 
+        const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+            emails,
+
+            "Daily Routine Updated ",
+
+            "Today's class routine updated successfully, One class Deleted, Please check now"
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
+
 
         res.status(200).json({
             message: "Class deleted successfully",
@@ -479,7 +545,21 @@ const deleteDailyClass = async (req, res) => {
 const deleteAllDailyClass = async (req, res) => {
     try {
         await DailyClass.deleteMany({}); // all delete
+        const emails = await getAllEmails();
 
+        try {
+            sendMail(
+
+            emails,
+
+            "Daily Routine Reset ",
+
+            "Today's class routine updated successfully, All class changed, Please check now"
+
+        );
+        }catch(error){
+            console.log("error"+error)
+        }
 
         res.status(200).json({
             message: "All daily data deleted successfully"
