@@ -76,7 +76,7 @@ const sendMail = async (emails, subject, text) => {
             font-size:34px;
             font-weight:700;
         ">
-            CLASS ROUTINE
+            C.R Time Pro
         </h1>
 
     </div>
