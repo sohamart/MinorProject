@@ -555,37 +555,47 @@ const deleteDailyClass = async (req, res) => {
         });
     }
 };
-
 const deleteAllDailyClass = async (req, res) => {
     try {
-        await DailyClass.deleteMany({}); // all delete
-        const emails = await getAllEmails();
 
+        const deleted = await DailyClass.deleteMany({});
 
-
+        // ✅ response FIRST
         res.status(200).json({
-            message: "All daily data deleted successfully"
+            message: "All daily data deleted successfully",
+            deletedCount: deleted.deletedCount
         });
 
+        // ✅ mail async background
         try {
-            sendMail(
 
-                emails,
+            const emails = await getAllEmails();
 
-                "Daily Routine Reset ",
+            if (emails.length > 0) {
 
-                "Today's class routine updated successfully, All class changed and reset, Please check now"
+                await sendMail(
+                    emails,
+                    "Daily Routine Reset",
+                    "Today's class routine updated successfully. All classes reset."
+                );
 
-            );
-        } catch (error) {
-            console.log("error" + error)
+            }
+
+        } catch (mailError) {
+
+            console.log("MAIL ERROR:", mailError.message);
+
         }
 
     } catch (error) {
+
         console.log("DELETE DAILY ALL ERROR:", error);
-        res.status(500).json({
-            message: "Internal server error"
+
+        return res.status(500).json({
+            message: "Internal server error",
+            error: error.message
         });
+
     }
 };
 
