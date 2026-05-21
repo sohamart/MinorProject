@@ -13,7 +13,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage'
 import Profile from './pages/student/Profile'
 import StudentsData from './pages/Admin/StudentsData'
 import AdminProfile from './pages/Admin/AdminProfile'
-import privacy from './pages/privacy/privacy'
+import Privacy from './pages/privacy/privacy'
 
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import FacultiesData from './pages/Admin/FacultiesData'
