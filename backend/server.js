@@ -5,6 +5,17 @@ require("dotenv").config({
 
 const connectDB = require('./src/db/db');
 
+process.on("unhandledRejection", (err) => {
+
+    console.log("UNHANDLED:", err);
+
+});
+
+process.on("uncaughtException", (err) => {
+
+    console.log("UNCAUGHT:", err);
+
+});
 
 
 
