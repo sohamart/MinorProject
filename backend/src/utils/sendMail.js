@@ -2,14 +2,19 @@ const nodemailer = require("nodemailer");
 require("dotenv").config({
     path: "./.env"
 });
-
 const transporter = nodemailer.createTransport({
 
     host: "smtp-relay.brevo.com",
 
-    port: 587,
+    port: 2525,
 
     secure: false,
+
+    connectionTimeout: 30000,
+
+    greetingTimeout: 30000,
+
+    socketTimeout: 30000,
 
     auth: {
 
@@ -20,26 +25,28 @@ const transporter = nodemailer.createTransport({
     },
 
 });
-
 const sendMail = async (emails, subject, text) => {
-    console.log("EMAILS:", emails);
-    console.log("TYPE:", typeof emails);
-    console.log("SENDER:", process.env.SENDER_EMAIL);
 
     try {
 
-        const info = await transporter.sendMail({
+        if (!emails || emails.length === 0) {
+            console.log("No emails");
+            return;
+        }
 
-            from: `"Class Routine" <${process.env.SENDER_EMAIL}>`,
+        for (const email of emails) {
 
-            bcc: Array.isArray(emails)
-                ? emails.join(",")
-                : emails,
+            try {
 
-            subject,
+                const info = await transporter.sendMail({
 
+                    from: `"Class Routine" <${process.env.SENDER_EMAIL}>`,
 
-            html: `
+                    to: email,
+
+                    subject,
+
+                    html: `
 
 <div style="
     background:#f3f4f6;
@@ -57,47 +64,22 @@ const sendMail = async (emails, subject, text) => {
     border:1px solid #e5e7eb;
 ">
 
-    <!-- HEADER -->
-
     <div style="
         background:linear-gradient(135deg,#2563eb,#1d4ed8);
         padding:40px 20px;
         text-align:center;
     ">
 
-        <img
-            src='https://cdn-icons-png.flaticon.com/512/3652/3652191.png'
-            width="90"
-            style="
-                background:white;
-                padding:12px;
-                border-radius:20px;
-                margin-bottom:15px;
-                box-shadow:0 4px 15px rgba(255,255,255,0.2);
-            "
-        />
-
         <h1 style="
             color:white;
             margin:0;
             font-size:34px;
-            letter-spacing:1px;
             font-weight:700;
         ">
             CLASS ROUTINE
         </h1>
 
-        <p style="
-            color:#dbeafe;
-            margin-top:12px;
-            font-size:16px;
-        ">
-            Smart Daily Routine Management System
-        </p>
-
     </div>
-
-    <!-- BODY -->
 
     <div style="
         padding:45px 35px;
@@ -108,74 +90,31 @@ const sendMail = async (emails, subject, text) => {
             font-size:30px;
             margin-bottom:20px;
             color:#2563eb;
-            font-weight:bold;
         ">
             ${subject}
         </h2>
 
         <p style="
             font-size:17px;
-            color:#374151;
-            line-height:1.8;
-            margin-bottom:28px;
-        ">
-            Hello Student,
-        </p>
-
-        <p style="
-            font-size:17px;
             color:#4b5563;
             line-height:1.9;
-            margin-bottom:35px;
         ">
             ${text}
         </p>
 
-        <!-- CARD -->
-
-        <div style="
-            background:#f9fafb;
-            border:1px solid #e5e7eb;
-            border-radius:16px;
-            padding:25px;
-            margin-bottom:35px;
-        ">
-
-            <h3 style="
-                margin-top:0;
-                color:#1d4ed8;
-                font-size:22px;
-            ">
-                Important Notice
-            </h3>
-
-            <p style="
-                margin-bottom:0;
-                color:#4b5563;
-                line-height:1.7;
-                font-size:15px;
-            ">
-                Please regularly check your class routine for latest updates, extra classes, cancellations, and schedule changes.
-            </p>
-
-        </div>
-
-        <!-- BUTTON -->
-
-        <div style="text-align:center;">
+        <div style="text-align:center; margin-top:35px;">
 
             <a
                 href="https://classroutinetime.vercel.app"
                 style="
                     display:inline-block;
-                    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+                    background:#2563eb;
                     color:white;
                     text-decoration:none;
                     padding:16px 34px;
                     border-radius:14px;
                     font-size:17px;
                     font-weight:bold;
-                    box-shadow:0 8px 20px rgba(37,99,235,0.3);
                 "
             >
                 Open Class Routine
@@ -185,38 +124,28 @@ const sendMail = async (emails, subject, text) => {
 
     </div>
 
-    <!-- FOOTER -->
-
-    <div style="
-        background:#f9fafb;
-        padding:25px;
-        text-align:center;
-        border-top:1px solid #e5e7eb;
-    ">
-
-        <p style="
-            margin:0;
-            color:#6b7280;
-            font-size:14px;
-            line-height:1.7;
-        ">
-            © 2026 Class Routine System <br/>
-            Developed by C.R Time Pro Team
-        </p>
-
-    </div>
-
 </div>
 
 </div>
 
-`
+                    `
 
+                });
 
+                console.log("MAIL SENT:", email);
 
-        });
+                await new Promise(resolve =>
+                    setTimeout(resolve, 1500)
+                );
 
-        console.log(info.response);
+            } catch (mailError) {
+
+                console.log("FAILED:", email);
+                console.log(mailError.message);
+
+            }
+
+        }
 
     } catch (error) {
 
@@ -225,5 +154,6 @@ const sendMail = async (emails, subject, text) => {
     }
 
 };
+
 
 module.exports = { sendMail };
