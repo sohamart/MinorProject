@@ -2,8 +2,8 @@ import React from 'react'
 
 const Privacy = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-5">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+    <div className="min-h-screen overflow-auto no-scrollbar bg-gray-100 py-10 px-5">
+      <div className="max-w-4xl mx-auto   bg-white shadow-lg rounded-2xl p-8">
         <h1 className="text-4xl font-bold text-center text-blue-700 mb-6">
           Privacy Policy
         </h1>
