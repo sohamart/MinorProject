@@ -139,6 +139,7 @@ const addWeeklyClass = async (req, res) => {
             );
         } catch (error) {
             console.log("error" + error)
+            
         }
     } catch (error) {
         console.log("ADD ERROR:", error);
