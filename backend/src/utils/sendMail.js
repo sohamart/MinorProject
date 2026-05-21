@@ -30,6 +30,9 @@ const transporter = nodemailer.createTransport({
 const sendMail = async (emails, subject, text) => {
 
     try {
+        await transporter.verify();
+
+        console.log("SMTP READY");
 
         const info = await transporter.sendMail({
 
