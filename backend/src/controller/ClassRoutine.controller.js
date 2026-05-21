@@ -364,7 +364,7 @@ const addDailyClass = async (req, res) => {
 
             try {
 
-                await sendMail(
+                sendMail(
                     emails,
                     "New extra class Added today",
                     `A class added successfully, day - ${dayName}, Please check now `
@@ -567,7 +567,7 @@ const deleteAllDailyClass = async (req, res) => {
         });
 
         try {
-            await sendMail(
+            sendMail(
 
                 emails,
 
