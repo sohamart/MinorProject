@@ -452,7 +452,7 @@ const editDailyClasses = async (req, res) => {
         const emails = await getAllEmails();
 
         try {
-            await sendMail(
+            sendMail(
 
                 emails,
 
@@ -573,7 +573,7 @@ const deleteAllDailyClass = async (req, res) => {
 
             if (emails.length > 0) {
 
-                await sendMail(
+                sendMail(
                     emails,
                     "Daily Routine Reset",
                     "Today's class routine updated successfully. All classes reset."
