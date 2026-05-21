@@ -13,6 +13,12 @@ const transporter = nodemailer.createTransport({
 
     family: 4,
 
+    connectionTimeout: 10000,
+
+    greetingTimeout: 10000,
+
+    socketTimeout: 10000,
+
     auth: {
 
         user: process.env.EMAIL_USER,
@@ -26,7 +32,6 @@ const transporter = nodemailer.createTransport({
     }
 
 });
-
 const sendMail = async (emails, subject, text) => {
 
     try {
