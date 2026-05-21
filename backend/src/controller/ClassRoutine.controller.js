@@ -452,7 +452,7 @@ const editDailyClasses = async (req, res) => {
         const emails = await getAllEmails();
 
         try {
-            sendMail(
+            await sendMail(
 
                 emails,
 
