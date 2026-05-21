@@ -1,11 +1,18 @@
 const nodemailer = require("nodemailer");
+
 require("dotenv").config({
     path: "./.env"
 });
 
 const transporter = nodemailer.createTransport({
 
-    service: "gmail",
+    host: "smtp.gmail.com",
+
+    port: 587,
+
+    secure: false,
+
+    family: 4,
 
     auth: {
 
@@ -21,7 +28,7 @@ const sendMail = async (emails, subject, text) => {
 
     try {
 
-        transporter.sendMail({
+        const info = await transporter.sendMail({
 
             from: `"Class Routine Kalna Polytechnic" <${process.env.EMAIL_USER}>`,
 
@@ -30,6 +37,7 @@ const sendMail = async (emails, subject, text) => {
             subject,
 
             html: `
+
 <div style="
     background:#f3f4f6;
     padding:30px;
@@ -45,8 +53,6 @@ const sendMail = async (emails, subject, text) => {
     border:1px solid #e5e7eb;
     box-shadow:0 5px 20px rgba(0,0,0,0.08);
 ">
-
-    <!-- HEADER -->
 
     <div style="
         background:#2563eb;
@@ -84,8 +90,6 @@ const sendMail = async (emails, subject, text) => {
 
     </div>
 
-    <!-- BODY -->
-
     <div style="padding:35px; color:#111827;">
 
         <h2 style="
@@ -95,13 +99,14 @@ const sendMail = async (emails, subject, text) => {
         ">
             ${subject}
         </h2>
+
         <p style="
-    font-size:16px;
-    color:#111827;
-    margin-bottom:20px;
-">
-    Hello Student,
-</p>
+            font-size:16px;
+            color:#111827;
+            margin-bottom:20px;
+        ">
+            Hello Student,
+        </p>
 
         <p style="
             font-size:16px;
@@ -136,8 +141,6 @@ const sendMail = async (emails, subject, text) => {
 
     </div>
 
-    <!-- FOOTER -->
-
     <div style="
         padding:18px;
         text-align:center;
@@ -146,26 +149,26 @@ const sendMail = async (emails, subject, text) => {
         color:#6b7280;
         font-size:13px;
     ">
-
         © 2026 Class Routine • Developed by C.R Time Pro Team
-
     </div>
 
 </div>
 
-
 </div>
 
-
-`,
+            `,
 
         });
 
-        console.log("MAIL SENT");
+        console.log("MAIL SENT:", info.response);
+
+        return info;
 
     } catch (error) {
 
-        console.log("MAIL ERROR:", error);
+        console.log("MAIL ERROR:", error.message);
+
+        return null;
 
     }
 
