@@ -22,6 +22,9 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendMail = async (emails, subject, text) => {
+    console.log("EMAILS:", emails);
+    console.log("TYPE:", typeof emails);
+    console.log("SENDER:", process.env.SENDER_EMAIL);
 
     try {
 
@@ -35,7 +38,7 @@ const sendMail = async (emails, subject, text) => {
 
             subject,
 
-           
+
             html: `
 
 <div style="
