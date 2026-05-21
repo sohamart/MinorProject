@@ -13,6 +13,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage'
 import Profile from './pages/student/Profile'
 import StudentsData from './pages/Admin/StudentsData'
 import AdminProfile from './pages/Admin/AdminProfile'
+import privacy from './pages/privacy/privacy'
 
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import FacultiesData from './pages/Admin/FacultiesData'
@@ -163,6 +164,8 @@ const App = () => {
       <Route path='/login' element={<Login></Login>}/>
       <Route path='/' element={<Home/>}/>
       <Route path='*' element={<ErrorPage/>}/>
+      <Route path='/privacy' element={<Privacy/>}/>
+
 
       
       
