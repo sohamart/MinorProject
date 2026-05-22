@@ -3,10 +3,15 @@ import React from 'react'
 const Privacy = () => {
   return (
     <div className="min-h-screen overflow-auto no-scrollbar bg-gray-100 py-10 px-5">
-      <div className="max-w-4xl mx-auto   bg-white shadow-lg rounded-2xl p-8">
-        <h1 className="text-4xl font-bold text-center text-blue-700 mb-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+        
+        <h1 className="text-4xl font-bold text-center text-blue-700 mb-4">
           Privacy Policy
         </h1>
+
+        <h2 className="text-center text-lg font-semibold text-gray-700 mb-2">
+          C.R Time Pro Kalna Polytechnic
+        </h2>
 
         <p className="text-gray-600 mb-6 text-center">
           Last Updated: May 21, 2026
@@ -16,11 +21,12 @@ const Privacy = () => {
           <h2 className="text-2xl font-semibold text-gray-800 mb-3">
             Introduction
           </h2>
+
           <p className="text-gray-600 leading-7">
-            Welcome to <strong>C.r Time Pro</strong>. Your privacy is important
-            to us. This Privacy Policy explains how we collect, use, and
-            protect your information when you use our college management
-            application developed for Kalna Polytechnic.
+            Welcome to <strong>C.R Time Pro Kalna Polytechnic</strong>. Your
+            privacy is important to us. This Privacy Policy explains how we
+            collect, use, and protect your information when you use our college
+            management application developed for Kalna Polytechnic.
           </p>
         </section>
 
@@ -78,7 +84,7 @@ const Privacy = () => {
           </h2>
 
           <p className="text-gray-600 leading-7">
-            C.r Time Pro is intended for educational use by college students and
+            C.R Time Pro is intended for educational use by college students and
             does not knowingly collect personal information from children under
             13 years of age.
           </p>
@@ -95,19 +101,43 @@ const Privacy = () => {
           </p>
         </section>
 
+        <section className="mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+            Support & Developer Details
+          </h2>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
+            <p className="text-gray-700 leading-7">
+              <span className="font-semibold">Developer Name:</span> Soham
+              Dutta
+            </p>
+
+            <p className="text-gray-700 leading-7">
+              <span className="font-semibold">Email:</span>{' '}
+              trioentorcode@gmail.com
+            </p>
+
+            <p className="text-gray-700 leading-7">
+              <span className="font-semibold">Application Name:</span> C.R Time
+              Pro Kalna Polytechnic
+            </p>
+          </div>
+        </section>
+
         <section>
           <h2 className="text-2xl font-semibold text-gray-800 mb-3">
             Contact Us
           </h2>
 
           <p className="text-gray-600 leading-7">
-            If you have any questions regarding this Privacy Policy, please
-            contact the developer of C.r Time Pro.
+            If you have any questions regarding this Privacy Policy or need
+            support related to the application, please contact the developer via
+            the provided email address.
           </p>
         </section>
 
         <div className="mt-10 text-center text-gray-500 text-sm">
-          © 2026 C.r Time Pro - Kalna Polytechnic
+          © 2026 C.R Time Pro Kalna Polytechnic. All Rights Reserved.
         </div>
       </div>
     </div>
