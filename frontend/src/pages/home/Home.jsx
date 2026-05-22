@@ -5,6 +5,7 @@ import { AuthContextData } from '../../context/AuthContext'
 import Loading from '../../components/loading/loading'
 import { motion } from "framer-motion"
 import kalnaLogo from "../../assets/KALNA.png"
+import { ShieldCheck } from 'lucide-react'
  
 const Home = () => {
     const navigate = useNavigate()
@@ -16,6 +17,12 @@ const Home = () => {
     if(loading){
         return <Loading></Loading>
     }
+    
+    
+      const privacy = () => {
+        window.location.href = "/privacy_policy"
+      }
+    
   return (
     <>
 
@@ -23,7 +30,11 @@ const Home = () => {
 
         <div className='flex  relative flex-col items-center justify-center w-screen h-screen    overflow-hidden text-white '>
             <div className=' flex flex-col items-center pb-10 absolute top-0 h-[40vh] lg:h-[35vh] w-full rounded-b-[180px] lg:rounded-b-[100px] bg-indigo-400/10  backdrop-blur-2xl border-b-2 border-white/30'>
-                    
+         <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-4'>
+                     <ShieldCheck
+                     onClick={privacy}
+                     color="#ffffff" />
+                   </div>           
 
         {/* Rotating Text Circle */}
         <div className="relative w-40 lg:h-60 h-80 flex items-center justify-center">

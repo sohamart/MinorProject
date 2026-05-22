@@ -31,21 +31,23 @@ import ExtraClassTeacher from './pages/Teacher/ExtraClassTeacher'
 import ExtraClass from './pages/Admin/ExtraClass'
 import ExtraClassStudent from './pages/student/ExtraClassStudent'
 import { useEffect } from 'react'
+import { RefreshCcw } from 'lucide-react'
+import { useState } from 'react'
+import { ShieldCheck } from 'lucide-react'
 
 
 
 
 
 const App = () => {
-  useEffect(() => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then((permission) => {
-        console.log("Notification permission:", permission);
-      });
-    }
-  }, []);
+
+
   return (
     <div className='h-screen relative w-screen flex flex-col  overflow-hidden bg-black'>
+      
+          
+
+      
       <motion.div
           className="absolute hidden lg:block w-[400px] h-[400px] bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"
           animate={{

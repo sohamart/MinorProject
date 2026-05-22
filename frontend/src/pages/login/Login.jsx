@@ -7,6 +7,9 @@ import { useState, useContext, useEffect } from 'react'
 import { AuthContextData } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/loading/loading'
+import { RefreshCcw } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
+
 
 const Login = () => {
 
@@ -16,6 +19,7 @@ const Login = () => {
 
     const { loggedinStudent, loggedinAdmin, loggedinTeacher, loading } = useContext(AuthContextData)
     const navigate = useNavigate()
+    const [rotated, setRotated] = React.useState(false);
 
     useEffect(() => {
         if (loggedinStudent !== null) navigate("/student/home")
@@ -42,10 +46,35 @@ const Login = () => {
         setstlogin(false)
         settrlogin(false)
     }
+   
+    const Refresh = () => {
+    setRotated(true);
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 10); // animation complete
+  };
+   const privacy = () => {
+        window.location.href = "/privacy_policy"
+      }
+    
+
 
     return (
         <div className='flex  w-screen h-screen overflow-hidden text-white pl-4 pr-4 pb-4'>
-
+                <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 left-7'>
+            <RefreshCcw
+              color='white'
+              onClick={Refresh}
+              className={`duration-500 cursor-pointer ${rotated ? "rotate-180" : ""
+                }`}
+            />
+          </div>
+          <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-7'>
+                     <ShieldCheck
+                     onClick={privacy}
+                     color="#ffffff" />
+                   </div>   
             <div className='w-full relative h-full flex flex-col rounded-2xl border-b border-l border-r border-white/30 backdrop-blur-2xl items-center'>
 
                 {/* Title */}
