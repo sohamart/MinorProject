@@ -33,7 +33,8 @@ const Home = () => {
          <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-4'>
                      <ShieldCheck
                      onClick={privacy}
-                     color="#ffffff" />
+                     color="#ffffff"
+                     className='active:scale-95' />
                    </div>           
 
         {/* Rotating Text Circle */}
