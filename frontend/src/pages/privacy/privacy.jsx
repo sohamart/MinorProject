@@ -1,8 +1,17 @@
 import React from 'react'
 
 const Privacy = () => {
+
+  const home = () => {
+        window.location.href = "/"
+      }
   return (
     <div className="h-screen overflow-y-auto overscroll-contain no-scrollbar py-10 px-5">
+      <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-4'>
+                     <House
+                     onclick={home}
+                     color="#ffffff" />
+      </div>
       <div className="max-w-4xl  mx-auto bg-black/20  border border-white/30 shadow-lg rounded-2xl p-8">
         
         <h1 className="text-4xl font-bold text-center text-blue-700 mb-4">
