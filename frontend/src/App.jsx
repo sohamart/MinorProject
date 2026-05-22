@@ -164,7 +164,7 @@ const App = () => {
       <Route path='/login' element={<Login></Login>}/>
       <Route path='/' element={<Home/>}/>
       <Route path='*' element={<ErrorPage/>}/>
-      <Route path='/privacy' element={<Privacy/>}/>
+      <Route path='/privacy_policy' element={<Privacy/>}/>
 
 
       
