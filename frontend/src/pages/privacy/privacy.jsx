@@ -2,8 +2,8 @@ import React from 'react'
 
 const Privacy = () => {
   return (
-    <div className="min-h-screen overflow-auto no-scrollbar  py-10 px-5">
-      <div className="max-w-4xl mx-auto bg-black/20  border border-white/30 shadow-lg rounded-2xl p-8">
+    <div className="min-h-screen overflow-y-auto no-scrollbar  py-10 px-5">
+      <div className="max-w-4xl  mx-auto bg-black/20  border border-white/30 shadow-lg rounded-2xl p-8">
         
         <h1 className="text-4xl font-bold text-center text-blue-700 mb-4">
           Privacy Policy
