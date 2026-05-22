@@ -13,7 +13,8 @@ const Privacy = () => {
         <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-2'>
                      <House
                      onClick={home}
-                     color="#ffffff" />
+                     color="#ffffff"
+                     className='active:scale-95' />
       </div>
         <h1 className="text-4xl font-bold text-center text-blue-700 mb-4">
           Privacy Policy
