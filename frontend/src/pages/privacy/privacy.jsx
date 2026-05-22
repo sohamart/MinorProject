@@ -1,4 +1,5 @@
 import React from 'react'
+import { House } from 'lucide-react'
 
 const Privacy = () => {
 
