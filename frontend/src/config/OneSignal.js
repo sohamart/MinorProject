@@ -2,17 +2,24 @@ import OneSignal from "react-onesignal";
 
 const initOneSignal = async () => {
 
+  // 🔥 localhost এ run করবে না
+
+  if (
+    window.location.hostname === "localhost"
+  ) {
+    return;
+  }
+
   await OneSignal.init({
 
-    appId: "YOUR_ONESIGNAL_APP_ID",
+    appId: "YOUR_APP_ID",
 
     allowLocalhostAsSecureOrigin: true,
 
   });
 
-  // 🔥 Auto Permission Popup
-
-  await OneSignal.Notifications.requestPermission(true);
+  await OneSignal.Notifications
+    .requestPermission(true);
 
 };
 
