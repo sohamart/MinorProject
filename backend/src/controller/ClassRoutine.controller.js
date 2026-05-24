@@ -500,10 +500,10 @@ const editDailyClasses = async (req, res) => {
 
         await sendNotification({
 
-            title: "Today's Classes Updated ✏️",
+            title: "today class Updated",
 
             message:
-                "Today's routine updated",
+                "Today's class routine updated successfully, check now ",
 
         });
 
@@ -582,10 +582,10 @@ const deleteDailyClass = async (req, res) => {
         await daily.save();
         await sendNotification({
 
-            title: "Class Deleted ❌",
+            title: "Today one class will be not held",
 
             message:
-                "One class removed from today's routine",
+                "Today's class routine updated successfully, One class Deleted, Please check now",
 
         });
 
@@ -626,10 +626,10 @@ const deleteAllDailyClass = async (req, res) => {
         const deleted = await DailyClass.deleteMany({});
         await sendNotification({
 
-            title: "All Classes Reset ⚠️",
+            title: "All Classes Reset ",
 
             message:
-                "All daily classes deleted",
+                "Today's class routine updated successfully. All classes reset.",
 
         });
         // ✅ response FIRST

@@ -101,6 +101,7 @@ const TodayClassTeacher = () => {
             
             setdeleting(false)
             toast.success("class deleted succesfull")
+            window.location.reload()
 
 
         } catch (err) {
@@ -152,6 +153,7 @@ const TodayClassTeacher = () => {
             setupdating(false)
             toast.success("class updated succesfull")
             console.log(res.data)
+            
 
 
 
@@ -174,6 +176,8 @@ const TodayClassTeacher = () => {
             setreseting(false)
             
             toast.success("classes reset succesfull")
+            window.location.reload()
+
 
 
         }
