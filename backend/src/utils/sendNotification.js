@@ -2,19 +2,34 @@ const axios = require("axios");
 require("dotenv").config({
     path: "./.env"
 });
-
 const sendNotification = async ({
   title,
   message,
 }) => {
 
+    console.log(process.env.ONESIGNAL_APP_ID);
+
+console.log(process.env.ONESIGNAL_REST_API_KEY);
+
   try {
 
-    const response = await axios.post(
+    const response = await axios({
 
-      "https://api.onesignal.com/notifications?c=push",
+      method: "POST",
 
-      {
+      url: "https://onesignal.com/api/v1/notifications",
+
+      headers: {
+
+        Authorization:
+          `Basic ${process.env.ONESIGNAL_REST_API_KEY}`,
+
+        "Content-Type":
+          "application/json",
+
+      },
+
+      data: {
 
         app_id:
           process.env.ONESIGNAL_APP_ID,
@@ -31,21 +46,7 @@ const sendNotification = async ({
 
       },
 
-      {
-
-        headers: {
-
-          Authorization:
-            `Basic ${process.env.ONESIGNAL_REST_API_KEY}`,
-
-          "Content-Type":
-            "application/json",
-
-        },
-
-      }
-
-    );
+    });
 
     console.log(
       "Notification Sent:",
@@ -55,7 +56,10 @@ const sendNotification = async ({
   } catch (error) {
 
     console.log(
-      error.response?.data || error.message
+
+      error.response?.data ||
+      error.message
+
     );
 
   }
