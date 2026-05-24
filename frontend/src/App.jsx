@@ -35,11 +35,41 @@ import { RefreshCcw } from 'lucide-react'
 import { useState } from 'react'
 import { ShieldCheck } from 'lucide-react'
 
+import OneSignal from "react-onesignal";
+import initOneSignal from "./config/OneSignal";
+
+
 
 
 
 
 const App = () => {
+  useEffect(() => {
+
+  const startOneSignal = async () => {
+
+    await initOneSignal();
+
+    // 🔥 Foreground Notification
+
+    OneSignal.Notifications.addEventListener(
+      "foregroundWillDisplay",
+
+      (event) => {
+
+        event.preventDefault();
+
+        event.notification.display();
+
+      }
+    );
+
+  };
+
+  startOneSignal();
+
+}, []);
+
 
 
   return (

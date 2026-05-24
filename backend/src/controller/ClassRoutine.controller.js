@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const Studentmodel = require("../model/StudentUser.model");
 const Teachermodel = require("../model/TeacherUser.model");
 const Adminmodel = require("../model/AdminUser.model");
+const sendNotification =
+    require("../utils/sendNotification");
 
 const { sendMail } = require("../utils/sendMail");
 
@@ -96,6 +98,14 @@ const addWeeklyClass = async (req, res) => {
 
             exists.classes.push(...classes);
             await exists.save();
+            await sendNotification({
+
+                title: "Weekly Routine Updated 📚",
+
+                message:
+                    `New classes added for ${day}`,
+
+            })
 
 
 
@@ -112,6 +122,15 @@ const addWeeklyClass = async (req, res) => {
         const weeklyclass = await weeklyClass.create({
             day,
             classes
+        });
+
+        await sendNotification({
+
+            title: "Weekly Routine Added 📚",
+
+            message:
+                `Weekly routine added for ${day}`,
+
         });
 
 
@@ -139,7 +158,7 @@ const addWeeklyClass = async (req, res) => {
             );
         } catch (error) {
             console.log("error" + error)
-            
+
         }
     } catch (error) {
         console.log("ADD ERROR:", error);
@@ -159,7 +178,14 @@ const deleteWeeklyClass = async (req, res) => {
         day = day.toLowerCase();
 
         const weeklyclass = await weeklyClass.findOneAndDelete({ day });
+        await sendNotification({
 
+            title: "Weekly Routine Deleted ❌",
+
+            message:
+                `${day} routine deleted`,
+
+        });
 
 
         if (!weeklyclass) {
@@ -205,6 +231,14 @@ const editWeeklyClass = async (req, res) => {
             { day, classes },
             { new: true }
         );
+        await sendNotification({
+
+            title: "Weekly Routine Updated ✏️",
+
+            message:
+                `${day} routine updated`,
+
+        });
 
 
         if (!weeklyclass) {
@@ -358,7 +392,14 @@ const addDailyClass = async (req, res) => {
             // ✅ add new classes
             existing.classes.push(...classes);
             await existing.save();
+            await sendNotification({
 
+                title: "Extra Class Added 📚",
+
+                message:
+                    `New extra class added today`,
+
+            });
 
             // ✅ MAIL
             const emails = await getAllEmails();
@@ -394,6 +435,14 @@ const addDailyClass = async (req, res) => {
             day: dayName,
             date: todayDate,
             classes
+        });
+        await sendNotification({
+
+            title: "Today's Class Added 📚",
+
+            message:
+                "Today's class schedule created",
+
         });
 
 
@@ -448,6 +497,15 @@ const editDailyClasses = async (req, res) => {
             { classes },
             { returnDocument: "after" }
         );
+
+        await sendNotification({
+
+            title: "Today's Classes Updated ✏️",
+
+            message:
+                "Today's routine updated",
+
+        });
 
         const emails = await getAllEmails();
 
@@ -522,7 +580,14 @@ const deleteDailyClass = async (req, res) => {
 
 
         await daily.save();
+        await sendNotification({
 
+            title: "Class Deleted ❌",
+
+            message:
+                "One class removed from today's routine",
+
+        });
 
 
 
@@ -559,7 +624,14 @@ const deleteAllDailyClass = async (req, res) => {
     try {
 
         const deleted = await DailyClass.deleteMany({});
+        await sendNotification({
 
+            title: "All Classes Reset ⚠️",
+
+            message:
+                "All daily classes deleted",
+
+        });
         // ✅ response FIRST
         res.status(200).json({
             message: "All daily data deleted successfully",
