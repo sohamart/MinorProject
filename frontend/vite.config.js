@@ -4,12 +4,42 @@ import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 import fs from 'fs'
 
+import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    
-    // 👇 THIS IS THE FIX
+
+    // ✅ PWA
+    VitePWA({
+      registerType: 'autoUpdate',
+
+      manifest: {
+        name: 'Class Routine',
+        short_name: 'Routine',
+        description: 'Class Routine App',
+        theme_color: '#000000',
+        background_color: '#000000',
+        display: 'standalone',
+        start_url: '/',
+
+        icons: [
+          {
+            src: '/logo.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/logo.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      }
+    }),
+
+    // ✅ redirects fix
     {
       name: 'copy-redirects',
       closeBundle() {

@@ -85,7 +85,7 @@ const AdminSidebarItems = (props) => {
                     ? "bg-white/15 border border-amber-50" 
                     : "hover:border hover:border-white/50 bg-none"}`
                 }
-                to={`/privacy`}
+                to={`/privacy_policy`}
               >
                 Privecy Policy
               </NavLink>

@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/loading/loading'
 import { RefreshCcw } from 'lucide-react';
 import { ShieldCheck } from 'lucide-react';
+import InstallPopup from '../../components/app_popup/InstallPopup'
 
 
 const Login = () => {
@@ -62,6 +63,7 @@ const Login = () => {
 
     return (
         <div className='flex  w-screen h-screen overflow-hidden text-white pl-4 pr-4 pb-4'>
+            <InstallPopup />
                 <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 left-7'>
             <RefreshCcw
               color='white'

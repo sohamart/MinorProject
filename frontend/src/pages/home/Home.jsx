@@ -6,6 +6,7 @@ import Loading from '../../components/loading/loading'
 import { motion } from "framer-motion"
 import kalnaLogo from "../../assets/KALNA.png"
 import { ShieldCheck } from 'lucide-react'
+import InstallPopup from '../../components/app_popup/InstallPopup'
  
 const Home = () => {
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ const Home = () => {
     
   return (
     <>
-
+      <InstallPopup />
 
 
         <div className='flex  relative flex-col items-center justify-center w-screen h-screen    overflow-hidden text-white '>
@@ -82,6 +83,7 @@ const Home = () => {
         
 
         </div>
+        
         
         </div>
 
