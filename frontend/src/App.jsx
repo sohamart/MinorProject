@@ -50,18 +50,20 @@ const App = () => {
 
     await initOneSignal();
 
-    // 🔥 Foreground Notification
-
     OneSignal.Notifications.addEventListener(
+
       "foregroundWillDisplay",
 
       (event) => {
+
+        console.log("Notification Received");
 
         event.preventDefault();
 
         event.notification.display();
 
       }
+
     );
 
   };
