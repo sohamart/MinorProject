@@ -5,17 +5,12 @@ const InstallPopup = () => {
 
   useEffect(() => {
 
-    // ✅ Detect REAL browser only
-    const isBrowser =
-      window.location.href.startsWith("http");
+    // ✅ Detect Median App
+    const isMedianApp =
+      navigator.userAgent.includes("C.R");
 
-    // ✅ Detect Android WebView / Median
-    const isWebView =
-      /wv/.test(navigator.userAgent) ||
-      /Android.*Version\/[\d.]+/.test(navigator.userAgent);
-
-    // ❌ App/WebView হলে popup না
-    if (!isBrowser || isWebView) return;
+    // ❌ Median app হলে popup block
+    if (isMedianApp) return;
 
     // ✅ Only website
     const timer = setTimeout(() => {
@@ -38,7 +33,7 @@ const InstallPopup = () => {
         </h1>
 
         <p className="text-gray-400 text-center mt-2">
-          Install our Android App for better experience
+          Install our Android App
         </p>
 
         <a
@@ -46,14 +41,14 @@ const InstallPopup = () => {
           target="_blank"
           className="block w-full text-center bg-yellow-400 text-black font-bold py-3 rounded-2xl mt-5"
         >
-          Download Now
+          Download
         </a>
 
         <button
           onClick={() => setShowPopup(false)}
           className="w-full mt-3 py-3 rounded-2xl bg-white/10 text-white"
         >
-          Maybe Later
+          Close
         </button>
 
       </div>
