@@ -82,7 +82,7 @@ const Login = () => {
                 {/* Title */}
                 <div className='lg:w-120 w-50 lg:h-20 bg-white/10 backdrop-blur-lg border-b border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                     <h1 className='lg:text-3xl h-15 text-center flex justify-center items-center text-lg uppercase font-bold'>
-                        our faculties
+                        Login
                     </h1>
                 </div>
 
