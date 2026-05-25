@@ -125,7 +125,7 @@ const Privacy = () => {
 
             <p className="text-blue-700 leading-7">
               <span className="font-semibold text-white">Email:</span>{' '}
-              trioentorcode@gmail.com
+              sohamduttabwn@gmail.com
             </p>
 
             <p className="text-yellow-400 leading-7">
