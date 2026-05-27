@@ -6,7 +6,9 @@ const Teacheruser = require('../model/TeacherUser.model');
 const Studentmodel = require("../model/StudentUser.model");
 const Teachermodel = require("../model/TeacherUser.model");
 const Adminmodel = require("../model/AdminUser.model");
-const { sendNotification } = require("../utils/sendNotification");
+const sendNotification =
+    require("../utils/sendNotification");
+
 
 const { sendMail } = require("../utils/sendMail");
 

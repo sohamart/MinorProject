@@ -90,11 +90,13 @@ const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
             {!loading ? ("logout"):("loading...")}
         </button>
 
-        {IsMedianApp && (
+        {IsMedianApp ? (
           <div>
              <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-0 mt-8 '>*No need to log in again for 10 days*</h1>
             </div>
-        )}
+        ):( <div>
+             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-0 mt-8 '>*No need to log in again for 1hrs Download the app for more time.*</h1>
+            </div>)}
         
         
         <div className='absolute bottom-[-12px] md:bottom-[-23px] lg:bottom-[-14px] text-[6px] md:text-[13px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
