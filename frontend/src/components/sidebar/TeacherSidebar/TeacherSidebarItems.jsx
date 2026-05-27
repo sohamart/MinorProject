@@ -8,7 +8,7 @@ import { AuthContextData } from '../../../context/AuthContext'
 const TeacherSidebarItems = (props) => {
   const { loggedinTeacher } = useContext(AuthContextData)
   const isMedianApp =
-  navigator.userAgent.includes("C.R");
+    navigator.userAgent.includes("C.R");
 
   const itemVariants = {
     hidden: { x: -60, opacity: 0 },
@@ -29,21 +29,20 @@ const TeacherSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={"/"}
         >
           Home
@@ -54,21 +53,20 @@ const TeacherSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={"/teacher/home"}
         >
           Dashbord
@@ -80,21 +78,20 @@ const TeacherSidebarItems = (props) => {
 
           onClick={props.NavHandel}
           className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={`/privacy_policy`}
         >
           Privecy Policy
@@ -105,21 +102,20 @@ const TeacherSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={"/teacher/todayClasses"}
         >
           TodayClass
@@ -130,21 +126,20 @@ const TeacherSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={"/teacher/ExtraClasses"}
         >
           Extra Class
@@ -154,21 +149,20 @@ const TeacherSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={"/teacher/WeeklyClasses"}
         >
           Weekly Class
@@ -178,22 +172,21 @@ const TeacherSidebarItems = (props) => {
       <motion.div variants={itemVariants}>
         <NavLink
           onClick={props.NavHandel}
-         className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={"/teacher/studentsData"}
         >
           Student
@@ -203,38 +196,37 @@ const TeacherSidebarItems = (props) => {
         <NavLink
 
           onClick={props.NavHandel}
-        className={({ isActive }) =>
-  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+          className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
   justify-center items-center rounded-2xl
 
   border backdrop-blur-xl
   transition-all duration-300
 
-  ${
-    isActive
-      ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
-      : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
-  }
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
 
   text-white hover:scale-[1.02]
   `
-}
+          }
           to={`/teacher/profile/${loggedinTeacher?._id}`}
         >
           Profile
         </NavLink>
       </motion.div>
 
-<motion.div
-  variants={itemVariants}
-  className="w-full flex justify-center"
->
-  {
-    isMedianApp ? (
+      <motion.div
+        variants={itemVariants}
+        className="w-full flex justify-center"
+      >
+        {
+          isMedianApp ? (
 
-      // ✅ Installed / Greeting Card
-      <div
-        className="
+            // ✅ Installed / Greeting Card
+            <div
+              className="
         group relative overflow-hidden
 
         w-78 lg:w-45
@@ -250,21 +242,21 @@ const TeacherSidebarItems = (props) => {
 
         shadow-xl shadow-green-400/10
         "
-      >
+            >
 
-        {/* Glow */}
-        <div className="
+              {/* Glow */}
+              <div className="
           absolute inset-0
           bg-gradient-to-br
           from-green-400/20 via-transparent to-transparent
         " />
 
-        <div className="relative flex items-start gap-3">
+              <div className="relative flex items-start gap-3">
 
-          {/* Icon */}
-          <div
-            className="
-            min-w-[42px] h-[42px]
+                {/* Icon */}
+                <div
+                  className="
+            min-w-[42px] h-[52px]
 
             rounded-2xl
             bg-green-400
@@ -273,38 +265,38 @@ const TeacherSidebarItems = (props) => {
 
             shadow-lg shadow-green-400/30
             "
-          >
-            ❤️
-          </div>
+                >
+                  ❤️
+                </div>
 
-          {/* Text */}
-          <div className="flex flex-col overflow-hidden">
+                {/* Text */}
+                <div className="flex flex-col overflow-hidden">
 
-            <h1 className="text-white text-[14px] font-semibold leading-tight">
-              Thanks For Installing
-            </h1>
+                  <h1 className="text-white text-[14px] font-semibold leading-tight">
+                    Thanks For Installing
+                  </h1>
 
-            <p className="text-green-200 text-[11px] mt-1 leading-relaxed">
-              Enjoy smoother & faster app experience 🚀
-            </p>
+                  <p className="text-green-200 text-[11px] mt-1 leading-relaxed">
+                    Enjoy smoother & faster app experience 🚀
+                  </p>
 
-          </div>
+                </div>
 
-        </div>
+              </div>
 
-        {/* Bottom */}
-        <div className="relative flex items-center justify-between mt-3">
+              {/* Bottom */}
+              <div className="relative flex items-center justify-between mt-3">
 
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
 
-            <span className="text-[10px] text-green-200">
-              APK Installed
-            </span>
-          </div>
+                  <span className="text-[10px] text-green-200">
+                    APK Installed
+                  </span>
+                </div>
 
-          <div
-            className="
+                <div
+                  className="
             px-2 py-1 rounded-full
 
             bg-white/10
@@ -312,30 +304,32 @@ const TeacherSidebarItems = (props) => {
 
             text-[10px] text-white
             "
-          >
-            THANK YOU
-          </div>
+                >
+                  THANK YOU
+                </div>
 
-        </div>
+              </div>
 
-      </div>
+            </div>
 
-    ) : (
+          ) : (
 
-      // ✅ Download Card
-      <a
-        href="https://sohamart.github.io/C.R-Time-Pro/"
-        target="_blank"
-        rel="noreferrer"
-        className="
+            // ✅ Download Card
+            <a
+              href="https://sohamart.github.io/C.R-Time-Pro/"
+              target="_blank"
+              rel="noreferrer"
+              className="
         group relative overflow-hidden
 
-        w-78 lg:w-45
-        h-[90px] lg:h-[90px]
+        w-78 lg:w-full
+        h-[120px] lg:h-[140px]
 
-        mr-2 px-4 py-3
+        mr-2 ml-2 px-4 py-3
 
         rounded-3xl
+
+        flex justify-center  flex-col
 
         border border-white/10
         bg-gradient-to-br from-yellow-400/10 to-white/5
@@ -348,10 +342,10 @@ const TeacherSidebarItems = (props) => {
         hover:shadow-2xl hover:shadow-yellow-400/10
         hover:scale-[1.02]
         "
-      >
+            >
 
-        {/* Glow */}
-        <div className="
+              {/* Glow */}
+              <div className="
           absolute inset-0
           bg-gradient-to-br
           from-yellow-400/20 via-transparent to-transparent
@@ -359,11 +353,11 @@ const TeacherSidebarItems = (props) => {
           transition-all duration-500
         " />
 
-        <div className="relative flex items-start gap-3">
+              <div className="relative flex items-start gap-3">
 
-          {/* Icon */}
-          <div
-            className="
+                {/* Icon */}
+                <div
+                  className="
             min-w-[42px] h-[42px]
 
             rounded-2xl
@@ -373,51 +367,51 @@ const TeacherSidebarItems = (props) => {
 
             shadow-lg shadow-yellow-400/30
             "
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-black"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.3}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 16V4m0 12l-4-4m4 4l4-4M4 20h16"
-              />
-            </svg>
-          </div>
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 text-black"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 16V4m0 12l-4-4m4 4l4-4M4 20h16"
+                    />
+                  </svg>
+                </div>
 
-          {/* Text */}
-          <div className="flex flex-col overflow-hidden">
+                {/* Text */}
+                <div className="flex flex-col overflow-hidden">
 
-            <h1 className="text-white text-[14px] font-semibold leading-tight">
-              Download Android App
-            </h1>
+                  <h1 className="text-white text-[14px] font-semibold leading-tight">
+                    Download Android App
+                  </h1>
 
-            <p className="text-gray-300 text-[11px] mt-1 leading-relaxed">
-              Faster performance & premium experience.
-            </p>
+                  <p className="text-gray-300 text-[11px] mt-1 leading-relaxed">
+                    Faster performance & premium experience.
+                  </p>
 
-          </div>
+                </div>
 
-        </div>
+              </div>
 
-        {/* Bottom */}
-        <div className="relative flex items-center justify-between mt-3">
+              {/* Bottom */}
+              <div className="relative flex items-center justify-between mt-3">
 
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
 
-            <span className="text-[10px] text-green-300">
-              Latest Version
-            </span>
-          </div>
+                  <span className="text-[10px] text-green-300">
+                    Latest Version
+                  </span>
+                </div>
 
-          <div
-            className="
+                <div
+                  className="
             px-2 py-1 rounded-full
 
             bg-yellow-400/15
@@ -425,17 +419,34 @@ const TeacherSidebarItems = (props) => {
 
             text-[10px] text-yellow-300
             "
-          >
-            APK
-          </div>
+                >
+                  APK
+                </div>
 
-        </div>
+              </div>
+              <button
+                className="
+                          px-3 py-1.5 rounded-xl
 
-      </a>
+                          bg-yellow-400
+                          hover:bg-yellow-300
 
-    )
-  }
-</motion.div>
+                          text-black text-[11px] font-semibold
+
+                          transition-all duration-300
+                          hover:scale-105
+
+                          shadow-lg mt-2 mb-2 shadow-yellow-400/20
+                          " 
+              >
+                Download
+              </button>
+
+            </a>
+
+          )
+        }
+      </motion.div>
     </div>
   );
 }
