@@ -1,20 +1,24 @@
 import React from 'react'
-import { House } from 'lucide-react'
+
+import { useNavigate } from "react-router-dom";
+import { ArrowLeftFromLine } from 'lucide-react';
+
 
 const Privacy = () => {
+  const navigate = useNavigate();
 
-  const home = () => {
-        window.location.href = "/"
+  const back = () => {
+        navigate(-1)
       }
   return (
     <div className="h-screen overflow-y-auto no-scrollbar py-10 px-5">
       
       <div className="max-w-4xl relative mx-auto bg-black/20  border border-white/30 shadow-lg rounded-2xl p-8">
         <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-2'>
-                     <House
-                     onClick={home}
+                     <ArrowLeftFromLine 
+                     onClick={back}
                      color="#ffffff"
-                     className='active:scale-95' />
+                     className='active:scale-95'/>
       </div>
         <h1 className="text-4xl font-bold text-center text-blue-700 mb-4">
           Privacy Policy
