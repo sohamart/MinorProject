@@ -256,7 +256,7 @@ const TeacherSidebarItems = (props) => {
                 {/* Icon */}
                 <div
                   className="
-            min-w-[42px] h-[52px]
+            min-w-[42px] h-[72px]
 
             rounded-2xl
             bg-green-400
