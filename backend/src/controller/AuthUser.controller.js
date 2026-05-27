@@ -6,6 +6,7 @@ const Teacheruser = require('../model/TeacherUser.model');
 const Studentmodel = require("../model/StudentUser.model");
 const Teachermodel = require("../model/TeacherUser.model");
 const Adminmodel = require("../model/AdminUser.model");
+const { sendNotification } = require("../utils/sendNotification");
 
 const { sendMail } = require("../utils/sendMail");
 
@@ -47,7 +48,14 @@ const registerStudent = async (req, res) => {
 
     try {
         const studentuserdata = await Studentuser.create({ name, phone, email, password: hashedPassword, trade, sem });
-
+        await sendNotification({
+        
+                        title: "New Student Registered",
+        
+                        message:
+                            `New student registered: ${studentuserdata.name}`,
+        
+                    })
         res.status(201).json({
             message: 'Student registered successfully',
             Studentuser: {
@@ -96,7 +104,7 @@ const loginStudent = async (req, res) => {
         const isMedian = req.headers["user-agent"]?.includes("C.R");
 
         const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET, {
-                expiresIn: isMedian ? "10d" : "10sec"
+                expiresIn: isMedian ? "10d" : "1h"
             });;
 
         res.cookie("token", token, {
@@ -211,6 +219,15 @@ const registerAdmin = async (req, res) => {
 
         const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET);
 
+         await sendNotification({
+        
+                        title: "New Admin Registered",
+        
+                        message:
+                            `New admin registered: ${adminuserdata.name}`,
+        
+                    })
+
         res.cookie("token", token, {
             httpOnly: true,
             secure: isProduction,
@@ -247,7 +264,7 @@ const loginAdmin = async (req, res) => {
         const isMedian = req.headers["user-agent"]?.includes("C.R");
 
         const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET, {
-                expiresIn: isMedian ? "10d" : "10sec"
+                expiresIn: isMedian ? "10d" : "1h"
             });
 
         res.cookie("token", token, {
@@ -318,7 +335,14 @@ const registerTeacher = async (req, res) => {
 
         const teacheruserdata = await Teacheruser.create({ name, phone, email, password: hashedPassword, subject });
 
-
+         await sendNotification({
+        
+                        title: "New Teacher Registered",
+        
+                        message:
+                            `New teacher registered: ${teacheruserdata.name}`,
+        
+                    })
 
         res.status(201).json({
             message: 'Teacher registered successfully',
@@ -368,7 +392,7 @@ const loginTeacher = async (req, res) => {
         const isMedian = req.headers["user-agent"]?.includes("C.R");
 
         const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET, {
-                expiresIn: isMedian ? "10d" : "10sec"
+                expiresIn: isMedian ? "10d" : "1h"
             });
 
         res.cookie("token", token, {

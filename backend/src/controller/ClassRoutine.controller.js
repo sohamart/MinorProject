@@ -98,16 +98,21 @@ const addWeeklyClass = async (req, res) => {
 
             exists.classes.push(...classes);
             await exists.save();
+            const addedSubjects = classes
+                .map(cls =>
+                    `• ${cls.subject} (${cls.time})`
+                )
+                .join("\n");
+
             await sendNotification({
 
-                title: "Weekly Routine Updated 📚",
+                title:
+                    "📚 Weekly Routine Updated",
 
                 message:
-                    `New classes added for ${day}`,
+                    `${formatDay(day)}\n${addedSubjects}`,
 
-            })
-
-
+            });
 
 
             return res.status(200).json({
@@ -124,12 +129,19 @@ const addWeeklyClass = async (req, res) => {
             classes
         });
 
+        const addedSubjects = classes
+            .map(cls =>
+                `• ${cls.subject} (${cls.time})`
+            )
+            .join("\n");
+
         await sendNotification({
 
-            title: "Weekly Routine Added 📚",
+            title:
+                "🚀 New Weekly Routine",
 
             message:
-                `Weekly routine added for ${day}`,
+                `${formatDay(day)}\n${addedSubjects}`,
 
         });
 
@@ -177,13 +189,28 @@ const deleteWeeklyClass = async (req, res) => {
 
         day = day.toLowerCase();
 
+        
+
         const weeklyclass = await weeklyClass.findOneAndDelete({ day });
+        if (!weeklyclass) {
+
+            return res.status(404).json({
+                message: 'Class not found'
+            });
+        }
+        const deletedSubjects = weeklyclass.classes
+            .map(cls =>
+                `• ${cls.subject} (${cls.time})`
+            )
+            .join("\n");
+
         await sendNotification({
 
-            title: "Weekly Routine Deleted ❌",
+            title:
+                "❌ Weekly Routine Removed",
 
             message:
-                `${day} routine deleted`,
+                `${formatDay(day)}\n${deletedSubjects}`,
 
         });
 
@@ -226,17 +253,103 @@ const editWeeklyClass = async (req, res) => {
 
         day = day.toLowerCase();
 
+        const oldData =
+            await weeklyClass.findById(id);
+
+        if (!oldData) {
+
+            return res.status(404).json({
+                message: "Class not found"
+            });
+
+        }
+
         const weeklyclass = await weeklyClass.findByIdAndUpdate(
             id,
             { day, classes },
             { new: true }
         );
+        const oldClass =
+            oldData.classes[0];
+
+        const newClass =
+            classes[0];
+
+        let changes = [];
+
+        if (
+            oldClass.subject !==
+            newClass.subject
+        ) {
+
+            changes.push(
+                `• Subject:
+${oldClass.subject}
+→
+${newClass.subject}`
+            );
+
+        }
+
+        if (
+            oldClass.teacher !==
+            newClass.teacher
+        ) {
+
+            changes.push(
+                `• Teacher:
+${oldClass.teacher}
+→
+${newClass.teacher}`
+            );
+
+        }
+
+        if (
+            oldClass.time !==
+            newClass.time
+        ) {
+
+            changes.push(
+                `• Time:
+${oldClass.time}
+→
+${newClass.time}`
+            );
+
+        }
+
+        if (
+            oldClass.type !==
+            newClass.type
+        ) {
+
+            changes.push(
+                `• Type:
+${oldClass.type}
+→
+${newClass.type}`
+            );
+
+        }
+
+        if (changes.length === 0) {
+
+            changes.push(
+                "• Minor updates applied"
+            );
+
+        }
+
         await sendNotification({
 
-            title: "Weekly Routine Updated ✏️",
+            title:
+                "✏️ Weekly Routine Updated",
 
             message:
-                `${day} routine updated`,
+                `${formatDay(day)}
+
+${changes.join("\n")}`,
 
         });
 
@@ -392,15 +505,16 @@ const addDailyClass = async (req, res) => {
             // ✅ add new classes
             existing.classes.push(...classes);
             await existing.save();
+            const firstClass = classes[0];
+
             await sendNotification({
 
-                title: "Extra Class Added 📚",
+                title: "📚 New Extra Class",
 
                 message:
-                    `New extra class added today`,
+                    `${firstClass.subject} • ${firstClass.time} • ${firstClass.teacher}`,
 
             });
-
             // ✅ MAIL
             const emails = await getAllEmails();
 
@@ -438,10 +552,10 @@ const addDailyClass = async (req, res) => {
         });
         await sendNotification({
 
-            title: "Today's Class Added 📚",
+            title: "Today's extra Class Added 📚 ",
 
             message:
-                "Today's class schedule created",
+                "Today's extra class schedule created",
 
         });
 
@@ -490,6 +604,15 @@ const editDailyClasses = async (req, res) => {
 
 
         }
+        const oldData =
+            await DailyClass.findById(id);
+
+        if (!oldData) {
+
+            return res.status(404).json({ message: "Daily class not found" });
+
+        }
+
 
         // 🔥 update
         const updated = await DailyClass.findByIdAndUpdate(
@@ -498,12 +621,77 @@ const editDailyClasses = async (req, res) => {
             { returnDocument: "after" }
         );
 
+        // 🔥 OLD & NEW
+        const oldClass =
+            oldData.classes[0];
+
+        const newClass =
+            classes[0];
+
+        // 🔥 Detect Changes
+        let changes = [];
+
+        if (
+            oldClass.subject !==
+            newClass.subject
+        ) {
+
+            changes.push(
+                `Subject: ${oldClass.subject} → ${newClass.subject}`
+            );
+
+        }
+
+        if (
+            oldClass.teacher !==
+            newClass.teacher
+        ) {
+
+            changes.push(
+                `Teacher: ${oldClass.teacher} → ${newClass.teacher}`
+            );
+
+        }
+
+        if (
+            oldClass.time !==
+            newClass.time
+        ) {
+
+            changes.push(
+                `Time: ${oldClass.time} → ${newClass.time}`
+            );
+
+        }
+
+        if (
+            oldClass.type !==
+            newClass.type
+        ) {
+
+            changes.push(
+                `Type: ${oldClass.type} → ${newClass.type}`
+            );
+
+        }
+
+        // 🔥 if nothing changed
+        if (changes.length === 0) {
+
+            changes.push(
+                "Minor routine updates applied"
+            );
+
+        }
+
+        // 🔥 FINAL NOTIFICATION
         await sendNotification({
 
-            title: "today class Updated",
+            title:
+                "⚡ Routine Updated",
 
             message:
-                "Today's class routine updated successfully, check now ",
+                `Changes: ${changes.join(" • ")}`,
 
         });
 
@@ -525,9 +713,7 @@ const editDailyClasses = async (req, res) => {
 
 
 
-        if (!updated) {
-            return res.status(404).json({ message: "Daily class not found" });
-        }
+
 
 
         res.status(200).json({
@@ -582,10 +768,11 @@ const deleteDailyClass = async (req, res) => {
         await daily.save();
         await sendNotification({
 
-            title: "Today one class will be not held",
+            title:
+                "❌ Class Cancelled",
 
             message:
-                "Today's class routine updated successfully, One class Deleted, Please check now",
+                `${classItem.subject} • ${classItem.time} • ${classItem.teacher}`,
 
         });
 
@@ -626,10 +813,11 @@ const deleteAllDailyClass = async (req, res) => {
         const deleted = await DailyClass.deleteMany({});
         await sendNotification({
 
-            title: "All Classes Reset ",
+            title:
+                "⚠️ Daily Routine Reset",
 
             message:
-                "Today's class routine updated successfully. All classes reset.",
+                `All ${deleted.deletedCount} daily schedules cleared`,
 
         });
         // ✅ response FIRST

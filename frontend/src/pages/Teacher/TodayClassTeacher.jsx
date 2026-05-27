@@ -15,7 +15,7 @@ const TodayClassTeacher = () => {
     const [selectedIndex, setSelectedIndex] = useState(null)
     const [adding, setadding] = useState(false)
     const [updating, setupdating] = useState(false)
-    const [deleting, setdeleting] = useState(false)
+    const [deleting, setdeleting] = useState(null)
     const [reseting, setreseting] = useState(false)
 
     const [formData, setFormData] = useState({
@@ -68,11 +68,11 @@ const TodayClassTeacher = () => {
                 { withCredentials: true }
             )
 
-          
+
 
             setShowAdd(false)
 
-            
+
             setadding(false)
             toast.success("class added succesfull")
 
@@ -89,17 +89,17 @@ const TodayClassTeacher = () => {
         try {
             const confirmDelete = window.confirm(`Delete this class?`)
             if (!confirmDelete) return
-            setdeleting(true)
+            setdeleting(classId)
             await axios.delete(
                 `${API}/api/class/today/delete/${classId}`,
                 { withCredentials: true }
             )
 
             // 🔥 NOTIFICATION
-        
 
-            
-            setdeleting(false)
+
+
+            setdeleting(null)
             toast.success("class deleted succesfull")
             window.location.reload()
 
@@ -107,7 +107,7 @@ const TodayClassTeacher = () => {
         } catch (err) {
             console.log(err.response?.data)
             toast.error("Delete failed", +err.response?.data.message)
-            setdeleting(false)
+            setdeleting(null)
         }
     }
 
@@ -146,14 +146,14 @@ const TodayClassTeacher = () => {
                 { classes: updatedClasses },
                 { withCredentials: true }
             )
-            
+
 
             setShowEdit(false)
             // window.location.reload()
             setupdating(false)
             toast.success("class updated succesfull")
             console.log(res.data)
-            
+
 
 
 
@@ -174,7 +174,7 @@ const TodayClassTeacher = () => {
             )
 
             setreseting(false)
-            
+
             toast.success("classes reset succesfull")
             window.location.reload()
 
@@ -267,7 +267,10 @@ const TodayClassTeacher = () => {
                                                         <button onClick={() => openEdit(cls, index)} className=' min-w-20 bg-green-500/20 border active:scale-95 rounded-2xl border-green-400/50 p-2'>Edit</button>
                                                         <button onClick={() => handleDeleteClass(cls._id)} className='min-w-20 bg-red-500/20 border active:scale-95 rounded-2xl border-red-400/50 p-2'>
 
-                                                            {deleting ? ("deleting..") : ("delete")}
+                                                            {deleting === cls._id
+                                                                ? "deleting..."
+                                                                : "delete"
+                                                            }
                                                         </button>
                                                     </div>
 
