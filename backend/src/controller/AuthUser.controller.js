@@ -46,7 +46,7 @@ const registerStudent = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        const studentuserdata = await Studentuser.create({ name,phone, email, password: hashedPassword, trade, sem });
+        const studentuserdata = await Studentuser.create({ name, phone, email, password: hashedPassword, trade, sem });
 
         res.status(201).json({
             message: 'Student registered successfully',
@@ -59,20 +59,20 @@ const registerStudent = async (req, res) => {
             }
         });
         const emails = await getAllEmails();
-        
-                try {
-                    sendMail(
-        
-                    emails,
-        
-                    "New Student Registered",
-        
-                    `New Student has been registered now, name - ${studentuserdata.name}, Please check now `
-        
-                );
-                }catch(error){
-                    console.log("error"+error)
-                }
+
+        try {
+            sendMail(
+
+                emails,
+
+                "New Student Registered",
+
+                `New Student has been registered now, name - ${studentuserdata.name}, Please check now `
+
+            );
+        } catch (error) {
+            console.log("error" + error)
+        }
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' + error });
@@ -93,9 +93,11 @@ const loginStudent = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
+        const isMedian = req.headers["user-agent"]?.includes("C.R");
+
         const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET, {
-            expiresIn: '1h'
-        });
+                expiresIn: isMedian ? "10d" : "10sec"
+            });;
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -157,28 +159,28 @@ const deleteStudent = async (req, res) => {
 
     try {
         const deletedStudent = await Studentuser.findByIdAndDelete(id);
-        if (!student){
+        if (!student) {
             res.status(404).json({ message: 'Student not found' });
         }
-        res.status(200).json({ 
+        res.status(200).json({
             message: 'Student deleted successfully',
             deletedStudent
         });
         const emails = await getAllEmails();
-        
-                try {
-                    sendMail(
-        
-                    emails,
-        
-                    "one Student left",
-        
-                    `admin has been deleted a student now, name - ${deletedStudent.name}, Please check now `
-        
-                );
-                }catch(error){
-                    console.log("error"+error)
-                }
+
+        try {
+            sendMail(
+
+                emails,
+
+                "one Student left",
+
+                `admin has been deleted a student now, name - ${deletedStudent.name}, Please check now `
+
+            );
+        } catch (error) {
+            console.log("error" + error)
+        }
     } catch {
         res.status(500).json({ message: 'Internal server error' });
 
@@ -242,10 +244,11 @@ const loginAdmin = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
+        const isMedian = req.headers["user-agent"]?.includes("C.R");
 
-        const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET,{
-            expiresIn: '1h'
-        });
+        const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET, {
+                expiresIn: isMedian ? "10d" : "10sec"
+            });
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -303,7 +306,7 @@ const findadmin = async (req, res) => {
 // ================= TEACHER =================
 
 const registerTeacher = async (req, res) => {
-    const { name, email, password, subject, phone} = req.body;
+    const { name, email, password, subject, phone } = req.body;
 
     try {
         const isTeacherExist = await Teacheruser.findOne({ email });
@@ -315,7 +318,7 @@ const registerTeacher = async (req, res) => {
 
         const teacheruserdata = await Teacheruser.create({ name, phone, email, password: hashedPassword, subject });
 
-        
+
 
         res.status(201).json({
             message: 'Teacher registered successfully',
@@ -326,21 +329,21 @@ const registerTeacher = async (req, res) => {
                 phone: teacheruserdata.phone,
             }
         });
-         const emails = await getAllEmails();
-        
-                try {
-                    sendMail(
-        
-                    emails,
-        
-                    "New Teacher Registered",
-        
-                    `New Faculty has been registered now, name - ${teacheruserdata.name}, Please check now `
-        
-                );
-                }catch(error){
-                    console.log("error"+error)
-                }
+        const emails = await getAllEmails();
+
+        try {
+            sendMail(
+
+                emails,
+
+                "New Teacher Registered",
+
+                `New Faculty has been registered now, name - ${teacheruserdata.name}, Please check now `
+
+            );
+        } catch (error) {
+            console.log("error" + error)
+        }
 
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' + error });
@@ -362,9 +365,11 @@ const loginTeacher = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET,{
-            expiresIn: '1h'
-        });
+        const isMedian = req.headers["user-agent"]?.includes("C.R");
+
+        const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET, {
+                expiresIn: isMedian ? "10d" : "10sec"
+            });
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -426,33 +431,33 @@ const deleteTeacher = async (req, res) => {
 
     try {
         const deletedTeacher = await Teacheruser.findByIdAndDelete(id);
-        if (!teacher){
+        if (!teacher) {
             res.status(404).json({ message: 'Teacher not found' });
         }
-        res.status(200).json({ 
+        res.status(200).json({
             message: 'Teacher deleted successfully',
             deletedTeacher
         });
         const emails = await getAllEmails();
-        
-                try {
-                    sendMail(
-        
-                    emails,
-        
-                    "one Teacher left",
-        
-                    `one Faculty has been left, name - ${deletedTeacher.name},Please check now `
-        
-                );
-                }catch(error){
-                    console.log("error"+error)
-                }
-    }catch{
+
+        try {
+            sendMail(
+
+                emails,
+
+                "one Teacher left",
+
+                `one Faculty has been left, name - ${deletedTeacher.name},Please check now `
+
+            );
+        } catch (error) {
+            console.log("error" + error)
+        }
+    } catch {
         res.status(500).json({ message: 'Internal server error' });
     }
 
-    }
+}
 
 
 
@@ -468,14 +473,14 @@ const getAllStudent = async (req, res) => {
         res.status(200).json({
             message: 'Students found successfully',
             studentuserdata: studentuserdata
-            });
-            
-    
+        });
 
-    } catch{
+
+
+    } catch {
         res.status(500).json({ message: 'Internal server error' });
     }
-    }
+}
 const getAllteacher = async (req, res) => {
     try {
         const teacheruserdata = await Teacheruser.find();
@@ -488,11 +493,11 @@ const getAllteacher = async (req, res) => {
             teacheruserdata: teacheruserdata
         });
     }
-    catch{
+    catch {
         res.status(500).json({ message: 'Internal server error' });
     }
 
-    }
+}
 
 module.exports = {
     registerStudent,
