@@ -38,11 +38,20 @@ const AdminSidebarItems = (props) => {
       <motion.div variants={itemVariants}>
         <NavLink
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/"}
         >
@@ -54,10 +63,19 @@ const AdminSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/home"}
         >
@@ -68,10 +86,19 @@ const AdminSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/todayClasses"}
         >
@@ -82,12 +109,21 @@ const AdminSidebarItems = (props) => {
               <NavLink
                 
                 onClick={props.NavHandel}
-                className={({ isActive }) =>
-                  `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-                  ${isActive 
-                    ? "bg-white/15 border border-amber-50" 
-                    : "hover:border hover:border-white/50 bg-none"}`
-                }
+                 className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
+          }
                 to={`/privacy_policy`}
               >
                 Privecy Policy
@@ -97,10 +133,19 @@ const AdminSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/ExtraClasses"}
         >
@@ -110,11 +155,20 @@ const AdminSidebarItems = (props) => {
       <motion.div variants={itemVariants}>
         <NavLink
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/WeeklyClass"}
         >
@@ -126,10 +180,19 @@ const AdminSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/facultiesData"}
         >
@@ -139,11 +202,20 @@ const AdminSidebarItems = (props) => {
       <motion.div variants={itemVariants}>
         <NavLink
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/studentsData"}
         >
@@ -155,11 +227,20 @@ const AdminSidebarItems = (props) => {
         <NavLink
           
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={`/Admin/profile/${loggedinAdmin?._id}`}
         >
@@ -170,11 +251,20 @@ const AdminSidebarItems = (props) => {
         <NavLink
           
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/teacherRegister"}
         >
@@ -185,12 +275,20 @@ const AdminSidebarItems = (props) => {
         <NavLink
           
           onClick={props.NavHandel}
-          
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/Admin/studentRegister"}
         >
