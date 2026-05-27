@@ -33,11 +33,20 @@ const studentSidebarItems = (props) => {
       <motion.div variants={itemVariants}>
         <NavLink
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/"}
         >
@@ -48,10 +57,19 @@ const studentSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/student/home"}
         >
@@ -62,10 +80,19 @@ const studentSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/student/todayClasses"}
         >
@@ -76,10 +103,19 @@ const studentSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/student/ExtraClasses"}
         >
@@ -90,10 +126,19 @@ const studentSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/student/WeeklyClasses"}
         >
@@ -106,10 +151,19 @@ const studentSidebarItems = (props) => {
         <NavLink
           onClick={props.NavHandel}
           className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={"/student/Faculty"}
         >
@@ -120,11 +174,20 @@ const studentSidebarItems = (props) => {
         <NavLink
           
           onClick={props.NavHandel}
-          className={({ isActive }) =>
-            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 justify-center items-center rounded-2xl
-            ${isActive 
-              ? "bg-white/15 border border-amber-50" 
-              : "hover:border hover:border-white/50 bg-none"}`
+           className={({ isActive }) =>
+            `flex w-78 h-15 lg:w-45 mr-2 lg:h-10 
+  justify-center items-center rounded-2xl
+
+  border backdrop-blur-xl
+  transition-all duration-300
+
+  ${isActive
+              ? "bg-white/15 border-yellow-400/70 shadow-lg shadow-yellow-400/10"
+              : "bg-white/5 border-white/10 hover:border-white/40 hover:bg-white/10"
+            }
+
+  text-white hover:scale-[1.02]
+  `
           }
           to={`/student/profile/${loggedinStudent?._id}`}
         >
