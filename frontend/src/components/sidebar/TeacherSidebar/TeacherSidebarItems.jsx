@@ -229,10 +229,10 @@ const TeacherSidebarItems = (props) => {
               className="
         group relative overflow-hidden
 
-        w-78 lg:w-45
-        h-[88px] lg:h-[82px]
+        w-78 lg:w-full
+        h-[90px] lg:h-[90px]
 
-        mr-2 px-4 py-3
+        mr-2 ml-2 px-4 py-3
 
         rounded-3xl
 
@@ -256,7 +256,7 @@ const TeacherSidebarItems = (props) => {
                 {/* Icon */}
                 <div
                   className="
-            min-w-[42px] h-[72px]
+            min-w-[42px] h-[42px]
 
             rounded-2xl
             bg-green-400
