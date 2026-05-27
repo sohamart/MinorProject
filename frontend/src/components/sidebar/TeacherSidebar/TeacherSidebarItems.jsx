@@ -222,19 +222,21 @@ const TeacherSidebarItems = (props) => {
         className="w-full flex justify-center"
       >
         {
-          isMedianApp ? (
+          !isMedianApp ? (
 
             // ✅ Installed / Greeting Card
             <div
               className="
         group relative overflow-hidden
 
-        w-78 lg:w-full
-        h-[90px] lg:h-[90px]
+       w-78 lg:w-full
+        h-[120px] lg:h-[140px]
 
         mr-2 ml-2 px-4 py-3
 
         rounded-3xl
+
+        flex justify-center  flex-col
 
         border border-green-400/20
         bg-gradient-to-br from-green-400/10 to-white/5
