@@ -21,6 +21,8 @@ const Profile = () => {
     const API = import.meta.env.VITE_API_URI
     const [error, seterror] = useState(null)
     const [loading, setloading] = useState(false)
+    const IsMedianApp =
+      navigator.userAgent.includes("C.R");
 
     const logouthandel = async () => {
         setloading(true)
@@ -57,6 +59,7 @@ const Profile = () => {
             
         }  
     }
+
     
   return (
     <div className=' relative border w-full h-full flex flex-col items-center lg:bg-black/5 bg-white/5 border-white/50 rounded-2xl'>
@@ -92,6 +95,15 @@ const Profile = () => {
         className='mt-5 lg:w-40 lg:h-14 w-30 active:scale-95 h-12 uppercase text-blue-400 hover:text-white hover:bg-blue-400 bg-blue-400/10 border border-blue-400/50 rounded-2xl flex items-center justify-center overflow-hidden'>
             {!loading ? ("logout"):("loading...")}
         </button>
+
+        
+        {IsMedianApp ? (
+          <div>
+             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 10 days*</h1>
+            </div>
+        ):( <div>
+             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 1hrs Download the app for more time.*</h1>
+            </div>)}
         
         <div className='absolute bottom-[-12px] md:bottom-[-23px] lg:bottom-[-14px] text-[6px] md:text-[13px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
                         <h1 className=' uppercase '>

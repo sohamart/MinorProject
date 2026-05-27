@@ -92,10 +92,10 @@ const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
 
         {IsMedianApp ? (
           <div>
-             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-0 mt-8 '>*No need to log in again for 10 days*</h1>
+             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 10 days*</h1>
             </div>
         ):( <div>
-             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-0 mt-8 '>*No need to log in again for 1hrs Download the app for more time.*</h1>
+             <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 1hrs Download the app for more time.*</h1>
             </div>)}
         
         
