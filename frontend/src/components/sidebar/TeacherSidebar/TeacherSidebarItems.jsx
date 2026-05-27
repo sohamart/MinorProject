@@ -325,7 +325,7 @@ const TeacherSidebarItems = (props) => {
         group relative overflow-hidden
 
         w-78 lg:w-full
-        h-[120px] lg:h-[140px]
+        h-[150px] lg:h-[150px]
 
         mr-2 ml-2 px-4 py-3
 
