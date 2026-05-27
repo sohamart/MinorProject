@@ -222,7 +222,7 @@ const TeacherSidebarItems = (props) => {
         className="w-full flex justify-center"
       >
         {
-          !isMedianApp ? (
+          isMedianApp ? (
 
             // ✅ Installed / Greeting Card
             <div
