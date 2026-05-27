@@ -16,6 +16,7 @@ const Privacy = () => {
       <div className="max-w-4xl relative mx-auto bg-black/20  border border-white/30 shadow-lg rounded-2xl p-8">
         <div className='absolute z-12 w-10 h-10  flex justify-center items-center  bg-white/20 border-white/50  border-b-2 rounded-b-2xl top-0 right-2'>
                      <ArrowLeftFromLine 
+                     title='Go Back'
                      onClick={back}
                      color="#ffffff"
                      className='active:scale-95'/>
