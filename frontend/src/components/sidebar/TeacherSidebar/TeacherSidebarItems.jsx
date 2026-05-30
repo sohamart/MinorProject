@@ -9,6 +9,9 @@ const TeacherSidebarItems = (props) => {
   const { loggedinTeacher } = useContext(AuthContextData)
   const isMedianApp =
     navigator.userAgent.includes("C.R");
+    const isDesktopApp =
+    navigator.userAgent.includes("Electron");
+
 
   const itemVariants = {
     hidden: { x: -60, opacity: 0 },
@@ -222,7 +225,7 @@ const TeacherSidebarItems = (props) => {
         className="w-full flex justify-center"
       >
         {
-          isMedianApp ? (
+          isMedianApp || isDesktopApp ? (
 
             // ✅ Installed / Greeting Card
             <div
@@ -390,7 +393,7 @@ const TeacherSidebarItems = (props) => {
                 <div className="flex flex-col overflow-hidden">
 
                   <h1 className="text-white text-[14px] font-semibold leading-tight">
-                    Download Android App
+                    Download Android/Windows App
                   </h1>
 
                   <p className="text-gray-300 text-[11px] mt-1 leading-relaxed">

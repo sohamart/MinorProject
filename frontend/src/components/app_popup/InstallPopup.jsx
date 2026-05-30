@@ -9,9 +9,14 @@ const InstallPopup = () => {
     // ✅ Detect Median App
     const isMedianApp =
       navigator.userAgent.includes("C.R");
+    const isDesktopApp =
+    navigator.userAgent.includes("Electron");
 
     // ❌ Hide in Median App
     if (isMedianApp) return;
+    // ❌ Hide in Desktop App
+    if (isDesktopApp) return;
+
 
     // ✅ Show only on website
     const timer = setTimeout(() => {
@@ -64,7 +69,7 @@ const InstallPopup = () => {
             </h1>
 
             <p className="text-gray-400 text-sm mt-1 leading-relaxed">
-              Install our Android App for a faster and better experience.
+              Install our Android App or Windows App for a faster and better experience.
             </p>
 
             {/* Button */}

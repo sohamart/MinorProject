@@ -32,6 +32,8 @@ const AdminSidebarItems = (props) => {
   };
     const isMedianApp =
     navigator.userAgent.includes("C.R");
+    const isDesktopApp =
+    navigator.userAgent.includes("Electron");
 
   return (
     <div ref={navRef}  className="text-white pb-12 relative z-20 flex gap-4 no-scrollbar overflow-y-auto flex-col w-full items-center h-full rounded-2xl p-2 lg:pt-18">
@@ -300,7 +302,7 @@ const AdminSidebarItems = (props) => {
               className="w-full flex justify-center"
             >
               {
-                isMedianApp ? (
+                isMedianApp || isDesktopApp ? (
       
                   // ✅ Installed / Greeting Card
                   <div
@@ -468,7 +470,7 @@ const AdminSidebarItems = (props) => {
                       <div className="flex flex-col overflow-hidden">
       
                         <h1 className="text-white text-[14px] font-semibold leading-tight">
-                          Download Android App
+                          Download Android/Windows App
                         </h1>
       
                         <p className="text-gray-300 text-[11px] mt-1 leading-relaxed">
