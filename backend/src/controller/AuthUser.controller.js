@@ -12,9 +12,8 @@ const sendNotification =
 
 const { sendMail } = require("../utils/sendMail");
 
-const userAgent =
-            req.headers["user-agent"] || "";
-const isDesktop = userAgent.includes("Electron");
+const isDesktop =
+  req.headers["user-agent"]?.includes("Electron");
 
 
 const getAllEmails = async () => {
@@ -108,9 +107,9 @@ const loginStudent = async (req, res) => {
         }
 
         const isMedian = req.headers["user-agent"]?.includes("C.R");
-        
 
-        
+
+
 
         const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET, {
             expiresIn: isMedian || isDesktop ? "10d" : "1h"
