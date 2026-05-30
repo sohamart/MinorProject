@@ -124,7 +124,7 @@ const Privacy = () => {
 
           <div className="bg-white/10 border border-white/50 rounded-xl p-5">
             <p className="text-green-400 leading-7">
-              <span className="font-semibold text-white">Developer Name:</span> C.R Time Pro Team - Kalna Polytechnic
+              <span className="font-semibold text-white">Developer Name:</span>Minor Project Team of Kalna Polytechnic
             </p>
 
             <p className="text-blue-700 leading-7">
