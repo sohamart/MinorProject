@@ -11,6 +11,7 @@ const InstallPopup = () => {
       navigator.userAgent.includes("C.R");
     const isDesktopApp =
     navigator.userAgent.includes("Electron");
+    console.log(navigator.userAgent);
 
     // ❌ Hide in Median App
     if (isMedianApp) return;

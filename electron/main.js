@@ -8,6 +8,7 @@ function createWindow() {
   });
 
   win.loadURL("https://classroutinetime.vercel.app/");
+  win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
