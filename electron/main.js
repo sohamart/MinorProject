@@ -7,8 +7,8 @@ function createWindow() {
     autoHideMenuBar: true
   });
 
-  win.loadURL("https://classroutinetime.vercel.app/");
-  win.webContents.openDevTools();
+  win.loadURL("https://classroutinetime.vercel.app");
+  
 }
 
 app.whenReady().then(createWindow);
