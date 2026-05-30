@@ -124,13 +124,12 @@ const Privacy = () => {
 
           <div className="bg-white/10 border border-white/50 rounded-xl p-5">
             <p className="text-green-400 leading-7">
-              <span className="font-semibold text-white">Developer Name:</span> Soham
-              Dutta
+              <span className="font-semibold text-white">Developer Name:</span> C.R Time Pro Team - Kalna Polytechnic
             </p>
 
             <p className="text-blue-700 leading-7">
               <span className="font-semibold text-white">Email:</span>{' '}
-              sohamduttabwn@gmail.com
+              trioentorcode@gmail.com
             </p>
 
             <p className="text-yellow-400 leading-7">
