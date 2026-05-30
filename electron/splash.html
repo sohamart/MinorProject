@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>C.R Time Pro</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+width:100vw;
+height:100vh;
+
+overflow:hidden;
+
+background:#050505;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+/* Background */
+
+.bg{
+
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(circle at top left,
+rgba(139,92,246,.4),
+transparent 30%),
+
+radial-gradient(circle at bottom right,
+rgba(79,70,229,.3),
+transparent 30%),
+
+#050505;
+
+animation:bgMove 8s ease infinite;
+
+}
+.fade-out{
+  animation: fullOutro 1s ease forwards;
+}
+
+@keyframes fullOutro{
+  to{
+    opacity:0;
+    transform:scale(1.08);
+    filter:blur(20px);
+  }
+}
+.container{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+@keyframes bgMove{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.1);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+/* Container */
+
+.container{
+
+position:relative;
+
+z-index:20;
+
+display:flex;
+flex-direction:column;
+
+align-items:center;
+
+}
+
+/* Logo */
+
+.logo-wrap{
+
+opacity:0;
+
+animation:
+logoIn 1.2s ease forwards;
+
+}
+
+.logo{
+
+width:180px;
+
+filter:
+drop-shadow(
+0 0 30px
+rgba(139,92,246,.8)
+);
+
+}
+
+@keyframes logoIn{
+
+0%{
+
+opacity:0;
+
+transform:
+scale(.3)
+rotate(-20deg);
+
+filter:blur(20px);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:
+scale(1)
+rotate(0deg);
+
+filter:blur(0px);
+
+}
+
+}
+
+/* Title */
+
+.title{
+
+margin-top:20px;
+
+font-size:55px;
+font-weight:700;
+
+background:
+linear-gradient(
+135deg,
+#fff,
+#8b5cf6,
+#4f46e5
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+opacity:0;
+
+animation:
+fadeUp 1s ease forwards;
+
+animation-delay:1s;
+
+}
+
+.subtitle{
+
+margin-top:10px;
+
+letter-spacing:4px;
+
+font-size:14px;
+
+color:#aaa;
+
+opacity:0;
+
+animation:
+fadeUp 1s ease forwards;
+
+animation-delay:1.3s;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+}
+
+/* Glass Frame */
+
+.frame{
+
+margin-top:40px;
+
+width:650px;
+height:320px;
+
+border-radius:30px;
+
+overflow:hidden;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:
+blur(20px);
+
+border:
+1px solid
+rgba(255,255,255,.1);
+
+box-shadow:
+
+0 0 50px
+rgba(139,92,246,.25),
+
+0 0 120px
+rgba(79,70,229,.2);
+
+opacity:0;
+
+animation:
+frameIn 1s ease forwards;
+
+animation-delay:1.8s;
+
+}
+
+@keyframes frameIn{
+
+from{
+
+opacity:0;
+
+transform:
+scale(.7);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+scale(1);
+
+}
+
+}
+
+.frame video{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+/* Loader */
+
+.loader{
+
+width:100%;
+height:8px;
+
+background:
+rgba(255,255,255,.08);
+
+margin-top:35px;
+
+border-radius:50px;
+
+overflow:hidden;
+
+}
+
+.bar{
+
+width:0%;
+
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+#8b5cf6,
+#4f46e5
+);
+
+animation:
+loadBar 5s linear forwards;
+
+}
+
+@keyframes loadBar{
+
+from{
+width:0%;
+}
+
+to{
+width:100%;
+}
+
+}
+
+/* Outro */
+
+.outro{
+
+animation:
+outroAnim .8s ease forwards;
+
+animation-delay:5s;
+
+}
+
+@keyframes outroAnim{
+
+to{
+
+opacity:0;
+
+transform:
+scale(1.3);
+
+filter:blur(20px);
+
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.frame{
+
+width:92vw;
+height:220px;
+
+}
+
+.title{
+
+font-size:35px;
+
+}
+
+.logo{
+
+width:130px;
+
+}
+
+}
+.container{
+  width:100%;
+  height:100%;
+}
+
+.logo{
+  width:min(18vw,220px);
+}
+
+.title{
+  font-size:clamp(32px,5vw,70px);
+}
+
+.frame{
+  width:min(80vw,900px);
+  height:min(45vw,500px);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="container outro">
+
+<div class="logo-wrap">
+
+<img
+src="assets/logo.png"
+class="logo">
+
+</div>
+
+<div class="title">
+C.R Time Pro
+</div>
+
+<div class="subtitle">
+SMART COLLEGE MANAGEMENT SYSTEM
+</div>
+
+<div class="frame">
+
+<video
+autoplay
+muted
+playsinline
+loop>
+
+<source
+src="assets/intro.mp4"
+type="video/mp4">
+
+</video>
+
+</div>
+
+<div class="loader">
+
+<div class="bar"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const speechText = "Welcome to C R Time Pro";
+
+window.addEventListener("load", () => {
+
+  setTimeout(() => {
+
+    const speech =
+      new SpeechSynthesisUtterance(
+        speechText
+      );
+
+    speech.lang = "en-US";
+    speech.rate = 0.9;
+
+    speechSynthesis.speak(speech);
+
+  }, 2500);
+
+  // Outro Start
+  setTimeout(() => {
+
+    document.body.classList.add(
+      "fade-out"
+    );
+
+  }, 5500);
+
+});
+
+</script>
+
+</body>
+
+</html>

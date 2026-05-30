@@ -54,6 +54,9 @@ const TeacherProfile = () => {
 
     const IsMedianApp =
         navigator.userAgent.includes("C.R");
+    const isDesktop =
+                  navigator.userAgent.includes("Electron");
+
 
     return (
         <div className=' relative border w-full h-full flex flex-col items-center lg:bg-black/5 bg-white/5 border-white/50 rounded-2xl'>
@@ -89,7 +92,7 @@ const TeacherProfile = () => {
                 className='mt-5 lg:w-40 lg:h-14 w-30 active:scale-95 h-12 uppercase text-blue-400 hover:text-white hover:bg-blue-400 bg-blue-400/10 border border-blue-400/50 rounded-2xl flex items-center justify-center overflow-hidden'>
                 {!loading ? ("logout") : ("loading...")}
             </button>
-            {IsMedianApp ? (
+            {IsMedianApp || isDesktop ? (
                 <div>
                     <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 10 days*</h1>
                 </div>

@@ -23,6 +23,8 @@ const Profile = () => {
     const [loading, setloading] = useState(false)
     const IsMedianApp =
       navigator.userAgent.includes("C.R");
+    const isDesktop =
+                  navigator.userAgent.includes("Electron");
 
 
     const logouthandel = async () => {
@@ -95,7 +97,7 @@ const Profile = () => {
             {!loading ? ("logout"):("loading...")}
         </button>
         
-        {IsMedianApp ? (
+        {IsMedianApp || isDesktop ? (
           <div>
              <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 10 days*</h1>
             </div>
