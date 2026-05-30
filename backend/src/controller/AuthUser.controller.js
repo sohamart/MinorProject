@@ -12,8 +12,6 @@ const sendNotification =
 
 const { sendMail } = require("../utils/sendMail");
 
-const isDesktop =
-  req.headers["user-agent"]?.includes("Electron");
 
 
 const getAllEmails = async () => {
@@ -107,7 +105,7 @@ const loginStudent = async (req, res) => {
         }
 
         const isMedian = req.headers["user-agent"]?.includes("C.R");
-
+        const isDesktop = req.headers["user-agent"]?.includes("Electron");
 
 
 
@@ -273,6 +271,7 @@ const loginAdmin = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         const isMedian = req.headers["user-agent"]?.includes("C.R");
+        const isDesktop = req.headers["user-agent"]?.includes("Electron");
 
         const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET, {
             expiresIn: isMedian || isDesktop ? "10d" : "1h"
@@ -404,6 +403,7 @@ const loginTeacher = async (req, res) => {
         }
 
         const isMedian = req.headers["user-agent"]?.includes("C.R");
+        const isDesktop = req.headers["user-agent"]?.includes("Electron");
 
         const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET, {
             expiresIn: isMedian || isDesktop ? "10d" : "1h"
