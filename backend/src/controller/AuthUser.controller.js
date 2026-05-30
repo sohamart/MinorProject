@@ -118,7 +118,10 @@ const loginStudent = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: isProduction,
-            sameSite: isProduction ? "none" : "lax"
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: (isMedian || isDesktop)
+            ? 10 * 24 * 60 * 60 * 1000 // 10 days
+            : 60 * 60 * 1000 // 1 hour
         });
 
         res.status(201).json({
@@ -278,7 +281,10 @@ const loginAdmin = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: isProduction,
-            sameSite: isProduction ? "none" : "lax"
+            sameSite: isProduction ? "none" : "lax",
+             maxAge: (isMedian || isDesktop)
+            ? 10 * 24 * 60 * 60 * 1000 // 10 days
+            : 60 * 60 * 1000 // 1 hour
         });
 
         res.status(201).json({
@@ -406,7 +412,10 @@ const loginTeacher = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: isProduction,
-            sameSite: isProduction ? "none" : "lax"
+            sameSite: isProduction ? "none" : "lax",
+             maxAge: (isMedian || isDesktop)
+            ? 10 * 24 * 60 * 60 * 1000 // 10 days
+            : 60 * 60 * 1000 // 1 hour
         });
 
         res.status(201).json({
