@@ -3,6 +3,8 @@ import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
 import Logo from '../../assets/clock.webp'
 import { toast } from 'react-toastify'
+import { BellRing } from "lucide-react";
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
 
 
 
@@ -17,6 +19,7 @@ const TodayClassTeacher = () => {
     const [updating, setupdating] = useState(false)
     const [deleting, setdeleting] = useState(null)
     const [reseting, setreseting] = useState(false)
+    const [showNotification, setShowNotification] = useState(false)
 
     const [formData, setFormData] = useState({
         subject: "",
@@ -188,14 +191,32 @@ const TodayClassTeacher = () => {
         }
     }
 
+    const boxopen = () => {
+        setShowNotification(!showNotification)
+    }
+    
+    if(showNotification){
+            return (           
+                    <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
+            )}
+                    
+
+
     return (
         <>
             <div className='relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]'>
 
                 {/* HEADER */}
-                <div className='lg:w-120 h-18 w-50 lg:h-20  bg-white/10 border-b border-white/40 border-r border-l shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+                <div className='lg:w-120 relative h-18 w-50 lg:h-20  bg-white/10 border-b border-white/40 border-r border-l shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                     <h1 className='lg:text-3xl flex h-18 items-center justify-center uppercase font-bold'>Today Class</h1>
+                    <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute top-18  flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                    <BellRing />
+
+                 </div>
+                    
                 </div>
+                 
+                 
 
                 {/* ADD BUTTON */}
                 <button
@@ -211,7 +232,9 @@ const TodayClassTeacher = () => {
                     {reseting ? ("reseting..") : ("Reset Classes")}
                 </button>
 
-                <div className='flex gap-12 pt-24 p-2 pb-24 w-full flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center'>
+                
+
+                <div className='flex gap-12 pt-14 p-2 pb-24 w-full flex-col overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center'>
 
                     {TodayData === null && (
                         <p className="text-white animate-pulse text-xl">No classes Found !!</p>

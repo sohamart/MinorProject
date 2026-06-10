@@ -10,6 +10,9 @@ import { Dot } from "lucide-react";
 
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
+import { BellRing } from 'lucide-react';
+
 const TeacherProfile = () => {
     const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
     const navigate = useNavigate()
@@ -57,12 +60,30 @@ const TeacherProfile = () => {
     const isDesktop =
                   navigator.userAgent.includes("Electron");
 
+    const [showNotification, setShowNotification] = useState(false)
+  
+  const boxopen = () => {
+        setShowNotification(!showNotification)
+    }
+    
+    if(showNotification){
+            return (           
+                    <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
+            )}
+
+
 
     return (
         <div className=' relative border w-full h-full flex flex-col items-center lg:bg-black/5 bg-white/5 border-white/50 rounded-2xl'>
-            <div className='lg:w-120 h-16 mb-8 w-50 lg:h-20 border-r border-l bg-white/10  border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+            <div className='lg:w-120 relative h-16 mb-15 w-50 lg:h-20 border-r border-l bg-white/10  border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                 <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>Profile</h1>
+                <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute lg:top-20 top-16  flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                    <BellRing />
+
+                 </div>
             </div>
+
+            
             {error && (
                 <p className=' transition-all duration-300 ease-in text-red-500'>
                     {error}
@@ -70,7 +91,7 @@ const TeacherProfile = () => {
 
             )}
 
-            <div className='mt-5 w-32 h-32 lg:w-50 lg:h-50 bg-green-400/10 border-2 border-green-400/30 rounded-full flex items-center justify-center overflow-hidden'>
+            <div className='mt-5 w-32 h-32  lg:w-50 lg:h-50 bg-green-400/10 border-2 border-green-400/30 rounded-full flex items-center justify-center overflow-hidden'>
                 <img className=' w-30 h-30  lg:w-50 lg:h-50 rounded-full object-cover' src={teacher} alt="" />
             </div>
             <div className='flex flex-col items-center justify-center lg:flex-row lg:gap-12'>

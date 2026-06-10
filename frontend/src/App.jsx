@@ -37,6 +37,9 @@ import { ShieldCheck } from 'lucide-react'
 
 import OneSignal from "react-onesignal";
 import initOneSignal from "./config/OneSignal";
+import {
+  NotificationProvider,
+} from "./context/Notifications";
 
 
 
@@ -76,6 +79,7 @@ const App = () => {
 
 
   return (
+    <NotificationProvider>
     <div className='h-screen relative w-screen flex flex-col  overflow-hidden bg-black'>
       
            
@@ -250,6 +254,7 @@ const App = () => {
 
 
     </div>
+    </NotificationProvider>
   )
 }
 

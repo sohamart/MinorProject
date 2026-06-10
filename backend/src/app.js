@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const AuthRouter = require('./routes/AuthUser.routes');
 const ClassRouter = require('./routes/ClassRoutine.routes');
+const NotificationRouter = require('./routes/Notification.routes');
 const cookie = require('cookie-parser');
 
 
@@ -33,5 +34,7 @@ app.use(cookie());
 
 app.use("/api/auth", AuthRouter)
 app.use("/api/class", ClassRouter)
+app.use("/api", NotificationRouter)
+
 
 module.exports = app;

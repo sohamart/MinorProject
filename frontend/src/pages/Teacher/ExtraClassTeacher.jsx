@@ -1,6 +1,9 @@
 import React from 'react'
 import { useContext } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
+import { useState } from 'react'
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
+import { BellRing } from 'lucide-react';
 
 const ExtraClassTeacher = () => {
     const { TodayClass: TodayData, error, loading } = useContext(ClassContextData)
@@ -8,15 +11,27 @@ const ExtraClassTeacher = () => {
             cls => cls.remarks && cls.remarks.length > 2
         );
         const currentLocal = new Date()
+     const [showNotification, setShowNotification] = useState(false)
+  
+  const boxopen = () => {
+        setShowNotification(!showNotification)
+    }
     
+    if(showNotification){
+            return (           
+                    <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
+            )}
     
     
         return (
             <>
                 <div className=' relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
-                    <div className='lg:w-120   h-18 w-50 lg:h-20 bg-white/10 border-b border-white/40 border-r border-l shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center' >
+                    <div className='lg:w-120 relative  h-18 w-50 lg:h-20 bg-white/10 border-b border-white/40 border-r border-l shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center' >
                         <h1 className='lg:text-3xl  flex h-18  items-center justify-center  uppercase font-bold'>Extra Class</h1>
-    
+                        <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute top-18  flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                                <BellRing />
+            
+                             </div>
                     </div>
                       {/* day */}
                                    <div className='absolute top-30  lg:left-12 left-2 ' >

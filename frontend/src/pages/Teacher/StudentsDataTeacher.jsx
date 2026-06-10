@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react';
 import { MessageCircleMore } from "lucide-react";
 import { Ban } from "lucide-react";
 import Student from '../../assets/student.png'
+import { BellRing } from "lucide-react";
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
+
+
 
 
 const StudentsDataTeacher = () => {
@@ -47,6 +51,17 @@ const fetchStudents = async () => {
 
     }, [])
 
+     const [showNotification, setShowNotification] = useState(false)
+  
+  const boxopen = () => {
+        setShowNotification(!showNotification)
+    }
+    
+    if(showNotification){
+            return (           
+                    <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
+            )}
+
     
 
 
@@ -55,9 +70,14 @@ const fetchStudents = async () => {
         <div className='h-full relative w-full bg-black/10 flex flex-col items-center rounded-2xl  border border-white/50'>
 
             {/* Heading */}
-            <div className='lg:w-120 h-18 mb-8 w-50 lg:h-20 bg-white/10 border-r border-l border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
+            <div className='lg:w-120 relative h-18  w-50 lg:h-20 bg-white/10 border-r border-l border-b border-white/40  shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center'>
                 <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>our students</h1>
+                <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute top-18  flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                                <BellRing />
+            
+                             </div>
             </div>
+            
 
             {/* Container */}
             <div className='overflow-y-scroll lg:pt-14 lg:pb-24 h-full pt-8 pb-30 no-scrollbar bg-black/20  lg:justify-center shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-xl [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-8 justify-center  items-center lg:items-start'>
