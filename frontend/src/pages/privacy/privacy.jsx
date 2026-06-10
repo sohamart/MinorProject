@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeftFromLine } from 'lucide-react';
 import { RefreshCcw } from 'lucide-react';
 import { useState } from 'react';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/loading/loading';
 
 
 const Privacy = () => {
