@@ -2,6 +2,10 @@ import React, { useContext, useState } from 'react'
 import { ClassContextData } from '../../context/ClassContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
+import { useNotification } from '../../context/Notifications'
+import { BellRing } from "lucide-react";
+
 
 
 const WeeklyClassAdmin = () => {
@@ -19,6 +23,8 @@ const WeeklyClassAdmin = () => {
   const [updateError, setUpdateError] = useState(null)
   const [adding, setadding] = useState(false)
   const [addError, setaddError] = useState(null)
+  const [showNotification, setShowNotification] = useState(false)
+
 
   const API = import.meta.env.VITE_API_URI
 
@@ -185,15 +191,53 @@ const addClass = async () => {
     setadding(false)
   }
 }
+
+  const boxopen = () => {
+    setShowNotification(!showNotification)
+  }
+  
+  if(showNotification){
+          return (           
+                  <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
+          )}
+          const { count } = useNotification();
   return (
     <>
       <div className='relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center border border-white/50 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-3 lg:p-6'>
 
         {/* HEADER */}
-        <div className='lg:w-120 w-60  h-16 lg:h-20 bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center mb-6'>
+        <div className='lg:w-120 relative  w-60  h-16 lg:h-20 bg-white/10 border border-white/30 rounded-2xl flex items-center justify-center mb-6'>
           <h1 className='lg:text-3xl h-18 flex items-center justify-center text-xl uppercase font-bold'>Weekly Class</h1>
+        <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute lg:top-18 top-15   flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                                <BellRing />
+                                {count > 0 && (
+    <span
+      className='
+      absolute
+      -top-2
+      -right-2
+      min-w-6
+      h-6
+      px-1
+      bg-red-500/60
+      text-white
+      border border-red-500/50
+      text-xs
+      font-bold
+      rounded-full
+      flex
+      items-center
+      justify-center
+      animate-pulse
+      
+      '
+    >
+      {count > 99 ? "99+" : count}
+    </span>
+  )}
+                             </div>
         </div>
-        <div className='absolute left-5  lg:top-28  lg:w-120 w-42 top-24'>
+        <div className='absolute left-5  lg:top-28  lg:w-120 w-32 top-24'>
           <h1 className='text-xs animate-pulse text-red-600' >
             ***All Changed data update after 24 hrs***
           </h1>

@@ -6,6 +6,9 @@ import axios from 'axios';
 import student from '../../assets/student.png'
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import { BellRing } from "lucide-react";
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
+import { useNotification } from '../../context/Notifications'
 
 
 const StudentRegister = () => {
@@ -76,6 +79,16 @@ const StudentRegister = () => {
         setRegisterdSuccess(false)
         seterror(null)
     }
+    const [showNotification, setShowNotification] = useState(false)
+    const boxopen = () => {
+        setShowNotification(!showNotification)
+    }
+    if (showNotification) {
+        return (
+            <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification} />
+        )
+    }
+    const { count } = useNotification();
 
     return (
         <>
@@ -84,8 +97,36 @@ const StudentRegister = () => {
                 {/* Heading */}
                 <div className='lg:w-120 h-18 mb-2 w-50 lg:h-20 bg-white/10 border-r  border-l border-b border-white/40   rounded-2xl mt-2 flex items-center justify-center'>
                     <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>Students Register</h1>
+                <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute top-20 flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                                                <BellRing />
+                                                {count > 0 && (
+                    <span
+                      className='
+                      absolute
+                      -top-2
+                      -right-2
+                      min-w-6
+                      h-6
+                      px-1
+                      bg-red-500/60
+                      text-white
+                      border border-red-500/50
+                      text-xs
+                      font-bold
+                      rounded-full
+                      flex
+                      items-center
+                      justify-center
+                      animate-pulse
+                      
+                      '
+                    >
+                      {count > 99 ? "99+" : count}
+                    </span>
+                  )}
+                                             </div>
                 </div>
-
+                
                 {/* Container */}
                 <div className='overflow-y-scroll no-scrollbar h-full pt-12 pb-30  [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]       backdrop-blur-md rounded-xl  flex overflow-auto flex-wrap lg:gap-4 w-full mt-4 p-4 lg:p-12 justify-center  items-center '>
 
@@ -180,11 +221,7 @@ const StudentRegister = () => {
                     </form>
 
                 </div>
-                <div className='absolute bottom-[-12px] lg:bottom-[-14px] text-[6px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
-                    <h1 className=' uppercase '>
-                        designed and devoloped by Soham Dutta
-                    </h1>
-                </div>
+                
                 {RegisterdSuccess && !error && (
 
                     <div className='w-1200 h-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl z-2000 backdrop-blur-xs   bg-black/50 flex items-center justify-center'>

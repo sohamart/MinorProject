@@ -7,6 +7,10 @@ import axios from 'axios';
 import teacher from '../../assets/teacher.jpg'
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import { AuthContextData } from '../../context/AuthContext';
+import { BellRing } from "lucide-react";
+import Notificationbox from '../../components/NotificationBox/Notificationbox'
+import { useNotification } from '../../context/Notifications'
 
 
 const TeacherRegister = () => {
@@ -77,6 +81,17 @@ const TeacherRegister = () => {
         setRegisterdSuccess(false)
         seterror(null)
     }
+        const [showNotification, setShowNotification] = useState(false)
+    const boxopen = () => {
+        setShowNotification(!showNotification)
+    }
+    if(showNotification){
+
+        return (           
+                <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
+        )
+    }
+    const { count } = useNotification();
 
     return (
         <>
@@ -85,6 +100,34 @@ const TeacherRegister = () => {
                 {/* Heading */}
                 <div className='lg:w-120 h-18 mb-2 w-50 lg:h-20 bg-white/10 border-r  border-l border-b border-white/40   rounded-2xl mt-2 flex items-center justify-center'>
                     <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>Teacher Register</h1>
+                <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute top-20 flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
+                                <BellRing />
+                                {count > 0 && (
+    <span
+      className='
+      absolute
+      -top-2
+      -right-2
+      min-w-6
+      h-6
+      px-1
+      bg-red-500/60
+      text-white
+      border border-red-500/50
+      text-xs
+      font-bold
+      rounded-full
+      flex
+      items-center
+      justify-center
+      animate-pulse
+      
+      '
+    >
+      {count > 99 ? "99+" : count}
+    </span>
+  )}
+                             </div>
                 </div>
 
                 {/* Container */}
@@ -203,11 +246,7 @@ const TeacherRegister = () => {
                     </div> 
 
                 )}
-               <div className='absolute bottom-[-12px] md:bottom-[-23px] lg:bottom-[-14px] text-[6px] md:text-[13px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
-                        <h1 className=' uppercase '>
-                            designed and devoloped by Soham Dutta
-                        </h1>
-                    </div>
+               
 
             </div>
 
