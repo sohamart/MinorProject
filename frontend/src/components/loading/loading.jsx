@@ -12,7 +12,7 @@ const Loading = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true)
-    }, 4000)
+    }, 6000)
 
     return () => clearTimeout(timer)
   }, [])

@@ -4,21 +4,31 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeftFromLine } from 'lucide-react';
 import { RefreshCcw } from 'lucide-react';
 import { useState } from 'react';
+import Loading from '../../components/Loading/Loading';
 
 
 const Privacy = () => {
   const navigate = useNavigate();
   const [rotated, setRotated] = useState(false);
+  const [isReloading, setIsReloading] =
+  useState(false);
   const back = () => {
         navigate(-1)
       }
    const Refresh = () => {
-    setRotated(true);
+  setRotated(true);
+  setIsReloading(true)
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 10); // animation complete
-  };   
+  setTimeout(() => {
+    window.location.href =
+      window.location.pathname;
+  }, 500);
+};   
+if (isReloading) {
+  return (
+    <Loading />
+  );
+}
   return (
     <div className="h-screen overflow-y-auto no-scrollbar py-10 px-5">
       

@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Notificationbox from '../../components/NotificationBox/Notificationbox'
 import { BellRing } from 'lucide-react';
+import { useNotification } from '../../context/Notifications'
 
 const TeacherProfile = () => {
     const { loggedinTeacher, setloggedinTeacher } = useContext(AuthContextData)
@@ -71,7 +72,7 @@ const TeacherProfile = () => {
                     <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
             )}
 
-
+            const { count } = useNotification();
 
     return (
         <div className=' relative border w-full h-full flex flex-col items-center lg:bg-black/5 bg-white/5 border-white/50 rounded-2xl'>
@@ -79,7 +80,31 @@ const TeacherProfile = () => {
                 <h1 className='lg:text-3xl h-18 text-center flex justify-center items-center text-lg uppercase font-bold'>Profile</h1>
                 <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute lg:top-20 top-16  flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
                     <BellRing />
-
+                    {count > 0 && (
+    <span
+      className='
+      absolute
+      -top-2
+      -right-2
+      min-w-6
+      h-6
+      px-1
+      bg-red-500/60
+      text-white
+      border border-red-500/50
+      text-xs
+      font-bold
+      rounded-full
+      flex
+      items-center
+      justify-center
+      animate-pulse
+      
+      '
+    >
+      {count > 99 ? "99+" : count}
+    </span>
+  )}
                  </div>
             </div>
 
@@ -122,11 +147,7 @@ const TeacherProfile = () => {
             </div>)}
 
 
-            <div className='absolute bottom-[-12px] md:bottom-[-23px] lg:bottom-[-14px] text-[6px] md:text-[13px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
-                <h1 className=' uppercase '>
-                    designed and devoloped by Soham Dutta
-                </h1>
-            </div>
+            
         </div>
     )
 }

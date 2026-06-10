@@ -4,6 +4,7 @@ import { ClassContextData } from '../../context/ClassContext'
 import { useState } from 'react'
 import Notificationbox from '../../components/NotificationBox/Notificationbox'
 import { BellRing } from 'lucide-react';
+import { useNotification } from '../../context/Notifications'
 
 
 
@@ -21,6 +22,8 @@ const WeeklyClassTeacher = () => {
             return (           
                     <Notificationbox setShowNotification={setShowNotification} showNotification={showNotification}/>                      
             )}
+
+    const { count } = useNotification();
      return (
          <>
              <div className=' relative text-white h-full w-full lg:bg-black/5 bg-black/20 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
@@ -28,7 +31,31 @@ const WeeklyClassTeacher = () => {
                      <h1 className='lg:text-3xl  flex h-18 items-center justify-center  uppercase font-bold'>weekly Class</h1>
                      <div onClick={boxopen} className = 'w-14 h-14 backdrop-blur-md z-2 absolute top-18  flex justify-center items-center duration-300 active:scale-y-95 adsolute  bg-white/20  border-b-white/50 rounded-b-2xl border-b-2 '>
                     <BellRing />
-
+                     {count > 0 && (
+    <span
+      className='
+      absolute
+      -top-2
+      -right-2
+      min-w-6
+      h-6
+      px-1
+      bg-red-500/60
+      text-white
+      border border-red-500/50
+      text-xs
+      font-bold
+      rounded-full
+      flex
+      items-center
+      justify-center
+      animate-pulse
+      
+      '
+    >
+      {count > 99 ? "99+" : count}
+    </span>
+  )}
                  </div>
                  </div>
                 
@@ -71,11 +98,7 @@ const WeeklyClassTeacher = () => {
  
  
  
-                     <div className='absolute bottom-[-12px] md:bottom-[-23px] lg:bottom-[-14px] text-[6px] md:text-[13px] lg:text-[8px] text-white text-center opacity-10 flex justify-center items-center w-full'>
-                        <h1 className=' uppercase '>
-                            designed and devoloped by Soham Dutta
-                        </h1>
-                    </div>
+                     
  
  
                  </div>
