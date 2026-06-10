@@ -81,10 +81,10 @@ const HomeTeacher = () => {
         <h1 className='lg:text-8xl  text-5xl text-center uppercase font-bold'>
           welcome back
         </h1>
-        <p className='mt-3 text-center lg:text-2xl text-xl font-bold '>
+        <p className='mt-3 mb-22 text-center lg:text-2xl text-xl font-bold '>
           Teacher - {loggedinName}
         </p>
-        <p className='text-xl mt-5 mb-6 opacity-40'>Check Your Pages </p>
+        <p className='text-xl mt-5 mb-6 opacity-40'></p>
       <div className=' absolute  bottom-15 h-40 w-full  overflow-auto no-scrollbar [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] items-center flex-wrap justify-center lg:mt-4 flex gap-5 p-5 '>
         <button onClick={weeklybutton} className='w-35 p-2 lg:w-45 lg:h-18 lg:text-xl text-xs h-12 active:scale-95 bg-green-400/20 border border-green-400/50 rounded-2xl'>
           Weekly Class
