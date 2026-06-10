@@ -136,10 +136,11 @@ const Notificationbox = ({
         relative
         w-full
         max-w-2xl
-        h-[80vh]
+        h-[74vh]
         overflow-hidden
         rounded-3xl
         mb-22
+        mt-5
         lg:mb-0
         border
         border-white/10
