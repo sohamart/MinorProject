@@ -139,7 +139,7 @@ const Notificationbox = ({
         h-[74vh]
         overflow-hidden
         rounded-3xl
-        mb-22
+        mb-25
         mt-5
         lg:mb-0
         border
