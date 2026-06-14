@@ -66,6 +66,11 @@ const AuthContext = (props) => {
         console.log("Admin not loggedin")
         setloggedinAdmin(null)
       }
+      finally {
+        setTimeout(() => {
+          setloading(false)
+        }, 2000)
+      }
       try {
         const res = await axios.get(`${API}/api/auth/loggedinTeacher/find`,
           { withCredentials: true }
