@@ -16,30 +16,30 @@ const Loading = () => {
     "Please retry."
   ]
 
+  // Start with no message visible
   const [messageIndex, setMessageIndex] = useState(-1)
 
   // ✅ Detect Median App
   const isMedianApp = navigator.userAgent.includes("C.R")
 
   useEffect(() => {
-    const timings = [
-      3000,
-      6000,
-      9000,
-      12000,
-      15000,
-      18000,
-      21000,
-      24000,
-      28000,
-      32000
-    ]
+    const timers = []
 
-    const timers = timings.map((time, index) =>
+    // First message after 5 seconds
+    timers.push(
       setTimeout(() => {
-        setMessageIndex(index)
-      }, time)
+        setMessageIndex(0)
+      }, 5000)
     )
+
+    // Remaining messages every 3 seconds
+    messages.slice(1).forEach((_, index) => {
+      timers.push(
+        setTimeout(() => {
+          setMessageIndex(index + 1)
+        }, 5000 + (index + 1) * 3000)
+      )
+    })
 
     return () => {
       timers.forEach(clearTimeout)
@@ -53,11 +53,13 @@ const Loading = () => {
           key={messageIndex}
           initial={{
             opacity: 0,
-            y: 30
+            y: 35,
+            scale: 0.95
           }}
           animate={{
             opacity: 1,
-            y: 0
+            y: 0,
+            scale: 1
           }}
           exit={{
             opacity: 0,
