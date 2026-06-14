@@ -16,23 +16,23 @@ const Loading = () => {
     "Please retry."
   ]
 
-  const [messageIndex, setMessageIndex] = useState(0)
+  const [messageIndex, setMessageIndex] = useState(-1)
 
   // ✅ Detect Median App
   const isMedianApp = navigator.userAgent.includes("C.R")
 
   useEffect(() => {
     const timings = [
-      4000,
+      3000,
       6000,
-      8000,
-      10000,
+      9000,
       12000,
-      14000,
-      16000,
+      15000,
       18000,
-      22000,
-      25000
+      21000,
+      24000,
+      28000,
+      32000
     ]
 
     const timers = timings.map((time, index) =>
@@ -48,22 +48,36 @@ const Loading = () => {
 
   const MessageComponent = () => (
     <AnimatePresence mode="wait">
-      <motion.p
-        key={messageIndex}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -8 }}
-        transition={{ duration: 0.4 }}
-        className={`mt-8 text-center px-8 ${
-          messageIndex >= 8
-            ? "text-red-400"
-            : messageIndex >= 6
-            ? "text-yellow-400"
-            : "text-green-400"
-        }`}
-      >
-        {messages[messageIndex]}
-      </motion.p>
+      {messageIndex >= 0 && (
+        <motion.p
+          key={messageIndex}
+          initial={{
+            opacity: 0,
+            y: 30
+          }}
+          animate={{
+            opacity: 1,
+            y: 0
+          }}
+          exit={{
+            opacity: 0,
+            y: -15
+          }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut"
+          }}
+          className={`mt-8 text-center px-8 ${
+            messageIndex >= 8
+              ? "text-red-400"
+              : messageIndex >= 6
+              ? "text-yellow-400"
+              : "text-green-400"
+          }`}
+        >
+          {messages[messageIndex]}
+        </motion.p>
+      )}
     </AnimatePresence>
   )
 
