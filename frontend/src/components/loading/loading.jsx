@@ -113,7 +113,7 @@ const Loading = () => {
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-3 h-3 bg-green-400 rounded-full"
+                className="w-3 h-3 animate-pulse duration-300 bg-green-400 rounded-full"
                 animate={{
                   y: [0, -8, 0],
                 }}
@@ -177,7 +177,7 @@ const Loading = () => {
           {[0, 1, 2].map((i) => (
             <motion.div
               key={i}
-              className="w-3 h-3 bg-green-400 rounded-full"
+              className="w-3 h-3 animate-pulse duration-300 bg-green-400 rounded-full"
               animate={{
                 y: [0, -8, 0],
               }}
