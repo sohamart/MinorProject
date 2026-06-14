@@ -81,7 +81,7 @@ const AuthContext = (props) => {
       finally {
         setTimeout(() => {
           setloading(false)
-        }, 1000)
+        }, 15000)
       }
 
       }
@@ -94,7 +94,7 @@ const AuthContext = (props) => {
       finally {
         setTimeout(() => {
           setloading(false)
-        }, 12000)
+        }, 20000)
       }
      
     }
