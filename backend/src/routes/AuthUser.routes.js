@@ -27,7 +27,10 @@ router.delete('/deleteStudent/:id', AuthMiddileware.AuthAdminMiddileware, AuthUs
 router.delete('/deleteTeacher/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteTeacher)
 
 
-
+router.post(
+"/google/login",
+AuthUserController.googleLogin
+);
 
 
 
