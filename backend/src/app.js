@@ -6,7 +6,7 @@ const ClassRouter = require('./routes/ClassRoutine.routes');
 const NotificationRouter = require('./routes/Notification.routes');
 const cookie = require('cookie-parser');
 const passport = require("passport");
-require("./config/passport");
+require("../src/config/passport");
 
 
 
