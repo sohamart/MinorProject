@@ -113,6 +113,8 @@ const googleLogin = () => {
                                 {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "Login"} {/* 🔥 text change */}
                             </button>
                            <button
+                            className='active:scale-95 duration-300 bg-blue-400 text-white rounded-2xl w-25 h-11 mt-5 md:text-2xl md:w-60 md:h-20 md:mt-10 lg:w-33 lg:h-14 uppercase border border-amber-50 lg:mt-5'
+                            
     type="button"
     onClick={googleLogin}
 >
