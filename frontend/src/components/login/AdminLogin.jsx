@@ -117,7 +117,7 @@ const googleLogin = () => {
     onClick={googleLogin}
 >
     Continue with Google
-</button>
+</button> 
                         </form>
         </>
     )
