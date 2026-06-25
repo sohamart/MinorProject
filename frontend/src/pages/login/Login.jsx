@@ -13,7 +13,6 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-const [searchParams] = useSearchParams();
 
 
 
@@ -24,6 +23,8 @@ const Login = () => {
     const [stlogin, setstlogin] = useState(true)
     const [trlogin, settrlogin] = useState(false)
     const [adlogin, setadlogin] = useState(false)
+    
+const [searchParams] = useSearchParams();
 
     const { loggedinStudent, loggedinAdmin, loggedinTeacher, loading } = useContext(AuthContextData)
     const navigate = useNavigate()
