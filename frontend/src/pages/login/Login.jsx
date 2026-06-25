@@ -10,7 +10,7 @@ import Loading from '../../components/loading/loading'
 import { RefreshCcw } from 'lucide-react';
 import { ShieldCheck } from 'lucide-react';
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+
 import { toast } from "react-toastify";
 
 
