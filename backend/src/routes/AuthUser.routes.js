@@ -43,10 +43,5 @@ router.get(
   AuthUserController.googleCallback
 );
 
-router.post(
-    "/google/login",
-    AuthUserController.googleLogin
-);
-
 
 module.exports = router;

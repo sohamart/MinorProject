@@ -8,14 +8,12 @@ const Teachermodel = require("../model/TeacherUser.model");
 const Adminmodel = require("../model/AdminUser.model");
 const sendNotification =
     require("../utils/sendNotification");
-
+require("dotenv").config({
+    path: "./.env"
+});
 
 const { sendMail } = require("../utils/sendMail");
-const { OAuth2Client } = require("google-auth-library");
 
-const googleClient = new OAuth2Client(
-    process.env.GOOGLE_CLIENT_ID
-);
 
 
 
