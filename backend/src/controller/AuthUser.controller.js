@@ -580,8 +580,8 @@ const googleCallback = async (req, res) => {
         // Registered না থাকলে
         if (!user) {
             return res.redirect(
-`${process.env.FRONTEND_URL}/google-success?error=not_registered`
-);
+                `${process.env.FRONTEND_URL}/login?error=not_registered`
+            );
         }
 
         const isMedian =
@@ -634,9 +634,9 @@ const googleCallback = async (req, res) => {
 
         console.log(error);
 
-       return res.redirect(
-`${process.env.FRONTEND_URL}/google-success?error=login_failed`
-);
+        return res.redirect(
+            `${process.env.FRONTEND_URL}/login?error=google_failed`
+        );
     }
 };
 

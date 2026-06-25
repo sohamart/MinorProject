@@ -9,6 +9,13 @@ import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/loading/loading'
 import { RefreshCcw } from 'lucide-react';
 import { ShieldCheck } from 'lucide-react';
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+
+const [searchParams] = useSearchParams();
+
+
 
 
 
@@ -59,7 +66,23 @@ const Login = () => {
         window.location.href = "/privacy_policy"
       }
     
+useEffect(() => {
 
+    const error = searchParams.get("error");
+
+    if (error === "not_registered") {
+
+        toast.error("Your Google account is not registered.");
+
+    }
+
+    if (error === "login_failed") {
+
+        toast.error("Google Login Failed");
+
+    }
+
+}, []);
 
     return (
         <div className='flex  w-screen h-screen overflow-hidden text-white pl-4 pr-4 pb-4'>
