@@ -73,9 +73,9 @@ const WeeklyClassTeacher = () => {
                                 <div >
                                      <h1 className='text-4xl lg:text-4xl text-white md:mt-12 font-bold uppercase mt-2'>{dayData.day}</h1>
                                 </div>
-                                <div className='flex w-full p-2 md:p-12  justify-center  gap-4 flex-wrap'>
+                                <div className='flex w-full p-2 md:p-12 justify-center gap-4 flex-wrap'>
                                     {dayData.classes.map((cls, index) => (
-                                     <div key={index} className='md:w-90 w-full lg:w-90  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
+                                     <div key={index} className='md:w-90 w-80 lg:w-90  uppercase lg:text-2xl p-4  bg-black/30 rounded-2xl border border-white/50'> 
                                          <h1 className='w-full text-center h-min-12 p-2  bg-blue-600/10 border items-center rounded-2xl border-blue-500/50 flex justify-around '> {cls.subject}</h1>
                                          
                                          <div className='w-full mt-4 lg:p-4 uppercase p-2 min-h-10 lg:min-h-50 gap-4 justify-center bg-white/5 border border-white/50 rounded-2xl flex flex-col '>
