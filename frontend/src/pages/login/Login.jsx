@@ -66,9 +66,12 @@ const [searchParams] = useSearchParams();
    const privacy = () => {
         window.location.href = "/privacy_policy"
       }
+
  useEffect(() => {
 
     const error = searchParams.get("error");
+    console.log("Current URL:", window.location.href);
+    console.log("Error:", searchParams.get("error"));
 
     if (!error) return;
 
