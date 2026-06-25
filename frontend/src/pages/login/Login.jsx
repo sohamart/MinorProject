@@ -66,10 +66,11 @@ const [searchParams] = useSearchParams();
    const privacy = () => {
         window.location.href = "/privacy_policy"
       }
-    
-useEffect(() => {
+ useEffect(() => {
 
     const error = searchParams.get("error");
+
+    if (!error) return;
 
     if (error === "not_registered") {
 
@@ -83,7 +84,10 @@ useEffect(() => {
 
     }
 
-}, [1000]);
+    // URL clean
+    window.history.replaceState({}, "", "/login");
+
+}, []);
 
     return (
         <div className='flex  w-screen h-screen overflow-hidden text-white pl-4 pr-4 pb-4'>
