@@ -1,7 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useContext } from "react";
-import { AuthContextData } from "../context/AuthContext";
+import { AuthContextData } from "../../context/AuthContext";
 
 export default function GoogleSuccess() {
 
