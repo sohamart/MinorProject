@@ -1,60 +1,72 @@
-import { useContext, useEffect } from "react";
-import { AuthContextData } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEffect, useContext } from "react";
+import { AuthContextData } from "../context/AuthContext";
 
 export default function GoogleSuccess() {
+
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const {
         loading,
         loggedinStudent,
         loggedinTeacher,
-        loggedinAdmin,
-        setloading
+        loggedinAdmin
     } = useContext(AuthContextData);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
 
-        setloading(true);
+        const error = searchParams.get("error");
 
-        setTimeout(() => {
+        if (error === "not_registered") {
+            toast.error("Your Google account is not registered.");
+            navigate("/login", { replace: true });
+            return;
+        }
 
-            if (loggedinStudent) {
+        if (error === "login_failed") {
+            toast.error("Google Login Failed");
+            navigate("/login", { replace: true });
+            return;
+        }
 
-                navigate("/student/home");
+    }, []);
 
-                return;
-            }
+    useEffect(() => {
 
-            if (loggedinTeacher) {
+        if (loading) return;
 
-                navigate("/teacher/home");
+        if (loggedinStudent) {
+            navigate("/student/home", { replace: true });
+            return;
+        }
 
-                return;
-            }
+        if (loggedinTeacher) {
+            navigate("/teacher/home", { replace: true });
+            return;
+        }
 
-            if (loggedinAdmin) {
+        if (loggedinAdmin) {
+            navigate("/admin/home", { replace: true });
+            return;
+        }
 
-                navigate("/admin/home");
+        // Cookie নেই
+        navigate("/login", { replace: true });
 
-                return;
-            }
-
-            navigate("/login");
-
-        },2000);
-
-    },[
+    }, [
+        loading,
         loggedinStudent,
         loggedinTeacher,
         loggedinAdmin
     ]);
 
     return (
-        <h1>
-            Signing you in...
-        </h1>
+        <div className="w-screen h-screen flex items-center justify-center text-white">
+            <h1 className="text-2xl animate-pulse">
+                Signing in...
+            </h1>
+        </div>
     );
-
 }
