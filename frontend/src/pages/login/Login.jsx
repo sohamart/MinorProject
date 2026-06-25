@@ -82,7 +82,7 @@ useEffect(() => {
 
     }
 
-}, []);
+}, [1000]);
 
     return (
         <div className='flex  w-screen h-screen overflow-hidden text-white pl-4 pr-4 pb-4'>
