@@ -47,6 +47,26 @@ const TeacherLogin = () => {
         setemail("")
         setpassword("")
     }
+    
+const googleLogin = () => {
+
+    const isMedian =
+        navigator.userAgent.includes("C.R");
+
+    if (isMedian) {
+
+        window.open(
+            `${API}/api/auth/google`,
+            "_blank"
+        );
+
+        return;
+    }
+
+    window.location.href =
+        `${API}/api/auth/google`;
+
+};
 
     return (
         <>
