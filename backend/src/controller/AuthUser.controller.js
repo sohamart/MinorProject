@@ -615,19 +615,19 @@ const googleCallback = async (req, res) => {
         });
 
         if (role === "student") {
-            return res.redirect(
-                `${process.env.FRONTEND_URL}/student`
-            );
+           return res.redirect(
+`${process.env.FRONTEND_URL}/google-success?role=student`
+);
         }
 
         if (role === "teacher") {
             return res.redirect(
-                `${process.env.FRONTEND_URL}/teacher`
+                `${process.env.FRONTEND_URL}/google-success?role=teacher`
             );
         }
 
         return res.redirect(
-            `${process.env.FRONTEND_URL}/admin`
+            `${process.env.FRONTEND_URL}/google-success?role=admin`
         );
 
     } catch (error) {
