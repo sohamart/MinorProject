@@ -5,6 +5,8 @@ const AuthRouter = require('./routes/AuthUser.routes');
 const ClassRouter = require('./routes/ClassRoutine.routes');
 const NotificationRouter = require('./routes/Notification.routes');
 const cookie = require('cookie-parser');
+const passport = require("passport");
+require("./config/passport");
 
 
 
@@ -15,6 +17,20 @@ const cookie = require('cookie-parser');
 
 
 const app = express();
+const session = require("express-session");
+
+
+app.use(express.json());
+app.use(cookie());
+app.use(
+  session({
+    secret: "crtimepro",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cors({
   origin: ['http://localhost:3000', "http://localhost:5173", "https://classroutinetime.vercel.app", "https://classrutinetimepro.vercel.app"],
   
@@ -28,8 +44,6 @@ app.get('/', (req, res) => {
 });
 
 
-app.use(express.json());
-app.use(cookie());
 
 
 app.use("/api/auth", AuthRouter)

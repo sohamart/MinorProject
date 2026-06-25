@@ -11,12 +11,13 @@ const sendNotification =
 
 
 const { sendMail } = require("../utils/sendMail");
-
 const { OAuth2Client } = require("google-auth-library");
 
-const client = new OAuth2Client(
-process.env.GOOGLE_CLIENT_ID
+const googleClient = new OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID
 );
+
+
 
 
 
@@ -545,43 +546,22 @@ const getAllteacher = async (req, res) => {
     }
 
 }
-const googleLogin = async (req, res) => {
+const googleCallback = async (req, res) => {
     try {
 
-        const { credential } = req.body;
-
-        if (!credential) {
-            return res.status(400).json({
-                message: "Google token missing"
-            });
-        }
-
-        const ticket = await client.verifyIdToken({
-            idToken: credential,
-            audience: process.env.GOOGLE_CLIENT_ID
-        });
-
-        const payload = ticket.getPayload();
-
-        if (!payload.email_verified) {
-            return res.status(401).json({
-                message: "Google email is not verified"
-            });
-        }
-
-        const email = payload.email;
+        const email = req.user.emails[0].value;
 
         let user = null;
         let role = "";
 
-        // ================= ADMIN =================
-        user = await Adminuser.findOne({ email });
+        // Student Check
+        user = await Studentuser.findOne({ email });
 
         if (user) {
-            role = "admin";
+            role = "student";
         }
 
-        // ================= TEACHER =================
+        // Teacher Check
         if (!user) {
             user = await Teacheruser.findOne({ email });
 
@@ -590,32 +570,39 @@ const googleLogin = async (req, res) => {
             }
         }
 
-        // ================= STUDENT =================
+        // Admin Check
         if (!user) {
-            user = await Studentuser.findOne({ email });
+            user = await Adminuser.findOne({ email });
 
             if (user) {
-                role = "student";
+                role = "admin";
             }
         }
 
+        // Registered না থাকলে
         if (!user) {
-            return res.status(401).json({
-                message: "Account not found. Please contact Admin."
-            });
+            return res.redirect(
+                `${process.env.FRONTEND_URL}/login?error=not_registered`
+            );
         }
 
-        const isMedian = req.headers["user-agent"]?.includes("C.R");
-        const isDesktop = req.headers["user-agent"]?.includes("Electron");
+        const isMedian =
+            req.headers["user-agent"]?.includes("C.R");
+
+        const isDesktop =
+            req.headers["user-agent"]?.includes("Electron");
 
         const token = jwt.sign(
             {
                 id: user._id,
-                role: role
+                role,
             },
             process.env.JWT_SECRET,
             {
-                expiresIn: isMedian || isDesktop ? "10d" : "1h"
+                expiresIn:
+                    isMedian || isDesktop
+                        ? "10d"
+                        : "1h",
             }
         );
 
@@ -623,72 +610,43 @@ const googleLogin = async (req, res) => {
             httpOnly: true,
             secure: isProduction,
             sameSite: isProduction ? "none" : "lax",
-            maxAge: (isMedian || isDesktop)
-                ? 10 * 24 * 60 * 60 * 1000
-                : 60 * 60 * 1000
+            maxAge:
+                isMedian || isDesktop
+                    ? 10 * 24 * 60 * 60 * 1000
+                    : 60 * 60 * 1000,
         });
 
-        // ================= STUDENT RESPONSE =================
         if (role === "student") {
-
-            return res.status(201).json({
-                message: "Student logged in successfully",
-                Studentuser: {
-                    name: user.name,
-                    email: user.email,
-                    trade: user.trade,
-                    sem: user.sem,
-                    phone: user.phone,
-                    token: token
-                }
-            });
-
+            return res.redirect(
+                `${process.env.FRONTEND_URL}/student`
+            );
         }
 
-        // ================= TEACHER RESPONSE =================
         if (role === "teacher") {
-
-            return res.status(201).json({
-                message: "Teacher logged in successfully",
-                teacheruserdata: {
-                    name: user.name,
-                    email: user.email,
-                    subject: user.subject,
-                    phone: user.phone,
-                    token: token
-                }
-            });
-
+            return res.redirect(
+                `${process.env.FRONTEND_URL}/teacher`
+            );
         }
 
-        // ================= ADMIN RESPONSE =================
-        if (role === "admin") {
-
-            return res.status(201).json({
-                message: "Admin logged in successfully",
-                adminuserdata: {
-                    name: user.name,
-                    email: user.email,
-                    token: token
-                }
-            });
-
-        }
+        return res.redirect(
+            `${process.env.FRONTEND_URL}/admin`
+        );
 
     } catch (error) {
 
         console.log(error);
 
-        return res.status(500).json({
-            message: "Google Login Failed"
-        });
-
+        return res.redirect(
+            `${process.env.FRONTEND_URL}/login?error=google_failed`
+        );
     }
 };
+
 
 module.exports = {
     registerStudent,
     loginStudent,
+    
     registerAdmin,
     loginAdmin,
     registerTeacher,
@@ -703,7 +661,7 @@ module.exports = {
     getAllteacher,
     deleteStudent,
     deleteTeacher,
-    googleLogin
+    googleCallback
 
 
 };

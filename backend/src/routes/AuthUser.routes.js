@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const AuthUserController = require ('../controller/AuthUser.controller')
 const AuthMiddileware = require('../middelwares/Auth.middleware')
-
+const passport = require("passport");
 
 
 
@@ -25,13 +25,28 @@ router.get('/getAllteacher', AuthUserController.getAllteacher)
 router.delete('/deleteStudent/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteStudent)
 
 router.delete('/deleteTeacher/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteTeacher)
-
-
-router.post(
-"/google/login",
-AuthUserController.googleLogin
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    session: false,
+  })
 );
 
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect:
+      "https://classroutinetime.vercel.app/login-failed",
+  }),
+  AuthUserController.googleCallback
+);
+
+router.post(
+    "/google/login",
+    AuthUserController.googleLogin
+);
 
 
 module.exports = router;

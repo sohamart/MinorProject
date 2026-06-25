@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { GoogleLogin } from "@react-oauth/google";
 
 import { useNavigate } from 'react-router-dom'
 import { AuthContextData } from '../../context/AuthContext'
@@ -17,49 +16,7 @@ const TeacherLogin = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false) // 🔥 NEW
 
-    const googleLogin = async (credentialResponse) => {
-
-    setLoading(true);
-
-    try {
-
-        const response = await axios.post(
-
-            `${API}/api/auth/google/login`,
-
-            {
-                credential: credentialResponse.credential,
-                role: "teacher"
-            },
-
-            {
-                withCredentials: true
-            }
-
-        );
-
-        setloggedinTeacher(response.data.teacheruserdata);
-        setloggedinName(response.data.teacheruserdata.name);
-
-        toast.success("Google Login Successful");
-
-        Navigate("/teacher/");
-
-    } catch (error) {
-
-        toast.error(
-            error.response?.data?.message || "Google Login Failed"
-        );
-
-        setloggedinTeacher(null);
-
-    } finally {
-
-        setLoading(false);
-
-    }
-
-};
+ 
 
     const formhandel = async (e) => {
         e.preventDefault()
@@ -135,18 +92,7 @@ const TeacherLogin = () => {
                             >
                                 {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "Login"} {/* 🔥 text change */}
                             </button>
-                            <div className="mt-4 w-full flex justify-center">
-
-    <GoogleLogin
-        onSuccess={googleLogin}
-        onError={() => {
-
-            toast.error("Google Login Failed");
-
-        }}
-    />
-
-</div>
+                            
             
                         </form>
         </>
