@@ -22,21 +22,21 @@ export default function GoogleSuccess() {
 
             if (loggedinStudent) {
 
-                navigate("/student");
+                navigate("/student/home");
 
                 return;
             }
 
             if (loggedinTeacher) {
 
-                navigate("/teacher");
+                navigate("/teacher/home");
 
                 return;
             }
 
             if (loggedinAdmin) {
 
-                navigate("/admin");
+                navigate("/admin/home");
 
                 return;
             }
