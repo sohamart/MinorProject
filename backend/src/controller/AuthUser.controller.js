@@ -607,7 +607,7 @@ const googleLogin = async (req, res) => {
 
         if (!user) {
             return res.status(401).json({
-                message: "Account not found. Please contact Admin."
+                message: "Account not found. Please register first."
             });
         }
 
