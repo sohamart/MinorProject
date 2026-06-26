@@ -49,24 +49,56 @@ const AdminLogin = () => {
         setemail("")
         setpassword("")
     }
-    
-const googleLogin = () => {
+const googleLogin = async (credentialResponse) => {
 
-    const isMedian =
-        navigator.userAgent.includes("C.R");
+    setLoading(true);
 
-    if (isMedian) {
+    try {
 
-        window.open(
-            `${API}/api/auth/google`,
-            "_blank"
+        const { data } = await axios.post(
+
+            `${API}/api/auth/google/login`,
+
+            {
+                credential: credentialResponse.credential
+            },
+
+            {
+                withCredentials: true
+            }
+
         );
 
-        return;
-    }
+        // Wrong role
+        if (data.role !== "admin") {
 
-    window.location.href =
-        `${API}/api/auth/google`;
+            toast.error("This Google account is not an Admin account.");
+
+            return;
+
+        }
+
+        setloggedinAdmin(data.user);
+        setloggedinName(data.user.name);
+
+        toast.success("Google Login Successful");
+
+        Navigate("/admin/home");
+
+    } catch (error) {
+
+        toast.error(
+            error.response?.data?.message ||
+            "Google Login Failed"
+        );
+
+        setloggedinAdmin(null);
+
+    } finally {
+
+        setLoading(false);
+
+    }
 
 };
     return (

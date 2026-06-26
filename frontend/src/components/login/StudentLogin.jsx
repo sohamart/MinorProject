@@ -49,23 +49,47 @@ const StudentLogin = () => {
         setpassword("")
     }
 
-const googleLogin = () => {
+  const googleLogin = async (credentialResponse) => {
 
-    const isMedian =
-        navigator.userAgent.includes("C.R");
+    setLoading(true);
 
-    if (isMedian) {
+    try {
 
-        window.open(
-            `${API}/api/auth/google`,
-            "_blank"
+        const response = await axios.post(
+
+            `${API}/api/auth/google/login`,
+
+            {
+                credential: credentialResponse.credential,
+                role: "student"
+            },
+
+            {
+                withCredentials: true
+            }
+
         );
 
-        return;
-    }
+        setloggedinStudent(response.data.Studentuser);
+        setloggedinName(response.data.Studentuser.name);
 
-    window.location.href =
-        `${API}/api/auth/google`;
+        toast.success("Google Login Successful");
+
+        Navigate("/student/");
+
+    } catch (error) {
+
+        toast.error(
+            error.response?.data?.message || "Google Login Failed"
+        );
+
+        setloggedinStudent(null);
+
+    } finally {
+
+        setLoading(false);
+
+    }
 
 };
    

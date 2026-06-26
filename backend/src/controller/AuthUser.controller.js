@@ -15,7 +15,7 @@ require("dotenv").config({
 const { sendMail } = require("../utils/sendMail");
 const { OAuth2Client } = require("google-auth-library");
 
-const googleClient = new OAuth2Client(
+const client = new OAuth2Client(
     process.env.GOOGLE_CLIENT_ID
 );
 
@@ -550,37 +550,42 @@ const getAllteacher = async (req, res) => {
 
 }
 const googleLogin = async (req, res) => {
-
     try {
 
         const { credential } = req.body;
 
         if (!credential) {
             return res.status(400).json({
-                message: "Google credential missing"
+                message: "Google token missing"
             });
         }
 
-        const ticket = await googleClient.verifyIdToken({
+        const ticket = await client.verifyIdToken({
             idToken: credential,
-            audience: process.env.GOOGLE_CLIENT_ID,
+            audience: process.env.GOOGLE_CLIENT_ID
         });
 
         const payload = ticket.getPayload();
+
+        if (!payload.email_verified) {
+            return res.status(401).json({
+                message: "Google email is not verified"
+            });
+        }
 
         const email = payload.email;
 
         let user = null;
         let role = "";
 
-        // Admin
+        // ================= ADMIN =================
         user = await Adminuser.findOne({ email });
 
         if (user) {
             role = "admin";
         }
 
-        // Teacher
+        // ================= TEACHER =================
         if (!user) {
             user = await Teacheruser.findOne({ email });
 
@@ -589,7 +594,7 @@ const googleLogin = async (req, res) => {
             }
         }
 
-        // Student
+        // ================= STUDENT =================
         if (!user) {
             user = await Studentuser.findOne({ email });
 
@@ -598,21 +603,23 @@ const googleLogin = async (req, res) => {
             }
         }
 
-        // User not registered
         if (!user) {
-            return res.status(404).json({
-                message: "Account not registered"
+            return res.status(401).json({
+                message: "Account not found. Please contact Admin."
             });
         }
+
+        const isMedian = req.headers["user-agent"]?.includes("C.R");
+        const isDesktop = req.headers["user-agent"]?.includes("Electron");
 
         const token = jwt.sign(
             {
                 id: user._id,
-                role: role,
+                role: role
             },
             process.env.JWT_SECRET,
             {
-                expiresIn: "7d",
+                expiresIn: isMedian || isDesktop ? "10d" : "1h"
             }
         );
 
@@ -620,33 +627,67 @@ const googleLogin = async (req, res) => {
             httpOnly: true,
             secure: isProduction,
             sameSite: isProduction ? "none" : "lax",
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            maxAge: (isMedian || isDesktop)
+                ? 10 * 24 * 60 * 60 * 1000
+                : 60 * 60 * 1000
         });
 
-        return res.status(200).json({
+        // ================= STUDENT RESPONSE =================
+        if (role === "student") {
 
-            success: true,
+            return res.status(201).json({
+                message: "Student logged in successfully",
+                Studentuser: {
+                    name: user.name,
+                    email: user.email,
+                    trade: user.trade,
+                    sem: user.sem,
+                    phone: user.phone,
+                    token: token
+                }
+            });
 
-            role,
+        }
 
-            user,
+        // ================= TEACHER RESPONSE =================
+        if (role === "teacher") {
 
-            message: "Google Login Successful"
+            return res.status(201).json({
+                message: "Teacher logged in successfully",
+                teacheruserdata: {
+                    name: user.name,
+                    email: user.email,
+                    subject: user.subject,
+                    phone: user.phone,
+                    token: token
+                }
+            });
 
-        });
+        }
+
+        // ================= ADMIN RESPONSE =================
+        if (role === "admin") {
+
+            return res.status(201).json({
+                message: "Admin logged in successfully",
+                adminuserdata: {
+                    name: user.name,
+                    email: user.email,
+                    token: token
+                }
+            });
+
+        }
 
     } catch (error) {
 
         console.log(error);
 
         return res.status(500).json({
-
             message: "Google Login Failed"
-
         });
 
     }
-
 };
 
 

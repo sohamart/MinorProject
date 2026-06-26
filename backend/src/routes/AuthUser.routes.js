@@ -30,5 +30,4 @@ router.post(
     AuthUserController.googleLogin
 );
 
-
 module.exports = router;

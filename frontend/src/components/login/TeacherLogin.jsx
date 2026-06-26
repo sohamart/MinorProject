@@ -48,24 +48,50 @@ const TeacherLogin = () => {
         setemail("")
         setpassword("")
     }
-    
-const googleLogin = () => {
+const googleLogin = async (credentialResponse) => {
 
-    const isMedian =
-        navigator.userAgent.includes("C.R");
+    setLoading(true);
 
-    if (isMedian) {
+    try {
 
-        window.open(
-            `${API}/api/auth/google`,
-            "_blank"
+        const { data } = await axios.post(
+            `${API}/api/auth/google/login`,
+            {
+                credential: credentialResponse.credential
+            },
+            {
+                withCredentials: true
+            }
         );
 
-        return;
-    }
+        if (data.role !== "teacher") {
 
-    window.location.href =
-        `${API}/api/auth/google`;
+            toast.error("This Google account is not a Teacher account.");
+
+            return;
+        }
+
+        setloggedinTeacher(data.user);
+        setloggedinName(data.user.name);
+
+        toast.success("Google Login Successful");
+
+        Navigate("/teacher/home");
+
+    } catch (error) {
+
+        toast.error(
+            error.response?.data?.message ||
+            "Google Login Failed"
+        );
+
+        setloggedinTeacher(null);
+
+    } finally {
+
+        setLoading(false);
+
+    }
 
 };
 
