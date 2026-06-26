@@ -120,7 +120,7 @@ const loginStudent = async (req, res) => {
 
 
         const token = jwt.sign({ id: studentuserdata._id }, process.env.JWT_SECRET, {
-            expiresIn: isMedian || isDesktop ? "10d" : "1h"
+            expiresIn: isMedian || isDesktop ? "10d" : "1d"
         });;
 
         res.cookie("token", token, {
@@ -129,7 +129,7 @@ const loginStudent = async (req, res) => {
             sameSite: isProduction ? "none" : "lax",
             maxAge: (isMedian || isDesktop)
             ? 10 * 24 * 60 * 60 * 1000 // 10 days
-            : 60 * 60 * 1000 // 1 hour
+            : 24 * 60 * 60 * 1000 // 1 day
         });
 
         res.status(201).json({
@@ -284,7 +284,7 @@ const loginAdmin = async (req, res) => {
         const isDesktop = req.headers["user-agent"]?.includes("Electron");
 
         const token = jwt.sign({ id: adminuserdata._id }, process.env.JWT_SECRET, {
-            expiresIn: isMedian || isDesktop ? "10d" : "1h"
+            expiresIn: isMedian || isDesktop ? "10d" : "1d"
         });
 
         res.cookie("token", token, {
@@ -293,7 +293,7 @@ const loginAdmin = async (req, res) => {
             sameSite: isProduction ? "none" : "lax",
              maxAge: (isMedian || isDesktop)
             ? 10 * 24 * 60 * 60 * 1000 // 10 days
-            : 60 * 60 * 1000 // 1 hour
+            : 24 * 60 * 60 * 1000 // 1 day
         });
 
         res.status(201).json({
@@ -416,7 +416,7 @@ const loginTeacher = async (req, res) => {
         const isDesktop = req.headers["user-agent"]?.includes("Electron");
 
         const token = jwt.sign({ id: teacheruserdata._id }, process.env.JWT_SECRET, {
-            expiresIn: isMedian || isDesktop ? "10d" : "1h"
+            expiresIn: isMedian || isDesktop ? "10d" : "1d"
         });
 
         res.cookie("token", token, {
@@ -425,7 +425,7 @@ const loginTeacher = async (req, res) => {
             sameSite: isProduction ? "none" : "lax",
              maxAge: (isMedian || isDesktop)
             ? 10 * 24 * 60 * 60 * 1000 // 10 days
-            : 60 * 60 * 1000 // 1 hour
+            : 24 * 60 * 60 * 1000  // 1 day
         });
 
         res.status(201).json({
@@ -619,7 +619,7 @@ const googleLogin = async (req, res) => {
             },
             process.env.JWT_SECRET,
             {
-                expiresIn: isMedian || isDesktop ? "10d" : "1h"
+                expiresIn: isMedian || isDesktop ? "10d" : "1d"
             }
         );
 
@@ -629,7 +629,7 @@ const googleLogin = async (req, res) => {
             sameSite: isProduction ? "none" : "lax",
             maxAge: (isMedian || isDesktop)
                 ? 10 * 24 * 60 * 60 * 1000
-                : 60 * 60 * 1000
+                : 24 * 60 * 60 * 1000
         });
 
         // ================= STUDENT RESPONSE =================
