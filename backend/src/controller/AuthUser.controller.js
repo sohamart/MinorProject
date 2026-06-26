@@ -575,7 +575,7 @@ const googleLogin = async (req, res) => {
             });
         }
 
-        const email = payload.email;
+        const email = payload.email.toLowerCase().trim();
 
         let user = null;
         let role = "";
