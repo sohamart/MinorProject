@@ -113,15 +113,17 @@ const googleLogin = () => {
                             >
                                 {loading ? <h1 className='text-sm md:text-xl lg:text-xl'>loading...</h1> : "Login"} {/* 🔥 text change */}
                             </button>
-                           {!isMedian && (
-                               <GoogleLogin
-                               className='mt-5'
-                                   onSuccess={googleLogin}
-                                   onError={() => {
-                                       toast.error("Google Login Failed");
-                                   }}
-                               />
-                           )}
+                           <div className='flex flex-col items-center justify-center mt-5'>
+                                               {!isMedian && (
+                                              <GoogleLogin
+                                              className='mt-5 '
+                                                  onSuccess={googleLogin}
+                                                  onError={() => {
+                                                      toast.error("Google Login Failed");
+                                                  }}
+                                              />
+                                          )}
+                                           </div>
                         </form>
         </>
     )
