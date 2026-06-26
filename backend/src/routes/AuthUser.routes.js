@@ -25,22 +25,9 @@ router.get('/getAllteacher', AuthUserController.getAllteacher)
 router.delete('/deleteStudent/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteStudent)
 
 router.delete('/deleteTeacher/:id', AuthMiddileware.AuthAdminMiddileware, AuthUserController.deleteTeacher)
-router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-    session: false,
-  })
-);
-
-router.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    session: false,
-    failureRedirect:
-      "https://classroutinetime.vercel.app/login-failed",
-  }),
-  AuthUserController.googleCallback
+router.post(
+    "/google/login",
+    AuthUserController.googleLogin
 );
 
 
