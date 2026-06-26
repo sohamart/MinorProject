@@ -144,7 +144,7 @@ const Profile = () => {
              <h1 className='lg:text-xl md:text-3xl animate-pulse text-white lg:mt-8 mt-8 '>*No need to log in again for 10 days*</h1>
             </div>
         ):( <div className='flex justify-center items-center'>
-             <h1 className='lg:text-xl md:text-3xl text-center  text-white lg:mt-8 mt-4 mb-2 '>*Enjoy longer login sessions by downloading the app.* <a className=' animate-none underline text-blue-500' href='https://sohamart.github.io/C.R-Time-Pro/'>C.R Time Pro</a></h1>
+             <h1 className='lg:text-xl md:text-3xl text-center text-xs text-white lg:mt-8 mt-4 mb-2 '>*login Expiring in 24 hrs, Enjoy longer login sessions by downloading the app.* <a className=' animate-none underline text-blue-500' href='https://sohamart.github.io/C.R-Time-Pro/'>C.R Time Pro</a></h1>
             </div>)}
         
         
