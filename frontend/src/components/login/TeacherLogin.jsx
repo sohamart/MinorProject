@@ -54,35 +54,32 @@ const googleLogin = async (credentialResponse) => {
 
     try {
 
-        const { data } = await axios.post(
+        const response = await axios.post(
+
             `${API}/api/auth/google/login`,
+
             {
-                credential: credentialResponse.credential
+                credential: credentialResponse.credential,
+                role: "teacher"
             },
+
             {
                 withCredentials: true
             }
+
         );
 
-        if (data.role !== "teacher") {
-
-            toast.error("This Google account is not a Teacher account.");
-
-            return;
-        }
-
-        setloggedinTeacher(data.user);
-        setloggedinName(data.user.name);
+        setloggedinTeacher(response.data.teacheruserdata);
+        setloggedinName(response.data.teacheruserdata.name);
 
         toast.success("Google Login Successful");
 
-        Navigate("/teacher/home");
+        Navigate("/teacher/");
 
     } catch (error) {
 
         toast.error(
-            error.response?.data?.message ||
-            "Google Login Failed"
+            error.response?.data?.message || "Google Login Failed"
         );
 
         setloggedinTeacher(null);

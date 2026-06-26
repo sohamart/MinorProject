@@ -55,12 +55,13 @@ const googleLogin = async (credentialResponse) => {
 
     try {
 
-        const { data } = await axios.post(
+        const response = await axios.post(
 
             `${API}/api/auth/google/login`,
 
             {
-                credential: credentialResponse.credential
+                credential: credentialResponse.credential,
+                role: "admin"
             },
 
             {
@@ -69,27 +70,17 @@ const googleLogin = async (credentialResponse) => {
 
         );
 
-        // Wrong role
-        if (data.role !== "admin") {
-
-            toast.error("This Google account is not an Admin account.");
-
-            return;
-
-        }
-
-        setloggedinAdmin(data.user);
-        setloggedinName(data.user.name);
+        setloggedinAdmin(response.data.adminuserdata);
+        setloggedinName(response.data.adminuserdata.name);
 
         toast.success("Google Login Successful");
 
-        Navigate("/admin/home");
+        Navigate("/admin/");
 
     } catch (error) {
 
         toast.error(
-            error.response?.data?.message ||
-            "Google Login Failed"
+            error.response?.data?.message || "Google Login Failed"
         );
 
         setloggedinAdmin(null);
