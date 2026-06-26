@@ -40,7 +40,7 @@ const HomeAdmin = () => {
   const { count } = useNotification();
 
   return (
-    <div className= ' relative text-white h-full w-full lg:bg-black/5 bg-white/5 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
+    <div className= ' relative text-white h-full w-full lg:bg-black/5 bg-black/5 flex flex-col items-center    border border-white/50 rounded-xl  shadow-[0_8px_32px_rgba(0,0,0,0.5)] '>
       <div className='lg:w-120  h-18 w-50 lg:h-20 bg-white/10 border-b border-white/40 border-r border-l shadow-[0_8px_32px_rgba(0,0,0,0.25)] shadow-inner rounded-2xl mt-2 flex items-center justify-center' >
             <h1 className='lg:text-3xl  uppercase font-bold'>Dashboard</h1>
             
