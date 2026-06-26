@@ -40,7 +40,6 @@ import initOneSignal from "./config/OneSignal";
 import {
   NotificationProvider,
 } from "./context/Notifications";
-import GoogleSuccess from './pages/googleLogin/GoogleSuccess'
 
 
 
@@ -205,10 +204,7 @@ const App = () => {
       <Route path='/' element={<Home/>}/>
       <Route path='*' element={<ErrorPage/>}/>
       <Route path='/privacy_policy' element={<Privacy/>}/>
-      <Route
-    path="/google-success"
-    element={<GoogleSuccess />}
-/>
+
 
 
       
