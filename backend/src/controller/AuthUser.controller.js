@@ -49,7 +49,7 @@ const isProduction = process.env.NODE_ENV === "production";
 // student user login logout AND register features
 
 const registerStudent = async (req, res) => {
-    const { name, email, password, trade, sem, phone } = req.body;
+    let { name, email, password, trade, sem, phone } = req.body;
     email = email.trim().toLowerCase();
 
     const isStudentExist = await Studentuser.findOne({ email });
@@ -102,7 +102,7 @@ const registerStudent = async (req, res) => {
 };
 
 const loginStudent = async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
     email = email.trim().toLowerCase();
 
     try {
@@ -226,7 +226,7 @@ const deleteStudent = async (req, res) => {
 // ================= ADMIN =================
 
 const registerAdmin = async (req, res) => {
-    const { name, email, password } = req.body;
+    let { name, email, password } = req.body;
     email = email.trim().toLowerCase();
     try {
         const isAdminExist = await Adminuser.findOne({ email });
@@ -270,7 +270,7 @@ const registerAdmin = async (req, res) => {
 };
 
 const loginAdmin = async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
     email = email.trim().toLowerCase();
     try {
         const adminuserdata = await Adminuser.findOne({ email });
@@ -348,7 +348,7 @@ const findadmin = async (req, res) => {
 // ================= TEACHER =================
 
 const registerTeacher = async (req, res) => {
-    const { name, email, password, subject, phone } = req.body;
+    let { name, email, password, subject, phone } = req.body;
     email = email.trim().toLowerCase();
     try {
         const isTeacherExist = await Teacheruser.findOne({ email });
@@ -400,7 +400,7 @@ const registerTeacher = async (req, res) => {
 };
 
 const loginTeacher = async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
     email = email.trim().toLowerCase();
     try {
         const teacheruserdata = await Teacheruser.findOne({ email });
