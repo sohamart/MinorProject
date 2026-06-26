@@ -36,7 +36,7 @@ const [searchParams] = useSearchParams();
         else if (loggedinTeacher !== null) navigate("/teacher/home")
     }, [loggedinStudent, loggedinAdmin, loggedinTeacher])
 
-    if (loading) return <Loading />
+    
 
     const onhandelstudent = () => {
         setstlogin(true)
@@ -91,6 +91,7 @@ const [searchParams] = useSearchParams();
     window.history.replaceState({}, "", "/login");
 
 }, []);
+if (loading) return <Loading />
 
     return (
         <div className='flex  w-screen h-screen overflow-hidden text-white pl-4 pr-4 pb-4'>
