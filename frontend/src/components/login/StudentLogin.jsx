@@ -66,7 +66,9 @@ const googleLogin = () => {
         `${API}/api/auth/google`;
 
 };
-    
+    const openApp = () => {
+  window.location.href = "crtime://login";
+};
     
 
     return (
@@ -144,6 +146,11 @@ const googleLogin = () => {
   <span className="text-sm md:text-2xl lg:text-lg">
     Continue with Google
   </span>
+</button>
+
+
+<button onClick={openApp}>
+  Open App
 </button>
 
             </form>
