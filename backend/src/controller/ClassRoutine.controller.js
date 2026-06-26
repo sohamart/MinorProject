@@ -817,7 +817,7 @@ const deleteAllDailyClass = async (req, res) => {
                 "⚠️ Daily Routine Reset",
 
             message:
-                `All ${deleted.deletedCount} daily schedules cleared`,
+                `All ${deleted.deletedCount} daily Routine Reset successfully`,
 
         });
         // ✅ response FIRST
