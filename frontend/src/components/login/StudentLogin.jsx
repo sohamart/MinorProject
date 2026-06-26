@@ -150,11 +150,12 @@ const googleLogin = () => {
 </button>
 
 
-<button onClick={openApp}>
-  Open App
-</button>
+
 
             </form>
+            <button onClick={openApp}>
+  Open App
+</button>
         </>
     )
 }
