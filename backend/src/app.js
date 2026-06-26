@@ -16,13 +16,11 @@ const cookie = require('cookie-parser');
 
 
 const app = express();
-
+const session = require("express-session");
 
 
 app.use(express.json());
 app.use(cookie());
-
-
 app.use(cors({
   origin: ['http://localhost:3000', "http://localhost:5173", "https://classroutinetime.vercel.app", "https://classrutinetimepro.vercel.app"],
   
