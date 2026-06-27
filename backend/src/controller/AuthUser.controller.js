@@ -177,7 +177,7 @@ const findstudent = async (req, res) => {
             return res.status(404).json({ message: 'Student not found' });
         }
 
-        res.status(200).json(studentuserdata);
+        res.status(200).json(studentuserdata); 
     } catch {
         res.status(401).json({ message: 'Unauthorized' });
     }
