@@ -22,8 +22,8 @@ const AdminLogin = () => {
     const formhandel = async (e) => {
         e.preventDefault()
         setLoading(true) // 🔥 start
-         alert("Button Clicked");
-         console.log("Button Clicked");
+         
+         
         try {
             const response = await axios.post(
                 `${API}/api/auth/admin/login`,
